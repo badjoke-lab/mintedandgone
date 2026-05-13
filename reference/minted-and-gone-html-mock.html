@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minted & Gone — HTML Mock</title>
+  <meta name="description" content="Minted & Gone HTML mock for a warm field-guide style NFT marketplace historical registry." />
+  <style>
+    :root {
+      --bg: #f4ecd9;
+      --bg-soft: #fbf6ea;
+      --paper: #fffaf0;
+      --paper-deep: #efe3c8;
+      --ink: #2d261b;
+      --ink-soft: #5f5445;
+      --muted: #867765;
+      --line: #d8c7a7;
+      --line-soft: #eadcc2;
+      --forest: #3f6f58;
+      --forest-soft: #dce9de;
+      --gold: #b8893d;
+      --gold-soft: #f2e2bb;
+      --redwood: #9b5549;
+      --redwood-soft: #ead1ca;
+      --bluegreen: #427d83;
+      --bluegreen-soft: #d8eaeb;
+      --violet: #7b6b8f;
+      --violet-soft: #e4deed;
+      --grayblue: #667987;
+      --grayblue-soft: #dfe7eb;
+      --shadow-soft: 0 10px 28px rgba(61, 45, 24, 0.10);
+      --shadow-card: 0 14px 38px rgba(61, 45, 24, 0.14);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255,255,255,.5), transparent 26rem),
+        radial-gradient(circle at 88% 12%, rgba(184,137,61,.14), transparent 22rem),
+        linear-gradient(180deg, var(--bg), #efe0c2);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+    button, input { font: inherit; }
+    :focus-visible { outline: 3px solid rgba(66,125,131,.45); outline-offset: 3px; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line-soft);
+      background: rgba(244,236,217,.9);
+      backdrop-filter: blur(14px);
+    }
+    .nav-shell {
+      width: min(calc(100% - 32px), 1220px);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: -.02em;
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--paper);
+      box-shadow: var(--shadow-soft);
+    }
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-links a {
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--ink-soft);
+      border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .nav-links a:hover { background: var(--paper); border-color: var(--line); color: var(--ink); }
+
+    .shell { width: min(calc(100% - 32px), 1220px); margin: 0 auto; }
+    section { margin: 58px 0; }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+    h1, h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: .96;
+      letter-spacing: -.045em;
+      margin: 0;
+    }
+    h1 { font-size: clamp(44px, 8vw, 96px); }
+    h2 { font-size: clamp(28px, 4.4vw, 48px); }
+    h3 { margin: 0 0 8px; font-size: 20px; line-height: 1.15; }
+    p { color: var(--ink-soft); margin: 0; }
+    .subtle { color: var(--muted); }
+    .rule { height: 1px; background: linear-gradient(90deg, var(--line), transparent); margin-top: 16px; }
+
+    .hero {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+    .book-cover {
+      position: relative;
+      padding: clamp(28px, 5vw, 54px);
+      border: 1px solid var(--line);
+      border-radius: 36px;
+      background:
+        linear-gradient(135deg, rgba(255,250,240,.96), rgba(239,227,200,.86)),
+        repeating-linear-gradient(90deg, transparent, transparent 18px, rgba(216,199,167,.18) 19px);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+    .book-cover::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      bottom: -100px;
+      width: 290px;
+      height: 290px;
+      border: 1px solid rgba(184,137,61,.22);
+      border-radius: 50%;
+      background: rgba(184,137,61,.08);
+    }
+    .hero-copy { position: relative; z-index: 1; max-width: 760px; }
+    .hero-copy p { font-size: 18px; max-width: 660px; margin-top: 18px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(61,45,24,.08);
+      cursor: pointer;
+    }
+    .btn.primary { background: var(--forest); color: white; border-color: var(--forest); }
+    .btn:hover { transform: translateY(-1px); }
+    .cover-side {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 36px;
+      background: var(--paper);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+    .specimen {
+      padding: 16px;
+      border: 1px dashed var(--line);
+      border-radius: 18px;
+      background: var(--bg-soft);
+    }
+    .specimen b { display: block; margin-bottom: 6px; }
+    .mini-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .mini-stat {
+      border: 1px solid var(--line-soft);
+      border-radius: 18px;
+      padding: 14px;
+      background: #fffdf7;
+    }
+    .mini-stat strong { display:block; font-size: 24px; line-height: 1; }
+    .mini-stat span { font-size: 12px; color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+
+    .grid { display: grid; gap: 16px; }
+    .browse-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, var(--paper), #f8efd9);
+      box-shadow: var(--shadow-soft);
+      padding: 20px;
+    }
+    .card.hoverable { cursor: pointer; transition: transform .18s ease, box-shadow .18s ease; }
+    .card.hoverable:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+    .browse-card .icon { font-size: 24px; margin-bottom: 10px; }
+    .browse-card strong { display: block; font-size: 18px; margin-bottom: 6px; }
+
+    .layout-list {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    .filters {
+      position: sticky;
+      top: 78px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px;
+      background: rgba(255,250,240,.78);
+      box-shadow: var(--shadow-soft);
+    }
+    .search {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 12px 14px;
+      background: var(--paper);
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+    .filter-group { margin-top: 16px; }
+    .filter-title { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; font-weight: 900; color: var(--muted); margin-bottom: 8px; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .filter-chip {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink-soft);
+      border-radius: 999px;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .filter-chip.active { background: var(--bluegreen); color: white; border-color: var(--bluegreen); }
+    .cards-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .market-card h3 { display:flex; justify-content:space-between; gap:10px; align-items:start; }
+    .market-card .summary { margin: 12px 0 14px; min-height: 52px; }
+    .tag-row { display:flex; flex-wrap:wrap; gap:7px; align-items:center; }
+    .tag, .status {
+      display:inline-flex;
+      align-items:center;
+      border-radius:999px;
+      padding: 5px 9px;
+      border:1px solid var(--line);
+      font-size:12px;
+      font-weight:900;
+      line-height:1;
+      white-space: nowrap;
+    }
+    .tag { background: #fffdf7; color: var(--ink-soft); }
+    .status-active { background: var(--forest-soft); color: var(--forest); border-color: rgba(63,111,88,.28); }
+    .status-limited { background: var(--gold-soft); color: #7b5f22; border-color: rgba(184,137,61,.32); }
+    .status-inactive { background: var(--grayblue-soft); color: var(--grayblue); border-color: rgba(102,121,135,.3); }
+    .status-dead { background: var(--redwood-soft); color: var(--redwood); border-color: rgba(155,85,73,.3); }
+    .status-acquired, .status-merged { background: var(--bluegreen-soft); color: var(--bluegreen); border-color: rgba(66,125,131,.3); }
+    .status-rebranded { background: var(--violet-soft); color: var(--violet); border-color: rgba(123,107,143,.3); }
+    .status-unknown { background: #ebe2d2; color: var(--muted); border-color: var(--line); }
+
+    .detail {
+      display: grid;
+      grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+      gap: 20px;
+      align-items: start;
+    }
+    .fact-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .fact {
+      border:1px solid var(--line-soft);
+      border-radius:16px;
+      padding:12px;
+      background:#fffdf7;
+    }
+    .fact span { display:block; font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+    .fact strong { display:block; margin-top:3px; font-size:14px; }
+    .remains-grid { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .remains-card {
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:16px;
+      background: var(--bg-soft);
+    }
+    .remains-card strong { display:block; margin-bottom:8px; }
+    .timeline, .evidence-list { display:grid; gap: 10px; }
+    .timeline-item, .evidence-item {
+      border-left: 4px solid var(--gold);
+      padding: 12px 14px;
+      background: #fffdf7;
+      border-radius: 14px;
+      border-top: 1px solid var(--line-soft);
+      border-right: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .evidence-item { border-left-color: var(--bluegreen); }
+    .small-meta { font-size: 12px; color: var(--muted); font-weight: 800; letter-spacing:.02em; }
+
+    .stats-grid { display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .kpi strong { font-size: 34px; line-height: 1; display:block; font-family: Georgia, "Times New Roman", serif; }
+    .breakdown-grid { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+    .bar-row { display:grid; grid-template-columns: 110px 1fr 34px; gap: 8px; align-items:center; margin: 8px 0; font-size: 13px; }
+    .bar-track { height: 10px; background: var(--line-soft); border-radius: 999px; overflow:hidden; }
+    .bar-fill { height:100%; background: var(--bluegreen); border-radius:999px; }
+
+    .longform {
+      width: min(100%, 860px);
+      margin-inline: auto;
+      border:1px solid var(--line);
+      border-radius: 34px;
+      background: var(--paper);
+      box-shadow: var(--shadow-soft);
+      padding: clamp(24px, 5vw, 46px);
+    }
+    .longform h3 { margin-top: 26px; }
+    .definition-list { display:grid; gap: 10px; margin-top: 18px; }
+    .definition {
+      border:1px solid var(--line-soft);
+      background:#fffdf7;
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .footer {
+      margin-top: 70px;
+      border-top:1px solid var(--line);
+      padding: 30px 0 48px;
+      color: var(--muted);
+    }
+
+    .mock-note {
+      margin-top: 18px;
+      border: 1px dashed var(--redwood);
+      background: rgba(234,209,202,.45);
+      border-radius: 18px;
+      padding: 14px 16px;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    @media (max-width: 960px) {
+      .hero, .layout-list, .detail { grid-template-columns: 1fr; }
+      .filters { position: static; }
+      .browse-grid, .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .breakdown-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 680px) {
+      .nav-shell { align-items:flex-start; flex-direction:column; }
+      .nav-links { justify-content:flex-start; }
+      .cards-grid, .browse-grid, .stats-grid, .remains-grid, .fact-grid { grid-template-columns: 1fr; }
+      .section-head { display:block; }
+      .bar-row { grid-template-columns: 86px 1fr 28px; }
+      section { margin: 38px 0; }
+      .book-cover, .cover-side, .longform { border-radius: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="#top" aria-label="Minted & Gone top">
+        <span class="brand-mark">M&G</span>
+        <span>Minted & Gone</span>
+      </a>
+      <nav class="nav-links" aria-label="Mock navigation">
+        <a href="#marketplaces">Marketplaces</a>
+        <a href="#detail">Record</a>
+        <a href="#stats">Stats</a>
+        <a href="#methodology">Methodology</a>
+        <a href="#submit">Submit</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="book-cover">
+        <div class="hero-copy">
+          <p class="eyebrow">NFT marketplace field guide</p>
+          <h1 id="hero-title">Minted & Gone</h1>
+          <p>A warm illustrated registry of NFT marketplaces — active, faded, acquired, rebranded, and gone. Built to show not only what disappeared, but what still remains.</p>
+          <div class="hero-actions">
+            <a href="#marketplaces" class="btn primary">Browse the encyclopedia</a>
+            <a href="#methodology" class="btn">Read methodology</a>
+          </div>
+          <div class="mock-note">
+            Mock mode: records and sources here are layout-test data. They are not verified public records.
+          </div>
+        </div>
+      </div>
+      <aside class="cover-side" aria-label="Archive summary">
+        <div class="specimen">
+          <b>Field note</b>
+          <p>Marketplace status can be dead while contracts or user assets still remain. This is the core display problem the mock tests.</p>
+        </div>
+        <div class="mini-stat-grid" id="heroStats"></div>
+      </aside>
+    </section>
+
+    <section aria-labelledby="browse-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Browse the encyclopedia</p>
+          <h2 id="browse-title">Start by shelf</h2>
+        </div>
+        <p class="subtle">Soft classification cards, not ranking tables.</p>
+      </div>
+      <div class="grid browse-grid" id="browseCards"></div>
+    </section>
+
+    <section aria-labelledby="featured-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Featured records</p>
+          <h2 id="featured-title">A few sample pages</h2>
+        </div>
+      </div>
+      <div class="cards-grid" id="featuredCards"></div>
+    </section>
+
+    <section id="marketplaces" aria-labelledby="marketplaces-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Index page mock</p>
+          <h2 id="marketplaces-title">Marketplaces</h2>
+        </div>
+        <p class="subtle" id="resultSummary">Showing all mock records.</p>
+      </div>
+
+      <div class="layout-list">
+        <aside class="filters" aria-label="Filters">
+          <input id="searchBox" class="search" type="search" placeholder="Search marketplace, chain, status..." />
+          <div class="filter-group">
+            <div class="filter-title">Status</div>
+            <div class="chip-row" id="statusFilters"></div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-title">Category</div>
+            <div class="chip-row" id="categoryFilters"></div>
+          </div>
+          <div class="filter-group">
+            <div class="filter-title">Chain</div>
+            <div class="chip-row" id="chainFilters"></div>
+          </div>
+          <div class="filter-group">
+            <button class="btn" id="clearFilters" type="button">Clear filters</button>
+          </div>
+        </aside>
+        <div>
+          <div class="cards-grid" id="marketCards"></div>
+          <div class="card" id="emptyState" hidden>
+            <h3>No marketplace records match these filters.</h3>
+            <p>Clear filters or suggest a missing marketplace.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="detail" aria-labelledby="detail-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Record page mock</p>
+          <h2 id="detail-title">Marketplace record</h2>
+        </div>
+        <p class="subtle">Click a card above to update this preview.</p>
+      </div>
+      <div class="detail" id="detailView"></div>
+    </section>
+
+    <section id="stats" aria-labelledby="stats-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Stats preview</p>
+          <h2 id="stats-title">Archive at a glance</h2>
+        </div>
+        <p class="subtle">A future /stats page should feel like a field-guide appendix.</p>
+      </div>
+      <div class="stats-grid" id="statsKpis"></div>
+      <div class="breakdown-grid" id="breakdowns"></div>
+    </section>
+
+    <section id="methodology" aria-labelledby="method-title">
+      <article class="longform">
+        <p class="eyebrow">Longform page mock</p>
+        <h2 id="method-title">How to read this guide</h2>
+        <p>Minted & Gone records NFT marketplaces as historical entries, not as investment recommendations. Each record asks whether the marketplace is active, limited, inactive, dead, acquired, merged, rebranded, or unknown.</p>
+
+        <h3>What counts</h3>
+        <p>An entry should have a distinct marketplace identity, a URL or archive trail, and meaningful marketplace behavior such as listing, buying, bidding, secondary trading, or marketplace-style mint distribution.</p>
+
+        <h3>Status definitions</h3>
+        <div class="definition-list">
+          <div class="definition"><b>Active</b><p>Core marketplace functions are represented as available.</p></div>
+          <div class="definition"><b>Limited</b><p>Only some functions remain, such as browsing, withdrawal, or migration.</p></div>
+          <div class="definition"><b>Dead</b><p>The marketplace operation is represented as ended, even if on-chain assets may remain.</p></div>
+          <div class="definition"><b>Unknown</b><p>Evidence is insufficient. The site should avoid pretending certainty.</p></div>
+        </div>
+
+        <h3>Evidence and confidence</h3>
+        <p>Official statements, support pages, company announcements, archived pages, and credible reporting should be preferred. Community references can help discovery, but should not alone prove shutdown or asset loss.</p>
+
+        <h3>Stats note</h3>
+        <p>Stats describe this registry’s current coverage and quality, not the complete global NFT marketplace universe.</p>
+      </article>
+    </section>
+
+    <section id="submit" aria-labelledby="submit-title">
+      <div class="card">
+        <p class="eyebrow">Correction prompt</p>
+        <h2 id="submit-title">Suggest a record or correction</h2>
+        <p>In production this would link to a Google Form or GitHub Issue. For the mock, it checks that the submit page can stay calm, paper-like, and practical.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#">Submit correction</a>
+          <a class="btn" href="#">Suggest marketplace</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell">
+      <b>Minted & Gone</b>
+      <p>HTML mock only. Not verified data. Not investment advice.</p>
+    </div>
+  </footer>
+
+  <script>
+    const DATA = {"marketplaces": [{"id": "mag_nfm_mock_000001", "slug": "opensea", "canonical_name": "OpenSea", "aliases": [], "status": "active", "category": "general", "marketplace_scope": "standalone_marketplace", "chain_scope": ["multi_chain"], "origin_bucket": "company_origin", "launch_date": null, "launch_date_precision": "year", "launch_year": 2017, "end_date": null, "end_date_precision": "unknown", "end_year": null, "closure_reason": "not_applicable", "frontend_status": "active", "contract_status": "accessible", "asset_status": "user_assets_remain", "country_or_origin": "United States", "official_url_original": "https://opensea.io/", "official_domain_original": "opensea.io", "official_url_status": "live_unverified", "archived_url": null, "successor_marketplace": null, "predecessor_marketplace": null, "summary": "Mock active major marketplace used to test baseline active record display.", "what_is_gone": null, "what_remains": "Marketplace UI, listings, and asset visibility are represented as active in this mock.", "where_users_or_assets_went": null, "confidence": "low", "review_status": "seed", "record_quality_flags": ["weak_status_evidence"], "last_verified_at": "2026-05-13", "notes": "Mock layout record only. Verify sources before canonical use."}, {"id": "mag_nfm_mock_000002", "slug": "blur", "canonical_name": "Blur", "aliases": [], "status": "active", "category": "general", "marketplace_scope": "aggregator", "chain_scope": ["ethereum"], "origin_bucket": "company_origin", "launch_date": null, "launch_date_precision": "year", "launch_year": 2022, "end_date": null, "end_date_precision": "unknown", "end_year": null, "closure_reason": "not_applicable", "frontend_status": "active", "contract_status": "accessible", "asset_status": "user_assets_remain", "country_or_origin": "unknown", "official_url_original": "https://blur.io/", "official_domain_original": "blur.io", "official_url_status": "live_unverified", "archived_url": null, "successor_marketplace": null, "predecessor_marketplace": null, "summary": "Mock active aggregator-style marketplace used to test pro-trading card layout.", "what_is_gone": null, "what_remains": "Marketplace and aggregator-style trading surface are represented as active in this mock.", "where_users_or_assets_went": null, "confidence": "low", "review_status": "seed", "record_quality_flags": ["weak_status_evidence"], "last_verified_at": "2026-05-13", "notes": "Mock layout record only. Verify sources before canonical use."}, {"id": "mag_nfm_mock_000003", "slug": "magic-eden", "canonical_name": "Magic Eden", "aliases": [], "status": "active", "category": "general", "marketplace_scope": "standalone_marketplace", "chain_scope": ["multi_chain"], "origin_bucket": "company_origin", "launch_date": null, "launch_date_precision": "year", "launch_year": 2021, "end_date": null, "end_date_precision": "unknown", "end_year": null, "closure_reason": "not_applicable", "frontend_status": "active", "contract_status": "accessible", "asset_status": "user_assets_remain", "country_or_origin": "unknown", "official_url_original": "https://magiceden.io/", "official_domain_original": "magiceden.io", "official_url_status": "live_unverified", "archived_url": null, "successor_marketplace": null, "predecessor_marketplace": null, "summary": "Mock multi-chain active marketplace used to test chain tags and active marketplace cards.", "what_is_gone": null, "what_remains": "Marketplace UI and cross-chain browsing are represented as active in this mock.", "where_users_or_assets_went": null, "confidence": "low", "review_status": "seed", "record_quality_flags": ["weak_status_evidence"], "last_verified_at": "2026-05-13", "notes": "Mock layout record only. Verify sources before canonical use."}, {"id": "mag_nfm_mock_000004", "slug": "kraken-nft", "canonical_name": "Kraken NFT", "aliases": [], "status": "dead", "category": "cex_nft_market", "marketplace_scope": "cex_feature", "chain_scope": ["multi_chain"], "origin_bucket": "company_origin", "launch_date": null, "launch_date_precision": "year", "launch_year": 2022, "end_date": null, "end_date_precision": "year", "end_year": 2025, "closure_reason": "voluntary_shutdown", "frontend_status": "dead", "contract_status": "not_applicable", "asset_status": "withdrawal_required", "country_or_origin": "United States", "official_url_original": "https://www.kraken.com/nft", "official_domain_original": "kraken.com", "official_url_status": "unknown", "archived_url": "https://web.archive.org/", "successor_marketplace": null, "predecessor_marketplace": null, "summary": "Mock CEX-operated NFT marketplace shutdown record used to test dead CEX display.", "what_is_gone": "The CEX-operated NFT marketplace surface is represented as ended in this mock.", "what_remains": "User assets may require withdrawal or external wallet handling depending on final verified facts.", "where_users_or_assets_went": "Mock text: users would be directed to withdrawal, wallet, or alternate marketplace paths.", "confidence": "low", "review_status": "seed", "record_quality_flags": ["single_source", "needs_asset_status_review"], "last_verified_at": "2026-05-13", "notes": "Mock layout record only. Verify official support notice before canonical use."}, {"id": "mag_nfm_mock_000005", "slug": "x2y2", "canonical_name": "X2Y2", "aliases": [], "status": "dead", "category": "general", "marketplace_scope": "standalone_marketplace", "chain_scope": ["ethereum"], "origin_bucket": "unknown", "launch_date": null, "launch_date_precision": "year", "launch_year": 2022, "end_date": null, "end_date_precision": "year", "end_year": 2025, "closure_reason": "voluntary_shutdown", "frontend_status": "dead", "contract_status": "accessible", "asset_status": "user_assets_remain", "country_or_origin": "unknown", "official_url_original": "https://x2y2.io/", "official_domain_original": "x2y2.io", "official_url_status": "unknown", "archived_url": "https://web.archive.org/", "successor_marketplace": null, "predecessor_marketplace": null, "summary": "Mock marketplace shutdown record used to test frontend-gone and contract-remains display.", "what_is_gone": "The marketplace frontend and trading operation are represented as gone in this mock.", "what_remains": "On-chain assets and historical contract traces may remain accessible outside the original marketplace.", "where_users_or_assets_went": "Mock text: users may rely on wallets, explorers, archives, or alternate marketplaces.", "confidence": "low", "review_status": "seed", "record_quality_flags": ["missing_archive", "needs_contract_review"], "last_verified_at": "2026-05-13", "notes": "Mock layout record only. Verify shutdown source before canonical use."}, {"id": "mag_nfm_mock_000006", "slug": "hic-et-nunc", "canonical_name": "Hic et Nunc", "aliases": ["HEN"], "status": "dead", "category": "art_curated", "marketplace_scope": "standalone_marketplace", "chain_scope": ["tezos"], "origin_bucket": "chain_ecosystem", "launch_date": null, "launch_date_precision": "year", "launch_year": 2021, "end_date": null, "end_date_precision": "year", "end_year": 2021, "closure_reason": "community_fork", "frontend_status": "dead", "contract_status": "accessible", "asset_status": "user_assets_remain", "country_or_origin": "Tezos ecosystem", "official_url_original": "https://hicetnunc.xyz/", "official_domain_original": "hicetnunc.xyz", "official_url_status": "unknown", "archived_url": "https://web.archive.org/", "successor_marketplace": "teia", "predecessor_marketplace": null, "summary": "Mock Tezos art marketplace record used to test community continuation and successor links.", "what_is_gone": "The original marketplace frontend is represented as gone in this mock.", "what_remains": "Community tools, assets, and lineage may remain visible through related Tezos platforms.", "where_users_or_assets_went": "Mock text: users may refer to community forks, wallets, and Tezos marketplaces.", "confidence": "low", "review_status": "seed", "record_quality_flags": ["needs_successor_review"], "last_verified_at": "2026-05-13", "notes": "Mock layout record only. Verify lineage before canonical use."}, {"id": "mag_nfm_mock_000007", "slug": "teia", "canonical_name": "Teia", "aliases": [], "status": "active", "category": "art_curated", "marketplace_scope": "community_fork", "chain_scope": ["tezos"], "origin_bucket": "chain_ecosystem", "launch_date": null, "launch_date_precision": "year", "launch_year": 2021, "end_date": null, "end_date_precision": "unknown", "end_year": null, "closure_reason": "not_applicable", "frontend_status": "active", "contract_status": "accessible", "asset_status": "user_assets_remain", "country_or_origin": "Tezos ecosystem", "official_url_original": "https://teia.art/", "official_domain_original": "teia.art", "official_url_status": "live_unverified", "archived_url": null, "successor_marketplace": null, "predecessor_marketplace": "hic-et-nunc", "summary": "Mock community continuation record used to test predecessor/successor relationships.", "what_is_gone": null, "what_remains": "Community marketplace and Tezos art browsing are represented as active in this mock.", "where_users_or_assets_went": null, "confidence": "low", "review_status": "seed", "record_quality_flags": ["needs_successor_review"], "last_verified_at": "2026-05-13", "notes": "Mock layout record only. Verify lineage before canonical use."}, {"id": "mag_nfm_mock_000008", "slug": "knownorigin", "canonical_name": "KnownOrigin", "aliases": [], "status": "acquired", "category": "art_curated", "marketplace_scope": "standalone_marketplace", "chain_scope": ["ethereum"], "origin_bucket": "company_origin", "launch_date": null, "launch_date_precision": "year", "launch_year": 2018, "end_date": null, "end_date_precision": "year", "end_year": 2025, "closure_reason": "acquisition_winddown", "frontend_status": "limited", "contract_status": "accessible", "asset_status": "user_assets_remain", "country_or_origin": "United Kingdom", "official_url_original": "https://knownorigin.io/", "official_domain_original": "knownorigin.io", "official_url_status": "unknown", "archived_url": "https://web.archive.org/", "successor_marketplace": null, "predecessor_marketplace": null, "summary": "Mock acquired art marketplace record used to test acquisition and winddown display.", "what_is_gone": "The original independent marketplace operation is represented as changed or wound down in this mock.", "what_remains": "Artist records, NFTs, or archive traces may remain depending on verified final sources.", "where_users_or_assets_went": "Mock text: users may depend on wallets, parent-company notices, or external marketplaces.", "confidence": "low", "review_status": "seed", "record_quality_flags": ["single_source", "needs_asset_status_review"], "last_verified_at": "2026-05-13", "notes": "Mock layout record only. Verify acquisition/winddown sources before canonical use."}, {"id": "mag_nfm_mock_000009", "slug": "gamestop-nft", "canonical_name": "GameStop NFT", "aliases": [], "status": "dead", "category": "gaming", "marketplace_scope": "brand_marketplace", "chain_scope": ["ethereum"], "origin_bucket": "company_origin", "launch_date": null, "launch_date_precision": "year", "launch_year": 2022, "end_date": null, "end_date_precision": "year", "end_year": 2024, "closure_reason": "parent_company_shutdown", "frontend_status": "dead", "contract_status": "accessible", "asset_status": "user_assets_remain", "country_or_origin": "United States", "official_url_original": "https://nft.gamestop.com/", "official_domain_original": "nft.gamestop.com", "official_url_status": "unknown", "archived_url": "https://web.archive.org/", "successor_marketplace": null, "predecessor_marketplace": null, "summary": "Mock brand-operated NFT marketplace shutdown record used to test brand marketplace display.", "what_is_gone": "The brand marketplace frontend and official marketplace operation are represented as gone in this mock.", "what_remains": "NFTs may remain visible through wallets, networks, or third-party marketplaces depending on verified sources.", "where_users_or_assets_went": "Mock text: users may use wallets or alternate marketplaces.", "confidence": "low", "review_status": "seed", "record_quality_flags": ["needs_contract_review", "needs_asset_status_review"], "last_verified_at": "2026-05-13", "notes": "Mock layout record only. Verify sources before canonical use."}, {"id": "mag_nfm_mock_000010", "slug": "quix", "canonical_name": "Quix", "aliases": [], "status": "dead", "category": "chain_specific", "marketplace_scope": "standalone_marketplace", "chain_scope": ["optimism"], "origin_bucket": "chain_ecosystem", "launch_date": null, "launch_date_precision": "year", "launch_year": 2022, "end_date": null, "end_date_precision": "year", "end_year": 2023, "closure_reason": "voluntary_shutdown", "frontend_status": "dead", "contract_status": "accessible", "asset_status": "user_assets_remain", "country_or_origin": "Optimism ecosystem", "official_url_original": "https://qx.app/", "official_domain_original": "qx.app", "official_url_status": "unknown", "archived_url": "https://web.archive.org/", "successor_marketplace": null, "predecessor_marketplace": null, "summary": "Mock chain-specific marketplace sunset record used to test L2 and chain-specific display.", "what_is_gone": "The chain-specific marketplace UI is represented as gone in this mock.", "what_remains": "On-chain assets may remain visible through wallets, explorers, or other marketplaces.", "where_users_or_assets_went": "Mock text: users may rely on Optimism-compatible wallets and alternate marketplaces.", "confidence": "low", "review_status": "seed", "record_quality_flags": ["missing_archive"], "last_verified_at": "2026-05-13", "notes": "Mock layout record only. Verify official sunset source before canonical use."}, {"id": "mag_nfm_mock_000011", "slug": "coinbase-nft", "canonical_name": "Coinbase NFT", "aliases": [], "status": "inactive", "category": "cex_nft_market", "marketplace_scope": "cex_feature", "chain_scope": ["ethereum"], "origin_bucket": "company_origin", "launch_date": null, "launch_date_precision": "year", "launch_year": 2022, "end_date": null, "end_date_precision": "unknown", "end_year": null, "closure_reason": "unknown", "frontend_status": "unknown", "contract_status": "not_applicable", "asset_status": "unknown", "country_or_origin": "United States", "official_url_original": "https://nft.coinbase.com/", "official_domain_original": "nft.coinbase.com", "official_url_status": "unknown", "archived_url": null, "successor_marketplace": null, "predecessor_marketplace": null, "summary": "Mock inactive CEX NFT marketplace record used to test uncertainty and inactive display.", "what_is_gone": "Not asserted in this mock. This record is used for inactive and uncertainty UI testing.", "what_remains": "Unknown in mock data.", "where_users_or_assets_went": "Unknown in mock data.", "confidence": "low", "review_status": "needs_review", "record_quality_flags": ["weak_status_evidence", "needs_frontend_review", "needs_asset_status_review"], "last_verified_at": "2026-05-13", "notes": "Mock layout record only. Do not use without verification."}, {"id": "mag_nfm_mock_000012", "slug": "example-unknown-market", "canonical_name": "Example Unknown Market", "aliases": ["Unknown Example"], "status": "unknown", "category": "unknown", "marketplace_scope": "unknown", "chain_scope": ["unknown"], "origin_bucket": "unknown", "launch_date": null, "launch_date_precision": "unknown", "launch_year": null, "end_date": null, "end_date_precision": "unknown", "end_year": null, "closure_reason": "unknown", "frontend_status": "unknown", "contract_status": "unknown", "asset_status": "unknown", "country_or_origin": "unknown", "official_url_original": null, "official_domain_original": null, "official_url_status": "unknown", "archived_url": null, "successor_marketplace": null, "predecessor_marketplace": null, "summary": "Fictional mock record used only to test unknown state, empty fields, and needs-review UI.", "what_is_gone": "Unknown in mock data.", "what_remains": "Unknown in mock data.", "where_users_or_assets_went": "Unknown in mock data.", "confidence": "low", "review_status": "needs_review", "record_quality_flags": ["zero_evidence", "possible_out_of_scope", "needs_summary_review"], "last_verified_at": "2026-05-13", "notes": "Fictional mock record. Not a real candidate."}], "events": [{"id": "mag_ev_mock_000001", "marketplace_id": "mag_nfm_mock_000001", "event_type": "launched", "event_date": "2017", "event_date_precision": "year", "title": "Mock event for OpenSea", "description": "Mock timeline event used to test the detail page for OpenSea.", "confidence": "low", "impact_level": "medium", "status_effect": "active", "source_count": 1, "sort_order": 1, "notes": "Mock event only. Replace with verified event before canonical use."}, {"id": "mag_ev_mock_000002", "marketplace_id": "mag_nfm_mock_000002", "event_type": "launched", "event_date": "2022", "event_date_precision": "year", "title": "Mock event for Blur", "description": "Mock timeline event used to test the detail page for Blur.", "confidence": "low", "impact_level": "medium", "status_effect": "active", "source_count": 1, "sort_order": 1, "notes": "Mock event only. Replace with verified event before canonical use."}, {"id": "mag_ev_mock_000003", "marketplace_id": "mag_nfm_mock_000003", "event_type": "launched", "event_date": "2021", "event_date_precision": "year", "title": "Mock event for Magic Eden", "description": "Mock timeline event used to test the detail page for Magic Eden.", "confidence": "low", "impact_level": "medium", "status_effect": "active", "source_count": 1, "sort_order": 1, "notes": "Mock event only. Replace with verified event before canonical use."}, {"id": "mag_ev_mock_000004", "marketplace_id": "mag_nfm_mock_000004", "event_type": "shutdown_effective", "event_date": "2025", "event_date_precision": "year", "title": "Mock event for Kraken NFT", "description": "Mock timeline event used to test the detail page for Kraken NFT.", "confidence": "low", "impact_level": "critical", "status_effect": "dead", "source_count": 1, "sort_order": 1, "notes": "Mock event only. Replace with verified event before canonical use."}, {"id": "mag_ev_mock_000005", "marketplace_id": "mag_nfm_mock_000005", "event_type": "shutdown_effective", "event_date": "2025", "event_date_precision": "year", "title": "Mock event for X2Y2", "description": "Mock timeline event used to test the detail page for X2Y2.", "confidence": "low", "impact_level": "critical", "status_effect": "dead", "source_count": 1, "sort_order": 1, "notes": "Mock event only. Replace with verified event before canonical use."}, {"id": "mag_ev_mock_000006", "marketplace_id": "mag_nfm_mock_000006", "event_type": "shutdown_effective", "event_date": "2021", "event_date_precision": "year", "title": "Mock event for Hic et Nunc", "description": "Mock timeline event used to test the detail page for Hic et Nunc.", "confidence": "low", "impact_level": "critical", "status_effect": "dead", "source_count": 1, "sort_order": 1, "notes": "Mock event only. Replace with verified event before canonical use."}, {"id": "mag_ev_mock_000007", "marketplace_id": "mag_nfm_mock_000007", "event_type": "launched", "event_date": "2021", "event_date_precision": "year", "title": "Mock event for Teia", "description": "Mock timeline event used to test the detail page for Teia.", "confidence": "low", "impact_level": "medium", "status_effect": "active", "source_count": 1, "sort_order": 1, "notes": "Mock event only. Replace with verified event before canonical use."}, {"id": "mag_ev_mock_000008", "marketplace_id": "mag_nfm_mock_000008", "event_type": "acquired", "event_date": "2025", "event_date_precision": "year", "title": "Mock event for KnownOrigin", "description": "Mock timeline event used to test the detail page for KnownOrigin.", "confidence": "low", "impact_level": "critical", "status_effect": "acquired", "source_count": 1, "sort_order": 1, "notes": "Mock event only. Replace with verified event before canonical use."}, {"id": "mag_ev_mock_000009", "marketplace_id": "mag_nfm_mock_000009", "event_type": "shutdown_effective", "event_date": "2024", "event_date_precision": "year", "title": "Mock event for GameStop NFT", "description": "Mock timeline event used to test the detail page for GameStop NFT.", "confidence": "low", "impact_level": "critical", "status_effect": "dead", "source_count": 1, "sort_order": 1, "notes": "Mock event only. Replace with verified event before canonical use."}, {"id": "mag_ev_mock_000010", "marketplace_id": "mag_nfm_mock_000010", "event_type": "shutdown_effective", "event_date": "2023", "event_date_precision": "year", "title": "Mock event for Quix", "description": "Mock timeline event used to test the detail page for Quix.", "confidence": "low", "impact_level": "critical", "status_effect": "dead", "source_count": 1, "sort_order": 1, "notes": "Mock event only. Replace with verified event before canonical use."}, {"id": "mag_ev_mock_000011", "marketplace_id": "mag_nfm_mock_000011", "event_type": "other", "event_date": "2022", "event_date_precision": "year", "title": "Mock event for Coinbase NFT", "description": "Mock timeline event used to test the detail page for Coinbase NFT.", "confidence": "low", "impact_level": "medium", "status_effect": "inactive", "source_count": 1, "sort_order": 1, "notes": "Mock event only. Replace with verified event before canonical use."}, {"id": "mag_ev_mock_000012", "marketplace_id": "mag_nfm_mock_000012", "event_type": "other", "event_date": null, "event_date_precision": "unknown", "title": "Mock event for Example Unknown Market", "description": "Mock timeline event used to test the detail page for Example Unknown Market.", "confidence": "low", "impact_level": "medium", "status_effect": "none", "source_count": 1, "sort_order": 1, "notes": "Mock event only. Replace with verified event before canonical use."}], "evidence": [{"id": "mag_src_mock_000001", "marketplace_id": "mag_nfm_mock_000001", "event_id": "mag_ev_mock_000001", "source_type": "marketplace_page", "title": "Mock source for OpenSea", "url": "https://example.invalid/mock-source", "publisher": "Mock Source", "published_at": null, "archived_url": null, "accessed_at": "2026-05-13", "reliability": "low", "claim_scope": "event", "language": "en", "notes": "Mock evidence only. Replace with verified source before canonical use."}, {"id": "mag_src_mock_000002", "marketplace_id": "mag_nfm_mock_000002", "event_id": "mag_ev_mock_000002", "source_type": "marketplace_page", "title": "Mock source for Blur", "url": "https://example.invalid/mock-source", "publisher": "Mock Source", "published_at": null, "archived_url": null, "accessed_at": "2026-05-13", "reliability": "low", "claim_scope": "event", "language": "en", "notes": "Mock evidence only. Replace with verified source before canonical use."}, {"id": "mag_src_mock_000003", "marketplace_id": "mag_nfm_mock_000003", "event_id": "mag_ev_mock_000003", "source_type": "marketplace_page", "title": "Mock source for Magic Eden", "url": "https://example.invalid/mock-source", "publisher": "Mock Source", "published_at": null, "archived_url": null, "accessed_at": "2026-05-13", "reliability": "low", "claim_scope": "event", "language": "en", "notes": "Mock evidence only. Replace with verified source before canonical use."}, {"id": "mag_src_mock_000004", "marketplace_id": "mag_nfm_mock_000004", "event_id": "mag_ev_mock_000004", "source_type": "archive_capture", "title": "Mock source for Kraken NFT", "url": "https://example.invalid/mock-source", "publisher": "Mock Source", "published_at": null, "archived_url": "https://web.archive.org/", "accessed_at": "2026-05-13", "reliability": "low", "claim_scope": "event", "language": "en", "notes": "Mock evidence only. Replace with verified source before canonical use."}, {"id": "mag_src_mock_000005", "marketplace_id": "mag_nfm_mock_000005", "event_id": "mag_ev_mock_000005", "source_type": "archive_capture", "title": "Mock source for X2Y2", "url": "https://example.invalid/mock-source", "publisher": "Mock Source", "published_at": null, "archived_url": "https://web.archive.org/", "accessed_at": "2026-05-13", "reliability": "low", "claim_scope": "event", "language": "en", "notes": "Mock evidence only. Replace with verified source before canonical use."}, {"id": "mag_src_mock_000006", "marketplace_id": "mag_nfm_mock_000006", "event_id": "mag_ev_mock_000006", "source_type": "archive_capture", "title": "Mock source for Hic et Nunc", "url": "https://example.invalid/mock-source", "publisher": "Mock Source", "published_at": null, "archived_url": "https://web.archive.org/", "accessed_at": "2026-05-13", "reliability": "low", "claim_scope": "event", "language": "en", "notes": "Mock evidence only. Replace with verified source before canonical use."}, {"id": "mag_src_mock_000007", "marketplace_id": "mag_nfm_mock_000007", "event_id": "mag_ev_mock_000007", "source_type": "marketplace_page", "title": "Mock source for Teia", "url": "https://example.invalid/mock-source", "publisher": "Mock Source", "published_at": null, "archived_url": null, "accessed_at": "2026-05-13", "reliability": "low", "claim_scope": "event", "language": "en", "notes": "Mock evidence only. Replace with verified source before canonical use."}, {"id": "mag_src_mock_000008", "marketplace_id": "mag_nfm_mock_000008", "event_id": "mag_ev_mock_000008", "source_type": "archive_capture", "title": "Mock source for KnownOrigin", "url": "https://example.invalid/mock-source", "publisher": "Mock Source", "published_at": null, "archived_url": "https://web.archive.org/", "accessed_at": "2026-05-13", "reliability": "low", "claim_scope": "event", "language": "en", "notes": "Mock evidence only. Replace with verified source before canonical use."}, {"id": "mag_src_mock_000009", "marketplace_id": "mag_nfm_mock_000009", "event_id": "mag_ev_mock_000009", "source_type": "archive_capture", "title": "Mock source for GameStop NFT", "url": "https://example.invalid/mock-source", "publisher": "Mock Source", "published_at": null, "archived_url": "https://web.archive.org/", "accessed_at": "2026-05-13", "reliability": "low", "claim_scope": "event", "language": "en", "notes": "Mock evidence only. Replace with verified source before canonical use."}, {"id": "mag_src_mock_000010", "marketplace_id": "mag_nfm_mock_000010", "event_id": "mag_ev_mock_000010", "source_type": "archive_capture", "title": "Mock source for Quix", "url": "https://example.invalid/mock-source", "publisher": "Mock Source", "published_at": null, "archived_url": "https://web.archive.org/", "accessed_at": "2026-05-13", "reliability": "low", "claim_scope": "event", "language": "en", "notes": "Mock evidence only. Replace with verified source before canonical use."}, {"id": "mag_src_mock_000011", "marketplace_id": "mag_nfm_mock_000011", "event_id": "mag_ev_mock_000011", "source_type": "archive_capture", "title": "Mock source for Coinbase NFT", "url": "https://example.invalid/mock-source", "publisher": "Mock Source", "published_at": null, "archived_url": null, "accessed_at": "2026-05-13", "reliability": "low", "claim_scope": "event", "language": "en", "notes": "Mock evidence only. Replace with verified source before canonical use."}, {"id": "mag_src_mock_000012", "marketplace_id": "mag_nfm_mock_000012", "event_id": "mag_ev_mock_000012", "source_type": "archive_capture", "title": "Mock source for Example Unknown Market", "url": "https://example.invalid/mock-source", "publisher": "Mock Source", "published_at": null, "archived_url": null, "accessed_at": "2026-05-13", "reliability": "low", "claim_scope": "event", "language": "en", "notes": "Mock evidence only. Replace with verified source before canonical use."}], "stats": {"generated_at": "2026-05-12T15:03:31.883786+00:00", "source": {"marketplaces_count": 12, "events_count": 12, "evidence_count": 12, "note": "Mock stats generated from mock-data only."}, "kpis": {"total_marketplaces": 12, "active_total": 4, "limited_total": 0, "inactive_total": 1, "dead_total": 5, "transitioned_total": 1, "faded_total": 7, "total_events": 12, "total_evidence": 12, "archive_coverage": 0.5, "high_confidence_share": 0.0, "reviewed_share": 0.0}, "breakdowns": {"by_status": {"active": 4, "dead": 5, "acquired": 1, "inactive": 1, "unknown": 1}, "by_category": {"general": 4, "cex_nft_market": 2, "art_curated": 3, "gaming": 1, "chain_specific": 1, "unknown": 1}, "by_marketplace_scope": {"standalone_marketplace": 6, "aggregator": 1, "cex_feature": 2, "community_fork": 1, "brand_marketplace": 1, "unknown": 1}, "by_chain": {"multi_chain": 3, "ethereum": 5, "tezos": 2, "optimism": 1, "unknown": 1}, "by_confidence": {"low": 12}, "by_review_status": {"seed": 10, "needs_review": 2}}, "coverage": {"archive_coverage": {"count": 6, "total": 12, "share": 0.5}}, "quality": {"record_quality_flags": {"weak_status_evidence": 4, "single_source": 2, "needs_asset_status_review": 4, "missing_archive": 2, "needs_contract_review": 2, "needs_successor_review": 2, "needs_frontend_review": 1, "zero_evidence": 1, "possible_out_of_scope": 1, "needs_summary_review": 1}, "evidence_depth": {"one": 12}}, "distributions": {"launch_year": {"2017": 1, "2022": 6, "2021": 3, "2018": 1, "unknown": 1}, "end_year": {"unknown": 6, "2025": 3, "2021": 1, "2024": 1, "2023": 1}}, "completeness": {"what_remains_present": {"count": 12, "total": 12}}}};
+    const state = {
+      q: "",
+      status: "",
+      category: "",
+      chain: "",
+      selectedSlug: "x2y2"
+    };
+
+    const label = s => (s || "unknown").replaceAll("_", " ").replace(/\b\w/g, c => c.toUpperCase());
+    const statusClass = s => "status status-" + (s || "unknown");
+    const byId = id => document.getElementById(id);
+
+    function countBy(items, getter) {
+      const counts = {};
+      for (const item of items) {
+        const value = getter(item);
+        if (Array.isArray(value)) value.forEach(v => counts[v] = (counts[v] || 0) + 1);
+        else counts[value || "unknown"] = (counts[value || "unknown"] || 0) + 1;
+      }
+      return counts;
+    }
+
+    function renderHeroStats() {
+      const k = DATA.stats.kpis;
+      byId("heroStats").innerHTML = [
+        ["Records", k.total_marketplaces],
+        ["Active", k.active_total],
+        ["Faded", k.faded_total],
+        ["Evidence", k.total_evidence]
+      ].map(([name, value]) => `<div class="mini-stat"><strong>${value}</strong><span>${name}</span></div>`).join("");
+    }
+
+    function renderBrowseCards() {
+      const cards = [
+        ["🌿", "Active", "Currently represented as usable.", "active"],
+        ["🍂", "Faded", "Limited, inactive, dead, or transitioned.", "faded"],
+        ["📚", "By chain", "Browse ecosystem shelves.", "chain"],
+        ["🏷️", "By category", "Art, gaming, CEX, brand, and more.", "category"]
+      ];
+      byId("browseCards").innerHTML = cards.map(([icon, title, desc, key]) => `
+        <div class="card browse-card hoverable" data-browse="${key}">
+          <div class="icon">${icon}</div>
+          <strong>${title}</strong>
+          <p>${desc}</p>
+        </div>
+      `).join("");
+      document.querySelectorAll("[data-browse]").forEach(el => {
+        el.addEventListener("click", () => {
+          if (el.dataset.browse === "active") state.status = "active";
+          if (el.dataset.browse === "faded") state.status = "dead";
+          renderFilters();
+          renderMarketCards();
+          location.hash = "#marketplaces";
+        });
+      });
+    }
+
+    function cardTemplate(m) {
+      const year = [m.launch_year || "?", m.end_year || ""].filter(Boolean).join("–");
+      return `
+        <article class="card market-card hoverable" data-slug="${m.slug}">
+          <h3><span>${m.canonical_name}</span><span class="${statusClass(m.status)}">${label(m.status)}</span></h3>
+          <div class="tag-row">
+            <span class="tag">${label(m.category)}</span>
+            <span class="tag">${label(m.marketplace_scope)}</span>
+            ${m.chain_scope.map(c => `<span class="tag">${label(c)}</span>`).join("")}
+          </div>
+          <p class="summary">${m.summary}</p>
+          <div class="small-meta">${year || "Unknown years"} · ${label(m.confidence)} confidence · ${label(m.review_status)}</div>
+        </article>
+      `;
+    }
+
+    function renderFeatured() {
+      const slugs = ["opensea", "x2y2", "hic-et-nunc", "kraken-nft"];
+      const items = slugs.map(slug => DATA.marketplaces.find(m => m.slug === slug)).filter(Boolean);
+      byId("featuredCards").innerHTML = items.map(cardTemplate).join("");
+      bindCardClicks(byId("featuredCards"));
+    }
+
+    function uniqueValues(key, arrayMode=false) {
+      const set = new Set();
+      for (const m of DATA.marketplaces) {
+        const v = m[key];
+        if (arrayMode) (v || []).forEach(x => set.add(x));
+        else set.add(v || "unknown");
+      }
+      return [...set].sort();
+    }
+
+    function filterChip(value, group, current) {
+      return `<button type="button" class="filter-chip ${current === value ? "active" : ""}" data-group="${group}" data-value="${value}">${label(value)}</button>`;
+    }
+
+    function renderFilters() {
+      byId("statusFilters").innerHTML = uniqueValues("status").map(v => filterChip(v, "status", state.status)).join("");
+      byId("categoryFilters").innerHTML = uniqueValues("category").map(v => filterChip(v, "category", state.category)).join("");
+      byId("chainFilters").innerHTML = uniqueValues("chain_scope", true).map(v => filterChip(v, "chain", state.chain)).join("");
+      document.querySelectorAll(".filter-chip").forEach(btn => {
+        btn.onclick = () => {
+          const group = btn.dataset.group;
+          const value = btn.dataset.value;
+          state[group] = state[group] === value ? "" : value;
+          renderFilters();
+          renderMarketCards();
+        };
+      });
+    }
+
+    function filteredMarketplaces() {
+      const q = state.q.trim().toLowerCase();
+      return DATA.marketplaces.filter(m => {
+        const searchText = [m.canonical_name, ...(m.aliases || []), m.status, m.category, m.marketplace_scope, ...(m.chain_scope || []), m.summary].join(" ").toLowerCase();
+        if (q && !searchText.includes(q)) return false;
+        if (state.status && m.status !== state.status) return false;
+        if (state.category && m.category !== state.category) return false;
+        if (state.chain && !m.chain_scope.includes(state.chain)) return false;
+        return true;
+      });
+    }
+
+    function renderMarketCards() {
+      const items = filteredMarketplaces();
+      byId("resultSummary").textContent = `Showing ${items.length} of ${DATA.marketplaces.length} mock records.`;
+      byId("marketCards").innerHTML = items.map(cardTemplate).join("");
+      byId("emptyState").hidden = items.length > 0;
+      bindCardClicks(byId("marketCards"));
+    }
+
+    function bindCardClicks(root=document) {
+      root.querySelectorAll("[data-slug]").forEach(card => {
+        card.addEventListener("click", () => {
+          state.selectedSlug = card.dataset.slug;
+          renderDetail();
+          location.hash = "#detail";
+        });
+      });
+    }
+
+    function recordEvents(m) { return DATA.events.filter(e => e.marketplace_id === m.id); }
+    function recordEvidence(m) { return DATA.evidence.filter(e => e.marketplace_id === m.id); }
+
+    function renderDetail() {
+      const m = DATA.marketplaces.find(x => x.slug === state.selectedSlug) || DATA.marketplaces[0];
+      const evs = recordEvents(m);
+      const srcs = recordEvidence(m);
+      const facts = [
+        ["Status", label(m.status)],
+        ["Category", label(m.category)],
+        ["Scope", label(m.marketplace_scope)],
+        ["Chain", m.chain_scope.map(label).join(", ")],
+        ["Frontend", label(m.frontend_status)],
+        ["Contract", label(m.contract_status)],
+        ["Assets", label(m.asset_status)],
+        ["Confidence", label(m.confidence)]
+      ];
+      byId("detailView").innerHTML = `
+        <aside class="card">
+          <p class="eyebrow">Specimen card</p>
+          <h2 style="font-size:42px">${m.canonical_name}</h2>
+          <div class="tag-row" style="margin:14px 0 18px">
+            <span class="${statusClass(m.status)}">${label(m.status)}</span>
+            <span class="tag">${label(m.category)}</span>
+            <span class="tag">${label(m.marketplace_scope)}</span>
+          </div>
+          <p>${m.summary}</p>
+          <div class="rule"></div>
+          <div class="fact-grid" style="margin-top:16px">
+            ${facts.map(([k,v]) => `<div class="fact"><span>${k}</span><strong>${v || "Unknown"}</strong></div>`).join("")}
+          </div>
+          <div class="mock-note">URL status: ${label(m.official_url_status)}<br>Archive: ${m.archived_url ? "Available in mock" : "Not set"}</div>
+        </aside>
+        <div class="grid">
+          <div class="card">
+            <p class="eyebrow">Core reading block</p>
+            <h2 style="font-size:36px">What changed?</h2>
+            <div class="remains-grid" style="margin-top:16px">
+              <div class="remains-card"><strong>What is gone?</strong><p>${m.what_is_gone || "Not applicable or unknown in mock data."}</p></div>
+              <div class="remains-card"><strong>What remains?</strong><p>${m.what_remains || "Unknown in mock data."}</p></div>
+              <div class="remains-card"><strong>Where did users or assets go?</strong><p>${m.where_users_or_assets_went || "Unknown in mock data."}</p></div>
+            </div>
+          </div>
+          <div class="card">
+            <p class="eyebrow">Timeline</p>
+            <div class="timeline">
+              ${evs.map(e => `<div class="timeline-item"><div class="small-meta">${e.event_date || "Unknown"} · ${label(e.event_type)} · ${label(e.impact_level)}</div><b>${e.title}</b><p>${e.description}</p></div>`).join("")}
+            </div>
+          </div>
+          <div class="card">
+            <p class="eyebrow">Evidence</p>
+            <div class="evidence-list">
+              ${srcs.map(s => `<div class="evidence-item"><div class="small-meta">${label(s.source_type)} · ${label(s.reliability)} reliability · ${label(s.claim_scope)}</div><b>${s.title}</b><p>${s.publisher} · ${s.accessed_at || "Unknown access date"}</p></div>`).join("")}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function kpiCard(name, value, note="") {
+      return `<div class="card kpi"><strong>${value}</strong><span class="small-meta">${name}</span>${note ? `<p style="margin-top:8px">${note}</p>` : ""}</div>`;
+    }
+
+    function renderStats() {
+      const k = DATA.stats.kpis;
+      byId("statsKpis").innerHTML = [
+        kpiCard("Total records", k.total_marketplaces, "Mock registry size"),
+        kpiCard("Faded-side", k.faded_total, "Limited, inactive, dead, or transitioned"),
+        kpiCard("Evidence", k.total_evidence, "Mock evidence items"),
+        kpiCard("Archive coverage", Math.round(k.archive_coverage * 100) + "%", "Mock archive availability")
+      ].join("");
+
+      const sections = [
+        ["Status", DATA.stats.breakdowns.by_status],
+        ["Category", DATA.stats.breakdowns.by_category],
+        ["Scope", DATA.stats.breakdowns.by_marketplace_scope]
+      ];
+      byId("breakdowns").innerHTML = sections.map(([title, obj]) => {
+        const max = Math.max(...Object.values(obj));
+        return `<div class="card"><h3>${title}</h3>${Object.entries(obj).map(([key, val]) => `
+          <div class="bar-row">
+            <span>${label(key)}</span>
+            <span class="bar-track"><span class="bar-fill" style="width:${Math.max(8, val / max * 100)}%"></span></span>
+            <b>${val}</b>
+          </div>
+        `).join("")}</div>`;
+      }).join("");
+    }
+
+    function init() {
+      renderHeroStats();
+      renderBrowseCards();
+      renderFeatured();
+      renderFilters();
+      renderMarketCards();
+      renderDetail();
+      renderStats();
+
+      byId("searchBox").addEventListener("input", e => {
+        state.q = e.target.value;
+        renderMarketCards();
+      });
+      byId("clearFilters").addEventListener("click", () => {
+        state.q = ""; state.status = ""; state.category = ""; state.chain = "";
+        byId("searchBox").value = "";
+        renderFilters();
+        renderMarketCards();
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>

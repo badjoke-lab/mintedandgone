@@ -1,0 +1,15 @@
+[
+  {
+    "snapshot_date": "2026-05-13",
+    "generated_at": "2026-05-12T15:03:31.883786+00:00",
+    "total_marketplaces": 12,
+    "total_events": 12,
+    "total_evidence": 12,
+    "active_total": 4,
+    "faded_total": 7,
+    "archive_coverage": 0.5,
+    "high_confidence_share": 0.0,
+    "reviewed_share": 0.0,
+    "note": "Initial mock-data snapshot."
+  }
+]
