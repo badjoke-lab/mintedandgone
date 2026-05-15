@@ -2,14 +2,57 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="About — Minted & Gone">
-  <div class="shell guide-page">
-    <section class="field-hero simple-hero"><div class="hero-botanical" aria-hidden="true">☘</div><div class="hero-copy plate-copy"><p class="eyebrow">About this archive</p><h1>What Minted &amp; Gone is</h1><div class="flourish" aria-hidden="true">✦</div><p class="lede">A static-first field guide for NFT marketplaces and their historical states.</p><p>It preserves what disappeared, what remains, and where users or assets went without turning the topic into a price dashboard.</p></div></section>
-    <p class="mock-note">The current implementation uses mock layout records only. Treat the archive as a design and validation prototype until records are sourced and reviewed.</p>
-    <section class="guide-grid">
-      <article class="framed-panel guide-card"><span class="num">01</span><h2>Why it exists</h2><p>NFT marketplaces change quickly. A warm registry can preserve closures, transitions, acquisitions, and surviving artifacts in a way that is useful to researchers and correction-friendly for maintainers.</p></article>
-      <article class="framed-panel guide-card"><span class="num">02</span><h2>What it records</h2><p>Records include identity, scope, chain coverage, frontend status, contract status, asset state, timeline events, source notes, confidence, and review status.</p></article>
-      <article class="framed-panel guide-card"><span class="num">03</span><h2>What it does not do</h2><p>Minted &amp; Gone does not provide NFT price data, wallet connection, legal analysis, investment rankings, login, or real-time uptime monitoring.</p></article>
+  <div class="shell guide-page about-page">
+    <section class="field-hero simple-hero compact-hero about-hero">
+      <div class="hero-botanical" aria-hidden="true">☘</div>
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">About this archive</p>
+        <h1>About Minted &amp; Gone</h1>
+        <p class="lede">A static field guide for NFT marketplace histories.</p>
+        <p>Minted &amp; Gone keeps a careful record of marketplace status, evidence, and what remains when platforms fade, close, merge, or change identity.</p>
+      </div>
     </section>
-    <section class="framed-panel definition-card"><p class="eyebrow">Definition card</p><h2>Field-guide, not dashboard</h2><p>The archive intentionally uses static pages, JSON records, and visible uncertainty. That makes it easier to review claims and harder to mistake mock records for live market signals.</p><div class="hero-actions"><a class="btn primary" href="/methodology/">Read methodology</a><a class="btn" href="/submit/">Submit/correct</a></div></section>
+
+    <p class="mock-note">The current implementation uses mock layout records only. Treat the archive as a design and validation prototype until records are sourced and reviewed.</p>
+
+    <section class="about-section-grid">
+      <article class="framed-panel guide-card">
+        <span class="num">01</span>
+        <h2>What is Minted &amp; Gone?</h2>
+        <p>Minted &amp; Gone is a field-guide archive for NFT marketplaces. It uses static pages and JSON records to describe marketplace identity, status, evidence, and historical context.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <span class="num">02</span>
+        <h2>Why NFT marketplaces need an archive</h2>
+        <p>NFT marketplaces can disappear unevenly: websites go dark, contracts remain readable, assets move to other interfaces, and announcements scatter across the web. An archive helps keep those changes reviewable.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <span class="num">03</span>
+        <h2>What this project tracks</h2>
+        <p>Records track marketplace names, aliases, status, category, chain scope, frontend and contract state, asset visibility, timeline events, evidence notes, confidence, and review status.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <span class="num">04</span>
+        <h2>What this project does not do</h2>
+        <p>It does not provide price data, wallet connection, login, rankings, legal analysis, investment advice, or real-time uptime monitoring. The archive is historical and source-oriented.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <span class="num">05</span>
+        <h2>Community corrections</h2>
+        <p>Corrections should include source URLs, archive URLs when available, and precise notes about dates, status, or what remains. The goal is to make uncertainty visible rather than hide it.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <span class="num">06</span>
+        <h2>Disclaimer</h2>
+        <p>Minted &amp; Gone is not investment advice, not legal advice, and not a guarantee that any marketplace, URL, contract, or asset remains available at runtime.</p>
+      </article>
+    </section>
+
+    <section class="framed-panel definition-card about-cta">
+      <p class="eyebrow">Field-guide, not dashboard</p>
+      <h2>Designed for reviewable history</h2>
+      <p>The archive intentionally uses static pages, JSON records, and visible uncertainty. That makes it easier to review claims and harder to mistake mock records for live market signals.</p>
+      <div class="hero-actions"><a class="btn primary" href="/methodology/">Read methodology</a><a class="btn" href="/submit/">Submit/correct</a></div>
+    </section>
   </div>
 </BaseLayout>
