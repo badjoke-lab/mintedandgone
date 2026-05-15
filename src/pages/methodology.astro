@@ -1,19 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const definitions = [
+  ['active', 'Core marketplace behavior appears available.'], ['limited', 'Some function remains, such as viewing, withdrawal, migration, or partial chain support.'], ['inactive', 'Activity appears faded but closure is not proven.'], ['dead', 'Marketplace function is ended or inaccessible.'], ['acquired / merged / rebranded', 'The record changed identity, ownership, or destination.'], ['unknown', 'Evidence is insufficient for a clearer status.']
+];
 ---
 <BaseLayout title="Methodology — Minted & Gone">
-  <article class="narrow longform panel" style="margin-top:48px">
-    <p class="eyebrow">Field-guide appendix</p><h1>Methodology</h1>
-    <p>This page adapts the project methodology into a readable static guide. It explains how to read marketplace status, evidence, confidence, and stats in Minted &amp; Gone.</p>
-    <h2>How to read this guide</h2><p>The central questions are: what is gone, what remains, and where did users or assets go? Records should keep uncertainty visible instead of smoothing it away.</p>
-    <h2>What counts</h2><p>Included records are named NFT marketplaces, aggregators, CEX-operated NFT marketplace features, chain-specific markets, curated art markets, gaming/metaverse markets, successor/fork markets, and historically meaningful marketplace interfaces when sources can support the classification.</p>
-    <h2>What does not count</h2><p>Excluded items include standalone collections, one-off mint pages, simple galleries, portfolio trackers, price comparison sites, news sites, analytics dashboards, and records where marketplace behavior or source support is too thin.</p>
-    <h2>Status definitions</h2><ul><li><strong>active:</strong> core marketplace behavior appears available.</li><li><strong>limited:</strong> some function remains, such as viewing, withdrawal, migration, or partial chain support.</li><li><strong>inactive:</strong> activity appears faded but closure is not proven.</li><li><strong>dead:</strong> marketplace function is ended or inaccessible.</li><li><strong>acquired / merged / rebranded:</strong> the record changed identity, ownership, or destination.</li><li><strong>unknown:</strong> evidence is insufficient for a clearer status.</li></ul>
-    <h2>Frontend / contract / asset status</h2><p>NFT marketplaces can disappear unevenly. The frontend may be gone while contracts remain readable, or assets may remain visible through another interface. Detail pages expose all three fields.</p>
-    <h2>Evidence rules</h2><p>Prefer official announcements, archived pages, current marketplace pages, reputable news, documentation, and primary social posts. Placeholder mock evidence must never be presented as verified proof.</p>
-    <h2>Confidence levels</h2><p>Confidence communicates how strongly the available sources support the classification. Low confidence is acceptable for mock or seed work if the record is clearly marked for review.</p>
-    <h2>Stats methodology</h2><p>Stats are generated from the same JSON records used by the site. They are coverage and classification summaries, not live market analytics or rankings.</p>
-    <h2>Corrections</h2><p>Corrections should include source URLs, archive URLs where possible, and precise notes about status, dates, or what remains. Disagreements should be tracked as review work rather than hidden.</p>
-    <h2>Disclaimer</h2><p>Minted &amp; Gone is not investment advice, not legal advice, and not a real-time availability guarantee. The current implementation uses mock data only.</p>
-  </article>
+  <div class="shell guide-page">
+    <section class="field-hero simple-hero"><div class="hero-botanical mushroom" aria-hidden="true">♧</div><div class="hero-copy plate-copy"><p class="eyebrow">Field-guide appendix</p><h1>Methodology</h1><div class="flourish" aria-hidden="true">✦</div><p class="lede">How to read marketplace status, evidence, confidence, and stats.</p><p>The central questions are: what is gone, what remains, and where did users or assets go? Records keep uncertainty visible instead of smoothing it away.</p></div></section>
+    <p class="mock-note">Placeholder mock evidence must never be presented as verified proof. Current records remain mock layout data.</p>
+    <section class="guide-grid numbered">
+      <article class="framed-panel guide-card"><span class="num">01</span><h2>What counts</h2><p>Included records are named NFT marketplaces, aggregators, CEX-operated marketplace features, chain-specific markets, curated art markets, gaming/metaverse markets, successor/fork markets, and historically meaningful marketplace interfaces when sources support the classification.</p></article>
+      <article class="framed-panel guide-card"><span class="num">02</span><h2>What does not count</h2><p>Excluded items include standalone collections, one-off mint pages, galleries, portfolio trackers, price comparison sites, news sites, analytics dashboards, and records where marketplace behavior or source support is too thin.</p></article>
+      <article class="framed-panel guide-card"><span class="num">03</span><h2>Evidence rules</h2><p>Prefer official announcements, archived pages, current marketplace pages, reputable news, documentation, and primary social posts. Corrections should include exact URLs and notes about what changed.</p></article>
+    </section>
+    <section class="framed-panel"><p class="eyebrow">Status definitions</p><h2>Reading the specimen labels</h2><div class="definition-grid">{definitions.map(([term, copy]) => <article class="definition-card"><h3>{term}</h3><p>{copy}</p></article>)}</div></section>
+    <section class="guide-grid">
+      <article class="framed-panel guide-card"><h2>Frontend / contract / asset status</h2><p>NFT marketplaces can disappear unevenly. The frontend may be gone while contracts remain readable, or assets may remain visible through another interface. Detail pages expose all three fields.</p></article>
+      <article class="framed-panel guide-card"><h2>Confidence levels</h2><p>Confidence communicates how strongly the available sources support the classification. Low confidence is acceptable for mock or seed work if the record is clearly marked for review.</p></article>
+      <article class="framed-panel guide-card"><h2>Stats methodology</h2><p>Stats are generated from the same JSON records used by the site. They are coverage and classification summaries, not live market analytics or rankings.</p></article>
+    </section>
+    <section class="framed-panel correction-desk"><p class="eyebrow">Corrections</p><h2>Make uncertainty reviewable</h2><p>Corrections should include source URLs, archive URLs where possible, and precise notes about status, dates, or what remains. Disagreements should be tracked as review work rather than hidden.</p><a class="btn primary" href="/submit/">Open the correction desk</a></section>
+  </div>
 </BaseLayout>
