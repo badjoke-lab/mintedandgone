@@ -6,11 +6,12 @@ import { getStats } from '../lib/data';
 const stats = getStats();
 ---
 <BaseLayout title="Stats appendix — Minted & Gone">
-  <div class="shell">
-    <section><p class="eyebrow">Appendix</p><h1>Registry stats</h1><p>Static counts generated from mock JSON. These numbers describe prototype coverage, not verified market history.</p></section>
-    <StatsKpiGrid stats={stats} />
-    <section class="grid two"><StatsBreakdown title="Status breakdown" data={stats.breakdowns.by_status} /><StatsBreakdown title="Category breakdown" data={stats.breakdowns.by_category} /><StatsBreakdown title="Marketplace scope" data={stats.breakdowns.by_marketplace_scope} /><StatsBreakdown title="Chain breakdown" data={stats.breakdowns.by_chain} /><StatsBreakdown title="Confidence" data={stats.breakdowns.by_confidence} /><StatsBreakdown title="Review status" data={stats.breakdowns.by_review_status} /></section>
-    <section class="grid two"><StatsBreakdown title="Launch year preview" data={stats.distributions.launch_year} /><StatsBreakdown title="End year preview" data={stats.distributions.end_year} /></section>
-    <section class="panel"><p class="eyebrow">Coverage / quality</p><h2>How to read these figures</h2><p>Archive coverage, confidence, review state, and record-quality flags are data-quality hints. They are designed to keep uncertain records visibly uncertain.</p><p class="subtle">Generated at {stats.generated_at}. Source counts: {stats.source.marketplaces_count} marketplaces, {stats.source.events_count} events, {stats.source.evidence_count} evidence notes.</p><a class="btn" href="/methodology/">Read methodology</a></section>
+  <div class="shell appendix-page">
+    <section class="field-hero appendix-hero"><div class="hero-botanical" aria-hidden="true">✤</div><div class="hero-copy plate-copy"><p class="eyebrow">Field-guide appendix</p><h1>Archive counts</h1><div class="flourish" aria-hidden="true">✦</div><p class="lede">Static counts generated from mock JSON.</p><p>These figures summarize prototype coverage and classification quality; they are not live market analytics, rankings, uptime monitoring, or price data.</p></div></section>
+    <p class="mock-note">Mock-data warning: these generated numbers describe prototype records only, not verified market history.</p>
+    <section class="framed-panel"><p class="eyebrow">Archive at a glance</p><StatsKpiGrid stats={stats} /></section>
+    <section class="appendix-grid"><StatsBreakdown title="Status specimens" data={stats.breakdowns.by_status} /><StatsBreakdown title="Category drawer" data={stats.breakdowns.by_category} /><StatsBreakdown title="Marketplace scope" data={stats.breakdowns.by_marketplace_scope} /><StatsBreakdown title="Chain shelf" data={stats.breakdowns.by_chain} /><StatsBreakdown title="Confidence labels" data={stats.breakdowns.by_confidence} /><StatsBreakdown title="Review state" data={stats.breakdowns.by_review_status} /></section>
+    <section class="appendix-grid two"><StatsBreakdown title="Launch-year field notes" data={stats.distributions.launch_year} /><StatsBreakdown title="End-year field notes" data={stats.distributions.end_year} /></section>
+    <section class="framed-panel definition-card"><p class="eyebrow">Coverage / quality</p><h2>How to read these figures</h2><p>Archive coverage, confidence, review state, and record-quality flags are data-quality hints. They are designed to keep uncertain records visibly uncertain.</p><p class="subtle">Generated at {stats.generated_at}. Source counts: {stats.source.marketplaces_count} marketplaces, {stats.source.events_count} events, {stats.source.evidence_count} evidence notes.</p><a class="btn" href="/methodology/">Read methodology</a></section>
   </div>
 </BaseLayout>
