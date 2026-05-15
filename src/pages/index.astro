@@ -3,19 +3,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import MarketplaceCard from '../components/MarketplaceCard.astro';
 import StatsKpiGrid from '../components/StatsKpiGrid.astro';
 import StatusChip from '../components/StatusChip.astro';
-import { getFeaturedMarketplaces, getRecentlyGoneMarketplaces, getStats } from '../lib/data';
-const featured = getFeaturedMarketplaces();
+import { getMarketplaces, getRecentlyGoneMarketplaces, getStats } from '../lib/data';
+const preferredFeaturedSlugs = ['opensea', 'blur', 'magic-eden', 'teia'];
+const marketplaces = getMarketplaces();
+const featured = preferredFeaturedSlugs
+  .map((slug) => marketplaces.find((record) => record.slug === slug))
+  .filter(Boolean);
 const recent = getRecentlyGoneMarketplaces();
 const stats = getStats();
 const shelf = [
-  ['Active', 'Currently operating marketplace records', '/marketplaces/?status=active', '✽'],
-  ['Inactive', 'Paused, dormant, or partially dimmed records', '/marketplaces/?status=inactive', '⌛'],
-  ['Dead', 'Permanently closed or inaccessible records', '/marketplaces/?status=dead', '☙'],
-  ['Rebranded / Merged', 'Markets that changed identity or destination', '/marketplaces/', '🦋'],
-  ['By Chain', 'Explore the archive by blockchain scope', '/marketplaces/', '⛓'],
-  ['By Category', 'Sort art, games, PFPs, and more', '/marketplaces/', '▤'],
-  ['Timeline', 'Follow marketplace history over time', '/stats/', '◷']
+  ['Active', 'Currently operating marketplace records', '/marketplaces/?status=active', 'active'],
+  ['Inactive', 'Paused, dormant, or partially dimmed records', '/marketplaces/?status=inactive', 'inactive'],
+  ['Dead', 'Permanently closed or inaccessible records', '/marketplaces/?status=dead', 'dead'],
+  ['Rebranded / Merged', 'Markets that changed identity or destination', '/marketplaces/', 'merged'],
+  ['By Chain', 'Explore the archive by blockchain scope', '/marketplaces/', 'chain'],
+  ['By Category', 'Sort art, games, PFPs, and more', '/marketplaces/', 'category'],
+  ['Timeline', 'Follow marketplace history over time', '/stats/', 'timeline']
 ];
+const drawers = ['ACTIVE', 'INACTIVE', 'DEAD', 'MERGED', 'BY CHAIN', 'BY CATEGORY'];
 const timeline = [
   ['2017', 'Early experiments'], ['2018', 'The spark'], ['2019', 'First wave'], ['2020', 'The boom'], ['2021', 'Peak activity'], ['2022', 'Consolidation'], ['2023', 'Correction'], ['2024', 'A new chapter']
 ];
@@ -23,7 +28,11 @@ const timeline = [
 <BaseLayout title="Minted & Gone — NFT marketplace field guide">
   <div class="shell">
     <section class="field-hero home-hero">
-      <div class="hero-botanical" aria-hidden="true">☘</div>
+      <div class="hero-botanical botanical-plate" aria-hidden="true">
+        <span class="stem stem-main"></span><span class="stem stem-side-a"></span><span class="stem stem-side-b"></span>
+        <span class="leaf leaf-a"></span><span class="leaf leaf-b"></span><span class="leaf leaf-c"></span><span class="leaf leaf-d"></span><span class="leaf leaf-e"></span><span class="leaf leaf-f"></span>
+        <span class="bud bud-a"></span><span class="bud bud-b"></span><span class="bud bud-c"></span>
+      </div>
       <div class="hero-copy plate-copy">
         <p class="eyebrow">NFT marketplace archive</p>
         <h1>Minted &amp; Gone</h1>
@@ -32,9 +41,18 @@ const timeline = [
         <p>We document the stories of NFT marketplaces across time: active, closed, acquired, rebranded, and forgotten. An open archive for collectors, researchers, and the curious.</p>
         <div class="hero-actions"><a class="btn primary" href="/marketplaces/">Browse the encyclopedia</a><a class="btn" href="/methodology/">Read methodology</a></div>
       </div>
-      <aside class="hero-plate framed-plate">
-        <div class="cabinet-illustration" aria-hidden="true"><span>▤</span><span>▤</span><span>▤</span><span>▤</span><span>▤</span><span>▤</span></div>
-        <div class="field-note-stamp"><p class="script">Field Notes</p><p>Markets come and go.<br />The record remains.</p><strong>M&amp;G</strong></div>
+      <aside class="hero-plate home-field-notes framed-plate">
+        <div class="archive-cabinet" aria-label="Field Notes archive cabinet">
+          <div class="cabinet-top"><span></span><span></span><span></span></div>
+          <div class="cabinet-drawers">{drawers.map((label) => <span class="cabinet-drawer"><b>{label}</b><i></i></span>)}</div>
+          <div class="cabinet-base"><span></span></div>
+        </div>
+        <div class="field-note-card">
+          <p class="script">Field Notes</p>
+          <p>Markets come and go.<br />The record remains.</p>
+          <span class="field-butterfly" aria-hidden="true">◇</span>
+          <strong class="mg-stamp">M&amp;G</strong>
+        </div>
       </aside>
     </section>
 
@@ -42,13 +60,13 @@ const timeline = [
 
     <section class="shelf-section framed-panel">
       <p class="eyebrow">Browse the encyclopedia</p>
-      <div class="browse-shelf">{shelf.map(([title, copy, href, icon]) => <a class="shelf-card" href={href}><span class="shelf-icon">{icon}</span><strong>{title}</strong><small>{copy}</small><em>→</em></a>)}</div>
+      <div class="browse-shelf">{shelf.map(([title, copy, href, icon]) => <a class="shelf-card" href={href}><span class:list={['shelf-illustration', `shelf-${icon}`]} aria-hidden="true"><i></i></span><strong>{title}</strong><small>{copy}</small><em>→</em></a>)}</div>
     </section>
 
     <section class="home-split">
-      <div class="framed-panel">
+      <div class="framed-panel home-featured-panel">
         <div class="section-head"><div><p class="eyebrow">Featured marketplaces</p><h2>Specimens from the shelf</h2></div><a class="text-link" href="/marketplaces/">View all active →</a></div>
-        <div class="grid cards featured-grid">{featured.slice(0, 4).map((record) => <MarketplaceCard record={record} compact />)}</div>
+        <div class="grid cards featured-grid home-featured-grid">{featured.slice(0, 4).map((record) => <MarketplaceCard record={record} compact home />)}</div>
       </div>
       <aside class="framed-panel recent-panel">
         <div class="section-head"><div><p class="eyebrow">Recently gone / updated</p></div><a class="text-link" href="/marketplaces/">View all →</a></div>
