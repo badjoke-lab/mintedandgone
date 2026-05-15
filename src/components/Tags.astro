@@ -1,0 +1,5 @@
+---
+import { formatLabel } from '../lib/format';
+const { items = [] } = Astro.props;
+---
+<div class="tag-row">{items.filter(Boolean).map((item: string) => <span class="tag">{formatLabel(item)}</span>)}</div>

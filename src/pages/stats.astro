@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StatsKpiGrid from '../components/StatsKpiGrid.astro';
+import StatsBreakdown from '../components/StatsBreakdown.astro';
+import { getStats } from '../lib/data';
+const stats = getStats();
+---
+<BaseLayout title="Stats appendix — Minted & Gone">
+  <div class="shell">
+    <section><p class="eyebrow">Appendix</p><h1>Registry stats</h1><p>Static counts generated from mock JSON. These numbers describe prototype coverage, not verified market history.</p></section>
+    <StatsKpiGrid stats={stats} />
+    <section class="grid two"><StatsBreakdown title="Status breakdown" data={stats.breakdowns.by_status} /><StatsBreakdown title="Category breakdown" data={stats.breakdowns.by_category} /><StatsBreakdown title="Marketplace scope" data={stats.breakdowns.by_marketplace_scope} /><StatsBreakdown title="Chain breakdown" data={stats.breakdowns.by_chain} /><StatsBreakdown title="Confidence" data={stats.breakdowns.by_confidence} /><StatsBreakdown title="Review status" data={stats.breakdowns.by_review_status} /></section>
+    <section class="grid two"><StatsBreakdown title="Launch year preview" data={stats.distributions.launch_year} /><StatsBreakdown title="End year preview" data={stats.distributions.end_year} /></section>
+    <section class="panel"><p class="eyebrow">Coverage / quality</p><h2>How to read these figures</h2><p>Archive coverage, confidence, review state, and record-quality flags are data-quality hints. They are designed to keep uncertain records visibly uncertain.</p><p class="subtle">Generated at {stats.generated_at}. Source counts: {stats.source.marketplaces_count} marketplaces, {stats.source.events_count} events, {stats.source.evidence_count} evidence notes.</p><a class="btn" href="/methodology/">Read methodology</a></section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,11 @@
+---
+const { record } = Astro.props;
+---
+<section aria-labelledby="what-remains">
+  <div class="section-head"><div><p class="eyebrow">Core field-guide question</p><h2 id="what-remains">What is gone, what remains?</h2></div></div>
+  <div class="grid three">
+    <article class="card what-card"><h3>What is gone?</h3><p>{record.what_is_gone || 'Unknown or not applicable in this mock record.'}</p></article>
+    <article class="card what-card"><h3>What remains?</h3><p>{record.what_remains || 'Unknown in this mock record.'}</p></article>
+    <article class="card what-card"><h3>Where did users or assets go?</h3><p>{record.where_users_or_assets_went || 'Unknown or not applicable in this mock record.'}</p></article>
+  </div>
+</section>

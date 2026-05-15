@@ -1,0 +1,10 @@
+---
+import { formatLabel, formatYearRange } from '../lib/format';
+const { record } = Astro.props;
+const facts = [
+ ['Status', record.status], ['Category', record.category], ['Scope', record.marketplace_scope], ['Chain', record.chain_scope?.join(', ')],
+ ['Frontend', record.frontend_status], ['Contracts', record.contract_status], ['Assets', record.asset_status], ['Years', formatYearRange(record)],
+ ['Confidence', record.confidence], ['Review', record.review_status]
+];
+---
+<div class="grid meta-grid">{facts.map(([k,v]) => <div class="fact"><b>{k}</b>{formatLabel(v)}</div>)}</div>

@@ -1,0 +1,5 @@
+---
+import { formatDatePrecision, formatLabel } from '../lib/format';
+const { events = [] } = Astro.props;
+---
+<section><p class="eyebrow">Timeline</p><h2>Recorded events</h2><div class="timeline">{events.map((event:any) => <article class="timeline-item"><h3>{event.title}</h3><p><strong>{formatDatePrecision(event.event_date, event.event_date_precision)}</strong> · {formatLabel(event.event_type)} · confidence {event.confidence}</p><p>{event.description}</p></article>)}</div></section>

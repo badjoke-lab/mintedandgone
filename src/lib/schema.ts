@@ -1,0 +1,16 @@
+export const STATUSES = ['active','limited','inactive','dead','acquired','merged','rebranded','unknown'] as const;
+export type MarketplaceStatus = typeof STATUSES[number];
+export type Marketplace = {
+  id: string; slug: string; canonical_name: string; aliases: string[]; status: MarketplaceStatus;
+  category: string; marketplace_scope: string; chain_scope: string[]; origin_bucket: string;
+  launch_date?: string | null; launch_date_precision?: string; launch_year?: number | null;
+  end_date?: string | null; end_date_precision?: string; end_year?: number | null;
+  closure_reason?: string; frontend_status?: string; contract_status?: string; asset_status?: string;
+  country_or_origin?: string | null; official_url_original?: string | null; official_domain_original?: string | null;
+  official_url_status?: string; archived_url?: string | null; successor_marketplace?: string | null; predecessor_marketplace?: string | null;
+  summary: string; what_is_gone?: string | null; what_remains?: string | null; where_users_or_assets_went?: string | null;
+  confidence: string; review_status: string; record_quality_flags: string[]; last_verified_at: string; notes?: string | null;
+};
+export type Event = { id:string; marketplace_id:string; event_type:string; event_date:string; event_date_precision:string; title:string; description:string; confidence:string; sort_order?:number; [key:string]: unknown };
+export type Evidence = { id:string; marketplace_id:string; event_id?:string; source_type:string; title:string; url:string; publisher:string; published_at?:string|null; archived_url?:string|null; accessed_at?:string|null; reliability:string; claim_scope:string; notes?:string|null; [key:string]: unknown };
+export type Stats = Record<string, any>;

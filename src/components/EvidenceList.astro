@@ -1,0 +1,5 @@
+---
+import { formatLabel } from '../lib/format';
+const { evidence = [] } = Astro.props;
+---
+<section><p class="eyebrow">Evidence</p><h2>Source notes</h2><p class="mock-note">Evidence URLs in this first build are placeholders from mock data and should not be treated as verified sources.</p><ul class="evidence">{evidence.map((item:any) => <li><h3>{item.title}</h3><p>{item.publisher} · {formatLabel(item.source_type)} · reliability {item.reliability} · claim {formatLabel(item.claim_scope)}</p><p class="subtle">Published: {item.published_at || 'unknown'} · Accessed: {item.accessed_at || 'unknown'} · Archive: {item.archived_url ? 'present' : 'not present'}</p><p>{item.notes}</p></li>)}</ul></section>

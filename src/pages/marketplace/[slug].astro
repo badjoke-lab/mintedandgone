@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StatusChip from '../../components/StatusChip.astro';
+import Tags from '../../components/Tags.astro';
+import FactGrid from '../../components/FactGrid.astro';
+import WhatRemainsBlock from '../../components/WhatRemainsBlock.astro';
+import UrlArchiveBlock from '../../components/UrlArchiveBlock.astro';
+import Timeline from '../../components/Timeline.astro';
+import EvidenceList from '../../components/EvidenceList.astro';
+import MarketplaceCard from '../../components/MarketplaceCard.astro';
+import { getMarketplaces, getEventsForMarketplace, getEvidenceForMarketplace, getRelatedMarketplaces } from '../../lib/data';
+export function getStaticPaths() { return getMarketplaces().map((record) => ({ params: { slug: record.slug }, props: { record } })); }
+const { record } = Astro.props;
+const events = getEventsForMarketplace(record.id);
+const evidence = getEvidenceForMarketplace(record.id);
+const related = getRelatedMarketplaces(record);
+---
+<BaseLayout title={`${record.canonical_name} — Minted & Gone`} description={record.summary}>
+  <div class="shell">
+    <nav class="breadcrumb"><a href="/marketplaces/">Marketplaces</a> / {record.canonical_name}</nav>
+    <section class="panel record-hero"><p class="eyebrow">Marketplace record</p><div class="card-top"><h1>{record.canonical_name}</h1><StatusChip status={record.status} /></div><p>{record.summary}</p><Tags items={[record.category, record.marketplace_scope, ...record.chain_scope]} /><p class="mock-note">Mock record only. Verify sources before canonical public use.</p></section>
+    <section><p class="eyebrow">Field facts</p><h2>Classification</h2><FactGrid record={record} /></section>
+    <WhatRemainsBlock record={record} />
+    <UrlArchiveBlock record={record} />
+    <Timeline events={events} />
+    <EvidenceList evidence={evidence} />
+    <section><div class="section-head"><div><p class="eyebrow">Related shelf</p><h2>Nearby records</h2></div><a class="btn" href="/submit/">Suggest a correction</a></div><div class="grid cards">{related.map((item) => <MarketplaceCard record={item} />)}</div><p class="subtle">Corrections should include source URLs, archive URLs when available, and a clear note about what changed.</p></section>
+  </div>
+</BaseLayout>

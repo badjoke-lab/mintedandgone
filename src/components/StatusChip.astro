@@ -1,0 +1,5 @@
+---
+import { formatStatus } from '../lib/format';
+const { status } = Astro.props;
+---
+<span class="chip" data-status={status}>{formatStatus(status)}</span>
