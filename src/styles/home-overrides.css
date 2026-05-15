@@ -1,132 +1,24 @@
-/* Safe home-only polish after PR #3 revert.
-   Scope: desktop home layout only. Keep routes, nav, data, and other pages unchanged. */
+/* Home-only correction after PR #3 revert.
+   Scope: keep PR #2 visual baseline and adjust only the desktop hero ornament alignment. */
 
 @media (min-width: 1051px) {
   .home-hero {
-    grid-template-columns: 150px minmax(0, 1fr) minmax(420px, 0.9fr);
-    gap: 30px;
-    align-items: center;
+    grid-template-columns: 118px minmax(0, 1fr) minmax(420px, 0.9fr);
+    column-gap: 24px;
   }
 
   .home-hero .hero-botanical {
-    font-size: 108px;
-    align-self: center;
-    transform: translateY(-10px);
+    align-self: start;
+    justify-self: end;
+    margin-top: 82px;
+    margin-right: 6px;
+    font-size: 104px;
+    line-height: 1;
     opacity: 0.68;
+    transform: none;
   }
 
   .home-hero .plate-copy {
     align-self: center;
-  }
-
-  .home-hero .hero-plate {
-    grid-template-columns: 1.35fr 0.82fr;
-    align-self: center;
-  }
-
-  .home-hero .cabinet-illustration {
-    min-height: 162px;
-    padding: 38px 24px 20px;
-  }
-
-  .home-hero .field-note-stamp {
-    padding: 18px 12px;
-  }
-
-  .home-hero .field-note-stamp strong {
-    width: 76px;
-    height: 76px;
-  }
-
-  .shelf-section {
-    padding: 20px 22px;
-  }
-
-  .browse-shelf {
-    gap: 10px;
-  }
-
-  .shelf-card {
-    min-height: 116px;
-    padding: 14px;
-  }
-
-  .shelf-icon {
-    font-size: 34px;
-  }
-
-  .home-split {
-    grid-template-columns: minmax(0, 1.65fr) minmax(340px, 1fr);
-  }
-
-  .featured-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-
-  .featured-grid .market-card.compact-card {
-    min-height: 190px;
-    gap: 10px;
-  }
-
-  .featured-grid .compact-card .card-top {
-    align-items: center;
-  }
-
-  .featured-grid .compact-card .card-identity {
-    min-width: 0;
-  }
-
-  .featured-grid .compact-card h3 {
-    font-size: 20px;
-    line-height: 1.05;
-  }
-
-  .featured-grid .compact-card .record-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    flex: none;
-  }
-
-  .featured-grid .compact-card p {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .featured-grid .compact-card .meta-grid {
-    display: none;
-  }
-
-  .featured-grid .compact-card .tag-row {
-    gap: 6px;
-  }
-
-  .featured-grid .compact-card .tag {
-    padding: 4px 8px;
-    font-size: 11px;
-  }
-
-  .recent-panel {
-    align-self: stretch;
-  }
-
-  .recent-row small {
-    -webkit-line-clamp: 2;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-  }
-
-  .glance-panel .kpi {
-    padding: 14px;
-  }
-
-  .glance-panel .kpi strong {
-    font-size: 34px;
-  }
-
-  .about-card h2 {
-    font-size: clamp(30px, 3vw, 44px);
   }
 }
