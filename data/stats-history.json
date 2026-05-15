@@ -1,15 +1,111 @@
 [
   {
-    "snapshot_date": "2026-05-13",
-    "generated_at": "2026-05-12T15:03:31.883786+00:00",
-    "total_marketplaces": 12,
-    "total_events": 12,
-    "total_evidence": 12,
-    "active_total": 4,
-    "faded_total": 7,
-    "archive_coverage": 0.5,
-    "high_confidence_share": 0.0,
-    "reviewed_share": 0.0,
-    "note": "Initial mock-data snapshot."
+    "snapshot_at": "2026-05-15T00:49:50.201Z",
+    "generated_at": "2026-05-15T00:49:50.201Z",
+    "source": {
+      "marketplaces_count": 12,
+      "events_count": 12,
+      "evidence_count": 12,
+      "note": "Mock stats generated from mock-data only."
+    },
+    "kpis": {
+      "total_marketplaces": 12,
+      "total_events": 12,
+      "total_evidence": 12,
+      "active_total": 4,
+      "limited_total": 0,
+      "inactive_total": 1,
+      "dead_total": 5,
+      "transitioned_total": 1,
+      "faded_total": 7,
+      "archive_coverage": 0.5,
+      "high_confidence_share": 0,
+      "reviewed_share": 0
+    },
+    "breakdowns": {
+      "by_status": {
+        "active": 4,
+        "dead": 5,
+        "acquired": 1,
+        "inactive": 1,
+        "unknown": 1
+      },
+      "by_category": {
+        "general": 4,
+        "cex_nft_market": 2,
+        "art_curated": 3,
+        "gaming": 1,
+        "chain_specific": 1,
+        "unknown": 1
+      },
+      "by_marketplace_scope": {
+        "standalone_marketplace": 6,
+        "aggregator": 1,
+        "cex_feature": 2,
+        "community_fork": 1,
+        "brand_marketplace": 1,
+        "unknown": 1
+      },
+      "by_chain": {
+        "multi_chain": 3,
+        "ethereum": 5,
+        "tezos": 2,
+        "optimism": 1,
+        "unknown": 1
+      },
+      "by_confidence": {
+        "low": 12
+      },
+      "by_review_status": {
+        "seed": 10,
+        "needs_review": 2
+      }
+    },
+    "coverage": {
+      "archive_coverage": {
+        "count": 6,
+        "total": 12,
+        "share": 0.5
+      }
+    },
+    "quality": {
+      "record_quality_flags": {
+        "weak_status_evidence": 4,
+        "single_source": 2,
+        "needs_asset_status_review": 4,
+        "missing_archive": 2,
+        "needs_contract_review": 2,
+        "needs_successor_review": 2,
+        "needs_frontend_review": 1,
+        "zero_evidence": 1,
+        "possible_out_of_scope": 1,
+        "needs_summary_review": 1
+      },
+      "evidence_depth": {
+        "one": 12
+      }
+    },
+    "distributions": {
+      "launch_year": {
+        "2017": 1,
+        "2018": 1,
+        "2021": 3,
+        "2022": 6,
+        "unknown": 1
+      },
+      "end_year": {
+        "2021": 1,
+        "2023": 1,
+        "2024": 1,
+        "2025": 3,
+        "unknown": 6
+      }
+    },
+    "completeness": {
+      "what_remains_present": {
+        "count": 12,
+        "total": 12
+      }
+    }
   }
 ]

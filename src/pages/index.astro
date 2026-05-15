@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarketplaceCard from '../components/MarketplaceCard.astro';
+import StatsKpiGrid from '../components/StatsKpiGrid.astro';
+import { getFeaturedMarketplaces, getRecentlyGoneMarketplaces, getStats } from '../lib/data';
+const featured = getFeaturedMarketplaces();
+const recent = getRecentlyGoneMarketplaces();
+const stats = getStats();
+---
+<BaseLayout title="Minted & Gone — NFT marketplace field guide">
+  <div class="shell">
+    <section class="hero">
+      <div class="book-cover"><div class="hero-copy"><p class="eyebrow">A warm paper registry</p><h1>Minted &amp; Gone</h1><p>An illustrated field guide to NFT marketplaces: the active, the faded, the closed, and the transformed. This first static edition uses mock data only.</p><div class="hero-actions"><a class="btn primary" href="/marketplaces/">Browse marketplaces</a><a class="btn" href="/methodology/">Read methodology</a></div></div></div>
+      <aside class="cover-side"><p class="eyebrow">Archive at a glance</p><StatsKpiGrid stats={stats} /></aside>
+    </section>
+    <p class="mock-note">Prototype warning: all current records are mock layout records, not verified canonical marketplace claims.</p>
+    <section><div class="section-head"><div><p class="eyebrow">Browse shelf</p><h2>Open the encyclopedia</h2></div><a class="btn" href="/stats/">View stats</a></div><div class="grid three"><a class="card" href="/marketplaces/"><h3>Marketplace index</h3><p>Search, filter, and open static record pages.</p></a><a class="card" href="/methodology/"><h3>Classification notes</h3><p>How status, evidence, and confidence are read.</p></a><a class="card" href="/submit/"><h3>Corrections</h3><p>What to include when suggesting missing records.</p></a></div></section>
+    <section><div class="section-head"><div><p class="eyebrow">Featured records</p><h2>Specimens from the shelf</h2></div></div><div class="grid cards">{featured.map((record) => <MarketplaceCard record={record} />)}</div></section>
+    <section><div class="section-head"><div><p class="eyebrow">Recently gone / faded</p><h2>Where the trail thins</h2></div></div><div class="grid cards">{recent.map((record) => <MarketplaceCard record={record} />)}</div></section>
+    <section class="panel"><p class="eyebrow">About this guide</p><h2>Not a trading dashboard</h2><p>Minted &amp; Gone records historical availability, evidence quality, and what remains after marketplaces change. It intentionally avoids price widgets, wallet connection, rankings, and investment framing.</p></section>
+  </div>
+</BaseLayout>

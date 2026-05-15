@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarketplaceCard from '../components/MarketplaceCard.astro';
+import { getMarketplaces } from '../lib/data';
+import { getFilterOptions } from '../lib/filters';
+import { formatLabel } from '../lib/format';
+const records = getMarketplaces();
+const options = getFilterOptions(records);
+---
+<BaseLayout title="Marketplace encyclopedia — Minted & Gone">
+  <div class="shell">
+    <section><p class="eyebrow">Encyclopedia</p><h1>Marketplace records</h1><p>Search and filter mock records. With JavaScript disabled, every card remains visible.</p></section>
+    <div class="market-layout" data-filter-root>
+      <aside class="filter-panel">
+        <details open><summary><strong>Search & filters</strong></summary>
+          <label for="market-search" class="eyebrow">Search</label><input class="search" id="market-search" data-search-input placeholder="Search name, chain, summary" />
+          {[['Status','status',options.statuses],['Category','category',options.categories],['Chain','chain',options.chains]].map(([label,name,items]: any) => <fieldset class="filter-group"><legend>{label}</legend>{items.map((item:string) => <label class="check"><input type="checkbox" data-filter={name} value={item}/>{formatLabel(item)}</label>)}</fieldset>)}
+          <button class="btn" data-clear-filters type="button">Clear filters</button>
+        </details>
+      </aside>
+      <section style="margin:0"><div class="section-head"><p><strong data-result-count>{records.length}</strong> records shown</p></div><div class="grid cards" data-card-list>{records.map((record) => <MarketplaceCard record={record} />)}</div><div class="card empty" data-empty-state><h3>No matching records</h3><p>Clear filters or try a broader search.</p></div></section>
+    </div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-filter-root]');
+    if (root) {
+      const input = root.querySelector('[data-search-input]');
+      const checks = [...root.querySelectorAll('input[type="checkbox"][data-filter]')];
+      const cards = [...root.querySelectorAll('.marketplace-card')];
+      const count = root.querySelector('[data-result-count]');
+      const empty = root.querySelector('[data-empty-state]');
+      const update = () => {
+        const q = input.value.trim().toLowerCase();
+        const selected = { status: [], category: [], chain: [] };
+        checks.filter(c => c.checked).forEach(c => selected[c.dataset.filter].push(c.value));
+        let visible = 0;
+        cards.forEach(card => {
+          const chains = card.dataset.chains.split('|');
+          const show = (!q || card.dataset.search.includes(q)) && (!selected.status.length || selected.status.includes(card.dataset.status)) && (!selected.category.length || selected.category.includes(card.dataset.category)) && (!selected.chain.length || chains.some(c => selected.chain.includes(c)));
+          card.classList.toggle('is-hidden', !show); if (show) visible++;
+        });
+        count.textContent = visible; empty.style.display = visible ? 'none' : 'block';
+      };
+      input.addEventListener('input', update); checks.forEach(c => c.addEventListener('change', update));
+      root.querySelector('[data-clear-filters]').addEventListener('click', () => { input.value=''; checks.forEach(c => c.checked=false); update(); });
+    }
+  </script>
+</BaseLayout>

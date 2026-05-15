@@ -1,0 +1,7 @@
+---
+const { record } = Astro.props;
+---
+<section><p class="eyebrow">URL & archive</p><h2>Original trail</h2><div class="url-grid">
+  <div class="card"><h3>Original URL</h3><p>{record.official_url_original || 'Unknown'}</p><p class="subtle">Status: {record.official_url_status || 'unknown'}</p></div>
+  <div class="card"><h3>Archived URL</h3><p>{record.archived_url || 'No archive URL in this mock record.'}</p><p class="subtle">Domain: {record.official_domain_original || 'unknown'}</p></div>
+</div></section>

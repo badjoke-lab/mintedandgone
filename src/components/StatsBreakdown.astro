@@ -1,0 +1,7 @@
+---
+import { formatLabel } from '../lib/format';
+const { title, data = {} } = Astro.props;
+const entries = Object.entries(data as Record<string, number>).sort((a,b) => b[1]-a[1]);
+const max = Math.max(1, ...entries.map(([,v]) => v));
+---
+<div class="card"><h3>{title}</h3><div class="bars">{entries.map(([key,value]) => <div class="bar-row"><span>{formatLabel(key)}</span><div class="bar"><span style={`width:${(value / max) * 100}%`}></span></div><strong>{value}</strong></div>)}</div></div>

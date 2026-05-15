@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-12T15:03:31.883786+00:00",
+  "generated_at": "2026-05-15T00:49:50.201Z",
   "source": {
     "marketplaces_count": 12,
     "events_count": 12,
@@ -8,17 +8,17 @@
   },
   "kpis": {
     "total_marketplaces": 12,
+    "total_events": 12,
+    "total_evidence": 12,
     "active_total": 4,
     "limited_total": 0,
     "inactive_total": 1,
     "dead_total": 5,
     "transitioned_total": 1,
     "faded_total": 7,
-    "total_events": 12,
-    "total_evidence": 12,
     "archive_coverage": 0.5,
-    "high_confidence_share": 0.0,
-    "reviewed_share": 0.0
+    "high_confidence_share": 0,
+    "reviewed_share": 0
   },
   "breakdowns": {
     "by_status": {
@@ -86,17 +86,17 @@
   "distributions": {
     "launch_year": {
       "2017": 1,
-      "2022": 6,
-      "2021": 3,
       "2018": 1,
+      "2021": 3,
+      "2022": 6,
       "unknown": 1
     },
     "end_year": {
-      "unknown": 6,
-      "2025": 3,
       "2021": 1,
+      "2023": 1,
       "2024": 1,
-      "2023": 1
+      "2025": 3,
+      "unknown": 6
     }
   },
   "completeness": {
