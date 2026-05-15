@@ -1,17 +1,17 @@
 ---
 import StatusChip from './StatusChip.astro';
 import Tags from './Tags.astro';
-import { formatCategory, formatChain, formatScope, formatYearRange } from '../lib/format';
-const { record, compact = false, home = false } = Astro.props;
+import { formatCategory, formatScope, formatYearRange } from '../lib/format';
+const { record, compact = false } = Astro.props;
 const searchText = [record.canonical_name, record.slug, record.summary, record.category, record.marketplace_scope, ...(record.chain_scope ?? [])].join(' ').toLowerCase();
 ---
-<a class:list={['card', 'market-card', 'marketplace-card', compact && 'compact-card', home && 'home-market-card']} href={`/marketplace/${record.slug}/`} data-search={searchText} data-status={record.status} data-category={record.category} data-chains={(record.chain_scope ?? []).join('|')}>
+<a class:list={['card', 'market-card', 'marketplace-card', compact && 'compact-card']} href={`/marketplace/${record.slug}/`} data-search={searchText} data-status={record.status} data-category={record.category} data-chains={(record.chain_scope ?? []).join('|')}>
   <div class="card-top"><div class="card-identity"><span class="record-icon">{record.canonical_name.slice(0, 2)}</span><h3>{record.canonical_name}</h3></div><StatusChip status={record.status} /></div>
-  {!home && <div class="tag-row"><span class="tag">{formatCategory(record.category)}</span><span class="tag">{formatScope(record.marketplace_scope)}</span></div>}
+  <div class="tag-row"><span class="tag">{formatCategory(record.category)}</span><span class="tag">{formatScope(record.marketplace_scope)}</span></div>
   {!compact && <Tags items={record.chain_scope} />}
   <p>{record.summary}</p>
-  {home ? <div class="home-card-foot"><span>{formatChain(record.chain_scope?.[0])}</span><span>{formatCategory(record.category)}</span></div> : <div class="meta-grid" aria-label="Record metadata">
+  <div class="meta-grid" aria-label="Record metadata">
     <div class="fact"><b>Years</b>{formatYearRange(record)}</div><div class="fact"><b>Confidence</b>{record.confidence}</div>
     {!compact && <><div class="fact"><b>Review</b>{record.review_status}</div><div class="fact"><b>Mock note</b>layout data</div></>}
-  </div>}
+  </div>
 </a>
