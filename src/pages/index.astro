@@ -8,12 +8,12 @@ const featured = getFeaturedMarketplaces();
 const recent = getRecentlyGoneMarketplaces();
 const stats = getStats();
 const shelf = [
-  ['Active', 'Currently operating marketplace records', '/marketplaces/?status=active', '✽'],
-  ['Inactive', 'Paused, dormant, or partially dimmed records', '/marketplaces/?status=inactive', '⌛'],
-  ['Dead', 'Permanently closed or inaccessible records', '/marketplaces/?status=dead', '☙'],
-  ['Rebranded / Merged', 'Markets that changed identity or destination', '/marketplaces/', '🦋'],
-  ['By Chain', 'Explore the archive by blockchain scope', '/marketplaces/', '⛓'],
-  ['By Category', 'Sort art, games, PFPs, and more', '/marketplaces/', '▤'],
+  ['Active', 'Currently operating marketplace records', '/encyclopedia/?status=active', '✽'],
+  ['Inactive', 'Paused, dormant, or partially dimmed records', '/encyclopedia/?status=inactive', '⌛'],
+  ['Dead', 'Permanently closed or inaccessible records', '/encyclopedia/?status=dead', '☙'],
+  ['Rebranded / Merged', 'Markets that changed identity or destination', '/encyclopedia/', '🦋'],
+  ['By Chain', 'Explore the archive by blockchain scope', '/encyclopedia/', '⛓'],
+  ['By Category', 'Sort art, games, PFPs, and more', '/encyclopedia/', '▤'],
   ['Timeline', 'Follow marketplace history over time', '/stats/', '◷']
 ];
 const timeline = [
@@ -30,7 +30,7 @@ const timeline = [
         <div class="flourish" aria-hidden="true">✦</div>
         <p class="lede">A field guide to NFT marketplaces — living, fading, and gone.</p>
         <p>We document the stories of NFT marketplaces across time: active, closed, acquired, rebranded, and forgotten. An open archive for collectors, researchers, and the curious.</p>
-        <div class="hero-actions"><a class="btn primary" href="/marketplaces/">Browse the encyclopedia</a><a class="btn" href="/methodology/">Read methodology</a></div>
+        <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse the encyclopedia</a><a class="btn" href="/methodology/">Read methodology</a></div>
       </div>
       <aside class="hero-plate framed-plate">
         <div class="cabinet-illustration" aria-hidden="true"><span>▤</span><span>▤</span><span>▤</span><span>▤</span><span>▤</span><span>▤</span></div>
@@ -47,12 +47,12 @@ const timeline = [
 
     <section class="home-split">
       <div class="framed-panel">
-        <div class="section-head"><div><p class="eyebrow">Featured marketplaces</p><h2>Specimens from the shelf</h2></div><a class="text-link" href="/marketplaces/">View all active →</a></div>
+        <div class="section-head"><div><p class="eyebrow">Featured marketplaces</p><h2>Specimens from the shelf</h2></div><a class="text-link" href="/encyclopedia/">View all active →</a></div>
         <div class="grid cards featured-grid">{featured.slice(0, 4).map((record) => <MarketplaceCard record={record} compact />)}</div>
       </div>
       <aside class="framed-panel recent-panel">
-        <div class="section-head"><div><p class="eyebrow">Recently gone / updated</p></div><a class="text-link" href="/marketplaces/">View all →</a></div>
-        <div class="recent-list">{recent.slice(0, 5).map((record) => <a class="recent-row" href={`/marketplace/${record.slug}/`}><span class="mini-mark">{record.canonical_name.slice(0,2)}</span><span><strong>{record.canonical_name}</strong><small>{record.summary}</small></span><StatusChip status={record.status} /></a>)}</div>
+        <div class="section-head"><div><p class="eyebrow">Recently gone / updated</p></div><a class="text-link" href="/encyclopedia/">View all →</a></div>
+        <div class="recent-list">{recent.slice(0, 5).map((record) => <a class="recent-row" href={`/encyclopedia/${record.slug}/`}><span class="mini-mark">{record.canonical_name.slice(0,2)}</span><span><strong>{record.canonical_name}</strong><small>{record.summary}</small></span><StatusChip status={record.status} /></a>)}</div>
       </aside>
     </section>
 
