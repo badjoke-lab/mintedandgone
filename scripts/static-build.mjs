@@ -22,7 +22,7 @@ function write(path, html) { mkdirSync(join('dist', path), { recursive: true });
 
 rmSync('dist', { recursive: true, force: true });
 mkdirSync('dist/assets', { recursive: true });
-const cssFiles = ['base', 'components', 'pages', 'home-overrides'];
+const cssFiles = ['tokens', 'base', 'components', 'pages', 'home-overrides'];
 writeFileSync('dist/assets/global.css', cssFiles.filter((n) => existsSync(`src/styles/${n}.css`)).map((n) => readFileSync(`src/styles/${n}.css`, 'utf8').replace(/@import[^;]+;/g, '')).join('\n'));
 if (existsSync('public/favicon.svg')) copyFileSync('public/favicon.svg', 'dist/favicon.svg');
 if (existsSync('public/robots.txt')) copyFileSync('public/robots.txt', 'dist/robots.txt');
