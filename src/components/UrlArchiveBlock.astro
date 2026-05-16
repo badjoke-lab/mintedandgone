@@ -2,21 +2,30 @@
 const { record } = Astro.props;
 const originalUrl = record.official_url_original;
 const archivedUrl = record.archived_url;
+const isArchiveSearch = archivedUrl?.includes('/web/*/');
+const isActive = record.status === 'active';
+const isDead = record.status === 'dead';
+const siteHeading = isActive ? 'Current site' : isDead ? 'Original site' : 'Current / original site';
+const siteButton = isActive ? 'Open current site →' : isDead ? 'Open original site →' : 'Open site →';
+const archiveHeading = isArchiveSearch ? 'Archive history' : 'Archived capture';
+const archiveButton = isArchiveSearch ? 'Search Wayback history →' : 'Open archived capture →';
+const archiveState = archivedUrl ? (isArchiveSearch ? 'Wayback search available' : 'Saved capture linked') : 'Archive missing';
 ---
 <section>
   <p class="eyebrow">URL & archive</p>
   <h2>Original trail</h2>
   <div class="url-grid">
     <div class="card url-card">
-      <h3>Original URL</h3>
+      <h3>{siteHeading}</h3>
       <p class="url-value">{originalUrl || 'Unknown'}</p>
-      {originalUrl && <a class="external-link-button" href={originalUrl} rel="noopener noreferrer">Open original site →</a>}
-      <p class="subtle">Status: {record.official_url_status || 'unknown'}</p>
+      {originalUrl && <a class="external-link-button" href={originalUrl} rel="noopener noreferrer">{siteButton}</a>}
+      <p class="subtle">URL status: {record.official_url_status || 'unknown'}</p>
     </div>
     <div class="card url-card">
-      <h3>Archived URL</h3>
-      <p class="url-value">{archivedUrl || 'No archive URL in this mock record.'}</p>
-      {archivedUrl && <a class="external-link-button archive-link-button" href={archivedUrl} rel="noopener noreferrer">Open archived site →</a>}
+      <h3>{archiveHeading}</h3>
+      <p class="url-value">{archivedUrl || 'No archive URL recorded.'}</p>
+      {archivedUrl && <a class="external-link-button archive-link-button" href={archivedUrl} rel="noopener noreferrer">{archiveButton}</a>}
+      <p class="subtle">Archive state: {archiveState}</p>
       <p class="subtle">Domain: {record.official_domain_original || 'unknown'}</p>
     </div>
   </div>
