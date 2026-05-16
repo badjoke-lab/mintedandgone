@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-05-16T19:30:00.000Z",
+  "generated_at": "2026-05-16T20:10:00.000Z",
   "source": {
     "marketplaces_count": 12,
     "events_count": 14,
-    "evidence_count": 17,
+    "evidence_count": 20,
     "note": "Prototype stats generated from mixed mock records and seed-validation records."
   },
   "kpis": {
     "total_marketplaces": 12,
     "total_events": 14,
-    "total_evidence": 17,
+    "total_evidence": 20,
     "active_total": 4,
     "limited_total": 0,
     "inactive_total": 1,
