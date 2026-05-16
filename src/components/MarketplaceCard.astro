@@ -5,7 +5,7 @@ import { formatCategory, formatScope, formatYearRange } from '../lib/format';
 const { record, compact = false } = Astro.props;
 const searchText = [record.canonical_name, record.slug, record.summary, record.category, record.marketplace_scope, ...(record.chain_scope ?? [])].join(' ').toLowerCase();
 ---
-<a class:list={['card', 'market-card', 'marketplace-card', compact && 'compact-card']} href={`/marketplace/${record.slug}/`} data-search={searchText} data-status={record.status} data-category={record.category} data-chains={(record.chain_scope ?? []).join('|')}>
+<a class:list={['card', 'market-card', 'marketplace-card', compact && 'compact-card']} href={`/encyclopedia/${record.slug}/`} data-search={searchText} data-status={record.status} data-category={record.category} data-chains={(record.chain_scope ?? []).join('|')}>
   <div class="card-top"><div class="card-identity"><span class="record-icon">{record.canonical_name.slice(0, 2)}</span><h3>{record.canonical_name}</h3></div><StatusChip status={record.status} /></div>
   <div class="tag-row"><span class="tag">{formatCategory(record.category)}</span><span class="tag">{formatScope(record.marketplace_scope)}</span></div>
   {!compact && <Tags items={record.chain_scope} />}
