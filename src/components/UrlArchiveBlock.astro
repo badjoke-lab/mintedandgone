@@ -9,12 +9,14 @@ const archivedUrl = record.archived_url;
   <div class="url-grid">
     <div class="card url-card">
       <h3>Original URL</h3>
-      {originalUrl ? <p><a class="url-link" href={originalUrl} target="_blank" rel="noopener noreferrer">{originalUrl}</a></p> : <p>Unknown</p>}
+      <p class="url-value">{originalUrl || 'Unknown'}</p>
+      {originalUrl && <a class="external-link-button" href={originalUrl} rel="noopener noreferrer">Open original site →</a>}
       <p class="subtle">Status: {record.official_url_status || 'unknown'}</p>
     </div>
     <div class="card url-card">
       <h3>Archived URL</h3>
-      {archivedUrl ? <p><a class="url-link" href={archivedUrl} target="_blank" rel="noopener noreferrer">{archivedUrl}</a></p> : <p>No archive URL in this mock record.</p>}
+      <p class="url-value">{archivedUrl || 'No archive URL in this mock record.'}</p>
+      {archivedUrl && <a class="external-link-button archive-link-button" href={archivedUrl} rel="noopener noreferrer">Open archived site →</a>}
       <p class="subtle">Domain: {record.official_domain_original || 'unknown'}</p>
     </div>
   </div>
