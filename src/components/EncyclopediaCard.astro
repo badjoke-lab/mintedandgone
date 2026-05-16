@@ -1,9 +1,10 @@
 ---
 import StatusChip from './StatusChip.astro';
-import { formatCategory, formatScope, formatYearRange } from '../lib/format';
+import { formatCategory, formatYearRange } from '../lib/format';
 const { record } = Astro.props;
 const searchText = [record.canonical_name, record.slug, record.summary, record.category, record.marketplace_scope, ...(record.chain_scope ?? [])].join(' ').toLowerCase();
 const primaryChain = record.chain_scope?.[0] ?? 'unknown';
+const formatLabel = (value) => (value ?? 'unknown').toString().replace(/_/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase());
 ---
 <a class="card encyclopedia-card marketplace-card" href={`/encyclopedia/${record.slug}/`} data-search={searchText} data-status={record.status} data-category={record.category} data-chains={(record.chain_scope ?? []).join('|')}>
   <div class="encyclopedia-card__icon" aria-hidden="true">{record.canonical_name.slice(0, 2)}</div>
@@ -20,9 +21,3 @@ const primaryChain = record.chain_scope?.[0] ?? 'unknown';
     </div>
   </div>
 </a>
-
----
-function formatLabel(value) {
-  return (value ?? 'unknown').toString().replace(/_/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase());
-}
----
