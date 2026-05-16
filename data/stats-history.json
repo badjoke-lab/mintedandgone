@@ -1,26 +1,26 @@
 [
   {
-    "snapshot_at": "2026-05-15T00:49:50.201Z",
-    "generated_at": "2026-05-15T00:49:50.201Z",
+    "snapshot_at": "2026-05-16T19:30:00.000Z",
+    "generated_at": "2026-05-16T19:30:00.000Z",
     "source": {
       "marketplaces_count": 12,
-      "events_count": 12,
-      "evidence_count": 12,
-      "note": "Mock stats generated from mock-data only."
+      "events_count": 14,
+      "evidence_count": 17,
+      "note": "Prototype stats generated from mixed mock records and seed-validation records."
     },
     "kpis": {
       "total_marketplaces": 12,
-      "total_events": 12,
-      "total_evidence": 12,
+      "total_events": 14,
+      "total_evidence": 17,
       "active_total": 4,
       "limited_total": 0,
       "inactive_total": 1,
       "dead_total": 5,
       "transitioned_total": 1,
       "faded_total": 7,
-      "archive_coverage": 0.5,
+      "archive_coverage": 0.5833333333333334,
       "high_confidence_share": 0,
-      "reviewed_share": 0
+      "reviewed_share": 0.25
     },
     "breakdowns": {
       "by_status": {
@@ -51,38 +51,47 @@
         "ethereum": 5,
         "tezos": 2,
         "optimism": 1,
-        "unknown": 1
+        "unknown": 1,
+        "immutable_x": 1
       },
       "by_confidence": {
-        "low": 12
+        "medium": 3,
+        "low": 9
       },
       "by_review_status": {
-        "seed": 10,
+        "reviewed_staging": 3,
+        "seed": 7,
         "needs_review": 2
       }
     },
     "coverage": {
       "archive_coverage": {
-        "count": 6,
+        "count": 7,
         "total": 12,
-        "share": 0.5
+        "share": 0.5833333333333334
       }
     },
     "quality": {
       "record_quality_flags": {
-        "weak_status_evidence": 4,
-        "single_source": 2,
-        "needs_asset_status_review": 4,
+        "needs_official_launch_source": 1,
+        "current_status_live_unverified": 1,
+        "weak_status_evidence": 3,
+        "single_source": 1,
+        "needs_asset_status_review": 2,
         "missing_archive": 2,
         "needs_contract_review": 2,
         "needs_successor_review": 2,
+        "needs_current_frontend_review": 1,
+        "needs_official_acquisition_source": 1,
+        "needs_primary_shutdown_archive": 1,
         "needs_frontend_review": 1,
         "zero_evidence": 1,
         "possible_out_of_scope": 1,
         "needs_summary_review": 1
       },
       "evidence_depth": {
-        "one": 12
+        "multiple": 3,
+        "one": 9
       }
     },
     "distributions": {
@@ -95,9 +104,10 @@
       },
       "end_year": {
         "2021": 1,
+        "2022": 1,
         "2023": 1,
         "2024": 1,
-        "2025": 3,
+        "2025": 2,
         "unknown": 6
       }
     },
