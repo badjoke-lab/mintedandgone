@@ -1,11 +1,28 @@
 ---
 const { record } = Astro.props;
+const isActive = record.status === 'active';
+const isSeedValidation = record.review_status === 'reviewed_staging';
+const goneFallback = isActive
+  ? 'Nothing is marked as gone for this active marketplace record. This section is kept to make status differences explicit.'
+  : isSeedValidation
+    ? 'Not yet fully established. This seed-validation record needs stronger review before final public wording.'
+    : 'Unknown or not applicable in this mock record.';
+const remainsFallback = isActive
+  ? 'The marketplace identity and public-facing marketplace surface remain active, subject to later verification.'
+  : isSeedValidation
+    ? 'Known remaining traces are described only where the current seed sources support them.'
+    : 'Unknown in this mock record.';
+const wentFallback = isActive
+  ? 'Not applicable while the marketplace is represented as active. No migration destination is asserted.'
+  : isSeedValidation
+    ? 'User or asset destinations are listed only where sources support them; otherwise this remains under review.'
+    : 'Unknown or not applicable in this mock record.';
 ---
 <section aria-labelledby="what-remains">
   <div class="section-head"><div><p class="eyebrow">Core field-guide question</p><h2 id="what-remains">What is gone, what remains?</h2></div></div>
   <div class="grid three">
-    <article class="card what-card"><h3>What is gone?</h3><p>{record.what_is_gone || 'Unknown or not applicable in this mock record.'}</p></article>
-    <article class="card what-card"><h3>What remains?</h3><p>{record.what_remains || 'Unknown in this mock record.'}</p></article>
-    <article class="card what-card"><h3>Where did users or assets go?</h3><p>{record.where_users_or_assets_went || 'Unknown or not applicable in this mock record.'}</p></article>
+    <article class="card what-card"><h3>What is gone?</h3><p>{record.what_is_gone || goneFallback}</p></article>
+    <article class="card what-card"><h3>What remains?</h3><p>{record.what_remains || remainsFallback}</p></article>
+    <article class="card what-card"><h3>Where did users or assets go?</h3><p>{record.where_users_or_assets_went || wentFallback}</p></article>
   </div>
 </section>
