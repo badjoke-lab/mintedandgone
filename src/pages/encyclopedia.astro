@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MarketplaceCard from '../components/MarketplaceCard.astro';
+import StatusChip from '../components/StatusChip.astro';
+import { getMarketplaces } from '../lib/data';
+import { getFilterOptions } from '../lib/filters';
+import { formatCategory, formatLabel, formatYearRange } from '../lib/format';
+const records = getMarketplaces();
+const options = getFilterOptions(records);
+const selected = records.find((record) => record.slug === 'x2y2') ?? records.find((record) => record.status === 'dead') ?? records[0];
+---
+<BaseLayout title="Browse the Encyclopedia — Minted & Gone">
+  <div class="shell">
+    <section class="field-hero encyclopedia-hero">
+      <div class="hero-botanical mushroom" aria-hidden="true">♧</div>
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Browse the encyclopedia</p><h1>Browse the Encyclopedia</h1><div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">Explore the complete archive of NFT marketplaces.</p><p>Search, filter, and learn about the platforms that shaped the NFT era — from early pioneers to the ones that faded, evolved, or merged.</p>
+      </div>
+      <aside class="hero-plate framed-plate"><div class="cabinet-illustration" aria-hidden="true"><span>▤</span><span>▤</span><span>▤</span><span>▤</span><span>▤</span><span>▤</span></div><div class="field-note-stamp"><p class="script">Field Notes</p><p>Every marketplace has a story.<br />We keep the record.</p><strong>M&amp;G</strong></div></aside>
+    </section>
+    <p class="mock-note">Prototype warning: filters and records use mock layout data only. No price, wallet, API, login, or live service data is loaded.</p>
+    <div class="market-layout" data-filter-root>
+      <aside class="filter-panel framed-panel">
+        <details open><summary><strong>Filters</strong></summary>
+          <label for="market-search" class="eyebrow">Search</label><input class="search" id="market-search" data-search-input placeholder="Search encyclopedia..." />
+          {[['Status','status',options.statuses],['Chain','chain',options.chains],['Category','category',options.categories]].map(([label,name,items]: any) => <fieldset class="filter-group"><legend>{label}</legend>{items.map((item:string) => <label class="check"><input type="checkbox" data-filter={name} value={item}/><span>{formatLabel(item)}</span></label>)}</fieldset>)}
+          <button class="btn" data-clear-filters type="button">Clear filters</button>
+        </details>
+      </aside>
+      <section class="catalog-panel framed-panel">
+        <div class="catalog-toolbar"><p><strong data-result-count>{records.length}</strong> results</p><div class="filter-pills"><span>Status: All ×</span><span>Chain: All ×</span><span>Category: All ×</span></div><a class="text-link" href="/encyclopedia/">Clear all</a></div>
+        <div class="grid cards catalog-grid" data-card-list>{records.map((record) => <MarketplaceCard record={record} />)}</div>
+        <div class="card empty" data-empty-state><h3>No matching records</h3><p>Clear filters or try a broader search.</p></div>
+      </section>
+      <aside class="field-notes-panel framed-panel">
+        <p class="eyebrow">Field notes</p><h2>{selected.canonical_name}</h2><p>{selected.summary}</p>
+        <div class="specimen-plate" aria-hidden="true">◉</div>
+        <dl class="notes-list"><div><dt>Status</dt><dd><StatusChip status={selected.status} /></dd></div><div><dt>Years active</dt><dd>{formatYearRange(selected)}</dd></div><div><dt>Chain</dt><dd>{selected.chain_scope.join(', ')}</dd></div><div><dt>Category</dt><dd>{formatCategory(selected.category)}</dd></div><div><dt>Archive state</dt><dd>{selected.archived_url ? 'Archive present' : 'Record remains'}</dd></div></dl>
+        <a class="btn primary wide" href={`/encyclopedia/${selected.slug}/`}>View full record →</a>
+        <blockquote>Even when the lights go out, the record remains.</blockquote>
+      </aside>
+    </div>
+  </div>
+  <script>
+    const root = document.querySelector('[data-filter-root]');
+    if (root) {
+      const input = root.querySelector('[data-search-input]');
+      const checks = [...root.querySelectorAll('input[type="checkbox"][data-filter]')];
+      const cards = [...root.querySelectorAll('.marketplace-card')];
+      const count = root.querySelector('[data-result-count]');
+      const empty = root.querySelector('[data-empty-state]');
+      const update = () => {
+        const q = input.value.trim().toLowerCase();
+        const selected = { status: [], category: [], chain: [] };
+        checks.filter(c => c.checked).forEach(c => selected[c.dataset.filter].push(c.value));
+        let visible = 0;
+        cards.forEach(card => {
+          const chains = card.dataset.chains.split('|');
+          const show = (!q || card.dataset.search.includes(q)) && (!selected.status.length || selected.status.includes(card.dataset.status)) && (!selected.category.length || selected.category.includes(card.dataset.category)) && (!selected.chain.length || chains.some(c => selected.chain.includes(c)));
+          card.classList.toggle('is-hidden', !show); if (show) visible++;
+        });
+        count.textContent = visible; empty.style.display = visible ? 'none' : 'block';
+      };
+      input.addEventListener('input', update); checks.forEach(c => c.addEventListener('change', update));
+      root.querySelector('[data-clear-filters]').addEventListener('click', () => { input.value=''; checks.forEach(c => c.checked=false); update(); });
+    }
+  </script>
+</BaseLayout>
