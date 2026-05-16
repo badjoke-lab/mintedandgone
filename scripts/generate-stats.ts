@@ -4,11 +4,11 @@ const marketplaces = read('data/marketplaces.json'); const events = read('data/e
 const countBy = (items, fn) => items.reduce((acc, item) => { const raw = fn(item); const vals = Array.isArray(raw) ? raw : [raw ?? 'unknown']; for (const v of vals) acc[v || 'unknown'] = (acc[v || 'unknown'] ?? 0) + 1; return acc; }, {});
 const transitioned = new Set(['acquired','merged','rebranded']); const faded = new Set(['inactive','dead','acquired','merged','rebranded']);
 const archiveCount = marketplaces.filter((m) => Boolean(m.archived_url)).length;
-const reviewedCount = marketplaces.filter((m) => ['reviewed','verified'].includes(m.review_status)).length;
+const reviewedCount = marketplaces.filter((m) => ['reviewed','verified','reviewed_staging'].includes(m.review_status)).length;
 const highCount = marketplaces.filter((m) => m.confidence === 'high').length;
 const stats = {
   generated_at: new Date().toISOString(),
-  source: { marketplaces_count: marketplaces.length, events_count: events.length, evidence_count: evidence.length, note: 'Mock stats generated from mock-data only.' },
+  source: { marketplaces_count: marketplaces.length, events_count: events.length, evidence_count: evidence.length, note: 'Prototype stats generated from mixed mock records and seed-validation records.' },
   kpis: {
     total_marketplaces: marketplaces.length,
     total_events: events.length,
