@@ -16,6 +16,7 @@ const events = getEventsForMarketplace(record.id);
 const evidence = getEvidenceForMarketplace(record.id);
 const related = getRelatedMarketplaces(record);
 const isSeedValidation = record.review_status === 'reviewed_staging';
+const archiveLabel = record.archived_url ? (record.archived_url.includes('/web/*/') ? 'Archive search available' : 'Archived capture linked') : 'Archive missing';
 ---
 <BaseLayout title={`${record.canonical_name} — Minted & Gone`} description={record.summary}>
   <div class="shell">
@@ -32,7 +33,7 @@ const isSeedValidation = record.review_status === 'reviewed_staging';
     {isSeedValidation ? <p class="mock-note">Seed validation record. Sources have been added, but this record still needs final public-quality review.</p> : <p class="mock-note">Mock record only. Verify sources before canonical public use.</p>}
     <div class="record-layout">
       <aside class="record-sidebar">
-        <section class="framed-panel glance-card"><p class="eyebrow">Record at a glance</p><dl class="notes-list"><div><dt>Status</dt><dd><StatusChip status={record.status} /></dd></div><div><dt>Years active</dt><dd>{formatYearRange(record)}</dd></div><div><dt>Chain</dt><dd>{record.chain_scope.join(', ')}</dd></div><div><dt>Category</dt><dd>{formatCategory(record.category)}</dd></div><div><dt>Archive state</dt><dd>{record.archived_url ? 'Archive present' : 'Record remains'}</dd></div><div><dt>What remains</dt><dd>{record.what_remains || 'Unknown in this mock record.'}</dd></div></dl><a class="btn primary wide" href="/submit/">Suggest correction →</a></section>
+        <section class="framed-panel glance-card"><p class="eyebrow">Record at a glance</p><dl class="notes-list"><div><dt>Status</dt><dd><StatusChip status={record.status} /></dd></div><div><dt>Years active</dt><dd>{formatYearRange(record)}</dd></div><div><dt>Chain</dt><dd>{record.chain_scope.join(', ')}</dd></div><div><dt>Category</dt><dd>{formatCategory(record.category)}</dd></div><div><dt>Archive state</dt><dd>{archiveLabel}</dd></div><div><dt>What remains</dt><dd>{record.what_remains || 'Unknown in this mock record.'}</dd></div></dl><a class="btn primary wide" href="/submit/">Suggest correction →</a></section>
         <aside class="framed-panel quote-card"><p>Markets come and go.<br /><strong>The record remains.</strong></p><small>— Minted &amp; Gone Archive</small></aside>
       </aside>
       <main class="record-main">
