@@ -6,5 +6,16 @@ const { evidence = [], isSeedValidation = false } = Astro.props;
   <p class="eyebrow">Evidence</p>
   <h2>Source notes</h2>
   {isSeedValidation ? <p class="mock-note">Seed validation sources are listed below. They support the staging record, but final public-quality review may still require stronger official or archived sources.</p> : <p class="mock-note">Evidence URLs in this first build are placeholders from mock data and should not be treated as verified sources.</p>}
-  <ul class="evidence">{evidence.map((item:any) => <li><h3>{item.url ? <a class="source-link" href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a> : item.title}</h3><p>{item.publisher} · {formatLabel(item.source_type)} · reliability {item.reliability} · claim {formatLabel(item.claim_scope)}</p><p class="subtle">Published: {item.published_at || 'unknown'} · Accessed: {item.accessed_at || 'unknown'} · Archive: {item.archived_url ? <a class="inline-link" href={item.archived_url} target="_blank" rel="noopener noreferrer">open archive</a> : 'not present'}</p><p>{item.notes}</p>{item.url && <p class="source-actions"><a href={item.url} target="_blank" rel="noopener noreferrer">Open source →</a>{item.archived_url && <a href={item.archived_url} target="_blank" rel="noopener noreferrer">Open archive →</a>}</p>}</li>)}</ul>
+  <ul class="evidence">
+    {evidence.map((item:any) => <li>
+      <h3>{item.title}</h3>
+      <p>{item.publisher} · {formatLabel(item.source_type)} · reliability {item.reliability} · claim {formatLabel(item.claim_scope)}</p>
+      <p class="subtle">Published: {item.published_at || 'unknown'} · Accessed: {item.accessed_at || 'unknown'}</p>
+      <p>{item.notes}</p>
+      <div class="source-actions">
+        {item.url && <a class="external-link-button" href={item.url} rel="noopener noreferrer">Open source →</a>}
+        {item.archived_url && <a class="external-link-button archive-link-button" href={item.archived_url} rel="noopener noreferrer">Open archive →</a>}
+      </div>
+    </li>)}
+  </ul>
 </section>
