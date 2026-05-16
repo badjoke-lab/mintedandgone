@@ -1,6 +1,17 @@
 ---
 import { formatLabel } from '../lib/format';
 const { evidence = [], isSeedValidation = false } = Astro.props;
+const isArchiveSearch = (url:string) => url?.includes('/web/*/');
+const sourceButtonLabel = (type:string) => {
+  if (type === 'official_statement') return 'Open official source →';
+  if (type === 'news_article') return 'Open article →';
+  if (type === 'database_reference') return 'Open database reference →';
+  if (type === 'marketplace_page') return 'Open marketplace page →';
+  if (type === 'archive_capture') return 'Open archived capture →';
+  return 'Open source →';
+};
+const archiveButtonLabel = (url:string) => isArchiveSearch(url) ? 'Search archive history →' : 'Open archived capture →';
+const archiveStateLabel = (url:string) => isArchiveSearch(url) ? 'Wayback search' : 'Saved capture';
 ---
 <section>
   <p class="eyebrow">Evidence</p>
@@ -10,11 +21,11 @@ const { evidence = [], isSeedValidation = false } = Astro.props;
     {evidence.map((item:any) => <li>
       <h3>{item.title}</h3>
       <p>{item.publisher} · {formatLabel(item.source_type)} · reliability {item.reliability} · claim {formatLabel(item.claim_scope)}</p>
-      <p class="subtle">Published: {item.published_at || 'unknown'} · Accessed: {item.accessed_at || 'unknown'}</p>
+      <p class="subtle">Published: {item.published_at || 'unknown'} · Accessed: {item.accessed_at || 'unknown'} · Archive: {item.archived_url ? archiveStateLabel(item.archived_url) : 'missing'}</p>
       <p>{item.notes}</p>
       <div class="source-actions">
-        {item.url && <a class="external-link-button" href={item.url} rel="noopener noreferrer">Open source →</a>}
-        {item.archived_url && <a class="external-link-button archive-link-button" href={item.archived_url} rel="noopener noreferrer">Open archive →</a>}
+        {item.url && <a class="external-link-button" href={item.url} rel="noopener noreferrer">{sourceButtonLabel(item.source_type)}</a>}
+        {item.archived_url && <a class="external-link-button archive-link-button" href={item.archived_url} rel="noopener noreferrer">{archiveButtonLabel(item.archived_url)}</a>}
       </div>
     </li>)}
   </ul>
