@@ -1,30 +1,30 @@
 {
-  "generated_at": "2026-05-17T00:45:00.000Z",
+  "generated_at": "2026-05-17T01:05:00.000Z",
   "source": {
     "marketplaces_count": 12,
     "events_count": 14,
-    "evidence_count": 23,
+    "evidence_count": 24,
     "note": "Prototype stats generated from mixed mock records and source-reviewed draft records."
   },
   "kpis": {
     "total_marketplaces": 12,
     "total_events": 14,
-    "total_evidence": 23,
+    "total_evidence": 24,
     "active_total": 4,
     "limited_total": 0,
-    "inactive_total": 2,
-    "dead_total": 4,
+    "inactive_total": 3,
+    "dead_total": 3,
     "transitioned_total": 1,
     "faded_total": 7,
-    "archive_coverage": 0.5833333333333334,
+    "archive_coverage": 0.6666666666666666,
     "high_confidence_share": 0,
-    "reviewed_share": 0.4166666666666667
+    "reviewed_share": 0.5
   },
   "breakdowns": {
     "by_status": {
       "active": 4,
-      "inactive": 2,
-      "dead": 4,
+      "inactive": 3,
+      "dead": 3,
       "acquired": 1,
       "unknown": 1
     },
@@ -53,33 +53,32 @@
       "immutable_x": 1
     },
     "by_confidence": {
-      "medium": 5,
-      "low": 7
+      "medium": 6,
+      "low": 6
     },
     "by_review_status": {
-      "reviewed_staging": 5,
-      "seed": 5,
+      "reviewed_staging": 6,
+      "seed": 4,
       "needs_review": 2
     }
   },
   "coverage": {
     "archive_coverage": {
-      "count": 7,
+      "count": 8,
       "total": 12,
-      "share": 0.5833333333333334
+      "share": 0.6666666666666666
     }
   },
   "quality": {
     "record_quality_flags": {
       "needs_official_launch_source": 1,
       "current_status_live_unverified": 1,
-      "weak_status_evidence": 3,
-      "single_source": 1,
+      "weak_status_evidence": 2,
+      "needs_official_status_source": 2,
+      "needs_frontend_review": 3,
       "needs_asset_status_review": 2,
-      "needs_official_status_source": 1,
-      "needs_frontend_review": 2,
+      "needs_exact_archive_capture": 4,
       "needs_contract_review": 3,
-      "needs_exact_archive_capture": 3,
       "needs_successor_review": 2,
       "needs_current_frontend_review": 1,
       "missing_archive": 1,
@@ -88,8 +87,8 @@
       "needs_summary_review": 1
     },
     "evidence_depth": {
-      "multiple": 5,
-      "one": 7
+      "multiple": 6,
+      "one": 6
     }
   },
   "distributions": {
@@ -105,8 +104,7 @@
       "2022": 1,
       "2023": 1,
       "2024": 1,
-      "2025": 1,
-      "unknown": 7
+      "unknown": 8
     }
   },
   "completeness": {
