@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-05-17T01:05:00.000Z",
+  "generated_at": "2026-05-17T01:25:00.000Z",
   "source": {
     "marketplaces_count": 12,
     "events_count": 14,
-    "evidence_count": 24,
+    "evidence_count": 25,
     "note": "Prototype stats generated from mixed mock records and source-reviewed draft records."
   },
   "kpis": {
     "total_marketplaces": 12,
     "total_events": 14,
-    "total_evidence": 24,
+    "total_evidence": 25,
     "active_total": 4,
     "limited_total": 0,
     "inactive_total": 3,
     "dead_total": 3,
     "transitioned_total": 1,
     "faded_total": 7,
-    "archive_coverage": 0.6666666666666666,
+    "archive_coverage": 0.75,
     "high_confidence_share": 0,
-    "reviewed_share": 0.5
+    "reviewed_share": 0.5833333333333334
   },
   "breakdowns": {
     "by_status": {
@@ -53,20 +53,20 @@
       "immutable_x": 1
     },
     "by_confidence": {
-      "medium": 6,
-      "low": 6
+      "medium": 7,
+      "low": 5
     },
     "by_review_status": {
-      "reviewed_staging": 6,
-      "seed": 4,
+      "reviewed_staging": 7,
+      "seed": 3,
       "needs_review": 2
     }
   },
   "coverage": {
     "archive_coverage": {
-      "count": 8,
+      "count": 9,
       "total": 12,
-      "share": 0.6666666666666666
+      "share": 0.75
     }
   },
   "quality": {
@@ -74,10 +74,10 @@
       "needs_official_launch_source": 1,
       "current_status_live_unverified": 1,
       "weak_status_evidence": 2,
-      "needs_official_status_source": 2,
-      "needs_frontend_review": 3,
-      "needs_asset_status_review": 2,
-      "needs_exact_archive_capture": 4,
+      "needs_official_status_source": 3,
+      "needs_frontend_review": 4,
+      "needs_asset_status_review": 3,
+      "needs_exact_archive_capture": 5,
       "needs_contract_review": 3,
       "needs_successor_review": 2,
       "needs_current_frontend_review": 1,
@@ -87,8 +87,8 @@
       "needs_summary_review": 1
     },
     "evidence_depth": {
-      "multiple": 6,
-      "one": 6
+      "multiple": 7,
+      "one": 5
     }
   },
   "distributions": {
