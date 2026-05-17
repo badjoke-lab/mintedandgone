@@ -6,7 +6,7 @@
       "marketplaces_count": 11,
       "events_count": 13,
       "evidence_count": 26,
-      "note": "Prototype stats generated from mixed mock records and seed-validation records."
+      "note": "Stats generated from source-reviewed draft records. Counts reflect current registry data, not final public-quality certification."
     },
     "kpis": {
       "total_marketplaces": 11,
