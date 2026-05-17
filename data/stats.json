@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T01:45:00.000Z",
+  "generated_at": "2026-05-17T02:05:00.000Z",
   "source": {
     "marketplaces_count": 12,
     "events_count": 14,
@@ -16,9 +16,9 @@
     "dead_total": 2,
     "transitioned_total": 1,
     "faded_total": 7,
-    "archive_coverage": 0.8333333333333334,
+    "archive_coverage": 0.9166666666666666,
     "high_confidence_share": 0,
-    "reviewed_share": 0.6666666666666666
+    "reviewed_share": 0.75
   },
   "breakdowns": {
     "by_status": {
@@ -53,26 +53,26 @@
       "immutable_x": 1
     },
     "by_confidence": {
-      "medium": 8,
-      "low": 4
+      "medium": 9,
+      "low": 3
     },
     "by_review_status": {
-      "reviewed_staging": 8,
-      "seed": 2,
+      "reviewed_staging": 9,
+      "seed": 1,
       "needs_review": 2
     }
   },
   "coverage": {
     "archive_coverage": {
-      "count": 10,
+      "count": 11,
       "total": 12,
-      "share": 0.8333333333333334
+      "share": 0.9166666666666666
     }
   },
   "quality": {
     "record_quality_flags": {
       "needs_official_launch_source": 1,
-      "current_status_live_unverified": 1,
+      "current_status_live_unverified": 2,
       "weak_status_evidence": 2,
       "needs_official_status_source": 4,
       "needs_frontend_review": 5,
@@ -86,8 +86,8 @@
       "needs_summary_review": 1
     },
     "evidence_depth": {
-      "multiple": 8,
-      "one": 4
+      "multiple": 9,
+      "one": 3
     }
   },
   "distributions": {
