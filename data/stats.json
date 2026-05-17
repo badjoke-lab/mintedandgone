@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-05-17T00:20:00.000Z",
+  "generated_at": "2026-05-17T00:45:00.000Z",
   "source": {
     "marketplaces_count": 12,
     "events_count": 14,
-    "evidence_count": 21,
+    "evidence_count": 23,
     "note": "Prototype stats generated from mixed mock records and source-reviewed draft records."
   },
   "kpis": {
     "total_marketplaces": 12,
     "total_events": 14,
-    "total_evidence": 21,
+    "total_evidence": 23,
     "active_total": 4,
     "limited_total": 0,
     "inactive_total": 2,
@@ -18,7 +18,7 @@
     "faded_total": 7,
     "archive_coverage": 0.5833333333333334,
     "high_confidence_share": 0,
-    "reviewed_share": 0.3333333333333333
+    "reviewed_share": 0.4166666666666667
   },
   "breakdowns": {
     "by_status": {
@@ -53,12 +53,12 @@
       "immutable_x": 1
     },
     "by_confidence": {
-      "medium": 4,
-      "low": 8
+      "medium": 5,
+      "low": 7
     },
     "by_review_status": {
-      "reviewed_staging": 4,
-      "seed": 6,
+      "reviewed_staging": 5,
+      "seed": 5,
       "needs_review": 2
     }
   },
@@ -78,8 +78,8 @@
       "needs_asset_status_review": 2,
       "needs_official_status_source": 1,
       "needs_frontend_review": 2,
-      "needs_contract_review": 2,
-      "needs_exact_archive_capture": 2,
+      "needs_contract_review": 3,
+      "needs_exact_archive_capture": 3,
       "needs_successor_review": 2,
       "needs_current_frontend_review": 1,
       "missing_archive": 1,
@@ -88,8 +88,8 @@
       "needs_summary_review": 1
     },
     "evidence_depth": {
-      "multiple": 4,
-      "one": 8
+      "multiple": 5,
+      "one": 7
     }
   },
   "distributions": {
