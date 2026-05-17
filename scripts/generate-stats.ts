@@ -8,7 +8,7 @@ const reviewedCount = marketplaces.filter((m) => ['reviewed','verified','reviewe
 const highCount = marketplaces.filter((m) => m.confidence === 'high').length;
 const stats = {
   generated_at: new Date().toISOString(),
-  source: { marketplaces_count: marketplaces.length, events_count: events.length, evidence_count: evidence.length, note: 'Prototype stats generated from mixed mock records and seed-validation records.' },
+  source: { marketplaces_count: marketplaces.length, events_count: events.length, evidence_count: evidence.length, note: 'Stats generated from source-reviewed draft records. Counts reflect current registry data, not final public-quality certification.' },
   kpis: {
     total_marketplaces: marketplaces.length,
     total_events: events.length,
