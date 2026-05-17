@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-05-17T02:05:00.000Z",
+  "generated_at": "2026-05-17T02:25:00.000Z",
   "source": {
     "marketplaces_count": 12,
     "events_count": 14,
-    "evidence_count": 25,
+    "evidence_count": 26,
     "note": "Prototype stats generated from mixed mock records and source-reviewed draft records."
   },
   "kpis": {
     "total_marketplaces": 12,
     "total_events": 14,
-    "total_evidence": 25,
+    "total_evidence": 26,
     "active_total": 4,
     "limited_total": 0,
     "inactive_total": 4,
     "dead_total": 2,
     "transitioned_total": 1,
     "faded_total": 7,
-    "archive_coverage": 0.9166666666666666,
+    "archive_coverage": 1,
     "high_confidence_share": 0,
-    "reviewed_share": 0.75
+    "reviewed_share": 0.8333333333333334
   },
   "breakdowns": {
     "by_status": {
@@ -53,27 +53,26 @@
       "immutable_x": 1
     },
     "by_confidence": {
-      "medium": 9,
-      "low": 3
+      "medium": 10,
+      "low": 2
     },
     "by_review_status": {
-      "reviewed_staging": 9,
-      "seed": 1,
+      "reviewed_staging": 10,
       "needs_review": 2
     }
   },
   "coverage": {
     "archive_coverage": {
-      "count": 11,
+      "count": 12,
       "total": 12,
-      "share": 0.9166666666666666
+      "share": 1
     }
   },
   "quality": {
     "record_quality_flags": {
-      "needs_official_launch_source": 1,
-      "current_status_live_unverified": 2,
-      "weak_status_evidence": 2,
+      "needs_official_launch_source": 2,
+      "current_status_live_unverified": 3,
+      "weak_status_evidence": 1,
       "needs_official_status_source": 4,
       "needs_frontend_review": 5,
       "needs_asset_status_review": 3,
@@ -86,8 +85,8 @@
       "needs_summary_review": 1
     },
     "evidence_depth": {
-      "multiple": 9,
-      "one": 3
+      "multiple": 10,
+      "one": 2
     }
   },
   "distributions": {
