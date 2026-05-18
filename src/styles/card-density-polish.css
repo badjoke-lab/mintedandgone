@@ -1,0 +1,50 @@
+.market-card.compact-card{
+  min-height:0;
+  gap:10px;
+}
+
+.market-card.compact-card .record-icon{
+  width:54px;
+  height:54px;
+  border-radius:10px;
+}
+
+.market-card.compact-card .card-identity{
+  gap:10px;
+}
+
+.market-card.compact-card h3{
+  font-size:20px;
+  line-height:1.05;
+}
+
+.market-card.compact-card .tag-row{
+  gap:6px;
+}
+
+.market-card.compact-card .tag{
+  padding:4px 8px;
+  font-size:11px;
+}
+
+.market-card.compact-card p{
+  display:-webkit-box;
+  -webkit-line-clamp:5;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  margin:0;
+}
+
+.market-card.compact-card .meta-grid{
+  gap:8px;
+}
+
+.market-card.compact-card .fact{
+  padding:8px;
+}
+
+@media (min-width: 900px){
+  .featured-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+}
