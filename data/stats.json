@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-05-17T10:10:00.000Z",
+  "generated_at": "2026-05-18T02:45:00.000Z",
   "source": {
-    "marketplaces_count": 11,
-    "events_count": 13,
-    "evidence_count": 26,
+    "marketplaces_count": 14,
+    "events_count": 17,
+    "evidence_count": 33,
     "note": "Stats generated from source-reviewed draft records. Counts reflect current registry data, not final public-quality certification."
   },
   "kpis": {
-    "total_marketplaces": 11,
-    "total_events": 13,
-    "total_evidence": 26,
-    "active_total": 4,
+    "total_marketplaces": 14,
+    "total_events": 17,
+    "total_evidence": 33,
+    "active_total": 7,
     "limited_total": 0,
     "inactive_total": 4,
     "dead_total": 2,
@@ -22,50 +22,50 @@
   },
   "breakdowns": {
     "by_status": {
-      "active": 4,
+      "active": 7,
       "inactive": 4,
       "dead": 2,
       "acquired": 1
     },
     "by_category": {
-      "general": 4,
+      "general": 5,
       "cex_nft_market": 2,
-      "art_curated": 3,
+      "art_curated": 5,
       "gaming": 1,
       "chain_specific": 1
     },
     "by_marketplace_scope": {
-      "standalone_marketplace": 6,
+      "standalone_marketplace": 9,
       "aggregator": 1,
       "cex_feature": 2,
       "community_fork": 1,
       "brand_marketplace": 1
     },
     "by_chain": {
-      "multi_chain": 3,
-      "ethereum": 5,
+      "multi_chain": 4,
+      "ethereum": 7,
       "tezos": 2,
       "optimism": 1,
       "immutable_x": 1
     },
     "by_confidence": {
-      "medium": 11
+      "medium": 14
     },
     "by_review_status": {
-      "reviewed_staging": 11
+      "reviewed_staging": 14
     }
   },
   "coverage": {
     "archive_coverage": {
-      "count": 11,
-      "total": 11,
+      "count": 14,
+      "total": 14,
       "share": 1
     }
   },
   "quality": {
     "record_quality_flags": {
-      "needs_official_launch_source": 3,
-      "current_status_live_unverified": 4,
+      "needs_official_launch_source": 6,
+      "current_status_live_unverified": 7,
       "needs_official_status_source": 4,
       "needs_frontend_review": 5,
       "needs_asset_status_review": 3,
@@ -75,27 +75,28 @@
       "needs_current_frontend_review": 1
     },
     "evidence_depth": {
-      "multiple": 11
+      "multiple": 14
     }
   },
   "distributions": {
     "launch_year": {
       "2017": 1,
-      "2018": 1,
-      "2021": 3,
+      "2018": 2,
+      "2020": 1,
+      "2021": 4,
       "2022": 6
     },
     "end_year": {
       "2021": 1,
       "2022": 1,
       "2024": 1,
-      "unknown": 8
+      "unknown": 11
     }
   },
   "completeness": {
     "what_remains_present": {
-      "count": 11,
-      "total": 11
+      "count": 14,
+      "total": 14
     }
   }
 }
