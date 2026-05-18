@@ -30,17 +30,17 @@ const archiveLabel = record.archived_url ? (record.archived_url.includes('/web/*
       </div>
       <aside class="hero-plate framed-plate"><div class="cabinet-illustration" aria-hidden="true"><span>▤</span><span>▤</span><span>▤</span><span>▤</span><span>▤</span><span>▤</span></div><div class="field-note-stamp"><p class="script">Field Notes</p><p>Even when the lights go out, the record remains.</p><strong>M&amp;G</strong></div></aside>
     </section>
-    {isSourceReviewed ? <p class="mock-note">Source-reviewed draft record. Sources have been added, but this record still needs final public-quality review.</p> : <p class="mock-note">Mock record only. Verify sources before canonical public use.</p>}
+    {isSourceReviewed ? <p class="mock-note">Source-reviewed draft record. Sources have been added, but this record still needs final public-quality review.</p> : <p class="mock-note">Draft record. More source review is needed before final public-quality use.</p>}
     <div class="record-layout">
       <aside class="record-sidebar">
-        <section class="framed-panel glance-card"><p class="eyebrow">Record at a glance</p><dl class="notes-list"><div><dt>Status</dt><dd><StatusChip status={record.status} /></dd></div><div><dt>Years active</dt><dd>{formatYearRange(record)}</dd></div><div><dt>Chain</dt><dd>{record.chain_scope.join(', ')}</dd></div><div><dt>Category</dt><dd>{formatCategory(record.category)}</dd></div><div><dt>Archive state</dt><dd>{archiveLabel}</dd></div><div><dt>What remains</dt><dd>{record.what_remains || 'Unknown in this mock record.'}</dd></div></dl><a class="btn primary wide" href="/submit/">Suggest correction →</a></section>
+        <section class="framed-panel glance-card"><p class="eyebrow">Record at a glance</p><dl class="notes-list"><div><dt>Status</dt><dd><StatusChip status={record.status} /></dd></div><div><dt>Years active</dt><dd>{formatYearRange(record)}</dd></div><div><dt>Chain</dt><dd>{record.chain_scope.join(', ')}</dd></div><div><dt>Category</dt><dd>{formatCategory(record.category)}</dd></div><div><dt>Archive state</dt><dd>{archiveLabel}</dd></div><div><dt>What remains</dt><dd>{record.what_remains || 'Unknown in this draft record.'}</dd></div></dl><a class="btn primary wide" href="/submit/">Suggest correction →</a></section>
         <aside class="framed-panel quote-card"><p>Markets come and go.<br /><strong>The record remains.</strong></p><small>— Minted &amp; Gone Archive</small></aside>
       </aside>
       <main class="record-main">
         <section class="framed-panel overview-card"><p class="eyebrow">Overview</p><h2>Classification notes</h2><p>{record.summary}</p><p>The record below separates frontend state, contracts, assets, evidence, and archive links so uncertainty stays visible.</p><FactGrid record={record} /></section>
         <WhatRemainsBlock record={record} />
         <Timeline events={events} />
-        <EvidenceList evidence={evidence} isSeedValidation={isSourceReviewed} />
+        <EvidenceList evidence={evidence} isSourceReviewed={isSourceReviewed} />
         <UrlArchiveBlock record={record} />
       </main>
     </div>
