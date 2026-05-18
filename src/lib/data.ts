@@ -1,13 +1,14 @@
 import marketplacesJson from '../../data/marketplaces.json';
 import eventsJson from '../../data/events.json';
 import evidenceJson from '../../data/evidence.json';
+import lgArtLabEvidenceJson from '../../data/evidence-lg-art-lab.json';
 import statsJson from '../../data/stats.json';
 import type { Marketplace, Event, Evidence, Stats } from './schema';
 import { isFadedSide } from './format';
 
 const marketplaces = marketplacesJson as Marketplace[];
 const events = eventsJson as Event[];
-const evidence = evidenceJson as Evidence[];
+const evidence = [...(evidenceJson as Evidence[]), ...(lgArtLabEvidenceJson as Evidence[])];
 
 export function getMarketplaces() { return [...marketplaces].sort((a,b) => a.canonical_name.localeCompare(b.canonical_name)); }
 export function getStats() { return statsJson as Stats; }
