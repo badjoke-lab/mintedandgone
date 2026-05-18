@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-05-18T02:45:00.000Z",
+  "generated_at": "2026-05-18T03:05:00.000Z",
   "source": {
-    "marketplaces_count": 14,
-    "events_count": 17,
-    "evidence_count": 33,
+    "marketplaces_count": 15,
+    "events_count": 18,
+    "evidence_count": 35,
     "note": "Stats generated from source-reviewed draft records. Counts reflect current registry data, not final public-quality certification."
   },
   "kpis": {
-    "total_marketplaces": 14,
-    "total_events": 17,
-    "total_evidence": 33,
+    "total_marketplaces": 15,
+    "total_events": 18,
+    "total_evidence": 35,
     "active_total": 7,
     "limited_total": 0,
     "inactive_total": 4,
-    "dead_total": 2,
+    "dead_total": 3,
     "transitioned_total": 1,
-    "faded_total": 7,
+    "faded_total": 8,
     "archive_coverage": 1,
     "high_confidence_share": 0,
     "reviewed_share": 1
@@ -24,7 +24,7 @@
     "by_status": {
       "active": 7,
       "inactive": 4,
-      "dead": 2,
+      "dead": 3,
       "acquired": 1
     },
     "by_category": {
@@ -32,33 +32,35 @@
       "cex_nft_market": 2,
       "art_curated": 5,
       "gaming": 1,
-      "chain_specific": 1
+      "chain_specific": 1,
+      "brand_marketplace": 1
     },
     "by_marketplace_scope": {
       "standalone_marketplace": 9,
       "aggregator": 1,
       "cex_feature": 2,
       "community_fork": 1,
-      "brand_marketplace": 1
+      "brand_marketplace": 2
     },
     "by_chain": {
       "multi_chain": 4,
-      "ethereum": 7,
+      "ethereum": 8,
       "tezos": 2,
       "optimism": 1,
-      "immutable_x": 1
+      "immutable_x": 1,
+      "hedera": 1
     },
     "by_confidence": {
-      "medium": 14
+      "medium": 15
     },
     "by_review_status": {
-      "reviewed_staging": 14
+      "reviewed_staging": 15
     }
   },
   "coverage": {
     "archive_coverage": {
-      "count": 14,
-      "total": 14,
+      "count": 15,
+      "total": 15,
       "share": 1
     }
   },
@@ -68,14 +70,15 @@
       "current_status_live_unverified": 7,
       "needs_official_status_source": 4,
       "needs_frontend_review": 5,
-      "needs_asset_status_review": 3,
-      "needs_exact_archive_capture": 6,
-      "needs_contract_review": 4,
+      "needs_asset_status_review": 4,
+      "needs_exact_archive_capture": 7,
+      "needs_contract_review": 5,
       "needs_successor_review": 2,
-      "needs_current_frontend_review": 1
+      "needs_current_frontend_review": 1,
+      "needs_official_shutdown_archive": 1
     },
     "evidence_depth": {
-      "multiple": 14
+      "multiple": 15
     }
   },
   "distributions": {
@@ -84,19 +87,20 @@
       "2018": 2,
       "2020": 1,
       "2021": 4,
-      "2022": 6
+      "2022": 7
     },
     "end_year": {
       "2021": 1,
       "2022": 1,
       "2024": 1,
+      "2025": 1,
       "unknown": 11
     }
   },
   "completeness": {
     "what_remains_present": {
-      "count": 14,
-      "total": 14
+      "count": 15,
+      "total": 15
     }
   }
 }
