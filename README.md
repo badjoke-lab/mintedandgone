@@ -8,47 +8,56 @@ It records NFT marketplaces as historical entries: active, limited, inactive, de
 
 This repository currently contains:
 
-- project specification docs
-- stats-ready data schema
-- methodology
-- candidate plan
-- mock data
-- HTML mock reference
-- image mock references
+- Astro static site implementation
+- source-reviewed draft marketplace records
+- generated marketplace encyclopedia pages
+- stats generation and validation scripts
+- methodology, about, stats, submit, and encyclopedia pages
+- static sitemap and robots.txt
+- HTML and image mock references used only as visual design references
 
-The first implementation target is a static Astro site using mock data only.
+The current site is an early source-reviewed draft registry. Records are evidence-backed enough for review, but they are not final public-quality certifications.
+
+## Data status
+
+Current draft data contains:
+
+- 11 marketplace records
+- 13 timeline events
+- 26 evidence notes
+- reviewed staging coverage for all current marketplace records
+
+The archive no longer includes fictional placeholder records.
 
 ## Important
 
-The current JSON records are mock data for layout testing. They are not verified canonical public records.
+Do not treat status labels as real-time marketplace monitoring. Draft records preserve uncertainty through confidence levels, evidence notes, and record quality flags.
 
-## Next step
-
-Use `docs/08-minted-and-gone-codex-implementation-task.md` as the implementation instruction.
+Dead, inactive, acquired, and active classifications should remain conservative. If official closure or status evidence is weak, use inactive or under-review wording rather than overclaiming.
 
 ## Implementation note
 
 Implemented:
-- Astro static site scaffold with warm field-guide styling.
-- Data loading from JSON mock records.
-- Marketplace index and generated detail page source files.
-- Stats generation and stats page source files.
-- Methodology, About, and Submit pages.
-- Validation and stats-generation scripts.
+
+- Astro static site scaffold with warm field-guide styling
+- Data loading from JSON records
+- Marketplace index and generated detail pages
+- Stats generation and stats page
+- Methodology, About, and Submit pages
+- Validation and stats-generation scripts
+- Static sitemap and robots.txt
 
 Run:
+
 - `npm install`
 - `npm run generate:stats`
 - `npm run validate`
-- `npm run dev`
 - `npm run build`
+- `npm run check`
 
-Known limitations:
-- Uses mock data only.
-- No verified v0 seed records yet.
-- No real submit form yet.
-- No production domain configured.
-- In restricted environments where npm registry access is blocked, scripts fall back to local static validation/build helpers so `npm run check` can still verify generated output.
+## Next steps
 
-Next:
-- Create v0 seed records from `docs/07-minted-and-gone-v0-seed-selection.md`.
+- Run browser review for the home, encyclopedia, detail, stats, about, methodology, and submit pages
+- Continue replacing draft flags with stronger sources where possible
+- Add the next batch of NFT marketplace records in small reviewed groups
+- Improve card density and visual alignment against the approved image references
