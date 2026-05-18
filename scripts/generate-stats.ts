@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
-const marketplaces = read('data/marketplaces.json'); const events = read('data/events.json'); const evidence = read('data/evidence.json');
+const marketplaces = read('data/marketplaces.json'); const events = read('data/events.json'); const evidence = [...read('data/evidence.json'), ...read('data/evidence-lg-art-lab.json')];
 const countBy = (items, fn) => items.reduce((acc, item) => { const raw = fn(item); const vals = Array.isArray(raw) ? raw : [raw ?? 'unknown']; for (const v of vals) acc[v || 'unknown'] = (acc[v || 'unknown'] ?? 0) + 1; return acc; }, {});
 const transitioned = new Set(['acquired','merged','rebranded']); const faded = new Set(['inactive','dead','acquired','merged','rebranded']);
 const archiveCount = marketplaces.filter((m) => Boolean(m.archived_url)).length;
