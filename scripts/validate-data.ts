@@ -1,8 +1,8 @@
 import { readFileSync } from 'node:fs';
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
-const marketplaces = read('data/marketplaces.json');
-const events = read('data/events.json');
-const evidence = [...read('data/evidence.json'), ...read('data/evidence-lg-art-lab.json')];
+const marketplaces = [...read('data/marketplaces.json'), ...read('data/marketplaces-batch-02.json')];
+const events = [...read('data/events.json'), ...read('data/events-batch-02.json')];
+const evidence = [...read('data/evidence.json'), ...read('data/evidence-lg-art-lab.json'), ...read('data/evidence-batch-02.json')];
 const stats = read('data/stats.json');
 const errors = []; const warnings = [];
 const statuses = new Set(['active','limited','inactive','dead','acquired','merged','rebranded','unknown']);
