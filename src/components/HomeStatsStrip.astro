@@ -1,0 +1,23 @@
+---
+const { stats } = Astro.props;
+const pct = (value: number) => `${Math.round((value ?? 0) * 100)}%`;
+const items = [
+  ['◎', 'Marketplaces', stats.kpis.total_marketplaces],
+  ['◷', 'Events', stats.kpis.total_events],
+  ['▤', 'Evidence', stats.kpis.total_evidence],
+  ['☙', 'Faded', stats.kpis.faded_total],
+  ['⌁', 'Archive', pct(stats.kpis.archive_coverage)],
+  ['✓', 'Reviewed', pct(stats.kpis.reviewed_share)],
+  ['✽', 'Active', stats.kpis.active_total],
+  ['×', 'Dead', stats.kpis.dead_total]
+];
+---
+<div class="home-stats-grid">
+  {items.map(([icon, label, value]) => (
+    <div class="home-stat-card">
+      <span aria-hidden="true">{icon}</span>
+      <strong>{value}</strong>
+      <small>{label}</small>
+    </div>
+  ))}
+</div>
