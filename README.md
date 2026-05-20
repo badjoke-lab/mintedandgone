@@ -22,15 +22,15 @@ The current site is an early source-reviewed draft registry. Records are evidenc
 
 Current draft data contains:
 
-- 17 marketplace records
-- 20 timeline events
-- 39 evidence notes
+- 20 marketplace records
+- 23 timeline events
+- 45 evidence notes
 - reviewed staging coverage for all current marketplace records
 - no fictional placeholder records
 
 Current status mix:
 
-- active: 9
+- active: 12
 - inactive: 4
 - dead: 3
 - acquired: 1
@@ -43,14 +43,23 @@ Base files:
 - `data/events.json`
 - `data/evidence.json`
 
-Additional batch files:
+Additional split/batch files:
 
 - `data/evidence-lg-art-lab.json`
 - `data/marketplaces-batch-02.json`
 - `data/events-batch-02.json`
 - `data/evidence-batch-02.json`
+- `data/marketplaces-batch-03.json`
+- `data/events-batch-03.json`
+- `data/evidence-batch-03.json`
 
-The site loader, validator, stats generator, and sitemap generator currently combine these files. Future batches should either follow this split-file pattern or be consolidated intentionally.
+The site loader, validator, stats generator, and sitemap generator auto-discover split files using these filename prefixes:
+
+- `data/marketplaces*.json`
+- `data/events*.json`
+- `data/evidence*.json`
+
+Future batches should follow the same split-file pattern unless intentionally consolidating the data.
 
 ## Important
 
@@ -84,6 +93,12 @@ Run:
 
 ```txt
 generate:stats → generate:sitemap → validate → build
+```
+
+Expected current sitemap count:
+
+```txt
+26 URLs = 20 marketplace detail pages + 6 static pages
 ```
 
 ## Next steps
