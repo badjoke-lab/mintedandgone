@@ -1,18 +1,18 @@
 [
   {
-    "snapshot_at": "2026-05-18T03:20:00.000Z",
-    "generated_at": "2026-05-18T03:20:00.000Z",
+    "snapshot_at": "2026-05-18T03:35:00.000Z",
+    "generated_at": "2026-05-18T03:35:00.000Z",
     "source": {
-      "marketplaces_count": 17,
-      "events_count": 20,
-      "evidence_count": 39,
+      "marketplaces_count": 20,
+      "events_count": 23,
+      "evidence_count": 45,
       "note": "Stats generated from source-reviewed draft records. Counts reflect current registry data, not final public-quality certification."
     },
     "kpis": {
-      "total_marketplaces": 17,
-      "total_events": 20,
-      "total_evidence": 39,
-      "active_total": 9,
+      "total_marketplaces": 20,
+      "total_events": 23,
+      "total_evidence": 45,
+      "active_total": 12,
       "limited_total": 0,
       "inactive_total": 4,
       "dead_total": 3,
@@ -24,73 +24,74 @@
     },
     "breakdowns": {
       "by_status": {
-        "active": 9,
+        "active": 12,
         "inactive": 4,
         "dead": 3,
         "acquired": 1
       },
       "by_category": {
-        "general": 6,
+        "general": 7,
         "cex_nft_market": 2,
-        "art_curated": 5,
+        "art_curated": 7,
         "gaming": 1,
         "chain_specific": 1,
         "brand_marketplace": 1,
         "collectibles": 1
       },
       "by_marketplace_scope": {
-        "standalone_marketplace": 11,
+        "standalone_marketplace": 14,
         "aggregator": 1,
         "cex_feature": 2,
         "community_fork": 1,
         "brand_marketplace": 2
       },
       "by_chain": {
-        "multi_chain": 4,
-        "ethereum": 9,
-        "tezos": 2,
+        "multi_chain": 5,
+        "ethereum": 10,
+        "tezos": 3,
         "optimism": 1,
         "immutable_x": 2,
         "hedera": 1
       },
       "by_confidence": {
-        "medium": 17
+        "medium": 20
       },
       "by_review_status": {
-        "reviewed_staging": 17
+        "reviewed_staging": 20
       }
     },
     "coverage": {
       "archive_coverage": {
-        "count": 17,
-        "total": 17,
+        "count": 20,
+        "total": 20,
         "share": 1
       }
     },
     "quality": {
       "record_quality_flags": {
-        "needs_official_launch_source": 8,
-        "current_status_live_unverified": 9,
+        "needs_official_launch_source": 10,
+        "current_status_live_unverified": 12,
         "needs_official_status_source": 4,
         "needs_frontend_review": 5,
         "needs_asset_status_review": 4,
         "needs_exact_archive_capture": 7,
-        "needs_contract_review": 5,
+        "needs_contract_review": 6,
         "needs_successor_review": 2,
-        "needs_current_frontend_review": 1,
+        "needs_current_frontend_review": 2,
         "needs_official_shutdown_archive": 1,
-        "needs_app_status_review": 1
+        "needs_app_status_review": 1,
+        "needs_protocol_status_review": 1
       },
       "evidence_depth": {
-        "multiple": 17
+        "multiple": 20
       }
     },
     "distributions": {
       "launch_year": {
         "2017": 1,
-        "2018": 2,
-        "2020": 1,
-        "2021": 5,
+        "2018": 3,
+        "2020": 2,
+        "2021": 6,
         "2022": 8
       },
       "end_year": {
@@ -98,13 +99,13 @@
         "2022": 1,
         "2024": 1,
         "2025": 1,
-        "unknown": 13
+        "unknown": 16
       }
     },
     "completeness": {
       "what_remains_present": {
-        "count": 17,
-        "total": 17
+        "count": 20,
+        "total": 20
       }
     }
   }
