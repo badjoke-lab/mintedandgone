@@ -1,8 +1,14 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
+
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
-const marketplaces = [...read('data/marketplaces.json'), ...read('data/marketplaces-batch-02.json')];
-const events = [...read('data/events.json'), ...read('data/events-batch-02.json')];
-const evidence = [...read('data/evidence.json'), ...read('data/evidence-lg-art-lab.json'), ...read('data/evidence-batch-02.json')];
+const readMany = (prefix) => readdirSync('data')
+  .filter((name) => name.startsWith(prefix) && name.endsWith('.json'))
+  .sort()
+  .flatMap((name) => read(`data/${name}`));
+
+const marketplaces = readMany('marketplaces');
+const events = readMany('events');
+const evidence = readMany('evidence');
 const stats = read('data/stats.json');
 const errors = []; const warnings = [];
 const statuses = new Set(['active','limited','inactive','dead','acquired','merged','rebranded','unknown']);
