@@ -1,0 +1,31 @@
+---
+import StatusChip from './StatusChip.astro';
+const { record } = Astro.props;
+
+const shortCopyBySlug: Record<string, string> = {
+  opensea: 'The pioneer and largest NFT marketplace.',
+  rarible: 'Community-focused multichain marketplace.',
+  blur: 'Pro trader experience. Built for speed.',
+  'magic-eden': 'A leading marketplace across major chains.',
+  superrare: 'Curated digital art marketplace.',
+  foundation: 'Ethereum art marketplace for creators.'
+};
+
+const copy = shortCopyBySlug[record.slug] ?? (record.summary.length > 64 ? `${record.summary.slice(0, 61)}...` : record.summary);
+const chain = record.chain_scope?.[0] ?? 'unknown';
+const typeLabel = record.marketplace_scope?.replaceAll('_', ' ') ?? 'marketplace';
+---
+<a class="home-feature-card" href={`/encyclopedia/${record.slug}/`}>
+  <span class="home-feature-icon" aria-hidden="true">{record.canonical_name.slice(0, 2)}</span>
+  <div class="home-feature-main">
+    <div class="home-feature-title-row">
+      <h3>{record.canonical_name}</h3>
+      <StatusChip status={record.status} />
+    </div>
+    <p>{copy}</p>
+  </div>
+  <div class="home-feature-meta">
+    <span>{chain}</span>
+    <span>{typeLabel}</span>
+  </div>
+</a>
