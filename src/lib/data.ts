@@ -25,7 +25,7 @@ export function getRelatedMarketplaces(record: Marketplace) {
   return marketplaces.filter((m) => m.id !== record.id && (m.category === record.category || m.chain_scope.some((c) => record.chain_scope.includes(c)))).slice(0,3);
 }
 export function getFeaturedMarketplaces() {
-  const slugs = ['x2y2','hic-et-nunc','opensea','kraken-nft'];
+  const slugs = ['opensea','rarible','blur','magic-eden'];
   return slugs.map(getMarketplaceBySlug).filter(Boolean) as Marketplace[];
 }
 export function getRecentlyGoneMarketplaces() {
