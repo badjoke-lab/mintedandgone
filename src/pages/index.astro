@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import MarketplaceCard from '../components/MarketplaceCard.astro';
-import StatsKpiGrid from '../components/StatsKpiGrid.astro';
-import StatusChip from '../components/StatusChip.astro';
+import HomeFeaturedCard from '../components/HomeFeaturedCard.astro';
+import HomeRecentRow from '../components/HomeRecentRow.astro';
+import HomeStatsStrip from '../components/HomeStatsStrip.astro';
 import { getFeaturedMarketplaces, getRecentlyGoneMarketplaces, getStats } from '../lib/data';
 const featured = getFeaturedMarketplaces();
 const recent = getRecentlyGoneMarketplaces();
@@ -21,10 +21,16 @@ const timeline = [
 ];
 ---
 <BaseLayout title="Minted & Gone — NFT marketplace field guide">
-  <div class="shell">
-    <section class="field-hero home-hero">
-      <div class="hero-botanical" aria-hidden="true">☘</div>
-      <div class="hero-copy plate-copy">
+  <div class="shell home-page-shell">
+    <section class="home-mock-hero">
+      <div class="home-hero-botanical" aria-hidden="true">
+        <span class="botanical-stem"></span>
+        <span class="botanical-leaf leaf-a"></span>
+        <span class="botanical-leaf leaf-b"></span>
+        <span class="botanical-leaf leaf-c"></span>
+        <span class="botanical-flower">✽</span>
+      </div>
+      <div class="home-hero-copy">
         <p class="eyebrow">NFT marketplace archive</p>
         <h1>Minted &amp; Gone</h1>
         <div class="flourish" aria-hidden="true">✦</div>
@@ -32,13 +38,18 @@ const timeline = [
         <p>We document the stories of NFT marketplaces across time: active, closed, acquired, rebranded, and forgotten. An open archive for collectors, researchers, and the curious.</p>
         <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse the encyclopedia</a><a class="btn" href="/methodology/">Read methodology</a></div>
       </div>
-      <aside class="hero-plate framed-plate">
-        <div class="cabinet-illustration" aria-hidden="true"><span>▤</span><span>▤</span><span>▤</span><span>▤</span><span>▤</span><span>▤</span></div>
-        <div class="field-note-stamp"><p class="script">Field Notes</p><p>Markets come and go.<br />The record remains.</p><strong>M&amp;G</strong></div>
+      <aside class="home-hero-cabinet">
+        <div class="cabinet-drawers" aria-hidden="true">
+          <span><i></i></span><span><i></i></span><span><i></i></span>
+          <span><i></i></span><span><i></i></span><span><i></i></span>
+        </div>
+        <div class="field-notes-card">
+          <p class="script">Field Notes</p>
+          <p>Markets come and go.<br />The record remains.</p>
+          <strong>M&amp;G</strong>
+        </div>
       </aside>
     </section>
-
-    <p class="mock-note">Early archive note: current records are source-reviewed drafts. Counts and classifications remain open to correction until stronger source review is complete.</p>
 
     <section class="shelf-section framed-panel">
       <p class="eyebrow">Browse the encyclopedia</p>
@@ -46,13 +57,13 @@ const timeline = [
     </section>
 
     <section class="home-split">
-      <div class="framed-panel">
+      <div class="framed-panel featured-panel">
         <div class="section-head"><div><p class="eyebrow">Featured marketplaces</p><h2>Specimens from the shelf</h2></div><a class="text-link" href="/encyclopedia/">View all active →</a></div>
-        <div class="grid cards featured-grid">{featured.slice(0, 4).map((record) => <MarketplaceCard record={record} compact />)}</div>
+        <div class="home-featured-grid">{featured.slice(0, 4).map((record) => <HomeFeaturedCard record={record} />)}</div>
       </div>
       <aside class="framed-panel recent-panel">
         <div class="section-head"><div><p class="eyebrow">Recently gone / updated</p></div><a class="text-link" href="/encyclopedia/">View all →</a></div>
-        <div class="recent-list">{recent.slice(0, 5).map((record) => <a class="recent-row" href={`/encyclopedia/${record.slug}/`}><span class="mini-mark">{record.canonical_name.slice(0,2)}</span><span><strong>{record.canonical_name}</strong><small>{record.summary}</small></span><StatusChip status={record.status} /></a>)}</div>
+        <div class="home-recent-list">{recent.slice(0, 5).map((record) => <HomeRecentRow record={record} />)}</div>
       </aside>
     </section>
 
@@ -62,8 +73,8 @@ const timeline = [
     </section>
 
     <section class="home-bottom">
-      <div class="framed-panel glance-panel"><p class="eyebrow">Archive at a glance</p><StatsKpiGrid stats={stats} /></div>
-      <article class="framed-panel about-card"><p class="eyebrow">About this archive</p><h2>Not a trading dashboard</h2><p>Minted &amp; Gone records historical availability, evidence quality, and what remains after marketplaces change. It intentionally avoids price widgets, wallet connection, rankings, and investment framing.</p><a class="text-link" href="/about/">Learn more about the methodology →</a></article>
+      <div class="framed-panel glance-panel"><p class="eyebrow">Archive at a glance</p><HomeStatsStrip stats={stats} /></div>
+      <article class="framed-panel about-card"><p class="eyebrow">About this archive</p><h2>Not a trading dashboard</h2><p>Minted &amp; Gone preserves marketplace histories, status changes, evidence notes, and what remains after platforms fade, close, merge, or change identity.</p><p class="subtle">Source-reviewed draft archive. Records remain open to correction.</p><a class="text-link" href="/about/">Learn more about the methodology →</a></article>
     </section>
   </div>
 </BaseLayout>
