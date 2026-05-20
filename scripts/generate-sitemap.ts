@@ -1,12 +1,13 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const read = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
-const site = 'https://mintedandgone.pages.dev';
+const readMany = (prefix: string) => readdirSync('data')
+  .filter((name) => name.startsWith(prefix) && name.endsWith('.json'))
+  .sort()
+  .flatMap((name) => read(`data/${name}`));
 
-const marketplaces = [
-  ...read('data/marketplaces.json'),
-  ...read('data/marketplaces-batch-02.json')
-];
+const site = 'https://mintedandgone.pages.dev';
+const marketplaces = readMany('marketplaces');
 
 const staticPaths = [
   '/',
