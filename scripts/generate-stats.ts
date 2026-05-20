@@ -1,6 +1,14 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+
 const read = (p) => JSON.parse(readFileSync(p, 'utf8'));
-const marketplaces = [...read('data/marketplaces.json'), ...read('data/marketplaces-batch-02.json')]; const events = [...read('data/events.json'), ...read('data/events-batch-02.json')]; const evidence = [...read('data/evidence.json'), ...read('data/evidence-lg-art-lab.json'), ...read('data/evidence-batch-02.json')];
+const readMany = (prefix) => readdirSync('data')
+  .filter((name) => name.startsWith(prefix) && name.endsWith('.json'))
+  .sort()
+  .flatMap((name) => read(`data/${name}`));
+
+const marketplaces = readMany('marketplaces');
+const events = readMany('events');
+const evidence = readMany('evidence');
 const countBy = (items, fn) => items.reduce((acc, item) => { const raw = fn(item); const vals = Array.isArray(raw) ? raw : [raw ?? 'unknown']; for (const v of vals) acc[v || 'unknown'] = (acc[v || 'unknown'] ?? 0) + 1; return acc; }, {});
 const transitioned = new Set(['acquired','merged','rebranded']); const faded = new Set(['inactive','dead','acquired','merged','rebranded']);
 const archiveCount = marketplaces.filter((m) => Boolean(m.archived_url)).length;
