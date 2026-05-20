@@ -9,7 +9,8 @@
     "preview": "command -v astro >/dev/null 2>&1 && astro preview || node scripts/static-build.mjs --serve",
     "validate": "command -v tsx >/dev/null 2>&1 && tsx scripts/validate-data.ts || node --loader ./scripts/ts-loader.mjs scripts/validate-data.ts",
     "generate:stats": "command -v tsx >/dev/null 2>&1 && tsx scripts/generate-stats.ts || node --loader ./scripts/ts-loader.mjs scripts/generate-stats.ts",
-    "check": "npm run generate:stats && npm run validate && npm run build"
+    "generate:sitemap": "command -v tsx >/dev/null 2>&1 && tsx scripts/generate-sitemap.ts || node --loader ./scripts/ts-loader.mjs scripts/generate-sitemap.ts",
+    "check": "npm run generate:stats && npm run generate:sitemap && npm run validate && npm run build"
   },
   "dependencies": {
     "astro": "latest",
