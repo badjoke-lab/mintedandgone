@@ -1,0 +1,22 @@
+---
+import StatusChip from './StatusChip.astro';
+const { record } = Astro.props;
+
+const dateLabel = record.end_date ?? (record.end_year ? String(record.end_year) : '');
+const reason = record.status === 'dead'
+  ? 'Marketplace closed'
+  : record.status === 'acquired'
+    ? 'Ownership changed'
+    : record.status === 'inactive'
+      ? 'Status under review'
+      : 'Status changed';
+---
+<a class="home-recent-row" href={`/encyclopedia/${record.slug}/`}>
+  <span class="home-recent-icon" aria-hidden="true">{record.canonical_name.slice(0, 2)}</span>
+  <span class="home-recent-copy">
+    <strong>{record.canonical_name}</strong>
+    <small>{reason}</small>
+  </span>
+  <StatusChip status={record.status} />
+  {dateLabel && <time>{dateLabel}</time>}
+</a>
