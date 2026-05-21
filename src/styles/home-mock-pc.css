@@ -47,8 +47,7 @@
     object-fit:contain;
     object-position:center center;
     transform:none;
-    filter:saturate(.9) sepia(.08);
-    mix-blend-mode:multiply;
+    filter:saturate(.94) sepia(.04);
   }
 
   .home-hero-copy{position:relative;z-index:1}
