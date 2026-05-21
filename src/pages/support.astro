@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { donateWallets } from '../lib/donate';
+---
+<BaseLayout title="Support — Minted & Gone" description="Support Minted & Gone with optional cryptocurrency donations only.">
+  <div class="shell support-page">
+    <section class="support-hero framed-panel">
+      <div class="support-hero-art" aria-hidden="true">☘</div>
+      <div class="support-hero-copy">
+        <p class="eyebrow">Crypto donations only</p>
+        <h1>Support Minted &amp; Gone</h1>
+        <p class="lede">Help preserve the historical record of NFT marketplaces.</p>
+        <p>Your support keeps this archive independent, public, and ad-light. Donations are voluntary, never required, and never treated as payment for priority placement, endorsement, or investment access.</p>
+      </div>
+      <aside class="support-note-card">
+        <p class="script">A note on support</p>
+        <ul>
+          <li>Crypto donations only.</li>
+          <li>No accounts required.</li>
+          <li>Send only on the correct network.</li>
+          <li>XRP destination tag is optional.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="framed-panel support-warning">
+      <div class="support-lantern" aria-hidden="true">◈</div>
+      <div>
+        <p class="eyebrow">Before sending</p>
+        <h2>Check the asset and network first</h2>
+        <p>Wrong-network transfers may be permanently lost. Copy the address for the exact asset and network you intend to use. Minted &amp; Gone cannot recover mistaken transfers.</p>
+      </div>
+    </section>
+
+    <section class="support-layout">
+      <div class="framed-panel support-wallets-panel">
+        <p class="eyebrow">Donate via crypto</p>
+        <h2>Wallet addresses</h2>
+        <p class="subtle">Choose your preferred asset and send to the listed address on the listed network only.</p>
+        <div class="wallet-grid">
+          {donateWallets.map((wallet) => (
+            <article class="wallet-card">
+              <div class="wallet-head">
+                <span class={`wallet-icon wallet-${wallet.asset.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>{wallet.asset.slice(0, 2)}</span>
+                <div>
+                  <h3>{wallet.asset}</h3>
+                  <p>{wallet.network}</p>
+                </div>
+              </div>
+              <code>{wallet.address}</code>
+              <p class="wallet-note">{wallet.note}</p>
+              <button class="copy-button" type="button" data-copy={wallet.address}>Copy</button>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <aside class="support-side-stack">
+        <section class="framed-panel support-reasons">
+          <p class="eyebrow">Why support this archive</p>
+          <ul>
+            <li><strong>Independent historical research</strong><span>Not backed by any marketplace or corporate entity.</span></li>
+            <li><strong>Archive maintenance</strong><span>Helps cover hosting, storage, source review, and ongoing care.</span></li>
+            <li><strong>Better evidence coverage</strong><span>Supports more records, stronger context, and improved data quality.</span></li>
+            <li><strong>More records, fewer gaps</strong><span>Helps surface forgotten marketplaces before their traces disappear.</span></li>
+          </ul>
+        </section>
+
+        <section class="framed-panel support-disclaimer">
+          <p class="eyebrow">Transparency</p>
+          <h2>Not payment, not influence</h2>
+          <p>Donations do not buy listing priority, status changes, endorsements, early access, financial advice, or private support. Publication and classification decisions remain independent.</p>
+        </section>
+      </aside>
+    </section>
+
+    <section class="framed-panel support-faq">
+      <p class="eyebrow">Support notes</p>
+      <div class="faq-grid">
+        <article><h3>Which networks are supported?</h3><p>Only the networks shown on this page. For EVM assets, use the listed EVM-compatible address only on the specified network.</p></article>
+        <article><h3>Do I get perks or access?</h3><p>No. Donations are optional support for a public archive. The site remains open regardless of donation.</p></article>
+        <article><h3>Can I help without donating?</h3><p>Yes. Corrections, archive captures, official shutdown notices, and missing marketplace suggestions are also valuable.</p></article>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.querySelectorAll('[data-copy]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const value = button.getAttribute('data-copy') || '';
+        try {
+          await navigator.clipboard.writeText(value);
+          const old = button.textContent;
+          button.textContent = 'Copied';
+          setTimeout(() => { button.textContent = old; }, 1200);
+        } catch {
+          button.textContent = 'Copy failed';
+          setTimeout(() => { button.textContent = 'Copy'; }, 1200);
+        }
+      });
+    });
+  </script>
+</BaseLayout>
