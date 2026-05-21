@@ -19,6 +19,7 @@ const isLimited = status === 'limited';
 const archiveCard = {
   key: 'archive',
   tone: isDead || isInactive ? 'main' : 'sub',
+  buttonTone: isDead || isInactive ? 'main' : 'sub',
   eyebrow: isArchiveSearch ? 'Archive search' : 'Saved capture',
   title: archiveHeading,
   value: archivedUrl || 'No archive URL recorded.',
@@ -33,6 +34,7 @@ const archiveCard = {
 const originalCard = {
   key: 'original',
   tone: isDead ? 'weak' : isInactive ? 'caution' : 'sub',
+  buttonTone: isActive ? 'main' : isDead || isInactive || isLimited ? 'caution' : 'sub',
   eyebrow: isActive ? 'Current access' : isDead ? 'Historical identifier' : 'Original / last known URL',
   title: isActive ? 'Current site' : isDead ? 'Original site' : 'Original / current URL',
   value: originalUrl || 'Unknown',
@@ -51,6 +53,7 @@ const originalCard = {
 const transitionCard = {
   key: 'transition',
   tone: 'main',
+  buttonTone: 'main',
   eyebrow: isAcquired ? 'Acquisition context' : isRebranded ? 'Rebrand context' : 'Successor context',
   title: isAcquired ? 'Ownership changed' : isRebranded ? 'Current destination / brand' : 'Successor / merged destination',
   value: isAcquired
@@ -108,9 +111,10 @@ if (isDead) {
         <p class="url-card-label">{card.eyebrow}</p>
         <h3>{card.title}</h3>
         <p class="url-value">{card.value}</p>
-        {card.href && <a class={`external-link-button ${card.key === 'archive' ? 'archive-link-button' : ''}`} href={card.href} rel="noopener noreferrer">{card.button}</a>}
+        {card.note && (card.key === 'original') && <p class="url-card-note url-card-note-before-button">{card.note}</p>}
+        {card.href && <a class={`external-link-button url-action-button url-button-${card.buttonTone} url-button-${card.key} ${card.key === 'archive' ? 'archive-link-button' : ''}`} href={card.href} rel="noopener noreferrer">{card.button}</a>}
         {card.meta.map((item) => <p class="subtle">{item}</p>)}
-        {card.note && <p class="url-card-note">{card.note}</p>}
+        {card.note && (card.key !== 'original') && <p class="url-card-note">{card.note}</p>}
       </div>
     ))}
   </div>
