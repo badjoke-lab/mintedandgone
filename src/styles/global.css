@@ -2,6 +2,7 @@
 @import './components.css';
 @import './pages.css';
 @import './home-overrides.css';
+@import './home-mock-pc.css';
 @import './encyclopedia.css';
 @import './encyclopedia-card-polish.css';
 @import './encyclopedia-panel-polish.css';
