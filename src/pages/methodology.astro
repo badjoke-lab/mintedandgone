@@ -1,24 +1,118 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-const definitions = [
-  ['active', 'Core marketplace behavior appears available.'], ['limited', 'Some function remains, such as viewing, withdrawal, migration, or partial chain support.'], ['inactive', 'Activity appears faded but closure is not proven.'], ['dead', 'Marketplace function is ended or inaccessible.'], ['acquired / merged / rebranded', 'The record changed identity, ownership, or destination.'], ['unknown', 'Evidence is insufficient for a clearer status.']
+
+const statusDefinitions = [
+  ['active', 'The marketplace identity or public marketplace surface is represented as currently operating or reachable in this draft.'],
+  ['inactive', 'The marketplace no longer appears clearly active, but a permanent shutdown has not been proven strongly enough.'],
+  ['dead', 'The original marketplace surface is treated as gone based on stronger shutdown, closure, unavailable-frontend, or archive evidence.'],
+  ['acquired', 'The independent marketplace identity changed through acquisition or became part of another owner or ecosystem.'],
+  ['limited', 'Some function remains, but the marketplace is no longer operating in a normal full form.'],
+  ['unknown', 'Evidence is not strong enough for a clearer classification.']
+];
+
+const flags = [
+  ['needs_official_launch_source', 'A stronger official launch, history, or announcement source is still needed.'],
+  ['current_status_live_unverified', 'The public surface appears live, but a current direct review still needs to be recorded.'],
+  ['needs_frontend_review', 'The current marketplace frontend behavior needs direct checking.'],
+  ['needs_exact_archive_capture', 'A wildcard archive exists, but exact relevant Wayback captures still need selection.'],
+  ['needs_contract_review', 'Underlying contract or on-chain marketplace behavior needs review.'],
+  ['needs_asset_status_review', 'User asset handling or post-shutdown asset path needs review.'],
+  ['needs_successor_review', 'A predecessor, successor, fork, or continuation relationship needs stronger sourcing.']
 ];
 ---
 <BaseLayout title="Methodology — Minted & Gone">
   <div class="shell guide-page">
-    <section class="field-hero simple-hero"><div class="hero-botanical mushroom" aria-hidden="true">♧</div><div class="hero-copy plate-copy"><p class="eyebrow">Field-guide appendix</p><h1>Methodology</h1><div class="flourish" aria-hidden="true">✦</div><p class="lede">How to read marketplace status, evidence, confidence, and stats.</p><p>The central questions are: what is gone, what remains, and where did users or assets go? Records keep uncertainty visible instead of smoothing it away.</p></div></section>
-    <p class="mock-note">Current records are source-reviewed drafts. They preserve evidence, uncertainty, and review flags, but should not be read as final public-quality certifications.</p>
+    <section class="field-hero simple-hero">
+      <div class="hero-botanical mushroom" aria-hidden="true">♧</div>
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Field-guide appendix</p>
+        <h1>Methodology</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">How Minted &amp; Gone records NFT marketplaces, classifies their status, and handles uncertainty.</p>
+        <p>Minted &amp; Gone is a historical archive, not a trading dashboard. Records preserve marketplace identity, timeline events, source notes, archive links, and unresolved review flags.</p>
+      </div>
+    </section>
+
+    <p class="mock-note">Current records are source-reviewed drafts. They are real source-backed registry entries, but they are not final public-quality certifications.</p>
+
     <section class="guide-grid numbered">
-      <article class="framed-panel guide-card"><span class="num">01</span><h2>What counts</h2><p>Included records are named NFT marketplaces, aggregators, CEX-operated marketplace features, chain-specific markets, curated art markets, gaming/metaverse markets, successor/fork markets, and historically meaningful marketplace interfaces when sources support the classification.</p></article>
-      <article class="framed-panel guide-card"><span class="num">02</span><h2>What does not count</h2><p>Excluded items include standalone collections, one-off mint pages, galleries, portfolio trackers, price comparison sites, news sites, analytics dashboards, and records where marketplace behavior or source support is too thin.</p></article>
-      <article class="framed-panel guide-card"><span class="num">03</span><h2>Evidence rules</h2><p>Prefer official announcements, archived pages, current marketplace pages, reputable news, documentation, and primary social posts. Corrections should include exact URLs and notes about what changed.</p></article>
+      <article class="framed-panel guide-card">
+        <span class="num">01</span>
+        <h2>What this archive counts</h2>
+        <p>Minted &amp; Gone counts NFT marketplace records: standalone marketplaces, aggregators, CEX-operated NFT marketplace features, brand marketplaces, chain-specific marketplaces, curated art markets, gaming markets, and community continuation projects when source support is strong enough.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <span class="num">02</span>
+        <h2>What this archive does not count</h2>
+        <p>It does not track NFT collection rankings, token prices, wallet balances, floor prices, trading recommendations, marketplace safety scores, or real-time uptime monitoring. It is a historical registry, not a live market product.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <span class="num">03</span>
+        <h2>The record model</h2>
+        <p>Each entry is built from three layers: the marketplace record, timeline events, and evidence notes. The marketplace record describes identity and classification. Events describe major changes. Evidence notes show the sources used to support those claims.</p>
+      </article>
     </section>
-    <section class="framed-panel"><p class="eyebrow">Status definitions</p><h2>Reading the specimen labels</h2><div class="definition-grid">{definitions.map(([term, copy]) => <article class="definition-card"><h3>{term}</h3><p>{copy}</p></article>)}</div></section>
+
+    <section class="framed-panel">
+      <p class="eyebrow">Source-reviewed draft</p>
+      <h2>Draft does not mean fictional</h2>
+      <p>A source-reviewed draft is a real registry entry backed by source material. It is no longer a fictional placeholder. But it may still have open review work for official sources, exact archived captures, frontend checks, contract behavior, asset handling, or successor relationships.</p>
+      <p>That is why records expose confidence, review status, evidence notes, and record quality flags instead of hiding uncertainty.</p>
+    </section>
+
+    <section class="framed-panel">
+      <p class="eyebrow">Status definitions</p>
+      <h2>Reading the specimen labels</h2>
+      <div class="definition-grid">
+        {statusDefinitions.map(([term, copy]) => <article class="definition-card"><h3>{term}</h3><p>{copy}</p></article>)}
+      </div>
+      <p class="subtle">When evidence is weak, Minted &amp; Gone prefers inactive or under-review wording rather than declaring a marketplace dead.</p>
+    </section>
+
     <section class="guide-grid">
-      <article class="framed-panel guide-card"><h2>Frontend / contract / asset status</h2><p>NFT marketplaces can disappear unevenly. The frontend may be gone while contracts remain readable, or assets may remain visible through another interface. Detail pages expose all three fields.</p></article>
-      <article class="framed-panel guide-card"><h2>Confidence levels</h2><p>Confidence communicates how strongly the available sources support the classification. Medium confidence can still carry review flags when official status, exact archive capture, contract state, or frontend state needs more checking.</p></article>
-      <article class="framed-panel guide-card"><h2>Stats methodology</h2><p>Stats are generated from the same JSON records used by the site. They are coverage and classification summaries, not live market analytics or rankings.</p></article>
+      <article class="framed-panel guide-card">
+        <h2>Confidence is not safety</h2>
+        <p>Confidence describes how strongly the current record is supported by sources. It is not a popularity score, safety score, or investment signal. A medium-confidence record may be useful while still needing stronger official or archived sources.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Evidence hierarchy</h2>
+        <p>Official pages, shutdown notices, archived marketplace pages, reputable reporting, documentation, and primary posts are preferred. Research and database sources can support context, but they should not alone determine current status.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Archives matter</h2>
+        <p>Original domains are preserved as historical identifiers, but they may expire, redirect, or be repurposed. For closed or changed marketplaces, archived captures are often the safer historical path.</p>
+      </article>
     </section>
-    <section class="framed-panel correction-desk"><p class="eyebrow">Corrections</p><h2>Make uncertainty reviewable</h2><p>Corrections should include source URLs, archive URLs where possible, and precise notes about status, dates, or what remains. Disagreements should be tracked as review work rather than hidden.</p><a class="btn primary" href="/submit/">Open the correction desk</a></section>
+
+    <section class="framed-panel">
+      <p class="eyebrow">Record quality flags</p>
+      <h2>Visible unresolved work</h2>
+      <p>Flags are not decoration and not automatic errors. They identify what still needs review before a record can be treated as final public-quality.</p>
+      <div class="definition-grid">
+        {flags.map(([term, copy]) => <article class="definition-card"><h3>{term}</h3><p>{copy}</p></article>)}
+      </div>
+    </section>
+
+    <section class="guide-grid">
+      <article class="framed-panel guide-card">
+        <h2>Frontend, contract, and asset status</h2>
+        <p>NFT marketplaces can disappear unevenly. A frontend may be gone while contracts remain readable. A platform account may disappear while wallet-held assets remain visible elsewhere. These states are tracked separately where possible.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Stats methodology</h2>
+        <p>Stats are generated from the same JSON records used by the site. They are coverage and classification summaries, not live market analytics, ranking scores, or investment indicators.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Open correction model</h2>
+        <p>Records are expected to improve. A better official notice, exact archive capture, contract reference, or status source can change a record’s confidence, flags, or classification.</p>
+      </article>
+    </section>
+
+    <section class="framed-panel correction-desk">
+      <p class="eyebrow">Corrections</p>
+      <h2>Make uncertainty reviewable</h2>
+      <p>Corrections should include the marketplace name, the Minted &amp; Gone page URL, what looks wrong, and source links. Archive URLs are especially useful for closed, redirected, or repurposed domains.</p>
+      <a class="btn primary" href="/submit/">Open the correction desk</a>
+    </section>
   </div>
 </BaseLayout>
