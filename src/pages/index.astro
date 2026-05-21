@@ -58,17 +58,17 @@ const timeline = [
 
     <section class="home-split">
       <div class="framed-panel featured-panel">
-        <div class="section-head"><div><p class="eyebrow">Featured marketplaces</p><h2>Specimens from the shelf</h2></div><a class="text-link" href="/encyclopedia/">View all active →</a></div>
+        <div class="section-head home-compact-head"><p class="eyebrow">Featured marketplaces</p><a class="text-link" href="/encyclopedia/">View all active →</a></div>
         <div class="home-featured-grid">{featured.slice(0, 4).map((record) => <HomeFeaturedCard record={record} />)}</div>
       </div>
       <aside class="framed-panel recent-panel">
-        <div class="section-head"><div><p class="eyebrow">Recently gone / updated</p></div><a class="text-link" href="/encyclopedia/">View all →</a></div>
+        <div class="section-head home-compact-head"><p class="eyebrow">Recently gone / updated</p><a class="text-link" href="/encyclopedia/">View all →</a></div>
         <div class="home-recent-list">{recent.slice(0, 5).map((record) => <HomeRecentRow record={record} />)}</div>
       </aside>
     </section>
 
     <section class="timeline-strip framed-panel">
-      <div class="section-head"><div><p class="eyebrow">Marketplace timeline</p></div><a class="text-link" href="/stats/">Explore full timeline →</a></div>
+      <div class="section-head home-compact-head"><p class="eyebrow">Marketplace timeline</p><a class="text-link" href="/stats/">Explore full timeline →</a></div>
       <div class="era-line">{timeline.map(([year, label]) => <div class="era"><span></span><strong>{year}</strong><em>{label}</em></div>)}</div>
     </section>
 
