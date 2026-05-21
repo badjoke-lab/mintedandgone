@@ -3,30 +3,115 @@ const { record } = Astro.props;
 const originalUrl = record.official_url_original;
 const archivedUrl = record.archived_url;
 const isArchiveSearch = archivedUrl?.includes('/web/*/');
-const isActive = record.status === 'active';
-const isDead = record.status === 'dead';
-const siteHeading = isActive ? 'Current site' : isDead ? 'Original site' : 'Current / original site';
-const siteButton = isActive ? 'Open current site →' : isDead ? 'Open original site →' : 'Open site →';
 const archiveHeading = isArchiveSearch ? 'Archive history' : 'Archived capture';
 const archiveButton = isArchiveSearch ? 'Search Wayback history →' : 'Open archived capture →';
 const archiveState = archivedUrl ? (isArchiveSearch ? 'Wayback search available' : 'Saved capture linked') : 'Archive missing';
+
+const status = record.status;
+const isActive = status === 'active';
+const isInactive = status === 'inactive' || status === 'unknown';
+const isDead = status === 'dead';
+const isAcquired = status === 'acquired';
+const isRebranded = status === 'rebranded';
+const isMerged = status === 'merged';
+const isLimited = status === 'limited';
+
+const archiveCard = {
+  key: 'archive',
+  tone: isDead || isInactive ? 'main' : 'sub',
+  eyebrow: isArchiveSearch ? 'Archive search' : 'Saved capture',
+  title: archiveHeading,
+  value: archivedUrl || 'No archive URL recorded.',
+  button: archiveButton,
+  href: archivedUrl,
+  meta: [`Archive state: ${archiveState}`, `Domain: ${record.official_domain_original || 'unknown'}`],
+  note: isArchiveSearch
+    ? 'This is a Wayback search entry, not a pinned exact historical capture.'
+    : 'This links to a specific saved historical capture.'
+};
+
+const originalCard = {
+  key: 'original',
+  tone: isDead ? 'weak' : isInactive ? 'caution' : 'sub',
+  eyebrow: isActive ? 'Current access' : isDead ? 'Historical identifier' : 'Original / last known URL',
+  title: isActive ? 'Current site' : isDead ? 'Original site' : 'Original / current URL',
+  value: originalUrl || 'Unknown',
+  button: isActive ? 'Open current site →' : 'Open original URL →',
+  href: originalUrl,
+  meta: [`URL status: ${record.official_url_status || 'unknown'}`],
+  note: isDead
+    ? 'Original domains may expire, redirect, or be reused after a marketplace closes.'
+    : isInactive
+      ? 'This may redirect, fail, or no longer represent the original marketplace.'
+      : isLimited
+        ? 'This page may represent a limited marketplace surface rather than full historical functionality.'
+        : null
+};
+
+const transitionCard = {
+  key: 'transition',
+  tone: 'main',
+  eyebrow: isAcquired ? 'Acquisition context' : isRebranded ? 'Rebrand context' : 'Successor context',
+  title: isAcquired ? 'Ownership changed' : isRebranded ? 'Current destination / brand' : 'Successor / merged destination',
+  value: isAcquired
+    ? 'This record is classified by an acquisition event rather than a simple marketplace shutdown.'
+    : isRebranded
+      ? (record.successor_marketplace ? `Successor / current identity: ${record.successor_marketplace}` : 'Current destination still needs review.')
+      : (record.successor_marketplace ? `Successor: ${record.successor_marketplace}` : 'Successor destination still needs review.'),
+  button: null,
+  href: null,
+  meta: [`Status: ${record.status}`],
+  note: isAcquired
+    ? 'Use evidence notes for acquisition sources. The original URL and archive remain historical context.'
+    : isRebranded
+      ? 'The same domain may represent the current brand rather than the original marketplace function.'
+      : 'Merged records should treat the successor as primary once a destination is pinned.'
+};
+
+let cards;
+let heading;
+let deckLabel;
+
+if (isDead) {
+  heading = 'Historical trail';
+  deckLabel = 'Archive-first view';
+  cards = [archiveCard, originalCard];
+} else if (isInactive) {
+  heading = 'Current state under review';
+  deckLabel = 'Archive-first view';
+  cards = [archiveCard, originalCard];
+} else if (isAcquired || isRebranded || isMerged) {
+  heading = isAcquired ? 'Acquisition trail' : isRebranded ? 'Rebrand / transition trail' : 'Merger trail';
+  deckLabel = 'Transition view';
+  cards = [transitionCard, originalCard, archiveCard];
+} else if (isLimited) {
+  heading = 'Limited availability';
+  deckLabel = 'Caution view';
+  cards = [originalCard, archiveCard];
+} else {
+  heading = 'Current access';
+  deckLabel = 'Current-first view';
+  cards = [originalCard, archiveCard];
+}
 ---
-<section>
-  <p class="eyebrow">URL & archive</p>
-  <h2>Original trail</h2>
-  <div class="url-grid">
-    <div class="card url-card">
-      <h3>{siteHeading}</h3>
-      <p class="url-value">{originalUrl || 'Unknown'}</p>
-      {originalUrl && <a class="external-link-button" href={originalUrl} rel="noopener noreferrer">{siteButton}</a>}
-      <p class="subtle">URL status: {record.official_url_status || 'unknown'}</p>
+<section class={`url-archive-block url-archive-${status}`}>
+  <div class="section-head url-archive-head">
+    <div>
+      <p class="eyebrow">URL &amp; archive</p>
+      <h2>{heading}</h2>
     </div>
-    <div class="card url-card">
-      <h3>{archiveHeading}</h3>
-      <p class="url-value">{archivedUrl || 'No archive URL recorded.'}</p>
-      {archivedUrl && <a class="external-link-button archive-link-button" href={archivedUrl} rel="noopener noreferrer">{archiveButton}</a>}
-      <p class="subtle">Archive state: {archiveState}</p>
-      <p class="subtle">Domain: {record.official_domain_original || 'unknown'}</p>
-    </div>
+    <span class="url-mode-label">{deckLabel}</span>
+  </div>
+  <div class="url-grid status-aware-url-grid">
+    {cards.map((card) => (
+      <div class={`card url-card url-card-${card.tone}`}>
+        <p class="url-card-label">{card.eyebrow}</p>
+        <h3>{card.title}</h3>
+        <p class="url-value">{card.value}</p>
+        {card.href && <a class={`external-link-button ${card.key === 'archive' ? 'archive-link-button' : ''}`} href={card.href} rel="noopener noreferrer">{card.button}</a>}
+        {card.meta.map((item) => <p class="subtle">{item}</p>)}
+        {card.note && <p class="url-card-note">{card.note}</p>}
+      </div>
+    ))}
   </div>
 </section>
