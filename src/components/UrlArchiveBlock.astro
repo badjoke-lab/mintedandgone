@@ -33,7 +33,7 @@ const archiveCard = {
 
 const originalCard = {
   key: 'original',
-  tone: isDead ? 'weak' : isInactive ? 'caution' : 'sub',
+  tone: isDead ? 'weak' : isInactive || isLimited ? 'caution' : 'sub',
   buttonTone: isActive ? 'main' : isDead || isInactive || isLimited ? 'caution' : 'sub',
   eyebrow: isActive ? 'Current access' : isDead ? 'Historical identifier' : 'Original / last known URL',
   title: isActive ? 'Current site' : isDead ? 'Original site' : 'Original / current URL',
