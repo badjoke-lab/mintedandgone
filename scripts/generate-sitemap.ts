@@ -16,7 +16,8 @@ const staticPaths = [
   '/methodology/',
   '/about/',
   '/submit/',
-  '/support/'
+  '/support/',
+  '/contact/'
 ];
 
 const marketplacePaths = marketplaces
