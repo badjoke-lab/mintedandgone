@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeBb4D0ljk3j1ju4lsfKiYEU8WIRu_ntn4DWar7DYMkX1B3eQ/viewform?usp=dialog';
+const contactTopics = ['General questions about Minted & Gone.', 'Rights, removal, copyright, or trademark concerns.', 'Broken page reports or site bugs.', 'Media, collaboration, or project inquiries.', 'Support or donation questions.'];
+---
+<BaseLayout title="Contact — Minted & Gone" description="Contact Minted & Gone for general questions, rights concerns, broken pages, collaborations, or support-related messages.">
+  <div class="shell guide-page">
+    <section class="field-hero simple-hero">
+      <div class="hero-botanical mushroom" aria-hidden="true">✉</div>
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Contact desk</p>
+        <h1>Contact Minted &amp; Gone</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">Use this page for general contact, rights concerns, broken pages, collaboration, media, or support-related messages.</p>
+        <p>For missing marketplace records, source links, archive captures, or record corrections, use the submission desk instead.</p>
+        <div class="hero-actions"><a class="btn primary" href={formUrl} target="_blank" rel="noreferrer">Open contact form</a><a class="btn" href="/submit/">Submit a correction</a></div>
+      </div>
+    </section>
+
+    <section class="guide-grid">
+      <article class="framed-panel guide-card">
+        <h2>Use contact for</h2>
+        <ul class="checklist">{contactTopics.map((item) => <li>{item}</li>)}</ul>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Use submit for</h2>
+        <p>Missing marketplaces, wrong status labels, better evidence, archive URLs, acquisition or rebrand notes, and marketplace-specific corrections.</p>
+        <a class="text-link" href="/submit/">Open the submission desk →</a>
+      </article>
+    </section>
+
+    <section class="framed-panel correction-desk">
+      <p class="eyebrow">Shared intake form</p>
+      <h2>Choose the closest inquiry type</h2>
+      <p>The contact and submission pages use the same Google Form. Select the inquiry type that best matches your message so it can be reviewed in the right context.</p>
+      <div class="hero-actions"><a class="btn primary" href={formUrl} target="_blank" rel="noreferrer">Open Google Form</a><a class="btn" href="/support/">Support this archive</a></div>
+    </section>
+  </div>
+</BaseLayout>
