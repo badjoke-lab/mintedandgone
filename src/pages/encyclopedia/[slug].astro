@@ -42,6 +42,7 @@ const archiveLabel = record.archived_url ? (record.archived_url.includes('/web/*
         <Timeline events={events} />
         <EvidenceList evidence={evidence} isSourceReviewed={isSourceReviewed} />
         <UrlArchiveBlock record={record} />
+        <section class="framed-panel definition-card correction-nudge"><p class="eyebrow">Improve this record</p><p>Found a better source or archive capture? <a class="text-link" href="/submit/">Submit correction →</a></p></section>
       </main>
     </div>
     <section class="framed-panel related-shelf"><div class="section-head"><div><p class="eyebrow">Related records</p></div><a class="text-link" href="/encyclopedia/">View all records →</a></div><div class="grid cards related-grid">{related.map((item) => <MarketplaceCard record={item} compact />)}</div></section>
