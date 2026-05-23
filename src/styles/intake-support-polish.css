@@ -1,0 +1,161 @@
+/* Intake and support page polish after shared subpage hero unification.
+   Scope: submit, contact, support. */
+
+/* Submit / Contact: keep the two intake pages visibly related. */
+.guide-page>.simple-hero .hero-actions{
+  margin-top:22px;
+}
+
+.guide-page>.simple-hero .btn{
+  min-width:170px;
+}
+
+.guide-page>.correction-desk{
+  padding:28px;
+}
+
+.correction-desk h2{
+  max-width:980px;
+  font-size:clamp(38px,4vw,56px);
+}
+
+.correction-desk>p:not(.eyebrow):not(.mock-note),
+.correction-desk .checklist{
+  max-width:980px;
+}
+
+.correction-desk .checklist{
+  gap:13px;
+  padding-left:26px;
+}
+
+.correction-desk .mock-note{
+  margin:4px 0 8px;
+}
+
+.guide-page>.guide-grid .guide-card{
+  min-height:210px;
+  padding:26px;
+}
+
+.guide-page>.guide-grid .guide-card h2,
+.guide-page>.guide-grid .definition-card h2{
+  font-size:clamp(34px,3.5vw,48px);
+  line-height:.96;
+}
+
+.guide-page>.guide-grid .guide-card p,
+.guide-page>.guide-grid .definition-card p,
+.guide-page>.guide-grid .checklist{
+  font-size:16px;
+  line-height:1.5;
+}
+
+/* Contact page has fewer blocks, so give them the same visual weight as submit cards. */
+.guide-page>.guide-grid:first-of-type{
+  align-items:stretch;
+}
+
+.guide-page>.guide-grid:first-of-type .guide-card{
+  display:grid;
+  align-content:start;
+  gap:10px;
+}
+
+/* Support: keep donation-specific right note, but align lower cards to the same archive system. */
+.support-warning{
+  min-height:118px;
+  padding:24px 28px;
+}
+
+.support-warning h2{
+  font-size:clamp(26px,2.5vw,34px);
+  line-height:1.02;
+  color:var(--forest);
+}
+
+.support-layout{
+  gap:22px;
+}
+
+.support-wallets-panel,
+.support-reasons,
+.support-disclaimer,
+.support-faq{
+  padding:26px;
+}
+
+.support-wallets-panel h2,
+.support-disclaimer h2{
+  font-size:clamp(38px,4vw,56px);
+  line-height:.96;
+}
+
+.wallet-grid{
+  gap:16px;
+}
+
+.wallet-card{
+  min-height:220px;
+  padding:17px;
+}
+
+.wallet-card h3{
+  font-size:22px;
+}
+
+.wallet-card code{
+  min-height:58px;
+}
+
+.support-reasons li{
+  padding:15px 0;
+}
+
+.support-reasons strong{
+  font-size:17px;
+}
+
+.support-disclaimer{
+  min-height:250px;
+}
+
+.support-faq .faq-grid article{
+  min-height:132px;
+}
+
+.support-faq h3{
+  font-size:21px;
+  line-height:1.08;
+}
+
+@media(max-width:1023px){
+  .support-page>.support-hero{
+    text-align:left;
+  }
+
+  .support-page>.support-hero .support-note-card{
+    justify-self:start;
+  }
+}
+
+@media(max-width:720px){
+  .guide-page>.correction-desk,
+  .guide-page>.guide-grid .guide-card,
+  .support-warning,
+  .support-wallets-panel,
+  .support-reasons,
+  .support-disclaimer,
+  .support-faq{
+    padding:18px;
+  }
+
+  .guide-page>.simple-hero .btn{
+    min-width:0;
+    width:100%;
+  }
+
+  .wallet-card{
+    min-height:0;
+  }
+}
