@@ -1,0 +1,190 @@
+/* Marketplace detail page polish after shared record hero unification.
+   Scope: /encyclopedia/[slug]/ only. */
+
+/* Make the detail page read as a record dossier, not a separate visual system. */
+.record-detail-hero .breadcrumb{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-bottom:12px;
+  font-size:13px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.record-detail-hero .title-row{
+  align-items:flex-start;
+  gap:14px;
+}
+
+.record-detail-hero .title-row .chip{
+  margin-top:6px;
+}
+
+.record-detail-hero .tag-row,
+.record-detail-hero .tags{
+  margin-top:14px;
+}
+
+.record-detail-hero .hero-copy>p:not(.eyebrow):not(.lede){
+  max-width:760px;
+  font-size:16px;
+  line-height:1.52;
+}
+
+.record-layout{
+  grid-template-columns:310px minmax(0,1fr);
+  gap:20px;
+}
+
+.record-sidebar{
+  gap:16px;
+}
+
+.record-sidebar .glance-card{
+  padding:22px;
+}
+
+.record-sidebar .glance-card .notes-list div{
+  grid-template-columns:1fr;
+  gap:5px;
+  padding:11px 0;
+}
+
+.record-sidebar .glance-card .notes-list dt{
+  font-size:11px;
+}
+
+.record-sidebar .glance-card .notes-list dd{
+  font-size:15px;
+}
+
+.record-sidebar .quote-card{
+  padding:24px;
+  font-size:19px;
+  line-height:1.35;
+}
+
+.record-main{
+  gap:18px;
+}
+
+.record-main .framed-panel,
+.record-main>section:not(.framed-panel){
+  padding:24px;
+}
+
+.record-main h2,
+.related-shelf h2{
+  font-size:clamp(34px,3.4vw,50px);
+  line-height:.98;
+}
+
+.overview-card{
+  gap:14px;
+}
+
+.overview-card>p:not(.eyebrow){
+  max-width:920px;
+}
+
+.overview-card .meta-grid{
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:10px;
+}
+
+.overview-card .fact{
+  min-height:86px;
+}
+
+.record-main .timeline-item{
+  padding-bottom:16px;
+}
+
+.record-main .timeline-item h3,
+.record-main .evidence h3,
+.record-main .definition-card h3{
+  font-size:20px;
+  line-height:1.1;
+}
+
+.record-main .evidence li{
+  padding:15px;
+}
+
+.correction-nudge{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+
+.correction-nudge .eyebrow{
+  margin:0;
+}
+
+.related-shelf{
+  margin-top:24px;
+  padding:24px;
+}
+
+.related-shelf .section-head{
+  margin-bottom:14px;
+}
+
+.related-grid{
+  gap:14px!important;
+}
+
+.related-grid .market-card{
+  min-height:160px;
+}
+
+.related-grid .record-icon{
+  width:48px;
+  height:48px;
+  border-radius:10px;
+}
+
+@media(max-width:1200px){
+  .record-layout{
+    grid-template-columns:1fr;
+  }
+
+  .record-sidebar{
+    position:static;
+    grid-template-columns:1fr 1fr;
+    align-items:stretch;
+  }
+
+  .overview-card .meta-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:720px){
+  .record-detail-hero .title-row{
+    display:grid;
+  }
+
+  .record-sidebar{
+    grid-template-columns:1fr;
+  }
+
+  .record-main .framed-panel,
+  .record-main>section:not(.framed-panel),
+  .record-sidebar .glance-card,
+  .record-sidebar .quote-card,
+  .related-shelf{
+    padding:18px;
+  }
+
+  .overview-card .meta-grid{
+    grid-template-columns:1fr;
+  }
+
+  .correction-nudge{
+    display:grid;
+  }
+}
