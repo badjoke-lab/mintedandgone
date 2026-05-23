@@ -2,8 +2,26 @@
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-const { title = 'Minted & Gone', description = 'A warm field-guide registry of NFT marketplaces that are active, faded, closed, or transformed.' } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com').toString();
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+
+const {
+  title = 'Minted & Gone',
+  description = 'A warm field-guide registry of NFT marketplaces that are active, faded, closed, or transformed.',
+  image = '/og-image.svg',
+  type = 'website'
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://mag.badjoke-lab.com');
+const canonical = new URL(Astro.url.pathname, site).toString();
+const imageUrl = new URL(image, site).toString();
+const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Minted & Gone',
+  url: new URL('/', site).toString(),
+  description
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -12,11 +30,23 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
     <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content="Minted & Gone" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
     <link rel="icon" href="/favicon.svg" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <GoogleAnalytics />
   </head>
   <body>
     <SiteHeader />
