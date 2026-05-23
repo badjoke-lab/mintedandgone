@@ -4,9 +4,9 @@ const read = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
 const readMany = (prefix: string) => readdirSync('data')
   .filter((name) => name.startsWith(prefix) && name.endsWith('.json'))
   .sort()
-  .flatMap((name) => read(`data/${name}`));
+  .flatMap((name) => read('data/' + name));
 
-const site = 'https://mintedandgone.pages.dev';
+const site = (process.env.PUBLIC_SITE_URL ?? 'https://mag.badjoke-lab.com').replace(/\/$/, '');
 const marketplaces = readMany('marketplaces');
 
 const staticPaths = [
@@ -21,13 +21,13 @@ const staticPaths = [
 ];
 
 const marketplacePaths = marketplaces
-  .map((record: { slug: string }) => `/encyclopedia/${record.slug}/`)
+  .map((record: { slug: string }) => '/encyclopedia/' + record.slug + '/')
   .sort((a: string, b: string) => a.localeCompare(b));
 
 const paths = [...staticPaths, ...marketplacePaths];
-const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${paths
-  .map((path) => `  <url><loc>${site}${path}</loc></url>`)
-  .join('\n')}\n</urlset>\n`;
+const xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + paths
+  .map((path) => '  <url><loc>' + site + path + '</loc></url>')
+  .join('\n') + '\n</urlset>\n';
 
 writeFileSync('public/sitemap.xml', xml);
-console.log(`Sitemap generated: ${paths.length} URLs`);
+console.log('Sitemap generated: ' + paths.length + ' URLs');
