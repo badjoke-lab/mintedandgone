@@ -5,12 +5,13 @@
   "private": true,
   "scripts": {
     "dev": "command -v astro >/dev/null 2>&1 && astro dev || node scripts/static-build.mjs --serve",
-    "build": "command -v astro >/dev/null 2>&1 && astro build || node scripts/static-build.mjs",
+    "build:site": "command -v astro >/dev/null 2>&1 && astro build || node scripts/static-build.mjs",
+    "build": "npm run generate:stats && npm run generate:sitemap && npm run build:site",
     "preview": "command -v astro >/dev/null 2>&1 && astro preview || node scripts/static-build.mjs --serve",
     "validate": "command -v tsx >/dev/null 2>&1 && tsx scripts/validate-data.ts || node --loader ./scripts/ts-loader.mjs scripts/validate-data.ts",
     "generate:stats": "command -v tsx >/dev/null 2>&1 && tsx scripts/generate-stats.ts || node --loader ./scripts/ts-loader.mjs scripts/generate-stats.ts",
     "generate:sitemap": "command -v tsx >/dev/null 2>&1 && tsx scripts/generate-sitemap.ts || node --loader ./scripts/ts-loader.mjs scripts/generate-sitemap.ts",
-    "check": "npm run generate:stats && npm run generate:sitemap && npm run validate && npm run build"
+    "check": "npm run generate:stats && npm run generate:sitemap && npm run validate && npm run build:site"
   },
   "dependencies": {
     "astro": "latest",
