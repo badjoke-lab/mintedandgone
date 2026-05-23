@@ -1,0 +1,247 @@
+/* Unified non-home page rhythm for Minted & Gone.
+   Top page remains independent. Everything below keeps a shared archive-page scale. */
+:root{
+  --subpage-hero-min:320px;
+  --subpage-hero-pad-block:38px;
+  --subpage-hero-pad-inline:34px;
+  --subpage-art-size:118px;
+  --subpage-side-width:340px;
+  --record-hero-min:300px;
+}
+
+/* Standard subpage hero: encyclopedia, stats, methodology, about, submit, contact. */
+.encyclopedia-shell>.field-hero,
+.appendix-page>.field-hero,
+.guide-page>.field-hero{
+  min-height:var(--subpage-hero-min);
+  padding:var(--subpage-hero-pad-block) var(--subpage-hero-pad-inline);
+  gap:30px;
+  align-items:center;
+  overflow:hidden;
+}
+
+.encyclopedia-shell>.field-hero{
+  grid-template-columns:var(--subpage-art-size) minmax(0,1fr) minmax(280px,var(--subpage-side-width));
+}
+
+.appendix-page>.field-hero,
+.guide-page>.field-hero,
+.guide-page>.field-hero.simple-hero,
+.guide-page>.field-hero.compact-hero{
+  grid-template-columns:var(--subpage-art-size) minmax(0,1fr);
+}
+
+.guide-page>.field-hero.compact-hero{
+  min-height:var(--subpage-hero-min);
+  padding:var(--subpage-hero-pad-block) var(--subpage-hero-pad-inline);
+}
+
+.encyclopedia-shell>.field-hero h1,
+.appendix-page>.field-hero h1,
+.guide-page>.field-hero h1,
+.support-page>.support-hero h1{
+  max-width:790px;
+  font-size:clamp(52px,5.4vw,72px);
+  line-height:.95;
+  letter-spacing:-.052em;
+}
+
+.encyclopedia-shell>.field-hero .lede,
+.appendix-page>.field-hero .lede,
+.guide-page>.field-hero .lede,
+.support-page>.support-hero .lede{
+  max-width:760px;
+  font-size:clamp(23px,2.2vw,29px);
+  line-height:1.22;
+}
+
+.encyclopedia-shell>.field-hero .hero-copy p:not(.eyebrow):not(.lede),
+.appendix-page>.field-hero .hero-copy p:not(.eyebrow):not(.lede),
+.guide-page>.field-hero .hero-copy p:not(.eyebrow):not(.lede),
+.support-page>.support-hero .support-hero-copy p:not(.eyebrow):not(.lede){
+  max-width:760px;
+  font-size:16px;
+  line-height:1.55;
+}
+
+.encyclopedia-shell>.field-hero .hero-botanical,
+.appendix-page>.field-hero .hero-botanical,
+.guide-page>.field-hero .hero-botanical,
+.guide-page>.field-hero.compact-hero .hero-botanical{
+  width:var(--subpage-art-size);
+  height:var(--subpage-art-size);
+  display:grid;
+  place-items:center;
+  font-size:96px;
+  line-height:1;
+  opacity:.68;
+}
+
+.encyclopedia-shell>.field-hero .hero-plate,
+.encyclopedia-shell>.field-hero .encyclopedia-hero-plate{
+  width:min(100%,var(--subpage-side-width));
+  justify-self:end;
+}
+
+.encyclopedia-shell>.field-hero .hero-archive-image{
+  max-height:210px;
+  width:100%;
+  object-fit:contain;
+}
+
+/* Support keeps its donation note, but uses the same subpage hero scale. */
+.support-page{
+  gap:24px;
+  padding-top:26px;
+}
+
+.support-page>.support-hero{
+  min-height:var(--subpage-hero-min);
+  grid-template-columns:var(--subpage-art-size) minmax(0,1fr) minmax(280px,320px);
+  gap:30px;
+  padding:var(--subpage-hero-pad-block) var(--subpage-hero-pad-inline);
+  align-items:center;
+}
+
+.support-page>.support-hero .support-hero-art{
+  width:var(--subpage-art-size);
+  height:var(--subpage-art-size);
+  font-size:96px;
+  opacity:.62;
+}
+
+.support-page>.support-hero .support-note-card{
+  width:min(100%,320px);
+  justify-self:end;
+}
+
+/* Detail pages use a record-specific hero, but share the same scale and rhythm. */
+.shell>.record-detail-hero{
+  min-height:var(--record-hero-min);
+  grid-template-columns:var(--subpage-art-size) minmax(0,1fr) minmax(300px,var(--subpage-side-width));
+  gap:30px;
+  padding:34px;
+  align-items:center;
+  overflow:hidden;
+}
+
+.shell>.record-detail-hero h1{
+  max-width:740px;
+  font-size:clamp(48px,5vw,64px);
+  line-height:.95;
+  letter-spacing:-.052em;
+}
+
+.shell>.record-detail-hero .lede{
+  max-width:760px;
+  font-size:clamp(21px,2vw,27px);
+  line-height:1.22;
+}
+
+.shell>.record-detail-hero .specimen-plate.large{
+  width:var(--subpage-art-size);
+  height:var(--subpage-art-size);
+  display:grid;
+  place-items:center;
+  font-size:96px;
+  line-height:1;
+}
+
+.shell>.record-detail-hero .hero-plate{
+  width:min(100%,var(--subpage-side-width));
+  justify-self:end;
+}
+
+.shell>.record-detail-hero .cabinet-illustration{
+  min-height:150px;
+  padding:36px 22px 18px;
+  font-size:28px;
+}
+
+.shell>.record-detail-hero .field-note-stamp{
+  padding:18px 10px;
+}
+
+.shell>.record-detail-hero .field-note-stamp strong{
+  width:72px;
+  height:72px;
+  font-size:21px;
+}
+
+/* Secondary section scale so lower pages do not feel like separate templates. */
+.guide-card h2,
+.definition-card h2,
+.correction-desk h2,
+.support-wallets-panel h2,
+.support-disclaimer h2{
+  font-size:clamp(34px,3.2vw,46px);
+}
+
+.about-section-grid .guide-card{
+  min-height:210px;
+}
+
+.appendix-grid .framed-panel,
+.record-main>.framed-panel,
+.record-main>section:not(.framed-panel),
+.guide-page>.framed-panel,
+.support-page>.framed-panel{
+  border-radius:12px;
+}
+
+@media(max-width:1200px){
+  .encyclopedia-shell>.field-hero,
+  .appendix-page>.field-hero,
+  .guide-page>.field-hero,
+  .support-page>.support-hero,
+  .shell>.record-detail-hero{
+    grid-template-columns:1fr;
+    min-height:auto;
+    padding:28px 22px;
+  }
+
+  .encyclopedia-shell>.field-hero .hero-botanical,
+  .appendix-page>.field-hero .hero-botanical,
+  .guide-page>.field-hero .hero-botanical,
+  .support-page>.support-hero .support-hero-art,
+  .shell>.record-detail-hero .specimen-plate.large{
+    width:96px;
+    height:96px;
+    font-size:78px;
+    justify-self:start;
+  }
+
+  .encyclopedia-shell>.field-hero .hero-plate,
+  .support-page>.support-hero .support-note-card,
+  .shell>.record-detail-hero .hero-plate{
+    justify-self:start;
+    width:100%;
+    max-width:420px;
+  }
+}
+
+@media(max-width:720px){
+  .encyclopedia-shell>.field-hero h1,
+  .appendix-page>.field-hero h1,
+  .guide-page>.field-hero h1,
+  .support-page>.support-hero h1,
+  .shell>.record-detail-hero h1{
+    font-size:clamp(40px,12vw,56px);
+  }
+
+  .encyclopedia-shell>.field-hero .lede,
+  .appendix-page>.field-hero .lede,
+  .guide-page>.field-hero .lede,
+  .support-page>.support-hero .lede,
+  .shell>.record-detail-hero .lede{
+    font-size:21px;
+  }
+
+  .guide-card h2,
+  .definition-card h2,
+  .correction-desk h2,
+  .support-wallets-panel h2,
+  .support-disclaimer h2{
+    font-size:clamp(30px,9vw,40px);
+  }
+}
