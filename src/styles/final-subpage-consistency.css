@@ -1,0 +1,114 @@
+/* Final consistency pass for non-home pages.
+   This file intentionally stays shallow: it smooths shared spacing and card rhythm
+   after the page-specific CSS layers have landed. */
+
+/* Keep top page independent. Apply common vertical rhythm only to lower pages. */
+.encyclopedia-shell,
+.appendix-page,
+.guide-page,
+.support-page,
+.shell:has(.record-detail-hero){
+  padding-top:0;
+}
+
+.encyclopedia-shell>.field-hero,
+.appendix-page>.field-hero,
+.guide-page>.field-hero,
+.support-page>.support-hero,
+.shell>.record-detail-hero{
+  margin-top:28px;
+  margin-bottom:20px;
+}
+
+.encyclopedia-shell>.mock-note,
+.appendix-page>.mock-note,
+.guide-page>.mock-note,
+.shell>.record-detail-hero+.mock-note{
+  margin:0 0 22px;
+}
+
+/* Make lower-page first content sections begin at the same visual distance. */
+.encyclopedia-layout,
+.stats-glance,
+.about-section-grid,
+.guide-page>.correction-desk,
+.support-warning,
+.record-layout{
+  margin-top:22px;
+}
+
+/* Shared panel density for the post-hero sections. */
+.encyclopedia-filter,
+.encyclopedia-catalog,
+.encyclopedia-notes,
+.stats-glance,
+.appendix-grid>.framed-panel,
+.about-section-grid .guide-card,
+.guide-page>.guide-grid .guide-card,
+.guide-page>.guide-grid .definition-card,
+.guide-page>.correction-desk,
+.support-warning,
+.support-wallets-panel,
+.support-reasons,
+.support-disclaimer,
+.support-faq,
+.record-sidebar .glance-card,
+.record-sidebar .quote-card,
+.record-main .framed-panel,
+.record-main>section:not(.framed-panel),
+.related-shelf{
+  box-shadow:var(--shadow-soft);
+}
+
+/* Prevent lower sections from competing with page H1s. */
+.encyclopedia-layout h2,
+.appendix-grid h2,
+.stats-glance h2,
+.about-section-grid h2,
+.guide-grid h2,
+.correction-desk h2,
+.support-page h2,
+.record-main h2,
+.related-shelf h2{
+  color:var(--forest);
+}
+
+/* Keep CTA rows visually consistent across intake/support/detail sections. */
+.hero-actions,
+.correction-desk .hero-actions,
+.support-page .hero-actions{
+  gap:12px;
+}
+
+.correction-nudge a,
+.about-cta a,
+.correction-desk a,
+.support-page a.text-link{
+  text-underline-offset:3px;
+}
+
+/* Mobile: avoid giant dead space between stacked lower-page sections. */
+@media(max-width:720px){
+  .encyclopedia-shell>.field-hero,
+  .appendix-page>.field-hero,
+  .guide-page>.field-hero,
+  .support-page>.support-hero,
+  .shell>.record-detail-hero{
+    margin-top:18px;
+    margin-bottom:16px;
+  }
+
+  .encyclopedia-layout,
+  .stats-glance,
+  .about-section-grid,
+  .guide-page>.correction-desk,
+  .support-warning,
+  .record-layout{
+    margin-top:18px;
+  }
+
+  .mock-note{
+    font-size:13px;
+    line-height:1.42;
+  }
+}
