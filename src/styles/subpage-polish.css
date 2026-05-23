@@ -1,0 +1,185 @@
+/* Page-specific polish after the shared non-home hero scale.
+   Scope: encyclopedia, stats, and about only. */
+
+/* Encyclopedia: make the archive browser feel like a controlled subpage, not an endless pasted grid. */
+.encyclopedia-layout{
+  grid-template-columns:230px minmax(0,1fr) 300px;
+  gap:18px;
+}
+
+.encyclopedia-filter,
+.encyclopedia-notes{
+  padding:20px;
+}
+
+.encyclopedia-filter details{
+  display:grid;
+  gap:14px;
+}
+
+.encyclopedia-filter .filter-group{
+  max-height:360px;
+  overflow:auto;
+  padding-right:4px;
+}
+
+.encyclopedia-filter .check{
+  font-size:13px;
+  line-height:1.25;
+}
+
+.encyclopedia-toolbar{
+  min-height:50px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--line-soft);
+}
+
+.encyclopedia-catalog{
+  padding:20px;
+}
+
+.encyclopedia-grid{
+  gap:16px!important;
+}
+
+.encyclopedia-grid .marketplace-card,
+.encyclopedia-grid .market-card{
+  min-height:218px;
+}
+
+.encyclopedia-notes h2{
+  font-size:clamp(30px,2.6vw,38px);
+  line-height:1;
+}
+
+.encyclopedia-notes .specimen-plate{
+  font-size:86px;
+  margin:12px 0;
+}
+
+.encyclopedia-notes blockquote{
+  font-size:15px;
+  line-height:1.45;
+}
+
+/* Stats: stop the generated appendix from becoming uneven tall columns. */
+.stats-glance{
+  padding:22px;
+}
+
+.appendix-grid{
+  align-items:start;
+}
+
+.appendix-grid>.framed-panel{
+  min-height:0;
+  padding:22px;
+}
+
+.appendix-grid .bars{
+  gap:9px;
+}
+
+.appendix-grid .bar-row{
+  grid-template-columns:minmax(120px,165px) minmax(95px,1fr) 34px;
+  gap:10px;
+  font-size:13px;
+}
+
+.appendix-grid .bar-row span:first-child{
+  line-height:1.2;
+}
+
+.appendix-grid .bar{
+  height:8px;
+}
+
+.appendix-grid.two{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:900px;
+}
+
+.definition-card h2,
+.stats-glance+.appendix-grid h2{
+  line-height:.98;
+}
+
+.appendix-page .definition-card{
+  padding:24px;
+}
+
+.appendix-page .definition-card h2{
+  font-size:clamp(36px,3.4vw,50px);
+}
+
+/* About: keep the six explanation cards in one visual family. */
+.about-section-grid{
+  gap:18px;
+}
+
+.about-section-grid .guide-card{
+  display:grid;
+  align-content:start;
+  gap:10px;
+  min-height:205px;
+  padding:26px;
+}
+
+.about-section-grid .guide-card .num{
+  margin-bottom:4px;
+  font-size:30px;
+}
+
+.about-section-grid .guide-card h2{
+  font-size:clamp(34px,3.4vw,48px);
+  line-height:.96;
+}
+
+.about-section-grid .guide-card p{
+  font-size:16px;
+  line-height:1.5;
+}
+
+.about-cta.definition-card{
+  padding:28px;
+}
+
+.about-cta h2{
+  max-width:980px;
+  font-size:clamp(38px,4vw,56px);
+}
+
+.about-cta p{
+  max-width:980px;
+}
+
+@media(max-width:1200px){
+  .encyclopedia-layout{
+    grid-template-columns:1fr;
+  }
+
+  .encyclopedia-filter .filter-group{
+    max-height:none;
+  }
+
+  .appendix-grid.two{
+    max-width:none;
+  }
+}
+
+@media(max-width:720px){
+  .encyclopedia-catalog,
+  .encyclopedia-filter,
+  .encyclopedia-notes,
+  .stats-glance,
+  .appendix-grid>.framed-panel,
+  .about-section-grid .guide-card,
+  .about-cta.definition-card{
+    padding:18px;
+  }
+
+  .appendix-grid .bar-row{
+    grid-template-columns:1fr;
+    gap:6px;
+  }
+}
