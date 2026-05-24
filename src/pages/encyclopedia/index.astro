@@ -37,7 +37,7 @@ const counts = {
     <p class="mock-note">Draft-data warning: records are source-reviewed staging entries, not final public-quality certification. Uncertain records remain visibly flagged for later review.</p>
     <div class="market-layout encyclopedia-layout" data-filter-root>
       <aside class="filter-panel framed-panel encyclopedia-filter">
-        <details open><summary><strong>Filters</strong><span class="filter-summary-hint">Search / refine</span></summary>
+        <details data-filter-details><summary><strong>Filters</strong><span class="filter-summary-hint">Search / refine</span></summary>
           <label for="market-search" class="eyebrow">Search</label><input class="search" id="market-search" data-search-input placeholder="Search encyclopedia..." />
           {[['Status','status',options.statuses],['Chain','chain',options.chains],['Category','category',options.categories]].map(([label,name,items]: any) => <fieldset class="filter-group"><legend>{label}</legend>{items.map((item:string) => <label class="check"><input type="checkbox" data-filter={name} value={item}/><span>{formatLabel(item)}</span><em>{counts[name]?.[item] ?? 0}</em></label>)}</fieldset>)}
           <button class="btn" data-clear-filters type="button">Clear filters</button>
@@ -81,9 +81,16 @@ const counts = {
       let visibleLimit = getInitialLimit();
       let wasMobile = mobileQuery.matches;
 
-      if (filterDetails && mobileQuery.matches) {
-        filterDetails.removeAttribute('open');
-      }
+      const syncFilterDetailsState = () => {
+        if (!filterDetails) return;
+        if (mobileQuery.matches) {
+          filterDetails.removeAttribute('open');
+        } else {
+          filterDetails.setAttribute('open', '');
+        }
+      };
+
+      syncFilterDetailsState();
 
       const getSelectedFilters = () => {
         const selected = { status: [], category: [], chain: [] };
@@ -167,6 +174,7 @@ const counts = {
         const isMobile = mobileQuery.matches;
         if (isMobile !== wasMobile) {
           wasMobile = isMobile;
+          syncFilterDetailsState();
           update({ resetLimit: true });
         }
       });

@@ -1,0 +1,215 @@
+/* Mobile navigation and encyclopedia filter repair.
+   Replaces horizontal nav scrolling with a compact menu and prevents filters from opening as a full-page wall. */
+
+.mobile-nav-menu {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .nav-shell {
+    width: min(calc(100% - 20px), 1220px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .brand {
+    min-width: 0;
+    font-size: 21px;
+    gap: 8px;
+  }
+
+  .brand-mark {
+    width: 26px;
+    height: 26px;
+    font-size: 22px;
+  }
+
+  .brand strong {
+    white-space: nowrap;
+  }
+
+  .brand small {
+    font-size: 9px;
+    letter-spacing: .1em;
+  }
+
+  .desktop-nav-links,
+  .nav-links.desktop-nav-links {
+    display: none !important;
+  }
+
+  .mobile-nav-menu {
+    display: block;
+    position: relative;
+    justify-self: end;
+  }
+
+  .mobile-nav-menu summary {
+    list-style: none;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: var(--forest);
+    color: #fff;
+    font-weight: 900;
+    font-size: 12px;
+    line-height: 1;
+    padding: 10px 12px;
+    box-shadow: 0 8px 18px rgba(61,45,24,.16);
+  }
+
+  .mobile-nav-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-nav-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: 50;
+    width: min(240px, calc(100vw - 24px));
+    display: grid;
+    gap: 4px;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(255,250,240,.98);
+    box-shadow: 0 18px 42px rgba(61,45,24,.18);
+  }
+
+  .mobile-nav-panel a {
+    display: block;
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 800;
+    font-size: 13px;
+    padding: 10px 11px;
+    border-radius: 7px;
+  }
+
+  .mobile-nav-panel a:hover,
+  .mobile-nav-panel a:focus {
+    background: rgba(64, 116, 89, .1);
+  }
+
+  .mobile-nav-panel .support-link {
+    background: var(--forest);
+    color: #fff;
+  }
+
+  /* Encyclopedia filter: closed by default on mobile, compact when opened. */
+  .encyclopedia-filter {
+    order: 1;
+    position: sticky !important;
+    top: 72px;
+    z-index: 12;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .encyclopedia-filter::before {
+    display: none !important;
+  }
+
+  .encyclopedia-filter details {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(255,250,240,.96);
+    box-shadow: 0 12px 28px rgba(61,45,24,.12);
+    overflow: hidden;
+  }
+
+  .encyclopedia-filter details[open] {
+    max-height: 68vh;
+    overflow: auto;
+  }
+
+  .encyclopedia-filter summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    list-style: none;
+    cursor: pointer;
+    padding: 12px 14px;
+    min-height: 46px;
+  }
+
+  .encyclopedia-filter summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .encyclopedia-filter summary::after {
+    content: "Open";
+    flex: 0 0 auto;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 5px 9px;
+    color: var(--forest);
+    background: rgba(64,116,89,.08);
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+
+  .encyclopedia-filter details[open] summary::after {
+    content: "Close";
+  }
+
+  .filter-summary-hint {
+    display: none !important;
+  }
+
+  .encyclopedia-filter .eyebrow {
+    display: block;
+    margin: 12px 14px 6px;
+  }
+
+  .encyclopedia-filter .search {
+    width: calc(100% - 28px);
+    margin: 0 14px 8px;
+  }
+
+  .encyclopedia-filter .filter-group {
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 10px 14px 0 !important;
+    margin: 8px 0 0 !important;
+  }
+
+  .encyclopedia-filter .filter-group legend {
+    position: sticky;
+    top: 0;
+    background: rgba(255,250,240,.96);
+    padding: 2px 0;
+  }
+
+  .encyclopedia-filter .check {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    margin: 7px 0;
+  }
+
+  .encyclopedia-filter .btn {
+    width: calc(100% - 28px);
+    margin: 12px 14px 14px;
+  }
+
+  .encyclopedia-layout {
+    gap: 10px;
+  }
+
+  .encyclopedia-catalog {
+    order: 2;
+  }
+}
