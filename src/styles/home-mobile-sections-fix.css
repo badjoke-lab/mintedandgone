@@ -1,0 +1,293 @@
+/* Home mobile section repair.
+   Fixes Featured, Recently gone / updated, Archive at a glance, and Timeline on narrow screens. */
+
+@media (max-width: 720px) {
+  /* Section headers */
+  .home-compact-head,
+  .featured-panel .section-head,
+  .recent-panel .section-head,
+  .timeline-strip .section-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .home-compact-head .eyebrow,
+  .featured-panel .eyebrow,
+  .recent-panel .eyebrow,
+  .timeline-strip .eyebrow {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.1;
+  }
+
+  .home-compact-head .text-link,
+  .featured-panel .text-link,
+  .recent-panel .text-link,
+  .timeline-strip .text-link {
+    justify-self: end;
+    font-size: 12px;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  /* Featured marketplaces: real compact cards, not loose text blocks */
+  .home-featured-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .home-feature-card {
+    display: grid !important;
+    grid-template-columns: 44px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    gap: 7px 10px;
+    min-height: 0 !important;
+    padding: 12px !important;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: rgba(255, 252, 241, .74);
+    text-decoration: none;
+    box-shadow: 0 8px 18px rgba(61,45,24,.07);
+  }
+
+  .home-feature-icon {
+    grid-row: 1 / 3;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: var(--forest);
+    color: #fff;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .home-feature-main {
+    min-width: 0;
+  }
+
+  .home-feature-title-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+    align-items: start;
+  }
+
+  .home-feature-title-row h3 {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.02;
+    letter-spacing: -.025em;
+  }
+
+  .home-feature-title-row .chip {
+    align-self: start;
+    font-size: 10px;
+    padding: 5px 7px;
+  }
+
+  .home-feature-main p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    line-height: 1.34;
+    color: var(--ink-soft);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .home-feature-meta {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 8px;
+    min-width: 0;
+    padding-top: 2px;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .home-feature-meta span {
+    max-width: 100%;
+    font-size: 11px;
+    line-height: 1.15;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .home-feature-meta span + span::before {
+    content: "· ";
+  }
+
+  /* Recently gone / updated: compact rows with clear columns */
+  .home-recent-list {
+    display: grid;
+    gap: 8px;
+  }
+
+  .home-recent-row {
+    display: grid !important;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 4px 9px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line-soft);
+    text-decoration: none;
+  }
+
+  .home-recent-row:last-child {
+    border-bottom: 0;
+  }
+
+  .home-recent-icon {
+    grid-row: 1 / 3;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    background: rgba(31, 86, 78, .12);
+    color: var(--forest);
+    font-weight: 900;
+    font-size: 12px;
+  }
+
+  .home-recent-copy {
+    min-width: 0;
+    display: grid;
+    gap: 1px;
+  }
+
+  .home-recent-copy strong {
+    font-size: 14px;
+    line-height: 1.12;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .home-recent-copy small {
+    font-size: 12px;
+    line-height: 1.2;
+    color: var(--muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .home-recent-row .chip {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: start;
+    font-size: 10px;
+    padding: 5px 7px;
+  }
+
+  .home-recent-row time {
+    grid-column: 2 / 4;
+    grid-row: 2;
+    justify-self: start;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.2;
+  }
+
+  /* Archive at a glance: make it look like stats again */
+  .home-stats-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .home-stat-card {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 1px 7px;
+    min-height: 52px;
+    padding: 9px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(255,252,241,.72);
+  }
+
+  .home-stat-card span {
+    grid-row: 1 / 3;
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    display: grid;
+    place-items: center;
+    background: rgba(31, 86, 78, .1);
+    color: var(--forest);
+    font-size: 12px;
+  }
+
+  .home-stat-card strong {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .home-stat-card small {
+    font-size: 10px;
+    line-height: 1.1;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Timeline: keep horizontal scroll but make it intentional and readable */
+  .timeline-strip {
+    overflow: hidden;
+  }
+
+  .era-line {
+    grid-template-columns: repeat(8, 88px) !important;
+    gap: 0;
+    overflow-x: auto;
+    padding: 14px 4px 10px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+
+  .era {
+    min-width: 88px;
+    scroll-snap-align: start;
+  }
+
+  .era span {
+    width: 11px;
+    height: 11px;
+  }
+
+  .era strong {
+    font-size: 12px;
+    line-height: 1.1;
+  }
+
+  .era em {
+    font-size: 10px;
+    line-height: 1.15;
+  }
+
+  /* About card */
+  .about-card h2 {
+    font-size: 30px;
+    line-height: .95;
+  }
+
+  .about-card p {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+}
