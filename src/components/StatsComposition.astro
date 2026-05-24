@@ -1,0 +1,35 @@
+---
+import { formatLabel } from '../lib/format';
+
+const { title, data = {}, note = '' } = Astro.props;
+
+const entries = Object.entries(data as Record<string, number>)
+  .filter(([, value]) => Number(value) > 0)
+  .sort((a, b) => Number(b[1]) - Number(a[1]));
+
+const total = entries.reduce((sum, [, value]) => sum + Number(value || 0), 0);
+---
+<div class="card stats-figure stats-composition-card">
+  <div class="stats-figure-head">
+    <h3>{title}</h3>
+    {note && <p>{note}</p>}
+  </div>
+  <div class="composition-bar" aria-label={title}>
+    {entries.map(([key, value], index) => {
+      const pct = total ? (Number(value) / total) * 100 : 0;
+      return <span class={`composition-segment seg-${index % 8}`} style={`width:${pct}%`} title={`${formatLabel(key)}: ${value}`} />;
+    })}
+  </div>
+  <div class="composition-legend">
+    {entries.map(([key, value], index) => {
+      const pct = total ? Math.round((Number(value) / total) * 100) : 0;
+      return (
+        <div>
+          <span class={`legend-dot seg-${index % 8}`} aria-hidden="true"></span>
+          <strong>{formatLabel(key)}</strong>
+          <em>{value} · {pct}%</em>
+        </div>
+      );
+    })}
+  </div>
+</div>

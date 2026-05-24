@@ -1,0 +1,31 @@
+---
+const { title, data = {}, note = '' } = Astro.props;
+
+const entries = Object.entries(data as Record<string, number>)
+  .filter(([, value]) => Number(value) > 0)
+  .sort(([a], [b]) => {
+    if (a === 'unknown') return 1;
+    if (b === 'unknown') return -1;
+    return Number(a) - Number(b);
+  });
+
+const max = Math.max(1, ...entries.map(([, value]) => Number(value)));
+---
+<div class="card stats-figure stats-histogram-card">
+  <div class="stats-figure-head">
+    <h3>{title}</h3>
+    {note && <p>{note}</p>}
+  </div>
+  <div class="histogram">
+    {entries.map(([key, value]) => {
+      const height = Math.max(4, (Number(value) / max) * 100);
+      return (
+        <div class="histogram-item">
+          <div class="histogram-track"><span style={`height:${height}%`}></span></div>
+          <strong>{value}</strong>
+          <em>{key}</em>
+        </div>
+      );
+    })}
+  </div>
+</div>

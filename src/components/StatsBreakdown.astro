@@ -1,7 +1,35 @@
 ---
 import { formatLabel } from '../lib/format';
-const { title, data = {} } = Astro.props;
-const entries = Object.entries(data as Record<string, number>).sort((a,b) => b[1]-a[1]);
-const max = Math.max(1, ...entries.map(([,v]) => v));
+
+const { title, data = {}, limit = 12, note = '' } = Astro.props;
+
+const rawEntries = Object.entries(data as Record<string, number>)
+  .filter(([, value]) => Number(value) > 0)
+  .sort((a, b) => Number(b[1]) - Number(a[1]));
+
+const topLimit = Math.max(1, Number(limit));
+const topEntries = rawEntries.slice(0, topLimit);
+const rest = rawEntries.slice(topLimit).reduce((sum, [, value]) => sum + Number(value || 0), 0);
+const entries = rest > 0 ? [...topEntries, ['other', rest] as [string, number]] : topEntries;
+const max = Math.max(1, ...entries.map(([, value]) => Number(value)));
+const total = rawEntries.reduce((sum, [, value]) => sum + Number(value || 0), 0);
 ---
-<div class="card"><h3>{title}</h3><div class="bars">{entries.map(([key,value]) => <div class="bar-row"><span>{formatLabel(key)}</span><div class="bar"><span style={`width:${(value / max) * 100}%`}></span></div><strong>{value}</strong></div>)}</div></div>
+<div class="card stats-figure stats-bars-card">
+  <div class="stats-figure-head">
+    <h3>{title}</h3>
+    {note && <p>{note}</p>}
+  </div>
+  <div class="bars">
+    {entries.map(([key, value]) => {
+      const pct = total ? Math.round((Number(value) / total) * 100) : 0;
+      return (
+        <div class="bar-row">
+          <span>{formatLabel(key)}</span>
+          <div class="bar"><span style={`width:${(Number(value) / max) * 100}%`}></span></div>
+          <strong>{value}</strong>
+          <em>{pct}%</em>
+        </div>
+      );
+    })}
+  </div>
+</div>
