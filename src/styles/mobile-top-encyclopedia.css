@@ -1,0 +1,458 @@
+/* Mobile repair pass: Top + Encyclopedia.
+   Goal: stop desktop/tablet layouts from collapsing into unreadable mobile stacks. */
+
+@media (max-width: 720px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .shell,
+  .home-page-shell,
+  .encyclopedia-shell {
+    width: min(calc(100% - 20px), 1220px);
+  }
+
+  /* Header */
+  .nav-shell {
+    width: min(calc(100% - 20px), 1220px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0 8px;
+  }
+
+  .brand {
+    min-width: 0;
+    gap: 7px;
+    font-size: 21px;
+  }
+
+  .brand-mark {
+    width: 26px;
+    height: 26px;
+    font-size: 21px;
+  }
+
+  .brand small {
+    font-size: 9px;
+    letter-spacing: .1em;
+  }
+
+  .nav-links {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 2px 0 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links a {
+    white-space: nowrap;
+    flex: 0 0 auto;
+    font-size: 11px;
+    line-height: 1;
+    padding: 7px 8px;
+  }
+
+  .nav-links .support-link {
+    padding: 8px 10px;
+  }
+
+  /* Top hero */
+  .home-mock-hero {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    min-height: 0;
+    margin-top: 14px;
+    padding: 18px !important;
+  }
+
+  .home-hero-plant {
+    display: none !important;
+  }
+
+  .home-hero-copy h1 {
+    font-size: clamp(38px, 13vw, 48px) !important;
+    line-height: .94;
+    max-width: 9ch;
+  }
+
+  .home-hero-copy .lede {
+    font-size: 18px;
+    line-height: 1.22;
+  }
+
+  .home-hero-copy p:not(.eyebrow):not(.lede) {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .home-hero-cabinet-image {
+    justify-self: stretch;
+    max-height: 130px;
+    overflow: hidden;
+  }
+
+  .home-hero-cabinet-image img {
+    width: 100%;
+    max-height: 125px;
+    object-fit: contain;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    min-height: 40px;
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  /* Home browse shelf */
+  .shelf-section,
+  .featured-panel,
+  .recent-panel,
+  .timeline-strip,
+  .glance-panel,
+  .about-card {
+    padding: 16px !important;
+  }
+
+  .browse-shelf {
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+  }
+
+  .shelf-card {
+    min-height: 74px;
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) 18px;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 3px 10px;
+    padding: 12px;
+  }
+
+  .shelf-icon {
+    grid-row: 1 / 3;
+    font-size: 27px;
+  }
+
+  .shelf-card strong {
+    font-size: 15px;
+    line-height: 1.1;
+  }
+
+  .shelf-card small {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .shelf-card em {
+    grid-row: 1 / 3;
+    grid-column: 3;
+    align-self: center;
+  }
+
+  /* Home sections */
+  .home-split,
+  .home-bottom {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+
+  .home-featured-grid,
+  .featured-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .featured-panel a,
+  .recent-panel a {
+    text-decoration: none;
+  }
+
+  .featured-panel .market-card,
+  .featured-panel .card,
+  .home-featured-grid > * {
+    min-height: 0 !important;
+  }
+
+  .featured-panel .record-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 9px;
+  }
+
+  .featured-panel p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .home-recent-list,
+  .recent-list {
+    gap: 0;
+  }
+
+  .recent-row {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 8px;
+    padding: 9px 0;
+  }
+
+  .recent-row small {
+    max-height: 1.4em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .era-line {
+    grid-template-columns: repeat(8, 76px) !important;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .era strong {
+    font-size: 12px;
+  }
+
+  .era em {
+    font-size: 11px;
+  }
+
+  .glance-panel .kpi-grid,
+  .appendix-page .kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px;
+  }
+
+  .kpi strong {
+    font-size: 26px;
+  }
+
+  .kpi p {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .site-footer {
+    margin-top: 30px;
+    padding: 24px 0 32px;
+  }
+
+  .footer-grid {
+    gap: 16px;
+    font-size: 13px;
+  }
+
+  /* Encyclopedia hero */
+  .encyclopedia-shell > .field-hero {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    min-height: 0;
+    margin-top: 14px;
+    padding: 16px !important;
+  }
+
+  .encyclopedia-shell > .field-hero .hero-botanical,
+  .encyclopedia-shell > .field-hero .hero-plate {
+    display: none !important;
+  }
+
+  .encyclopedia-shell > .field-hero h1 {
+    font-size: clamp(34px, 11vw, 44px) !important;
+    line-height: .96;
+  }
+
+  .encyclopedia-shell > .field-hero .lede {
+    font-size: 18px;
+    line-height: 1.23;
+  }
+
+  .encyclopedia-shell > .field-hero .hero-copy p:not(.eyebrow):not(.lede) {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .encyclopedia-shell > .mock-note {
+    font-size: 12px;
+    line-height: 1.4;
+    padding: 10px 11px;
+  }
+
+  /* Encyclopedia mobile browsing */
+  .encyclopedia-layout {
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .encyclopedia-filter {
+    order: 1;
+    position: static !important;
+    padding: 0 !important;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .encyclopedia-filter::before {
+    display: none;
+  }
+
+  .encyclopedia-filter details {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(255,250,240,.78);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+  }
+
+  .encyclopedia-filter summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+    list-style: none;
+  }
+
+  .encyclopedia-filter summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .encyclopedia-filter summary::after {
+    content: "Open";
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--forest);
+  }
+
+  .encyclopedia-filter details[open] summary::after {
+    content: "Close";
+  }
+
+  .filter-summary-hint {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .encyclopedia-filter .eyebrow,
+  .encyclopedia-filter .search,
+  .encyclopedia-filter .btn {
+    margin-left: 14px;
+    margin-right: 14px;
+    width: calc(100% - 28px);
+  }
+
+  .encyclopedia-filter .filter-group {
+    max-height: 220px !important;
+    overflow: auto;
+    padding: 12px 14px 0;
+    margin: 12px 0 0;
+  }
+
+  .encyclopedia-filter .check {
+    font-size: 13px;
+    line-height: 1.25;
+    margin: 8px 0;
+  }
+
+  .encyclopedia-catalog {
+    order: 2;
+    padding: 14px !important;
+  }
+
+  .encyclopedia-toolbar {
+    display: grid !important;
+    gap: 8px;
+    align-items: start;
+    min-height: 0;
+    padding-bottom: 10px;
+  }
+
+  .encyclopedia-toolbar p {
+    font-size: 13px;
+  }
+
+  .encyclopedia-toolbar .view-icons {
+    display: none;
+  }
+
+  .filter-pills {
+    display: none !important;
+  }
+
+  .encyclopedia-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .encyclopedia-grid .marketplace-card,
+  .encyclopedia-grid .market-card,
+  .encyclopedia-grid .card {
+    min-height: 0 !important;
+    padding: 12px !important;
+    border-radius: 10px;
+    text-decoration: none;
+  }
+
+  .encyclopedia-grid .record-icon,
+  .encyclopedia-grid .mini-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 9px;
+  }
+
+  .encyclopedia-grid h2,
+  .encyclopedia-grid h3 {
+    font-size: 18px;
+    line-height: 1.05;
+  }
+
+  .encyclopedia-grid p {
+    font-size: 13px;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .encyclopedia-grid .meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .encyclopedia-grid .fact {
+    padding: 8px;
+  }
+
+  .encyclopedia-notes {
+    display: none !important;
+  }
+}

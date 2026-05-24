@@ -37,7 +37,7 @@ const counts = {
     <p class="mock-note">Draft-data warning: records are source-reviewed staging entries, not final public-quality certification. Uncertain records remain visibly flagged for later review.</p>
     <div class="market-layout encyclopedia-layout" data-filter-root>
       <aside class="filter-panel framed-panel encyclopedia-filter">
-        <details open><summary><strong>Filters</strong></summary>
+        <details open><summary><strong>Filters</strong><span class="filter-summary-hint">Search / refine</span></summary>
           <label for="market-search" class="eyebrow">Search</label><input class="search" id="market-search" data-search-input placeholder="Search encyclopedia..." />
           {[['Status','status',options.statuses],['Chain','chain',options.chains],['Category','category',options.categories]].map(([label,name,items]: any) => <fieldset class="filter-group"><legend>{label}</legend>{items.map((item:string) => <label class="check"><input type="checkbox" data-filter={name} value={item}/><span>{formatLabel(item)}</span><em>{counts[name]?.[item] ?? 0}</em></label>)}</fieldset>)}
           <button class="btn" data-clear-filters type="button">Clear filters</button>
@@ -60,6 +60,10 @@ const counts = {
   <script>
     const root = document.querySelector('[data-filter-root]');
     if (root) {
+      const filterDetails = root.querySelector('.encyclopedia-filter details');
+      if (filterDetails && window.matchMedia('(max-width: 720px)').matches) {
+        filterDetails.removeAttribute('open');
+      }
       const input = root.querySelector('[data-search-input]');
       const checks = [...root.querySelectorAll('input[type="checkbox"][data-filter]')];
       const cards = [...root.querySelectorAll('.marketplace-card')];
