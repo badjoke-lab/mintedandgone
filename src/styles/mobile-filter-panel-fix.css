@@ -1,0 +1,187 @@
+/* Mobile encyclopedia filter panel repair.
+   The closed state is compact, but the opened state must be a usable full-width control panel. */
+
+@media (max-width: 720px) {
+  .encyclopedia-filter {
+    position: sticky !important;
+    top: 64px;
+    z-index: 18;
+    order: 1;
+    margin: 0 0 10px;
+  }
+
+  .encyclopedia-filter details {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: rgba(255,250,240,.98);
+    box-shadow: 0 12px 28px rgba(61,45,24,.14);
+    overflow: hidden;
+  }
+
+  .encyclopedia-filter summary {
+    min-height: 52px;
+    padding: 13px 14px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .encyclopedia-filter summary strong {
+    font-size: 13px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .encyclopedia-filter summary::after {
+    content: "Show";
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 10px;
+    background: rgba(64,116,89,.1);
+    color: var(--forest);
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .encyclopedia-filter details[open] summary::after {
+    content: "Hide";
+  }
+
+  .filter-summary-hint {
+    display: block !important;
+    grid-column: 1;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.25;
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: 700;
+  }
+
+  .encyclopedia-filter details[open] {
+    max-height: 78vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .encyclopedia-filter .eyebrow {
+    display: block;
+    margin: 14px 14px 6px;
+    font-size: 11px;
+  }
+
+  .encyclopedia-filter .search {
+    display: block;
+    width: calc(100% - 28px);
+    min-height: 44px;
+    margin: 0 14px 12px;
+    font-size: 15px;
+  }
+
+  .encyclopedia-filter .filter-group {
+    margin: 0 !important;
+    padding: 12px 14px 4px !important;
+    max-height: none !important;
+    overflow: visible !important;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .encyclopedia-filter .filter-group legend {
+    float: none;
+    width: 100%;
+    margin: 0 0 8px;
+    padding: 0;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background: transparent;
+  }
+
+  .encyclopedia-filter .filter-group::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .encyclopedia-filter .check {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.25;
+  }
+
+  .encyclopedia-filter .check input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+  }
+
+  .encyclopedia-filter .check span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .encyclopedia-filter .check em {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: normal;
+  }
+
+  .encyclopedia-filter .btn {
+    width: calc(100% - 28px);
+    margin: 14px;
+    min-height: 42px;
+  }
+
+  /* Reduce card wall feeling below the filter */
+  .encyclopedia-toolbar {
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+  }
+
+  .encyclopedia-toolbar p {
+    margin: 0;
+    font-size: 13px;
+  }
+
+  .encyclopedia-toolbar .text-link {
+    justify-self: end;
+    font-size: 13px;
+  }
+
+  .encyclopedia-grid .market-card,
+  .encyclopedia-grid .marketplace-card,
+  .encyclopedia-grid .card {
+    padding: 13px !important;
+  }
+
+  .load-more-wrap {
+    position: sticky;
+    bottom: 10px;
+    z-index: 8;
+    margin: 14px 0 4px;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: rgba(255,250,240,.96);
+    box-shadow: 0 12px 28px rgba(61,45,24,.12);
+  }
+
+  .load-more-wrap .btn {
+    width: 100%;
+  }
+}
