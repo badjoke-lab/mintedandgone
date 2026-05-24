@@ -1,0 +1,107 @@
+/* Stats mobile histogram overflow fix.
+   Keeps yearly distributions inside the card and reduces mobile section pressure. */
+
+@media (max-width: 720px) {
+  .stats-histogram-card {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .stats-histogram-card .stats-figure-head {
+    margin-bottom: 8px !important;
+  }
+
+  .stats-histogram-card .stats-figure-head h3 {
+    font-size: 15px !important;
+    line-height: 1.05;
+  }
+
+  .stats-histogram-card .stats-figure-head p {
+    font-size: 11px !important;
+    line-height: 1.25;
+  }
+
+  .histogram {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    min-height: 142px !important;
+    display: grid !important;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(30px, 1fr);
+    gap: 5px !important;
+    overflow-x: hidden !important;
+    padding: 6px 0 2px !important;
+  }
+
+  .histogram-item {
+    min-width: 0 !important;
+    width: auto !important;
+    flex: initial !important;
+    display: grid;
+    grid-template-rows: 86px auto auto !important;
+    gap: 4px !important;
+    text-align: center;
+  }
+
+  .histogram-track {
+    min-width: 0;
+    border-radius: 6px 6px 2px 2px;
+  }
+
+  .histogram-track span {
+    width: 62% !important;
+    min-width: 8px;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .histogram-item strong {
+    font-size: 10px !important;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .histogram-item em {
+    font-size: 9px !important;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* Unknown-heavy end-year graph should not blow out the card. */
+  .stats-histogram-card:nth-of-type(2) .histogram {
+    grid-auto-columns: minmax(28px, 1fr);
+  }
+
+  /* Tighten the timeline section title on mobile. */
+  .stats-section-title:has(+ .stats-analysis-grid.two) h2 {
+    font-size: clamp(26px, 8vw, 34px) !important;
+    max-width: 10ch;
+  }
+
+  .stats-section-title:has(+ .stats-analysis-grid.two) {
+    margin-top: 16px !important;
+  }
+
+  /* Coverage table readability */
+  .stats-table-card .stats-metric-table tr {
+    padding: 9px 0 !important;
+  }
+
+  .stats-table-card .stats-metric-table th {
+    font-size: 12px;
+    line-height: 1.15;
+  }
+
+  .stats-table-card .stats-metric-table td {
+    font-size: 12px;
+    line-height: 1.32;
+  }
+
+  /* Avoid any accidental horizontal page overflow from stats cards. */
+  .stats-page,
+  .stats-analysis-grid,
+  .stats-figure,
+  .stats-figure * {
+    max-width: 100%;
+  }
+}
