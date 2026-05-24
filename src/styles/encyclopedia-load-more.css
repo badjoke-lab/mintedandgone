@@ -1,0 +1,29 @@
+/* Encyclopedia list limiting and load-more controls. */
+
+.load-more-wrap {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  margin: 18px 0 4px;
+  padding: 8px 0 0;
+}
+
+.load-more-wrap .btn {
+  min-width: 220px;
+}
+
+.load-more-wrap .subtle {
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+@media (max-width: 720px) {
+  .load-more-wrap {
+    margin: 14px 0 2px;
+  }
+
+  .load-more-wrap .btn {
+    width: 100%;
+    min-width: 0;
+  }
+}

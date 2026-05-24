@@ -46,6 +46,10 @@ const counts = {
       <section class="catalog-panel framed-panel encyclopedia-catalog">
         <div class="catalog-toolbar encyclopedia-toolbar"><p><strong data-result-count>{records.length}</strong> results</p><div class="filter-pills"><span>Status: All ×</span><span>Chain: All ×</span><span>Category: All ×</span></div><a class="text-link" href="/encyclopedia/">Clear all</a><span class="view-icons" aria-hidden="true">▦ ☰</span></div>
         <div class="grid cards catalog-grid encyclopedia-grid" data-card-list>{records.map((record) => <EncyclopediaCard record={record} />)}</div>
+        <div class="load-more-wrap" data-load-more-wrap>
+          <button class="btn" data-load-more type="button">Load more records</button>
+          <p class="subtle" data-load-more-status></p>
+        </div>
         <div class="card empty" data-empty-state><h3>No matching records</h3><p>Clear filters or try a broader search.</p></div>
       </section>
       <aside class="field-notes-panel framed-panel encyclopedia-notes">
@@ -60,29 +64,114 @@ const counts = {
   <script>
     const root = document.querySelector('[data-filter-root]');
     if (root) {
-      const filterDetails = root.querySelector('.encyclopedia-filter details');
-      if (filterDetails && window.matchMedia('(max-width: 720px)').matches) {
-        filterDetails.removeAttribute('open');
-      }
       const input = root.querySelector('[data-search-input]');
       const checks = [...root.querySelectorAll('input[type="checkbox"][data-filter]')];
       const cards = [...root.querySelectorAll('.marketplace-card')];
       const count = root.querySelector('[data-result-count]');
       const empty = root.querySelector('[data-empty-state]');
-      const update = () => {
-        const q = input.value.trim().toLowerCase();
+      const loadWrap = root.querySelector('[data-load-more-wrap]');
+      const loadButton = root.querySelector('[data-load-more]');
+      const loadStatus = root.querySelector('[data-load-more-status]');
+      const filterDetails = root.querySelector('.encyclopedia-filter details');
+
+      const mobileQuery = window.matchMedia('(max-width: 720px)');
+      const getInitialLimit = () => mobileQuery.matches ? 30 : 60;
+      const getIncrement = () => mobileQuery.matches ? 30 : 60;
+
+      let visibleLimit = getInitialLimit();
+      let wasMobile = mobileQuery.matches;
+
+      if (filterDetails && mobileQuery.matches) {
+        filterDetails.removeAttribute('open');
+      }
+
+      const getSelectedFilters = () => {
         const selected = { status: [], category: [], chain: [] };
-        checks.filter(c => c.checked).forEach(c => selected[c.dataset.filter].push(c.value));
-        let visible = 0;
-        cards.forEach(card => {
-          const chains = card.dataset.chains.split('|');
-          const show = (!q || card.dataset.search.includes(q)) && (!selected.status.length || selected.status.includes(card.dataset.status)) && (!selected.category.length || selected.category.includes(card.dataset.category)) && (!selected.chain.length || chains.some(c => selected.chain.includes(c)));
-          card.classList.toggle('is-hidden', !show); if (show) visible++;
+        checks.filter((checkbox) => checkbox.checked).forEach((checkbox) => {
+          selected[checkbox.dataset.filter].push(checkbox.value);
         });
-        count.textContent = visible; empty.style.display = visible ? 'none' : 'block';
+        return selected;
       };
-      input.addEventListener('input', update); checks.forEach(c => c.addEventListener('change', update));
-      root.querySelector('[data-clear-filters]').addEventListener('click', () => { input.value=''; checks.forEach(c => c.checked=false); update(); });
+
+      const cardMatches = (card, query, selected) => {
+        const chains = (card.dataset.chains || '').split('|');
+        return (
+          (!query || card.dataset.search.includes(query)) &&
+          (!selected.status.length || selected.status.includes(card.dataset.status)) &&
+          (!selected.category.length || selected.category.includes(card.dataset.category)) &&
+          (!selected.chain.length || chains.some((chain) => selected.chain.includes(chain)))
+        );
+      };
+
+      const update = ({ resetLimit = false } = {}) => {
+        if (resetLimit) {
+          visibleLimit = getInitialLimit();
+        }
+
+        const query = input.value.trim().toLowerCase();
+        const selected = getSelectedFilters();
+        let matched = 0;
+        let shown = 0;
+
+        cards.forEach((card) => {
+          const matches = cardMatches(card, query, selected);
+
+          if (matches) {
+            matched += 1;
+          }
+
+          const shouldShow = matches && matched <= visibleLimit;
+          card.classList.toggle('is-hidden', !shouldShow);
+
+          if (shouldShow) {
+            shown += 1;
+          }
+        });
+
+        count.textContent = matched;
+        empty.style.display = matched ? 'none' : 'block';
+
+        const remaining = Math.max(matched - shown, 0);
+        if (loadWrap) {
+          loadWrap.style.display = remaining ? 'grid' : 'none';
+        }
+        if (loadStatus) {
+          loadStatus.textContent = remaining
+            ? `${shown} shown · ${remaining} more records`
+            : matched
+              ? `${shown} shown`
+              : '';
+        }
+      };
+
+      input.addEventListener('input', () => update({ resetLimit: true }));
+      checks.forEach((checkbox) => checkbox.addEventListener('change', () => update({ resetLimit: true })));
+
+      const clearButton = root.querySelector('[data-clear-filters]');
+      if (clearButton) {
+        clearButton.addEventListener('click', () => {
+          input.value = '';
+          checks.forEach((checkbox) => { checkbox.checked = false; });
+          update({ resetLimit: true });
+        });
+      }
+
+      if (loadButton) {
+        loadButton.addEventListener('click', () => {
+          visibleLimit += getIncrement();
+          update();
+        });
+      }
+
+      window.addEventListener('resize', () => {
+        const isMobile = mobileQuery.matches;
+        if (isMobile !== wasMobile) {
+          wasMobile = isMobile;
+          update({ resetLimit: true });
+        }
+      });
+
+      update({ resetLimit: true });
     }
   </script>
 </BaseLayout>
