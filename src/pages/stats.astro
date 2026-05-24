@@ -2,16 +2,122 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StatsKpiGrid from '../components/StatsKpiGrid.astro';
 import StatsBreakdown from '../components/StatsBreakdown.astro';
+import StatsComposition from '../components/StatsComposition.astro';
+import StatsHistogram from '../components/StatsHistogram.astro';
+import StatsMetricTable from '../components/StatsMetricTable.astro';
 import { getStats } from '../lib/data';
+
 const stats = getStats();
+
+const pct = (value: number) => `${Math.round((value ?? 0) * 100)}%`;
+const status = stats.breakdowns.by_status ?? {};
+const flags = stats.quality?.record_quality_flags ?? {};
+const flagTotal = Object.values(flags).reduce((sum: number, value: any) => sum + Number(value || 0), 0);
+
+const activeSide = {
+  active: status.active ?? 0,
+  limited: status.limited ?? 0,
+  inactive: status.inactive ?? 0
+};
+
+const fadedSide = {
+  dead: status.dead ?? 0,
+  rebranded: status.rebranded ?? 0,
+  acquired: status.acquired ?? 0,
+  merged: status.merged ?? 0
+};
+
+const activeVsFaded = {
+  active_side: (stats.kpis.active_total ?? 0) + (stats.kpis.limited_total ?? 0) + (stats.kpis.inactive_total ?? 0),
+  faded_side: stats.kpis.faded_total ?? 0
+};
+
+const topFlags = Object.fromEntries(
+  Object.entries(flags)
+    .sort((a, b) => Number(b[1]) - Number(a[1]))
+    .slice(0, 8)
+);
+
+const coverageRows = [
+  ['Archive coverage', `${pct(stats.kpis.archive_coverage)} · ${stats.coverage.archive_coverage.count}/${stats.coverage.archive_coverage.total}`, 'Records with an archived URL present.'],
+  ['Reviewed share', pct(stats.kpis.reviewed_share), 'Current records marked as reviewed staging.'],
+  ['Evidence depth', `${stats.quality.evidence_depth.multiple ?? 0} with multiple sources`, 'How many records have more than one evidence note.'],
+  ['Quality flags', flagTotal, 'Open review-quality flags across the current archive.'],
+  ['Generated from', `${stats.source.marketplaces_count} records`, `${stats.source.events_count} events and ${stats.source.evidence_count} evidence notes.`]
+];
 ---
 <BaseLayout title="Stats appendix — Minted & Gone">
-  <div class="shell appendix-page">
-    <section class="field-hero appendix-hero"><div class="hero-botanical" aria-hidden="true">✤</div><div class="hero-copy plate-copy"><p class="eyebrow">Field-guide appendix</p><h1>Archive counts</h1><div class="flourish" aria-hidden="true">✦</div><p class="lede">Static counts generated from source-reviewed draft records.</p><p>These figures summarize current registry coverage, status distribution, chain coverage, marketplace scope, and review-quality signals. They are not live market analytics, rankings, uptime monitoring, or price data.</p></div></section>
+  <div class="shell appendix-page stats-page">
+    <section class="field-hero appendix-hero">
+      <div class="hero-botanical" aria-hidden="true">✤</div>
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Field-guide appendix</p>
+        <h1>Archive counts</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">Static counts generated from source-reviewed draft records.</p>
+        <p>These figures summarize registry coverage, status distribution, chain coverage, marketplace scope, and review-quality signals. They are not live market analytics, rankings, uptime monitoring, or price data.</p>
+      </div>
+    </section>
+
     <p class="mock-note">Draft-data warning: these generated numbers reflect reviewed staging records, not final public-quality certification. Uncertain records remain visibly flagged for later review.</p>
-    <section class="framed-panel stats-glance"><p class="eyebrow">Archive at a glance</p><StatsKpiGrid stats={stats} /></section>
-    <section class="appendix-grid"><StatsBreakdown title="Status specimens" data={stats.breakdowns.by_status} /><StatsBreakdown title="Category drawer" data={stats.breakdowns.by_category} /><StatsBreakdown title="Marketplace scope" data={stats.breakdowns.by_marketplace_scope} /><StatsBreakdown title="Chain shelf" data={stats.breakdowns.by_chain} /><StatsBreakdown title="Confidence labels" data={stats.breakdowns.by_confidence} /><StatsBreakdown title="Review state" data={stats.breakdowns.by_review_status} /></section>
-    <section class="appendix-grid two"><StatsBreakdown title="Launch-year field notes" data={stats.distributions.launch_year} /><StatsBreakdown title="End-year field notes" data={stats.distributions.end_year} /></section>
-    <section class="framed-panel definition-card"><p class="eyebrow">Coverage / quality</p><h2>How to read these figures</h2><p>Archive coverage, confidence, review state, and record-quality flags are data-quality hints. They are designed to keep uncertain records visibly uncertain while the registry grows.</p><p class="subtle">Generated at {stats.generated_at}. Source counts: {stats.source.marketplaces_count} marketplaces, {stats.source.events_count} events, {stats.source.evidence_count} evidence notes.</p><a class="btn" href="/methodology/">Read methodology</a></section>
+
+    <section class="framed-panel stats-glance">
+      <p class="eyebrow">Archive at a glance</p>
+      <StatsKpiGrid stats={stats} />
+    </section>
+
+    <section class="stats-section-title">
+      <p class="eyebrow">Core analysis</p>
+      <h2>What the archive looks like now</h2>
+    </section>
+
+    <section class="stats-analysis-grid core">
+      <StatsBreakdown title="Status breakdown" data={stats.breakdowns.by_status} limit={8} note="Best as horizontal bars because status labels are categorical." />
+      <StatsComposition title="Active-side vs faded-side" data={activeVsFaded} note="A composition view is better here than another ranked bar list." />
+      <StatsComposition title="Active-side status mix" data={activeSide} note="Active, limited, and inactive are a composition group." />
+      <StatsComposition title="Faded-side status mix" data={fadedSide} note="Dead, rebranded, acquired, and merged belong together." />
+    </section>
+
+    <section class="stats-section-title">
+      <p class="eyebrow">Breakdowns</p>
+      <h2>Where the records cluster</h2>
+    </section>
+
+    <section class="stats-analysis-grid wide">
+      <StatsBreakdown title="Category leaders" data={stats.breakdowns.by_category} limit={10} note="Top categories only; the long tail is grouped as Other." />
+      <StatsBreakdown title="Marketplace scope" data={stats.breakdowns.by_marketplace_scope} limit={9} note="Marketplace scope is ranked, not a timeline." />
+      <StatsBreakdown title="Chain leaders" data={stats.breakdowns.by_chain} limit={12} note="Top chains only; the long tail no longer creates a huge empty page." />
+      <StatsMetricTable title="Coverage & quality" rows={coverageRows} note="Coverage reads better as exact values than as another chart." />
+    </section>
+
+    <section class="stats-section-title">
+      <p class="eyebrow">Registry timelines</p>
+      <h2>Launch and end-year distributions</h2>
+    </section>
+
+    <section class="stats-analysis-grid two">
+      <StatsHistogram title="Launch-year distribution" data={stats.distributions.launch_year} note="Yearly counts are shown as a column distribution." />
+      <StatsHistogram title="End-year distribution" data={stats.distributions.end_year} note="Unknown-heavy data stays visible without pretending it is a normal ranking." />
+    </section>
+
+    <section class="stats-section-title">
+      <p class="eyebrow">Deep quality notes</p>
+      <h2>Review signals</h2>
+    </section>
+
+    <section class="stats-analysis-grid deep">
+      <StatsBreakdown title="Top review-quality flags" data={topFlags} limit={8} note="Only the leading flags are shown here." />
+      <StatsComposition title="Evidence depth" data={stats.quality.evidence_depth} />
+      <StatsComposition title="Confidence labels" data={stats.breakdowns.by_confidence} />
+      <StatsComposition title="Review state" data={stats.breakdowns.by_review_status} />
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Coverage / quality</p>
+      <h2>How to read these figures</h2>
+      <p>Archive coverage, confidence, review state, and record-quality flags are data-quality hints. They are designed to keep uncertain records visibly uncertain while the registry grows.</p>
+      <p class="subtle">Generated at {stats.generated_at}. Source counts: {stats.source.marketplaces_count} marketplaces, {stats.source.events_count} events, {stats.source.evidence_count} evidence notes.</p>
+      <a class="btn" href="/methodology/">Read methodology</a>
+    </section>
   </div>
 </BaseLayout>

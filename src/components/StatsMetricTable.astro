@@ -1,0 +1,20 @@
+---
+const { title, rows = [], note = '' } = Astro.props;
+---
+<div class="card stats-figure stats-table-card">
+  <div class="stats-figure-head">
+    <h3>{title}</h3>
+    {note && <p>{note}</p>}
+  </div>
+  <table class="stats-metric-table">
+    <tbody>
+      {rows.map(([label, value, description]: [string, string | number, string]) => (
+        <tr>
+          <th>{label}</th>
+          <td>{value}</td>
+          <td>{description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
