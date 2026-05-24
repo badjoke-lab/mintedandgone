@@ -112,11 +112,24 @@ const coverageRows = [
       <StatsComposition title="Review state" data={stats.breakdowns.by_review_status} />
     </section>
 
-    <section class="framed-panel definition-card">
+    <section class="framed-panel definition-card stats-reading-guide">
       <p class="eyebrow">Coverage / quality</p>
       <h2>How to read these figures</h2>
-      <p>Archive coverage, confidence, review state, and record-quality flags are data-quality hints. They are designed to keep uncertain records visibly uncertain while the registry grows.</p>
-      <p class="subtle">Generated at {stats.generated_at}. Source counts: {stats.source.marketplaces_count} marketplaces, {stats.source.events_count} events, {stats.source.evidence_count} evidence notes.</p>
+      <div class="reading-guide-grid" aria-label="How to read archive statistics">
+        <article>
+          <strong>Counts are draft records.</strong>
+          <span>They show archive coverage, not market rank or traffic.</span>
+        </article>
+        <article>
+          <strong>Coverage is evidence depth.</strong>
+          <span>Archive links, source notes, and review state show how supported each record is.</span>
+        </article>
+        <article>
+          <strong>Flags are open work.</strong>
+          <span>A flag means the record needs more checking, not that it should be hidden.</span>
+        </article>
+      </div>
+      <p class="source-summary">Generated from {stats.source.marketplaces_count} marketplaces, {stats.source.events_count} events, and {stats.source.evidence_count} evidence notes.</p>
       <a class="btn" href="/methodology/">Read methodology</a>
     </section>
   </div>
