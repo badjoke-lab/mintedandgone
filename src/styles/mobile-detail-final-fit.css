@@ -1,0 +1,352 @@
+/* Mobile detail final fit pass.
+   Focus: recorded events, classification facts, what-remains notes, source notes, related records. */
+
+@media (max-width: 720px) {
+  /* Timeline / Recorded events */
+  .record-main section:has(> .timeline) {
+    padding: 13px !important;
+    border-radius: 11px !important;
+  }
+
+  .record-main section:has(> .timeline) > .eyebrow {
+    margin: 0 0 4px !important;
+    font-size: 10px !important;
+    letter-spacing: .12em !important;
+  }
+
+  .record-main section:has(> .timeline) > h2 {
+    margin: 0 0 9px !important;
+    font-size: clamp(24px, 7.5vw, 32px) !important;
+    line-height: .96 !important;
+  }
+
+  .record-main .timeline {
+    display: grid !important;
+    gap: 7px !important;
+    border-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .record-main .timeline-item {
+    display: grid !important;
+    grid-template-columns: 12px minmax(0, 1fr);
+    gap: 4px 8px !important;
+    padding: 9px 0 9px !important;
+    border-bottom: 1px solid var(--line-soft);
+    position: relative;
+  }
+
+  .record-main .timeline-item:last-child {
+    border-bottom: 0;
+    padding-bottom: 0 !important;
+  }
+
+  .record-main .timeline-item::before {
+    content: "";
+    grid-column: 1;
+    grid-row: 1 / 4;
+    width: 9px;
+    height: 9px;
+    margin-top: 4px;
+    border-radius: 999px;
+    background: var(--forest);
+    box-shadow: 0 0 0 3px rgba(64,116,89,.12);
+  }
+
+  .record-main .timeline-item h3 {
+    grid-column: 2;
+    margin: 0 !important;
+    font-size: 15px !important;
+    line-height: 1.08 !important;
+  }
+
+  .record-main .timeline-item p {
+    grid-column: 2;
+    margin: 0 !important;
+    font-size: 12px !important;
+    line-height: 1.32 !important;
+  }
+
+  .record-main .timeline-item p:first-of-type {
+    color: var(--muted);
+    font-size: 11px !important;
+  }
+
+  /* Overview / Classification facts */
+  .overview-card {
+    gap: 8px !important;
+  }
+
+  .overview-card h2 {
+    font-size: clamp(26px, 8vw, 34px) !important;
+  }
+
+  .overview-card > p:nth-of-type(2) {
+    display: none !important;
+  }
+
+  .overview-card .meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  .overview-card .meta-grid .fact {
+    padding: 7px !important;
+    min-height: 0 !important;
+  }
+
+  /* Hide lower-priority mobile facts: Scope, Contracts, Assets, Review */
+  .overview-card .meta-grid .fact:nth-child(3),
+  .overview-card .meta-grid .fact:nth-child(6),
+  .overview-card .meta-grid .fact:nth-child(7),
+  .overview-card .meta-grid .fact:nth-child(10) {
+    display: none !important;
+  }
+
+  /* What remains: lighter note list instead of heavy card stack */
+  .record-main section:has(#what-remains) {
+    padding: 13px !important;
+  }
+
+  .record-main section:has(#what-remains) .section-head {
+    margin-bottom: 7px !important;
+  }
+
+  .record-main section:has(#what-remains) h2 {
+    font-size: clamp(26px, 8vw, 34px) !important;
+  }
+
+  .record-main section:has(#what-remains) .grid.three {
+    display: grid !important;
+    gap: 0 !important;
+  }
+
+  .record-main section:has(#what-remains) .what-card {
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 9px 0 !important;
+    border-bottom: 1px solid var(--line-soft) !important;
+  }
+
+  .record-main section:has(#what-remains) .what-card:last-child {
+    border-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .what-card h3 {
+    font-size: 14px !important;
+    margin: 0 0 3px !important;
+  }
+
+  .what-card p {
+    font-size: 12px !important;
+    line-height: 1.34 !important;
+  }
+
+  /* URL/archive: shave height further */
+  .url-card {
+    padding: 10px !important;
+  }
+
+  .url-card h3 {
+    font-size: 15px !important;
+  }
+
+  .url-card-note {
+    margin-top: 5px !important;
+    padding: 7px !important;
+    font-size: 10px !important;
+  }
+
+  .url-card .subtle {
+    margin: 4px 0 0 !important;
+    font-size: 10px !important;
+  }
+
+  /* Source notes / Evidence */
+  .record-main section:has(> .evidence) {
+    padding: 13px !important;
+  }
+
+  .record-main section:has(> .evidence) > .eyebrow {
+    margin: 0 0 4px !important;
+  }
+
+  .record-main section:has(> .evidence) > h2 {
+    margin: 0 0 8px !important;
+    font-size: clamp(26px, 8vw, 34px) !important;
+  }
+
+  .record-main section:has(> .evidence) > .mock-note {
+    display: none !important;
+  }
+
+  .evidence {
+    gap: 8px !important;
+  }
+
+  .evidence li {
+    padding: 10px !important;
+    display: grid !important;
+    gap: 5px !important;
+  }
+
+  .evidence li h3 {
+    margin: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.08 !important;
+  }
+
+  .evidence li p {
+    margin: 0 !important;
+    font-size: 11px !important;
+    line-height: 1.32 !important;
+  }
+
+  .evidence li p.subtle {
+    color: var(--muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .evidence li p:not(.subtle):last-of-type {
+    display: -webkit-box;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .source-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+    margin-top: 4px !important;
+  }
+
+  .source-actions .external-link-button {
+    min-height: 32px !important;
+    padding: 7px 8px !important;
+    font-size: 10px !important;
+    line-height: 1.15 !important;
+    text-align: center;
+  }
+
+  @media (max-width: 360px) {
+    .source-actions {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  /* Improve correction nudge visibility without growing it */
+  .correction-nudge {
+    border-style: dashed !important;
+  }
+
+  .correction-nudge .text-link {
+    font-weight: 900;
+  }
+
+  /* Related records: final list-like treatment */
+  .related-shelf {
+    padding: 12px !important;
+  }
+
+  .related-shelf .section-head {
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px !important;
+  }
+
+  .related-shelf .section-head .text-link {
+    font-size: 11px !important;
+    white-space: nowrap;
+  }
+
+  .related-grid {
+    display: grid !important;
+    gap: 7px !important;
+  }
+
+  .related-grid .market-card,
+  .related-grid .marketplace-card,
+  .related-grid .card {
+    display: grid !important;
+    grid-template-columns: 36px minmax(0, 1fr) auto;
+    gap: 5px 8px !important;
+    align-items: center;
+    padding: 9px !important;
+    min-height: 0 !important;
+    border-radius: 9px !important;
+  }
+
+  .related-grid .card-top {
+    display: contents !important;
+  }
+
+  .related-grid .card-identity {
+    display: contents !important;
+  }
+
+  .related-grid .record-icon {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 8px !important;
+    font-size: 11px !important;
+  }
+
+  .related-grid h3 {
+    grid-column: 2;
+    margin: 0 !important;
+    min-width: 0;
+    font-size: 14px !important;
+    line-height: 1.08 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .related-grid .chip {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: start;
+    font-size: 9px !important;
+    padding: 4px 6px !important;
+  }
+
+  .related-grid .tag-row {
+    grid-column: 2 / 4;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 4px !important;
+    overflow: hidden;
+    margin: 0 !important;
+  }
+
+  .related-grid .tag {
+    max-width: 48%;
+    font-size: 9px !important;
+    padding: 4px 6px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .related-grid p,
+  .related-grid .meta-grid {
+    display: none !important;
+  }
+
+  /* Footer under detail pages */
+  .shell:has(.record-detail-hero) + .site-footer,
+  .site-footer {
+    margin-top: 24px !important;
+  }
+}
