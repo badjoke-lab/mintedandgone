@@ -1,0 +1,348 @@
+/* Mobile body-card compression for lower pages.
+   Scope: support, contact, submit, about, methodology, stats.
+   Hero unification is handled separately; this file fixes the content below the hero. */
+
+@media (max-width: 720px) {
+  /* Shared card rhythm */
+  .guide-page .framed-panel,
+  .guide-page .guide-card,
+  .guide-page .definition-card,
+  .guide-page .correction-desk,
+  .appendix-page .framed-panel,
+  .appendix-page .card,
+  .support-page .framed-panel,
+  .support-page .support-warning,
+  .support-page .support-wallets-panel,
+  .support-page .support-reasons,
+  .support-page .support-disclaimer,
+  .support-page .support-faq,
+  .record-main .framed-panel {
+    padding: 14px !important;
+    border-radius: 11px !important;
+  }
+
+  .guide-page .guide-grid,
+  .about-section-grid,
+  .support-layout,
+  .support-faq .faq-grid,
+  .stats-analysis-grid {
+    gap: 10px !important;
+  }
+
+  /* Shared typography below hero */
+  .guide-page h2,
+  .appendix-page h2,
+  .support-page h2,
+  .guide-page .guide-card h2,
+  .guide-page .definition-card h2,
+  .about-section-grid .guide-card h2,
+  .correction-desk h2,
+  .support-wallets-panel h2,
+  .support-disclaimer h2 {
+    font-size: clamp(28px, 8.5vw, 38px) !important;
+    line-height: .96 !important;
+    letter-spacing: -.04em !important;
+  }
+
+  .guide-page h3,
+  .appendix-page h3,
+  .support-page h3 {
+    font-size: 17px !important;
+    line-height: 1.08 !important;
+  }
+
+  .guide-page p,
+  .appendix-page p,
+  .support-page p,
+  .guide-page li,
+  .support-page li {
+    font-size: 13px !important;
+    line-height: 1.42 !important;
+  }
+
+  .guide-page .eyebrow,
+  .appendix-page .eyebrow,
+  .support-page .eyebrow {
+    font-size: 10px !important;
+    letter-spacing: .12em !important;
+  }
+
+  /* About: six cards should not feel like six giant posters */
+  .about-section-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .about-section-grid .guide-card {
+    min-height: 0 !important;
+    display: grid;
+    gap: 6px !important;
+  }
+
+  .about-section-grid .guide-card .num {
+    font-size: 22px !important;
+    margin: 0 !important;
+  }
+
+  .about-section-grid .guide-card p {
+    margin: 0 !important;
+  }
+
+  .about-cta.definition-card {
+    display: grid;
+    gap: 8px;
+  }
+
+  .about-cta .hero-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .about-cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Submit/contact: checklist and intake cards */
+  .correction-desk {
+    display: grid;
+    gap: 10px;
+  }
+
+  .correction-desk .checklist,
+  .guide-card .checklist {
+    padding-left: 20px !important;
+    display: grid;
+    gap: 8px !important;
+  }
+
+  .correction-desk .checklist li,
+  .guide-card .checklist li {
+    padding-left: 2px;
+  }
+
+  .correction-desk .mock-note {
+    margin: 4px 0 !important;
+    padding: 10px !important;
+    font-size: 12px !important;
+  }
+
+  .correction-desk .hero-actions,
+  .guide-page .definition-card .hero-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .correction-desk .btn,
+  .guide-page .definition-card .btn,
+  .guide-page .guide-card .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .guide-page > .guide-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .guide-page > .guide-grid .guide-card {
+    min-height: 0 !important;
+  }
+
+  /* Methodology: long-form cards should be denser */
+  .methodology-page .guide-card,
+  .methodology-page .definition-card,
+  .guide-page .method-card,
+  .guide-page .method-section {
+    padding: 14px !important;
+  }
+
+  .guide-page .guide-card + .guide-card,
+  .guide-page .definition-card + .definition-card {
+    margin-top: 10px !important;
+  }
+
+  .guide-page dl,
+  .guide-page .notes-list {
+    display: grid;
+    gap: 7px !important;
+  }
+
+  .guide-page dt {
+    font-size: 11px !important;
+    line-height: 1.15;
+  }
+
+  .guide-page dd {
+    font-size: 13px !important;
+    line-height: 1.35;
+  }
+
+  /* Support: wallet area */
+  .support-warning {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+  }
+
+  .support-warning h2 {
+    font-size: 20px !important;
+    line-height: 1.05 !important;
+    letter-spacing: -.025em !important;
+  }
+
+  .support-warning p {
+    grid-column: 2;
+    margin: 0 !important;
+  }
+
+  .support-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .support-wallets-panel {
+    display: grid;
+    gap: 10px;
+  }
+
+  .support-wallets-panel h2 {
+    font-size: clamp(30px, 9vw, 40px) !important;
+  }
+
+  .wallet-grid {
+    grid-template-columns: 1fr !important;
+    gap: 9px !important;
+  }
+
+  .wallet-card {
+    min-height: 0 !important;
+    padding: 12px !important;
+    display: grid;
+    gap: 7px !important;
+  }
+
+  .wallet-card header {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 8px;
+    align-items: center;
+  }
+
+  .wallet-card h3 {
+    font-size: 18px !important;
+    line-height: 1.05 !important;
+  }
+
+  .wallet-card small,
+  .wallet-card p {
+    font-size: 11px !important;
+    line-height: 1.25 !important;
+  }
+
+  .wallet-card code {
+    display: block;
+    min-height: 0 !important;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 8px !important;
+    font-size: 10px !important;
+    line-height: 1.25 !important;
+  }
+
+  .wallet-card .btn,
+  .wallet-card button {
+    width: fit-content;
+    min-height: 34px;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+  }
+
+  .support-reasons,
+  .support-disclaimer,
+  .support-faq {
+    display: grid;
+    gap: 8px;
+  }
+
+  .support-reasons li {
+    padding: 9px 0 !important;
+  }
+
+  .support-reasons strong {
+    font-size: 14px !important;
+    line-height: 1.1 !important;
+  }
+
+  .support-disclaimer {
+    min-height: 0 !important;
+  }
+
+  .support-faq .faq-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .support-faq .faq-grid article {
+    min-height: 0 !important;
+    padding: 12px !important;
+  }
+
+  /* Stats: keep mobile analytical but less tall */
+  .stats-page .stats-section-title {
+    margin: 16px 0 8px !important;
+  }
+
+  .stats-page .stats-section-title h2 {
+    font-size: clamp(26px, 8vw, 34px) !important;
+    max-width: 13ch;
+  }
+
+  .stats-page .stats-figure {
+    padding: 12px !important;
+  }
+
+  .stats-page .stats-figure-head {
+    margin-bottom: 8px !important;
+  }
+
+  .stats-page .stats-figure-head h3 {
+    font-size: 15px !important;
+  }
+
+  .stats-page .stats-figure-head p {
+    font-size: 11px !important;
+  }
+
+  .stats-page .stats-bars-card .bar-row {
+    padding: 1px 0 !important;
+  }
+
+  .stats-page .composition-legend {
+    gap: 5px !important;
+  }
+
+  .stats-page .composition-legend div {
+    padding-bottom: 4px !important;
+  }
+
+  .stats-page .definition-card .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Footer: slightly tighter under long mobile pages */
+  .site-footer {
+    margin-top: 26px !important;
+  }
+
+  .footer-grid {
+    gap: 14px !important;
+  }
+
+  .footer-grid p,
+  .footer-grid a {
+    font-size: 12px !important;
+    line-height: 1.42 !important;
+  }
+}
