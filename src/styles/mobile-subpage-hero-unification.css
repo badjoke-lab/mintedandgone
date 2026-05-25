@@ -1,0 +1,172 @@
+/* Mobile subpage hero unification.
+   Aligns support/contact/submit/about/methodology/stats with the encyclopedia mobile hero shape.
+   Top page and encyclopedia keep their own already-polished rules. */
+
+@media (max-width: 720px) {
+  /* Common lower-page shell spacing */
+  .guide-page,
+  .appendix-page,
+  .support-page {
+    width: min(calc(100% - 18px), 1220px);
+  }
+
+  /* Standard mobile hero shape */
+  .guide-page > .field-hero,
+  .guide-page > .field-hero.simple-hero,
+  .guide-page > .field-hero.compact-hero,
+  .appendix-page > .field-hero,
+  .support-page > .support-hero {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: start !important;
+    justify-items: stretch !important;
+    min-height: 0 !important;
+    margin-top: 14px !important;
+    margin-bottom: 12px !important;
+    padding: 16px !important;
+    gap: 10px !important;
+    overflow: hidden;
+    text-align: left !important;
+  }
+
+  /* Kill desktop-side decorative columns on mobile */
+  .guide-page > .field-hero .hero-botanical,
+  .guide-page > .field-hero .hero-illustration,
+  .guide-page > .field-hero .hero-art,
+  .guide-page > .field-hero .hero-icon,
+  .appendix-page > .field-hero .hero-botanical,
+  .appendix-page > .field-hero .hero-illustration,
+  .appendix-page > .field-hero .hero-art,
+  .support-page > .support-hero .support-hero-art {
+    display: none !important;
+  }
+
+  /* Full-width copy block */
+  .guide-page > .field-hero .hero-copy,
+  .guide-page > .field-hero .plate-copy,
+  .appendix-page > .field-hero .hero-copy,
+  .appendix-page > .field-hero .plate-copy,
+  .support-page > .support-hero .support-hero-copy {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    display: grid;
+    gap: 8px;
+    justify-items: start;
+    text-align: left !important;
+  }
+
+  /* Eyebrow */
+  .guide-page > .field-hero .eyebrow,
+  .appendix-page > .field-hero .eyebrow,
+  .support-page > .support-hero .eyebrow {
+    margin: 0 !important;
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    letter-spacing: .12em !important;
+    text-transform: uppercase;
+  }
+
+  /* H1: same family as encyclopedia mobile */
+  .guide-page > .field-hero h1,
+  .appendix-page > .field-hero h1,
+  .support-page > .support-hero h1 {
+    max-width: 100% !important;
+    margin: 0 !important;
+    font-size: clamp(36px, 11vw, 46px) !important;
+    line-height: .94 !important;
+    letter-spacing: -.052em !important;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  /* Extra-long submit title gets a slightly smaller cap */
+  .guide-page > .field-hero h1:has(+ .flourish) {
+    max-width: 100% !important;
+  }
+
+  /* Flourish */
+  .guide-page > .field-hero .flourish,
+  .appendix-page > .field-hero .flourish,
+  .support-page > .support-hero .flourish {
+    margin: 0 !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+  }
+
+  /* Lead */
+  .guide-page > .field-hero .lede,
+  .appendix-page > .field-hero .lede,
+  .support-page > .support-hero .lede {
+    max-width: none !important;
+    margin: 0 !important;
+    font-size: 18px !important;
+    line-height: 1.22 !important;
+  }
+
+  /* Body copy */
+  .guide-page > .field-hero p:not(.eyebrow):not(.lede),
+  .appendix-page > .field-hero p:not(.eyebrow):not(.lede),
+  .support-page > .support-hero p:not(.eyebrow):not(.lede) {
+    max-width: none !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+  }
+
+  /* CTA row */
+  .guide-page > .field-hero .hero-actions,
+  .appendix-page > .field-hero .hero-actions,
+  .support-page > .support-hero .hero-actions {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    margin-top: 6px !important;
+  }
+
+  .guide-page > .field-hero .hero-actions .btn,
+  .appendix-page > .field-hero .hero-actions .btn,
+  .support-page > .support-hero .hero-actions .btn {
+    width: 100% !important;
+    min-height: 42px;
+    justify-content: center;
+    padding: 10px 12px !important;
+    font-size: 13px !important;
+  }
+
+  /* Support note card is redundant in the mobile hero and makes the hero inconsistent */
+  .support-page > .support-hero .support-note-card {
+    display: none !important;
+  }
+
+  /* Prevent old 2-column hero leftovers from forcing narrow copy */
+  .guide-page > .field-hero > *,
+  .appendix-page > .field-hero > *,
+  .support-page > .support-hero > * {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* Warning/note directly below hero should match encyclopedia warning scale */
+  .guide-page > .mock-note,
+  .appendix-page > .mock-note,
+  .support-page > .mock-note,
+  .support-warning {
+    margin-top: 0 !important;
+    margin-bottom: 12px !important;
+    padding: 10px 11px !important;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Make large first content blocks less aggressive right after hero */
+  .guide-page > .correction-desk,
+  .guide-page > .definition-card,
+  .guide-page > .guide-grid,
+  .appendix-page > .stats-glance,
+  .support-page > .framed-panel,
+  .support-layout,
+  .support-warning {
+    margin-top: 12px !important;
+  }
+}
