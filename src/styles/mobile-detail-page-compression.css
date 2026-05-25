@@ -1,0 +1,472 @@
+/* Mobile detail page compression.
+   Scope: /encyclopedia/[slug]/ record pages.
+   Goal: stop the desktop dossier layout from becoming a long mobile wall. */
+
+@media (max-width: 720px) {
+  .shell:has(.record-detail-hero) {
+    width: min(calc(100% - 18px), 1220px);
+  }
+
+  /* Detail hero: align with the encyclopedia mobile hero pattern */
+  .shell > .record-detail-hero {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    margin-top: 14px !important;
+    margin-bottom: 12px !important;
+    padding: 16px !important;
+    gap: 9px !important;
+    overflow: hidden;
+  }
+
+  .record-detail-hero .specimen-plate.large,
+  .record-detail-hero .hero-plate,
+  .record-detail-hero .framed-plate,
+  .record-detail-hero .cabinet-illustration,
+  .record-detail-hero .field-note-stamp {
+    display: none !important;
+  }
+
+  .record-detail-hero .hero-copy,
+  .record-detail-hero .plate-copy {
+    width: 100% !important;
+    max-width: none !important;
+    display: grid;
+    gap: 8px;
+  }
+
+  .record-detail-hero .breadcrumb {
+    margin: 0 !important;
+    font-size: 11px !important;
+    line-height: 1.2;
+    letter-spacing: .06em;
+    text-transform: none;
+  }
+
+  .record-detail-hero .title-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 8px !important;
+  }
+
+  .record-detail-hero h1 {
+    margin: 0 !important;
+    max-width: 100% !important;
+    font-size: clamp(36px, 11vw, 46px) !important;
+    line-height: .94 !important;
+    letter-spacing: -.052em !important;
+  }
+
+  .record-detail-hero .title-row .chip {
+    margin-top: 2px !important;
+    font-size: 10px !important;
+    padding: 5px 7px !important;
+  }
+
+  .record-detail-hero .lede {
+    margin: 0 !important;
+    max-width: none !important;
+    font-size: 17px !important;
+    line-height: 1.22 !important;
+  }
+
+  .record-detail-hero .hero-copy > p:not(.lede) {
+    margin: 0 !important;
+    max-width: none !important;
+    font-size: 13px !important;
+    line-height: 1.42 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .record-detail-hero .tags,
+  .record-detail-hero .tag-row {
+    margin-top: 2px !important;
+    gap: 5px !important;
+  }
+
+  .record-detail-hero .tags span,
+  .record-detail-hero .tag,
+  .record-detail-hero .pill {
+    font-size: 10px !important;
+    padding: 5px 7px !important;
+  }
+
+  .shell:has(.record-detail-hero) > .mock-note,
+  .record-detail-hero + .mock-note {
+    margin: 0 0 12px !important;
+    padding: 10px 11px !important;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Layout: sidebar should not behave like a desktop sidebar */
+  .record-layout {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    margin-top: 12px !important;
+  }
+
+  .record-sidebar {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    position: static !important;
+  }
+
+  .record-main {
+    display: grid !important;
+    gap: 10px !important;
+  }
+
+  /* Record at a glance: compact facts only */
+  .record-sidebar .glance-card {
+    padding: 13px !important;
+    border-radius: 11px !important;
+  }
+
+  .glance-card .eyebrow {
+    margin: 0 0 8px !important;
+    font-size: 10px !important;
+    letter-spacing: .12em !important;
+  }
+
+  .glance-card .notes-list {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px !important;
+  }
+
+  .glance-card .notes-list div {
+    display: grid !important;
+    gap: 3px !important;
+    padding: 8px !important;
+    border: 1px solid var(--line-soft);
+    border-radius: 9px;
+    background: rgba(255,252,241,.62);
+  }
+
+  .glance-card .notes-list dt {
+    font-size: 9px !important;
+    line-height: 1.1 !important;
+    letter-spacing: .1em !important;
+  }
+
+  .glance-card .notes-list dd {
+    font-size: 12px !important;
+    line-height: 1.25 !important;
+  }
+
+  .glance-card .notes-list div:nth-child(6) {
+    display: none !important;
+  }
+
+  .glance-card .btn {
+    display: none !important;
+  }
+
+  .record-sidebar .quote-card {
+    display: none !important;
+  }
+
+  /* Main record panels */
+  .record-main .framed-panel,
+  .record-main > section:not(.framed-panel),
+  .related-shelf {
+    padding: 14px !important;
+    border-radius: 11px !important;
+  }
+
+  .record-main h2,
+  .related-shelf h2 {
+    font-size: clamp(28px, 8.5vw, 38px) !important;
+    line-height: .96 !important;
+    letter-spacing: -.04em !important;
+  }
+
+  .record-main h3,
+  .related-shelf h3 {
+    font-size: 16px !important;
+    line-height: 1.08 !important;
+  }
+
+  .record-main p,
+  .record-main li,
+  .related-shelf p {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+  }
+
+  .record-main .eyebrow,
+  .related-shelf .eyebrow {
+    font-size: 10px !important;
+    letter-spacing: .12em !important;
+  }
+
+  /* Overview facts: small two-column facts instead of a long one-column wall */
+  .overview-card {
+    display: grid;
+    gap: 9px !important;
+  }
+
+  .overview-card > p {
+    margin: 0 !important;
+  }
+
+  .overview-card .meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+  }
+
+  .overview-card .fact {
+    min-height: 0 !important;
+    padding: 8px !important;
+    border-radius: 9px !important;
+  }
+
+  .overview-card .fact b {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 9px !important;
+    line-height: 1.1;
+    letter-spacing: .1em;
+  }
+
+  .overview-card .fact {
+    font-size: 12px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* What remains: make the 3 blocks more like compact notes */
+  .record-main .section-head {
+    margin-bottom: 8px !important;
+  }
+
+  .record-main .grid.three {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .what-card {
+    padding: 11px !important;
+    border-radius: 10px !important;
+  }
+
+  .what-card h3 {
+    margin-bottom: 4px !important;
+  }
+
+  .what-card p {
+    margin: 0 !important;
+  }
+
+  /* Timeline */
+  .timeline-item,
+  .record-main .timeline-item {
+    padding: 10px 0 !important;
+  }
+
+  .record-main .timeline-item h3 {
+    font-size: 15px !important;
+  }
+
+  /* URL/archive block should appear before evidence visually on mobile */
+  .url-archive-block {
+    order: 3;
+  }
+
+  .record-main > section:has(.evidence) {
+    order: 4;
+  }
+
+  .record-main > section:has(.section-head) {
+    order: 2;
+  }
+
+  .record-main > .overview-card {
+    order: 1;
+  }
+
+  .record-main > .correction-nudge {
+    order: 5;
+  }
+
+  /* URL/archive compact cards */
+  .url-archive-head {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .url-mode-label {
+    justify-self: start;
+    font-size: 10px !important;
+    padding: 5px 8px !important;
+  }
+
+  .status-aware-url-grid,
+  .url-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .url-card {
+    padding: 11px !important;
+    border-radius: 10px !important;
+  }
+
+  .url-card-label {
+    font-size: 9px !important;
+    letter-spacing: .1em !important;
+  }
+
+  .url-card h3 {
+    margin: 2px 0 4px !important;
+  }
+
+  .url-value {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 11px !important;
+    padding-bottom: 2px;
+  }
+
+  .url-card-note,
+  .url-card .subtle {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+  }
+
+  .url-action-button {
+    min-height: 34px !important;
+    padding: 8px 10px !important;
+    font-size: 11px !important;
+  }
+
+  /* Evidence: reduce source cards and buttons */
+  .record-main section:has(.evidence) > h2 {
+    margin-bottom: 8px !important;
+  }
+
+  .record-main section:has(.evidence) > .mock-note {
+    margin: 0 0 9px !important;
+    padding: 9px 10px !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+
+  .evidence {
+    display: grid !important;
+    gap: 8px !important;
+  }
+
+  .evidence li {
+    padding: 11px !important;
+    border-radius: 10px !important;
+  }
+
+  .evidence li h3 {
+    margin-bottom: 4px !important;
+    font-size: 15px !important;
+  }
+
+  .evidence li p {
+    margin: 4px 0 !important;
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+  }
+
+  .evidence li p:not(.subtle):last-of-type {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .source-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 7px !important;
+    margin-top: 8px !important;
+  }
+
+  .external-link-button {
+    min-height: 34px !important;
+    padding: 8px 10px !important;
+    font-size: 11px !important;
+    justify-content: center;
+  }
+
+  /* Correction nudge */
+  .correction-nudge {
+    display: grid !important;
+    gap: 5px !important;
+    padding: 12px !important;
+  }
+
+  .correction-nudge p {
+    margin: 0 !important;
+  }
+
+  /* Related records: compact list, not full cards */
+  .related-shelf {
+    margin-top: 12px !important;
+    padding: 13px !important;
+  }
+
+  .related-shelf .section-head {
+    margin-bottom: 8px !important;
+  }
+
+  .related-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .related-grid .market-card,
+  .related-grid .marketplace-card,
+  .related-grid .card {
+    min-height: 0 !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
+  }
+
+  .related-grid .card-body,
+  .related-grid .market-card-body {
+    gap: 4px !important;
+  }
+
+  .related-grid h3,
+  .related-grid h2 {
+    font-size: 15px !important;
+    line-height: 1.08 !important;
+  }
+
+  .related-grid p {
+    display: none !important;
+  }
+
+  .related-grid .record-icon,
+  .related-grid .mini-mark {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 8px !important;
+    font-size: 12px !important;
+  }
+
+  .related-grid .meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  .related-grid .fact {
+    min-height: 0 !important;
+    padding: 7px !important;
+  }
+}
