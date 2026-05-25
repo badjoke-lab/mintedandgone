@@ -1,0 +1,138 @@
+/* Final mobile fit for detail page timeline / recorded events.
+   Fixes the timeline dot escaping outside the card and reduces the section weight. */
+
+@media (max-width: 720px) {
+  .record-main .record-timeline-section {
+    padding: 12px !important;
+    border-radius: 11px !important;
+    overflow: hidden !important;
+  }
+
+  .record-main .record-timeline-section > .eyebrow {
+    margin: 0 0 3px !important;
+    font-size: 10px !important;
+    letter-spacing: .12em !important;
+    line-height: 1.1 !important;
+  }
+
+  .record-main .record-timeline-section > h2 {
+    margin: 0 0 8px !important;
+    font-size: clamp(23px, 7vw, 30px) !important;
+    line-height: .96 !important;
+    letter-spacing: -.04em !important;
+  }
+
+  .record-main .record-timeline-section .timeline {
+    display: grid !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-left: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .record-main .record-timeline-section .timeline::before,
+  .record-main .record-timeline-section .timeline::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .record-main .timeline-entry,
+  .record-main .record-timeline-section .timeline-item {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: 12px minmax(0, 1fr) !important;
+    gap: 0 8px !important;
+    margin: 0 !important;
+    padding: 8px 0 !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--line-soft) !important;
+    min-width: 0 !important;
+  }
+
+  .record-main .record-timeline-section .timeline-item:last-child {
+    border-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .record-main .record-timeline-section .timeline-item::before,
+  .record-main .record-timeline-section .timeline-item::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .record-main .timeline-dot {
+    grid-column: 1;
+    grid-row: 1;
+    width: 8px;
+    height: 8px;
+    margin-top: 4px;
+    border-radius: 999px;
+    background: var(--forest);
+    box-shadow: 0 0 0 3px rgba(64,116,89,.12);
+  }
+
+  .record-main .timeline-copy {
+    grid-column: 2;
+    min-width: 0;
+    display: grid;
+    gap: 4px;
+  }
+
+  .record-main .timeline-copy h3 {
+    margin: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.08 !important;
+    letter-spacing: -.015em !important;
+  }
+
+  .record-main .timeline-meta {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 3px 7px;
+    margin: 0 !important;
+    color: var(--muted);
+    font-size: 10.5px !important;
+    line-height: 1.25 !important;
+  }
+
+  .record-main .timeline-meta strong {
+    color: var(--ink);
+    font-weight: 900;
+  }
+
+  .record-main .timeline-description {
+    margin: 0 !important;
+    font-size: 12px !important;
+    line-height: 1.34 !important;
+  }
+
+  /* Slightly reduce nearby heavy detail sections so timeline no longer looks like an outlier. */
+  .record-main .overview-card h2,
+  .record-main section:has(#what-remains) h2,
+  .record-main .url-archive-block h2,
+  .record-main section:has(> .evidence) > h2 {
+    font-size: clamp(25px, 7.8vw, 33px) !important;
+  }
+
+  .record-main section:has(> .evidence) > h2 {
+    margin-bottom: 7px !important;
+  }
+
+  .record-main section:has(> .evidence) .source-actions {
+    gap: 5px !important;
+  }
+
+  .record-main section:has(> .evidence) .external-link-button {
+    min-height: 31px !important;
+    padding: 7px 7px !important;
+  }
+
+  .url-archive-block .url-card {
+    padding: 9px !important;
+  }
+
+  .url-archive-block .url-card-note {
+    display: none !important;
+  }
+}
