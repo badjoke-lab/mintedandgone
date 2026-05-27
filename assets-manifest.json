@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "inputRoot": "input-assets",
+  "outputRoot": ".",
+  "reportPath": "data-staging/asset-import-report.json",
+  "entries": [
+    {
+      "id": "submit-pencil",
+      "source": "submit-pencil.png",
+      "output": "public/assets/submit/submit-pencil.png",
+      "required": false,
+      "wire": [
+        {
+          "path": "src/pages/submit.astro",
+          "replace": "<div class=\"hero-botanical\" aria-hidden=\"true\">✎</div>",
+          "with": "<figure class=\"hero-botanical hero-pencil-art\" aria-hidden=\"true\"><img src=\"/assets/submit/submit-pencil.png\" alt=\"\" loading=\"eager\" /></figure>"
+        }
+      ]
+    }
+  ]
+}
