@@ -1,0 +1,25 @@
+.hero-pencil-art {
+  display: grid;
+  place-items: center;
+  min-height: clamp(132px, 18vw, 190px);
+  overflow: visible;
+}
+
+.hero-pencil-art img {
+  display: block;
+  width: min(168px, 30vw);
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 18px rgba(58, 43, 25, 0.16));
+}
+
+@media (max-width: 720px) {
+  .hero-pencil-art {
+    min-height: 112px;
+  }
+
+  .hero-pencil-art img {
+    width: 118px;
+  }
+}
