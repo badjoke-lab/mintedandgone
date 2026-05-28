@@ -4,6 +4,7 @@
   place-items: center;
   min-height: clamp(132px, 18vw, 190px);
   overflow: visible;
+  background: transparent;
 }
 
 .hero-pencil-art img,
@@ -14,11 +15,13 @@
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 14px 18px rgba(58, 43, 25, 0.14));
+  mix-blend-mode: multiply;
 }
 
 .support-hero-image {
   display: grid;
   place-items: center;
+  background: transparent;
 }
 
 .support-hero-image img {
@@ -28,6 +31,7 @@
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 14px 18px rgba(58, 43, 25, 0.14));
+  mix-blend-mode: multiply;
 }
 
 @media (max-width: 720px) {
