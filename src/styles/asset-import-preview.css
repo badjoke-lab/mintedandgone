@@ -1,7 +1,7 @@
 :root {
   --guide-hero-image-column: 190px;
-  --guide-hero-image-size: 190px;
-  --guide-hero-support-size: 220px;
+  --guide-hero-image-width: 190px;
+  --guide-hero-image-max-height: 290px;
 }
 
 .appendix-page > .field-hero,
@@ -16,12 +16,12 @@
 }
 
 .hero-pencil-art,
-.hero-page-art {
+.hero-page-art,
+.support-hero-image {
   display: grid;
   place-items: center;
   width: var(--guide-hero-image-column);
-  height: var(--guide-hero-image-size);
-  min-height: 0;
+  min-height: var(--guide-hero-image-max-height);
   margin: 0;
   overflow: visible;
   background: transparent;
@@ -29,32 +29,12 @@
 }
 
 .hero-pencil-art img,
-.hero-page-art img {
-  display: block;
-  width: min(100%, var(--guide-hero-image-size));
-  max-width: var(--guide-hero-image-size);
-  max-height: var(--guide-hero-image-size);
-  height: auto;
-  object-fit: contain;
-  object-position: center center;
-  filter: saturate(.94) sepia(.05) drop-shadow(0 14px 18px rgba(58, 43, 25, 0.14));
-}
-
-.support-hero-image {
-  display: grid;
-  place-items: center;
-  width: var(--guide-hero-image-column);
-  height: var(--guide-hero-support-size);
-  margin: 0;
-  background: transparent;
-  opacity: 1;
-}
-
+.hero-page-art img,
 .support-hero-image img {
   display: block;
-  width: min(100%, var(--guide-hero-support-size));
-  max-width: var(--guide-hero-support-size);
-  max-height: var(--guide-hero-support-size);
+  width: min(100%, var(--guide-hero-image-width));
+  max-width: var(--guide-hero-image-width);
+  max-height: var(--guide-hero-image-max-height);
   height: auto;
   object-fit: contain;
   object-position: center center;
@@ -74,7 +54,7 @@
   .hero-page-art,
   .support-hero-image {
     width: 160px;
-    height: 160px;
+    min-height: 240px;
     justify-self: start;
   }
 
@@ -83,7 +63,7 @@
   .support-hero-image img {
     width: 160px;
     max-width: 160px;
-    max-height: 160px;
+    max-height: 240px;
   }
 }
 

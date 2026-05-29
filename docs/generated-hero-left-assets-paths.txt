@@ -1,0 +1,6 @@
+methodology: public/assets/methodology/methodology-specimen-loupe.png -> /assets/methodology/methodology-specimen-loupe.png
+support: public/assets/support/support-lantern-vine.png -> /assets/support/support-lantern-vine.png
+about: public/assets/about/about-archive-key.png -> /assets/about/about-archive-key.png
+stats: public/assets/stats/stats-counting-rod-chart.png -> /assets/stats/stats-counting-rod-chart.png
+contact: public/assets/contact/contact-bell-seal.png -> /assets/contact/contact-bell-seal.png
+submit: public/assets/submit/submit-quill-ink.png -> /assets/submit/submit-quill-ink.png

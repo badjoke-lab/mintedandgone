@@ -1,0 +1,93 @@
+{
+  "canvas": {
+    "width": 928,
+    "height": 1411,
+    "aspect_ratio": "928:1411"
+  },
+  "assets": [
+    {
+      "page": "methodology",
+      "repo_path": "public/assets/methodology/methodology-specimen-loupe.png",
+      "description": "specimen plant with measuring rule and brass loupe",
+      "asset_path": "/assets/methodology/methodology-specimen-loupe.png",
+      "width": 928,
+      "height": 1411,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 1151785,
+      "transparent_ratio": 0.8796
+    },
+    {
+      "page": "support",
+      "repo_path": "public/assets/support/support-lantern-vine.png",
+      "description": "antique lantern with climbing plant",
+      "asset_path": "/assets/support/support-lantern-vine.png",
+      "width": 928,
+      "height": 1411,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 1076413,
+      "transparent_ratio": 0.8221
+    },
+    {
+      "page": "about",
+      "repo_path": "public/assets/about/about-archive-key.png",
+      "description": "antique archive key with clover plant",
+      "asset_path": "/assets/about/about-archive-key.png",
+      "width": 928,
+      "height": 1411,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 1077312,
+      "transparent_ratio": 0.8227
+    },
+    {
+      "page": "stats",
+      "repo_path": "public/assets/stats/stats-counting-rod-chart.png",
+      "description": "counting rod with beads, plant, and small charts",
+      "asset_path": "/assets/stats/stats-counting-rod-chart.png",
+      "width": 928,
+      "height": 1411,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 1178615,
+      "transparent_ratio": 0.9001
+    },
+    {
+      "page": "contact",
+      "repo_path": "public/assets/contact/contact-bell-seal.png",
+      "description": "small brass bell, wax seal, and plant",
+      "asset_path": "/assets/contact/contact-bell-seal.png",
+      "width": 928,
+      "height": 1411,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 1140876,
+      "transparent_ratio": 0.8713
+    },
+    {
+      "page": "submit",
+      "repo_path": "public/assets/submit/submit-quill-ink.png",
+      "description": "quill pen, ink bottle, check marks, and plant",
+      "asset_path": "/assets/submit/submit-quill-ink.png",
+      "width": 928,
+      "height": 1411,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 1056825,
+      "transparent_ratio": 0.8071
+    }
+  ]
+}
