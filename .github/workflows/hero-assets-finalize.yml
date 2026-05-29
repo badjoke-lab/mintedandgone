@@ -1,0 +1,219 @@
+name: Finalize generated hero assets
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  finalize-hero-assets:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Generate repo-local transparent PNG assets and update hero sizing
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import shutil
+          import subprocess
+          from pathlib import Path
+
+          subprocess.check_call(['python', '-m', 'pip', 'install', '--no-input', '--quiet', 'pillow', 'numpy'])
+          from PIL import Image, ImageOps, ImageFilter
+          import numpy as np
+
+          root = Path('.')
+          raw_dir = root / 'tmp-hero-raw'
+          raw_dir.mkdir(exist_ok=True)
+
+          assets = [
+              ('submit', 'https://github.com/user-attachments/assets/2d991d0d-d837-4186-adf2-27a6b109feeb', 'submit-correction-pencil.png'),
+              ('stats', 'https://github.com/user-attachments/assets/e1d15a8a-6ad5-4bad-b15f-8a2cc0825cc2', 'stats-ledger-chart.png'),
+              ('methodology', 'https://github.com/user-attachments/assets/4955582b-02de-4ce9-9918-73942f6612d9', 'methodology-field-notes.png'),
+              ('about', 'https://github.com/user-attachments/assets/072b4039-553a-4aea-aecf-e062b1932660', 'about-archive-cabinet.png'),
+              ('contact', 'https://github.com/user-attachments/assets/afcf020a-5e06-44e9-bec5-78b2d9e451cf', 'contact-archive-envelope.png'),
+              ('support', 'https://github.com/user-attachments/assets/7b3784aa-09fe-434e-9c5d-4baf1483ecda', 'support-preservation-box.png'),
+          ]
+
+          def remove_checkerboard_to_alpha(src: Path) -> Image.Image:
+              img = Image.open(src).convert('RGBA')
+              arr = np.array(img).astype(np.float32)
+              rgb = arr[..., :3]
+              mx = rgb.max(axis=2)
+              mn = rgb.min(axis=2)
+              chroma = mx - mn
+              mean = rgb.mean(axis=2)
+              bg = (mean > 218) & (chroma < 18)
+              bg |= (mean > 206) & (chroma < 12)
+              alpha = np.where(bg, 0, 255).astype(np.uint8)
+              mask = Image.fromarray(alpha, mode='L').filter(ImageFilter.MedianFilter(3)).filter(ImageFilter.GaussianBlur(0.35))
+              out = img.copy()
+              out.putalpha(mask)
+              bbox = out.getbbox()
+              if bbox:
+                  out = out.crop(bbox)
+              out = ImageOps.expand(out, border=12, fill=(255, 255, 255, 0))
+              max_dim = 512
+              scale = min(max_dim / out.width, max_dim / out.height, 1)
+              if scale < 1:
+                  out = out.resize((round(out.width * scale), round(out.height * scale)), Image.Resampling.LANCZOS)
+              return out
+
+          manifest = []
+          for page, url, filename in assets:
+              raw = raw_dir / filename
+              subprocess.check_call(['curl', '-L', '--fail', '--retry', '3', url, '-o', str(raw)])
+              out = remove_checkerboard_to_alpha(raw)
+              target = root / 'public' / 'assets' / page / filename
+              target.parent.mkdir(parents=True, exist_ok=True)
+              out.save(target, 'PNG', optimize=True, compress_level=9)
+              alpha = np.array(out.getchannel('A'))
+              manifest.append({
+                  'page': page,
+                  'path': '/' + str(target).replace('public/', ''),
+                  'width': out.width,
+                  'height': out.height,
+                  'transparent_pixel_count': int((alpha == 0).sum()),
+                  'semi_transparent_pixel_count': int(((alpha > 0) & (alpha < 255)).sum()),
+              })
+
+          replacements = {
+              'https://github.com/user-attachments/assets/2d991d0d-d837-4186-adf2-27a6b109feeb': '/assets/submit/submit-correction-pencil.png',
+              'https://github.com/user-attachments/assets/e1d15a8a-6ad5-4bad-b15f-8a2cc0825cc2': '/assets/stats/stats-ledger-chart.png',
+              'https://github.com/user-attachments/assets/4955582b-02de-4ce9-9918-73942f6612d9': '/assets/methodology/methodology-field-notes.png',
+              'https://github.com/user-attachments/assets/072b4039-553a-4aea-aecf-e062b1932660': '/assets/about/about-archive-cabinet.png',
+              'https://github.com/user-attachments/assets/afcf020a-5e06-44e9-bec5-78b2d9e451cf': '/assets/contact/contact-archive-envelope.png',
+              'https://github.com/user-attachments/assets/7b3784aa-09fe-434e-9c5d-4baf1483ecda': '/assets/support/support-preservation-box.png',
+          }
+          for rel in ['src/pages/submit.astro', 'src/pages/stats.astro', 'src/pages/methodology.astro', 'src/pages/about.astro', 'src/pages/contact.astro', 'src/pages/support.astro']:
+              path = root / rel
+              text = path.read_text()
+              for old, new in replacements.items():
+                  text = text.replace(old, new)
+              path.write_text(text)
+
+          (root / 'src' / 'styles' / 'asset-import-preview.css').write_text('''
+:root {
+  --guide-hero-image-column: 190px;
+  --guide-hero-image-size: 190px;
+  --guide-hero-support-size: 220px;
+}
+
+.appendix-page > .field-hero,
+.guide-page > .field-hero,
+.guide-page > .field-hero.simple-hero,
+.guide-page > .field-hero.compact-hero {
+  grid-template-columns: var(--guide-hero-image-column) minmax(0, 1fr);
+}
+
+.support-page > .support-hero {
+  grid-template-columns: var(--guide-hero-image-column) minmax(0, 1fr) minmax(280px, 320px);
+}
+
+.hero-pencil-art,
+.hero-page-art {
+  display: grid;
+  place-items: center;
+  width: var(--guide-hero-image-column);
+  height: var(--guide-hero-image-size);
+  min-height: 0;
+  margin: 0;
+  overflow: visible;
+  background: transparent;
+  opacity: 1;
+}
+
+.hero-pencil-art img,
+.hero-page-art img {
+  display: block;
+  width: min(100%, var(--guide-hero-image-size));
+  max-width: var(--guide-hero-image-size);
+  max-height: var(--guide-hero-image-size);
+  height: auto;
+  object-fit: contain;
+  object-position: center center;
+  filter: saturate(.94) sepia(.05) drop-shadow(0 14px 18px rgba(58, 43, 25, 0.14));
+}
+
+.support-hero-image {
+  display: grid;
+  place-items: center;
+  width: var(--guide-hero-image-column);
+  height: var(--guide-hero-support-size);
+  margin: 0;
+  background: transparent;
+  opacity: 1;
+}
+
+.support-hero-image img {
+  display: block;
+  width: min(100%, var(--guide-hero-support-size));
+  max-width: var(--guide-hero-support-size);
+  max-height: var(--guide-hero-support-size);
+  height: auto;
+  object-fit: contain;
+  object-position: center center;
+  filter: saturate(.94) sepia(.05) drop-shadow(0 14px 18px rgba(58, 43, 25, 0.14));
+}
+
+@media (max-width: 1200px) {
+  .appendix-page > .field-hero,
+  .guide-page > .field-hero,
+  .guide-page > .field-hero.simple-hero,
+  .guide-page > .field-hero.compact-hero,
+  .support-page > .support-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-pencil-art,
+  .hero-page-art,
+  .support-hero-image {
+    width: 160px;
+    height: 160px;
+    justify-self: start;
+  }
+
+  .hero-pencil-art img,
+  .hero-page-art img,
+  .support-hero-image img {
+    width: 160px;
+    max-width: 160px;
+    max-height: 160px;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-pencil-art,
+  .hero-page-art,
+  .support-hero-image {
+    display: none;
+  }
+}
+'''.lstrip())
+
+          docs_dir = root / 'docs'
+          docs_dir.mkdir(exist_ok=True)
+          (docs_dir / 'generated-hero-assets-manifest.json').write_text(json.dumps({'assets': manifest}, indent=2) + '\n')
+          shutil.rmtree(raw_dir, ignore_errors=True)
+          workflow = root / '.github' / 'workflows' / 'hero-assets-finalize.yml'
+          if workflow.exists():
+              workflow.unlink()
+          PY
+
+      - name: Commit finalized hero assets
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git status --short
+          git add public/assets src/pages src/styles/asset-import-preview.css docs/generated-hero-assets-manifest.json .github/workflows/hero-assets-finalize.yml
+          git commit -m "Finalize guide hero image assets"
+          git push origin main
