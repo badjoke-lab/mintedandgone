@@ -1,0 +1,6 @@
+public/assets/submit/submit-correction-pencil.png
+public/assets/stats/stats-ledger-chart.png
+public/assets/methodology/methodology-field-notes.png
+public/assets/about/about-archive-cabinet.png
+public/assets/contact/contact-archive-envelope.png
+public/assets/support/support-preservation-box.png

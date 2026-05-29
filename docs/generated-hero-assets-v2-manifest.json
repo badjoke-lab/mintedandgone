@@ -1,0 +1,70 @@
+{
+  "assets": [
+    {
+      "page": "submit",
+      "source_file": "ヴィンテージ風チェックリストと鉛筆.png",
+      "repo_path": "public/assets/submit/submit-correction-pencil.png",
+      "asset_path": "/assets/submit/submit-correction-pencil.png",
+      "width": 971,
+      "height": 1619,
+      "transparent_pixels": 1080647,
+      "semi_transparent_pixels": 21821,
+      "opaque_pixels": 469581
+    },
+    {
+      "page": "stats",
+      "source_file": "マーケットプレイスの成長統計.png",
+      "repo_path": "public/assets/stats/stats-ledger-chart.png",
+      "asset_path": "/assets/stats/stats-ledger-chart.png",
+      "width": 971,
+      "height": 1619,
+      "transparent_pixels": 809751,
+      "semi_transparent_pixels": 16734,
+      "opaque_pixels": 745564
+    },
+    {
+      "page": "methodology",
+      "source_file": "フィールドノートの静物画.png",
+      "repo_path": "public/assets/methodology/methodology-field-notes.png",
+      "asset_path": "/assets/methodology/methodology-field-notes.png",
+      "width": 971,
+      "height": 1619,
+      "transparent_pixels": 816793,
+      "semi_transparent_pixels": 12725,
+      "opaque_pixels": 742531
+    },
+    {
+      "page": "about",
+      "source_file": "アンティークボタニカルファイルボックス.png",
+      "repo_path": "public/assets/about/about-archive-cabinet.png",
+      "asset_path": "/assets/about/about-archive-cabinet.png",
+      "width": 971,
+      "height": 1619,
+      "transparent_pixels": 860671,
+      "semi_transparent_pixels": 16149,
+      "opaque_pixels": 695229
+    },
+    {
+      "page": "contact",
+      "source_file": "ヴィンテージ風ステーショナリーコラージュ.png",
+      "repo_path": "public/assets/contact/contact-archive-envelope.png",
+      "asset_path": "/assets/contact/contact-archive-envelope.png",
+      "width": 971,
+      "height": 1619,
+      "transparent_pixels": 895362,
+      "semi_transparent_pixels": 15125,
+      "opaque_pixels": 661562
+    },
+    {
+      "page": "support",
+      "source_file": "思い出を守る箱.png",
+      "repo_path": "public/assets/support/support-preservation-box.png",
+      "asset_path": "/assets/support/support-preservation-box.png",
+      "width": 971,
+      "height": 1619,
+      "transparent_pixels": 883210,
+      "semi_transparent_pixels": 22303,
+      "opaque_pixels": 666536
+    }
+  ]
+}
