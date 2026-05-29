@@ -1,0 +1,186 @@
+{
+  "reference": {
+    "file": "hero-plant.png",
+    "canvas_width": 928,
+    "canvas_height": 1411,
+    "alpha_threshold": 5,
+    "target_bbox": [
+      99,
+      1,
+      748,
+      1354
+    ],
+    "target_bbox_width": 649,
+    "target_bbox_height": 1353
+  },
+  "assets": [
+    {
+      "path": "public/assets/about/about-archive-key.png",
+      "canvas_width": 928,
+      "canvas_height": 1411,
+      "source_bbox": [
+        238,
+        75,
+        694,
+        1354
+      ],
+      "source_bbox_width": 456,
+      "source_bbox_height": 1279,
+      "output_bbox": [
+        103,
+        4,
+        747,
+        1353
+      ],
+      "output_bbox_width": 644,
+      "output_bbox_height": 1349,
+      "scale_strategy": "non_uniform_scale_to_reference_alpha_bbox",
+      "reference_bbox": [
+        99,
+        1,
+        748,
+        1354
+      ]
+    },
+    {
+      "path": "public/assets/contact/contact-bell-seal.png",
+      "canvas_width": 928,
+      "canvas_height": 1411,
+      "source_bbox": [
+        245,
+        53,
+        681,
+        1370
+      ],
+      "source_bbox_width": 436,
+      "source_bbox_height": 1317,
+      "output_bbox": [
+        100,
+        4,
+        747,
+        1351
+      ],
+      "output_bbox_width": 647,
+      "output_bbox_height": 1347,
+      "scale_strategy": "non_uniform_scale_to_reference_alpha_bbox",
+      "reference_bbox": [
+        99,
+        1,
+        748,
+        1354
+      ]
+    },
+    {
+      "path": "public/assets/methodology/methodology-specimen-loupe.png",
+      "canvas_width": 928,
+      "canvas_height": 1411,
+      "source_bbox": [
+        260,
+        48,
+        666,
+        1330
+      ],
+      "source_bbox_width": 406,
+      "source_bbox_height": 1282,
+      "output_bbox": [
+        104,
+        2,
+        743,
+        1351
+      ],
+      "output_bbox_width": 639,
+      "output_bbox_height": 1349,
+      "scale_strategy": "non_uniform_scale_to_reference_alpha_bbox",
+      "reference_bbox": [
+        99,
+        1,
+        748,
+        1354
+      ]
+    },
+    {
+      "path": "public/assets/stats/stats-counting-rod-chart.png",
+      "canvas_width": 928,
+      "canvas_height": 1411,
+      "source_bbox": [
+        256,
+        72,
+        630,
+        1354
+      ],
+      "source_bbox_width": 374,
+      "source_bbox_height": 1282,
+      "output_bbox": [
+        102,
+        5,
+        746,
+        1353
+      ],
+      "output_bbox_width": 644,
+      "output_bbox_height": 1348,
+      "scale_strategy": "non_uniform_scale_to_reference_alpha_bbox",
+      "reference_bbox": [
+        99,
+        1,
+        748,
+        1354
+      ]
+    },
+    {
+      "path": "public/assets/submit/submit-quill-ink.png",
+      "canvas_width": 928,
+      "canvas_height": 1411,
+      "source_bbox": [
+        243,
+        41,
+        639,
+        1357
+      ],
+      "source_bbox_width": 396,
+      "source_bbox_height": 1316,
+      "output_bbox": [
+        102,
+        4,
+        745,
+        1351
+      ],
+      "output_bbox_width": 643,
+      "output_bbox_height": 1347,
+      "scale_strategy": "non_uniform_scale_to_reference_alpha_bbox",
+      "reference_bbox": [
+        99,
+        1,
+        748,
+        1354
+      ]
+    },
+    {
+      "path": "public/assets/support/support-lantern-vine.png",
+      "canvas_width": 928,
+      "canvas_height": 1411,
+      "source_bbox": [
+        185,
+        46,
+        678,
+        1359
+      ],
+      "source_bbox_width": 493,
+      "source_bbox_height": 1313,
+      "output_bbox": [
+        100,
+        3,
+        744,
+        1351
+      ],
+      "output_bbox_width": 644,
+      "output_bbox_height": 1348,
+      "scale_strategy": "non_uniform_scale_to_reference_alpha_bbox",
+      "reference_bbox": [
+        99,
+        1,
+        748,
+        1354
+      ]
+    }
+  ]
+}
