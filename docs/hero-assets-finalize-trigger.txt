@@ -1,0 +1,1 @@
+Trigger generated hero asset finalization workflow.
