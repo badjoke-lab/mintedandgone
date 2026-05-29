@@ -1,0 +1,58 @@
+{
+  "assets": [
+    {
+      "page": "submit",
+      "file": "submit-correction-pencil.png",
+      "path": "/assets/submit/submit-correction-pencil.png",
+      "width": 512,
+      "height": 489,
+      "transparent_pixels": 130167,
+      "semi_transparent_pixels": 10578
+    },
+    {
+      "page": "stats",
+      "file": "stats-ledger-chart.png",
+      "path": "/assets/stats/stats-ledger-chart.png",
+      "width": 512,
+      "height": 451,
+      "transparent_pixels": 93443,
+      "semi_transparent_pixels": 8836
+    },
+    {
+      "page": "methodology",
+      "file": "methodology-field-notes.png",
+      "path": "/assets/methodology/methodology-field-notes.png",
+      "width": 512,
+      "height": 423,
+      "transparent_pixels": 79695,
+      "semi_transparent_pixels": 9575
+    },
+    {
+      "page": "about",
+      "file": "about-archive-cabinet.png",
+      "path": "/assets/about/about-archive-cabinet.png",
+      "width": 509,
+      "height": 512,
+      "transparent_pixels": 60628,
+      "semi_transparent_pixels": 5573
+    },
+    {
+      "page": "contact",
+      "file": "contact-archive-envelope.png",
+      "path": "/assets/contact/contact-archive-envelope.png",
+      "width": 512,
+      "height": 498,
+      "transparent_pixels": 69774,
+      "semi_transparent_pixels": 14311
+    },
+    {
+      "page": "support",
+      "file": "support-preservation-box.png",
+      "path": "/assets/support/support-preservation-box.png",
+      "width": 512,
+      "height": 432,
+      "transparent_pixels": 64696,
+      "semi_transparent_pixels": 7589
+    }
+  ]
+}
