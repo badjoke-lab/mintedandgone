@@ -4,6 +4,13 @@
   --guide-hero-image-max-height: 290px;
 }
 
+/*
+  Final import layer for generated guide-page hero art.
+  subpage-unification.css defines `.appendix-page>.field-hero .hero-botanical`
+  at 118px square with reduced opacity. These selectors intentionally match and
+  override that higher-specificity rule so the new transparent PNG art uses the
+  same visual scale as the home hero plant.
+*/
 .appendix-page > .field-hero,
 .guide-page > .field-hero,
 .guide-page > .field-hero.simple-hero,
@@ -15,22 +22,31 @@
   grid-template-columns: var(--guide-hero-image-column) minmax(0, 1fr) minmax(280px, 320px);
 }
 
-.hero-pencil-art,
-.hero-page-art,
-.support-hero-image {
+.appendix-page > .field-hero .hero-botanical.hero-page-art,
+.guide-page > .field-hero .hero-botanical.hero-page-art,
+.guide-page > .field-hero.simple-hero .hero-botanical.hero-page-art,
+.guide-page > .field-hero.compact-hero .hero-botanical.hero-page-art,
+.support-page > .support-hero .support-hero-image,
+.hero-pencil-art {
   display: grid;
   place-items: center;
   width: var(--guide-hero-image-column);
+  height: auto;
   min-height: var(--guide-hero-image-max-height);
   margin: 0;
   overflow: visible;
   background: transparent;
   opacity: 1;
+  font-size: inherit;
+  line-height: normal;
 }
 
-.hero-pencil-art img,
-.hero-page-art img,
-.support-hero-image img {
+.appendix-page > .field-hero .hero-botanical.hero-page-art img,
+.guide-page > .field-hero .hero-botanical.hero-page-art img,
+.guide-page > .field-hero.simple-hero .hero-botanical.hero-page-art img,
+.guide-page > .field-hero.compact-hero .hero-botanical.hero-page-art img,
+.support-page > .support-hero .support-hero-image img,
+.hero-pencil-art img {
   display: block;
   width: min(100%, var(--guide-hero-image-width));
   max-width: var(--guide-hero-image-width);
@@ -50,17 +66,23 @@
     grid-template-columns: 1fr;
   }
 
-  .hero-pencil-art,
-  .hero-page-art,
-  .support-hero-image {
+  .appendix-page > .field-hero .hero-botanical.hero-page-art,
+  .guide-page > .field-hero .hero-botanical.hero-page-art,
+  .guide-page > .field-hero.simple-hero .hero-botanical.hero-page-art,
+  .guide-page > .field-hero.compact-hero .hero-botanical.hero-page-art,
+  .support-page > .support-hero .support-hero-image,
+  .hero-pencil-art {
     width: 160px;
     min-height: 240px;
     justify-self: start;
   }
 
-  .hero-pencil-art img,
-  .hero-page-art img,
-  .support-hero-image img {
+  .appendix-page > .field-hero .hero-botanical.hero-page-art img,
+  .guide-page > .field-hero .hero-botanical.hero-page-art img,
+  .guide-page > .field-hero.simple-hero .hero-botanical.hero-page-art img,
+  .guide-page > .field-hero.compact-hero .hero-botanical.hero-page-art img,
+  .support-page > .support-hero .support-hero-image img,
+  .hero-pencil-art img {
     width: 160px;
     max-width: 160px;
     max-height: 240px;
@@ -69,8 +91,11 @@
 
 @media (max-width: 720px) {
   .hero-pencil-art,
-  .hero-page-art,
-  .support-hero-image {
+  .appendix-page > .field-hero .hero-botanical.hero-page-art,
+  .guide-page > .field-hero .hero-botanical.hero-page-art,
+  .guide-page > .field-hero.simple-hero .hero-botanical.hero-page-art,
+  .guide-page > .field-hero.compact-hero .hero-botanical.hero-page-art,
+  .support-page > .support-hero .support-hero-image {
     display: none;
   }
 }
