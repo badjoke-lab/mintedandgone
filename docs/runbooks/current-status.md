@@ -90,6 +90,18 @@ Result:
 - Added an initial v0 reading-layer update note.
 - Updated sitemap generation to include `/updates/`.
 
+### PR-046 equivalent
+
+Committed directly to `main` because branch creation remained blocked by the tool safety layer during this session.
+
+Result:
+
+- Added `docs/runbooks/v0-release-hardening-checklist.md`.
+- Checked BaseLayout metadata coverage: title, description, robots, canonical, OG, Twitter, favicon, sitemap link, and JSON-LD WebSite block.
+- Confirmed sitemap generator covers the current static routes and generated marketplace records.
+- Added footer links to Guides, Glossary, and Updates so the reading layer is discoverable without replacing the registry as the main header focus.
+- Recorded remaining terminal/browser checks: `npm run check`, sitemap generation confirmation, mobile review, CTA link review, and CSS regression check.
+
 ## Operating rule
 
 After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
@@ -128,7 +140,7 @@ Required state:
 - Validation and build checks
 - Source-reviewed seed records
 
-Current assessment: mostly implemented. The route audit and v0 reading layer are now in place. Next focus is release hardening.
+Current assessment: mostly implemented. The route audit, v0 reading layer, and release-hardening checklist are in place. Terminal/browser verification is still required before calling v0 ready.
 
 ### v0 reading layer
 
@@ -148,14 +160,13 @@ Do not expand into broad NFT blogging at this stage.
 
 Goal: make the current public surface consistent and safer.
 
-Required state:
+Current status:
 
-- page titles and descriptions checked
-- sitemap reflects canonical pages
-- unsafe/dead domain behavior checked
-- correction paths visible but secondary
-- draft/uncertainty wording consistent
-- mobile review completed
+- metadata structure checked
+- sitemap route list checked at source level
+- reading-layer footer discovery added
+- hardening checklist added
+- terminal/browser verification remains pending
 
 ### v0.5
 
@@ -211,20 +222,19 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-046: Release hardening pass
+### PR-047: Terminal/browser verification or record/content batch
 
-Purpose: align sitemap, metadata, correction links, draft wording, and mobile-safe layout before treating the current surface as v0.
+Preferred next action if local/runtime access is available:
 
-Expected scope:
+- run `npm run check`
+- confirm generated `public/sitemap.xml` includes new static routes
+- browser review for `/guides/`, both guide pages, `/glossary/`, `/updates/`
+- mobile review for header/footer wrapping and guide/glossary/update pages
+- check CTA links and CSS regressions
 
-- verify `scripts/generate-sitemap.ts` includes all current static routes
-- check top-level page metadata/title coverage
-- check correction/submit links remain visible but secondary
-- check wording avoids overclaiming asset loss or marketplace danger
-- check direct-domain/archive wording remains conservative
-- produce a release hardening checklist or fix clear small issues
+If runtime/browser verification is not available from the tool layer, proceed with the next small reviewed record/content batch and keep verification pending in the checklist.
 
-### PR-047 and later: Record and content batches
+### PR-048 and later: Record and content batches
 
 Purpose: continue with small reviewed batches.
 
@@ -237,4 +247,4 @@ Expected pattern:
 
 ## Current next action
 
-Proceed to PR-046: release hardening pass.
+Run terminal/browser verification if available. If not, continue with the next reviewed record/content batch while keeping verification pending.
