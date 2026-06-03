@@ -166,6 +166,18 @@ Result:
 - Kept glossary detail pages compact and registry-support focused.
 - Confirmed local terminal check passed after the change: sitemap generated with 374 URLs, validation passed, and 374 pages built.
 
+### PR-052 equivalent
+
+Committed directly to `main` because branch creation remained blocked by the tool safety layer during this session.
+
+Result:
+
+- Added shared update entry data in `src/data/updateEntries.ts`.
+- Updated `/updates/` to use the shared update entry data.
+- Added `/updates/[slug]/` detail pages for registry update entries.
+- Updated sitemap generation to include update detail pages.
+- Kept update detail pages as registry changelog entries, not NFT news articles.
+
 ## Operating rule
 
 After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
@@ -246,11 +258,12 @@ Current status:
 - third v0.5 guide added: `/guides/what-is-an-nft-marketplace-aggregator/`
 - fourth v0.5 guide added: `/guides/what-is-an-nft-launchpad-marketplace/`
 - glossary detail page structure added for 20 terms
+- update detail page structure added for 3 entries
 - terminal check passed after glossary-detail changes
+- terminal check pending after update-detail changes
 
 Planned additions:
 
-- update detail page structure
 - stronger related-record links from guides/glossary to marketplace records
 - additional reviewed record batches
 
@@ -296,15 +309,18 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-052: Next reviewed content batch
+### PR-053: Validation check or next reviewed content batch
 
-Recommended next options:
+Preferred next action:
 
-- update detail page structure
-- reviewed record batch
+- run `npm run check` after the update-detail changes.
+
+If check passes, continue with one of the following:
+
 - internal linking pass from glossary to guides/records
+- reviewed record batch
 
-### PR-053 and later: Record and content batches
+### PR-054 and later: Record and content batches
 
 Purpose: continue with small reviewed batches.
 
@@ -317,4 +333,4 @@ Expected pattern:
 
 ## Current next action
 
-Proceed with the next reviewed content/record batch.
+Run `npm run check` after pulling main. If it passes, proceed with the next reviewed content/record batch.
