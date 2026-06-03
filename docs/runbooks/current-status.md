@@ -116,6 +116,18 @@ Result:
 - Kept the guide framed as a registry-support workflow, not an NFT blog post.
 - Confirmed local terminal check passed after the change: sitemap generated with 351 URLs, validation passed, and 351 pages built.
 
+### PR-048 equivalent
+
+Committed directly to `main` because branch creation remained blocked by the tool safety layer during this session.
+
+Result:
+
+- Added `/guides/do-nfts-disappear-when-a-marketplace-closes/` as the second v0.5 reading-layer guide.
+- Updated `/guides/` to list the new guide.
+- Updated sitemap generation to include the new guide route.
+- Kept the guide focused on layer separation: marketplace page, token record, metadata path, media file, wallet display, and trading path.
+- Avoided overclaiming that marketplace closure means NFT or asset disappearance.
+
 ## Operating rule
 
 After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
@@ -192,7 +204,9 @@ Goal: expand search-intake pages without weakening the registry.
 Current status:
 
 - first v0.5 guide added: `/guides/how-to-check-old-nft-marketplace-pages/`
+- second v0.5 guide added: `/guides/do-nfts-disappear-when-a-marketplace-closes/`
 - terminal check passed after first v0.5 guide
+- terminal check pending after second v0.5 guide
 
 Planned additions:
 
@@ -244,16 +258,20 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-048: Next reviewed content batch
+### PR-049: Validation check or next reviewed content batch
 
-Recommended next options:
+Preferred next action:
 
-- next guide: `Do NFTs disappear when a marketplace closes?`
+- run `npm run check` after the new guide/sitemap change.
+
+If check passes, continue with one of the following:
+
+- next guide: `What is an NFT marketplace aggregator?`
 - glossary detail page structure
 - update detail page structure
 - reviewed record batch
 
-### PR-049 and later: Record and content batches
+### PR-050 and later: Record and content batches
 
 Purpose: continue with small reviewed batches.
 
@@ -266,4 +284,4 @@ Expected pattern:
 
 ## Current next action
 
-Proceed with the next reviewed content/record batch.
+Run `npm run check` after pulling main. If it passes, proceed with the next reviewed content/record batch.
