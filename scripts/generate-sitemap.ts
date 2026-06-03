@@ -32,6 +32,12 @@ const glossarySlugs = [
   'creator-fee'
 ];
 
+const updateSlugs = [
+  'v0-reading-layer-added',
+  'v0-5-guide-expansion-added',
+  'glossary-detail-pages-added'
+];
+
 const staticPaths = [
   '/',
   '/encyclopedia/',
@@ -46,6 +52,7 @@ const staticPaths = [
   '/glossary/',
   ...glossarySlugs.map((slug) => '/glossary/' + slug + '/'),
   '/updates/',
+  ...updateSlugs.map((slug) => '/updates/' + slug + '/'),
   '/methodology/',
   '/about/',
   '/submit/',
