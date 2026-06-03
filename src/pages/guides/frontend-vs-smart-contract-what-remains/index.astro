@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const layers = [
+  {
+    title: 'Marketplace frontend',
+    copy: 'The website or app surface people use to search collections, create listings, view pages, and navigate marketplace-specific account features.'
+  },
+  {
+    title: 'Marketplace operation',
+    copy: 'The business or product operation behind the marketplace. It may end, merge, rebrand, or become limited while other technical traces still exist.'
+  },
+  {
+    title: 'Smart contracts',
+    copy: 'On-chain contracts may remain readable even after a marketplace frontend closes, depending on chain status, contract design, and available explorers or tools.'
+  },
+  {
+    title: 'Metadata and media',
+    copy: 'NFT metadata and media can depend on storage paths. A marketplace closing does not automatically prove metadata or media disappeared.'
+  },
+  {
+    title: 'Wallet visibility',
+    copy: 'Wallets or external tools may still display tokens if they can read the token and metadata paths.'
+  },
+  {
+    title: 'Archives and sources',
+    copy: 'Archived pages, public notices, docs, reports, and other traces can remain useful even when the original site changes or vanishes.'
+  }
+];
+
+const recordQuestions = [
+  'Is the original marketplace frontend still reachable?',
+  'Did the marketplace operation end, merge, rebrand, or become limited?',
+  'Are contracts, metadata, or asset display paths separately documented?',
+  'Is there an archived page or source-backed notice?',
+  'Is the status clear, or should the record keep uncertainty visible?'
+];
+---
+<BaseLayout title="Frontend vs smart contract: what actually remains? — Minted & Gone" description="A field-guide explanation of frontend closure, marketplace operation, smart contracts, metadata, wallets, and archives as separate layers in NFT marketplace history.">
+  <div class="shell guide-page">
+    <section class="field-hero simple-hero compact-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Guide</p>
+        <h1>Frontend vs smart contract: what actually remains?</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">A closed marketplace website is not the same thing as a vanished on-chain record.</p>
+        <p>This guide separates the public frontend, marketplace operation, smart contracts, metadata, wallet visibility, third-party views, and archived source trail.</p>
+        <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse records</a><a class="btn" href="/guides/">Back to guides</a></div>
+      </div>
+    </section>
+
+    <p class="mock-note">This guide is educational. It does not verify any specific token, wallet, contract, recovery path, ownership claim, or marketplace safety claim.</p>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Short answer</p>
+      <h2>Different layers can fail, remain, or become uncertain at different times</h2>
+      <p>An NFT marketplace can lose its visible frontend while some on-chain or archived traces remain. A smart contract can remain readable while the original product is no longer operated. Metadata may remain available, become partly unavailable, or need further review.</p>
+      <p>Minted &amp; Gone records these layers separately so a closed frontend is not automatically treated as proof that assets, contracts, metadata, or history disappeared.</p>
+    </section>
+
+    <section class="guide-grid numbered">
+      {layers.map((layer, index) => (
+        <article class="framed-panel guide-card">
+          <span class="num">{String(index + 1).padStart(2, '0')}</span>
+          <h2>{layer.title}</h2>
+          <p>{layer.copy}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Why this distinction matters</p>
+      <h2>Marketplace history is not a single switch</h2>
+      <p>Many NFT marketplace stories are uneven. The domain might redirect. The app might stop loading. Collection pages might disappear. A company might keep another product alive. Contracts might still be readable. External marketplaces or wallets might display some assets. Archives might preserve the old interface.</p>
+      <p>Because these layers change separately, Minted &amp; Gone avoids broad claims like "the NFT disappeared" unless a source-backed record supports a narrower statement.</p>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">How M&amp;G records it</p>
+      <h2>Records ask layer-specific questions</h2>
+      <ul class="plain-list">
+        {recordQuestions.map((item) => <li>{item}</li>)}
+      </ul>
+      <p>When the answer is unclear, the record should keep the uncertainty visible through notes, evidence, confidence, archive state, and review flags.</p>
+    </section>
+
+    <section class="guide-grid">
+      <article class="framed-panel guide-card">
+        <h2>Frontend closed</h2>
+        <p>This usually means the public marketplace interface is no longer available in its original form. It does not by itself settle contract, metadata, or wallet visibility.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Contract readable</h2>
+        <p>This means an on-chain artifact may still be inspectable. It does not prove that the original marketplace is still operating or that every asset display path works.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Archive available</h2>
+        <p>This means a historical copy or archive search exists. It is evidence for history, not proof that the marketplace is currently active.</p>
+      </article>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Related reading</p>
+      <h2>Use this guide with individual records</h2>
+      <p>Open a marketplace record and compare the status, timeline events, evidence notes, archive URL, and what-remains block. The strongest records are not necessarily the simplest; they are the ones that keep the evidence and uncertainty visible.</p>
+      <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse marketplace records</a><a class="btn" href="/guides/what-happens-when-nft-marketplace-shuts-down/">Previous guide</a><a class="btn" href="/methodology/">Read methodology</a></div>
+    </section>
+  </div>
+</BaseLayout>
