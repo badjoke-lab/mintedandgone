@@ -1,0 +1,24 @@
+---
+type RecordLink = {
+  title: string;
+  href: string;
+  note: string;
+};
+
+const { records = [] } = Astro.props as { records: RecordLink[] };
+---
+{records.length > 0 && (
+  <section class="framed-panel definition-card">
+    <p class="eyebrow">Related records</p>
+    <h2>Read this guide with live registry examples</h2>
+    <div class="definition-grid">
+      {records.map((record) => (
+        <article class="definition-card">
+          <h3><a class="text-link" href={record.href}>{record.title}</a></h3>
+          <p>{record.note}</p>
+          <a class="btn" href={record.href}>Open record →</a>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
