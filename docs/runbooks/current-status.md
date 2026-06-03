@@ -77,6 +77,19 @@ Result:
 - Linked glossary to guides and methodology.
 - Updated sitemap generation to include `/glossary/`.
 
+### PR-045 equivalent
+
+Committed directly to `main` because branch creation remained blocked by the tool safety layer during this session.
+
+Result:
+
+- Added `/updates/` as a registry update/changelog entry point.
+- Framed updates as registry changes, not NFT news/blog content.
+- Defined update categories for added records, status changes, evidence additions, archive links, and methodology changes.
+- Clarified that unreviewed monitoring signals and unmerged candidates do not belong in public updates.
+- Added an initial v0 reading-layer update note.
+- Updated sitemap generation to include `/updates/`.
+
 ## Operating rule
 
 After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
@@ -115,7 +128,7 @@ Required state:
 - Validation and build checks
 - Source-reviewed seed records
 
-Current assessment: mostly implemented. The route audit is done. The guides index, two core guides, and glossary index are added. Next focus is updates index.
+Current assessment: mostly implemented. The route audit and v0 reading layer are now in place. Next focus is release hardening.
 
 ### v0 reading layer
 
@@ -127,7 +140,7 @@ Required state:
 - What happens when an NFT marketplace shuts down?: done
 - Frontend vs smart contract: what actually remains?: done
 - Glossary index: done
-- Updates index / registry changelog entry point: next
+- Updates index / registry changelog entry point: done
 
 Do not expand into broad NFT blogging at this stage.
 
@@ -198,22 +211,18 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-045: Add updates index
-
-Purpose: create a registry update/changelog entry point.
-
-Expected scope:
-
-- add `/updates/`
-- frame it as registry updates, not news/blog content
-- include update categories for added records, status changes, evidence additions, archive links, and methodology changes
-- make clear that only reviewed or merged changes belong here
-- link to encyclopedia, methodology, submit, and current status runbook where appropriate
-- update sitemap generator
-
 ### PR-046: Release hardening pass
 
 Purpose: align sitemap, metadata, correction links, draft wording, and mobile-safe layout before treating the current surface as v0.
+
+Expected scope:
+
+- verify `scripts/generate-sitemap.ts` includes all current static routes
+- check top-level page metadata/title coverage
+- check correction/submit links remain visible but secondary
+- check wording avoids overclaiming asset loss or marketplace danger
+- check direct-domain/archive wording remains conservative
+- produce a release hardening checklist or fix clear small issues
 
 ### PR-047 and later: Record and content batches
 
@@ -228,4 +237,4 @@ Expected pattern:
 
 ## Current next action
 
-Proceed to PR-045: add the updates index.
+Proceed to PR-046: release hardening pass.
