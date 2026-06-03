@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RelatedGlossaryLinks from '../../../components/RelatedGlossaryLinks.astro';
 
 const layers = [
   {
@@ -35,6 +36,13 @@ const recordQuestions = [
   'Did launch pages disappear while the platform or collections remained elsewhere?',
   'Is there an official notice, archived page, or source-backed migration path?'
 ];
+
+const glossaryLinks = [
+  { title: 'Launchpad marketplace', href: '/glossary/launchpad-marketplace/' },
+  { title: 'Asset migration', href: '/glossary/asset-migration/' },
+  { title: 'Collection page', href: '/glossary/collection-page/' },
+  { title: 'Aggregator', href: '/glossary/aggregator/' }
+];
 ---
 <BaseLayout title="What is an NFT launchpad marketplace? — Minted & Gone" description="A field-guide explanation of NFT launchpad marketplaces, primary releases, mint paths, campaign pages, secondary-market handoffs, and M&G classification.">
   <div class="shell guide-page">
@@ -57,6 +65,8 @@ const recordQuestions = [
       <p>An NFT launchpad marketplace is usually a place where creators, brands, games, or communities release NFTs through drops, mints, claims, auctions, or curated sale pages. Some launchpads also support secondary trading, while others hand assets off to external marketplaces or wallet views after the initial release.</p>
       <p>For Minted &amp; Gone, the key is not just whether a trading page remains. The archive should also ask what happened to the release surface, campaign pages, minting path, and post-launch continuity.</p>
     </section>
+
+    <RelatedGlossaryLinks terms={glossaryLinks} />
 
     <section class="guide-grid numbered">
       {layers.map((layer, index) => (
