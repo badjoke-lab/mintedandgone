@@ -54,6 +54,18 @@ Result:
 - Linked back to guides, encyclopedia, methodology, and the next planned guide.
 - Updated sitemap generation to include the shutdown guide.
 
+### PR-043 equivalent
+
+Committed directly to `main` because branch creation remained blocked by the tool safety layer during this session.
+
+Result:
+
+- Added `/guides/frontend-vs-smart-contract-what-remains/`.
+- Explained frontend, marketplace operation, smart contracts, metadata, wallet visibility, and archives as separate layers.
+- Avoided overclaiming that a closed frontend equals lost assets.
+- Linked back to guides, encyclopedia, methodology, and the shutdown guide.
+- Updated sitemap generation to include the frontend vs smart contract guide.
+
 ## Operating rule
 
 After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
@@ -92,7 +104,7 @@ Required state:
 - Validation and build checks
 - Source-reviewed seed records
 
-Current assessment: mostly implemented. The route audit is done. The guides index and first guide are added. Next focus is the second core guide.
+Current assessment: mostly implemented. The route audit is done. The guides index and two core guides are added. Next focus is glossary index.
 
 ### v0 reading layer
 
@@ -102,8 +114,8 @@ Required state:
 
 - Guides index: done
 - What happens when an NFT marketplace shuts down?: done
-- Frontend vs smart contract: what actually remains?: next
-- Glossary index
+- Frontend vs smart contract: what actually remains?: done
+- Glossary index: next
 - Updates index / registry changelog entry point
 
 Do not expand into broad NFT blogging at this stage.
@@ -175,21 +187,17 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-043: Add or align frontend vs smart contract guide
-
-Purpose: publish or standardize the second guide: what remains when frontend and smart contract are separated.
-
-Expected scope:
-
-- add `/guides/frontend-vs-smart-contract-what-remains/`
-- explain frontend, marketplace operation, smart contracts, metadata, wallet visibility, and archives as separate layers
-- avoid overclaiming that a closed frontend equals lost assets
-- link back to `/guides/`, `/encyclopedia/`, `/methodology/`, and the shutdown guide
-- update sitemap generator
-
 ### PR-044: Add glossary index
 
 Purpose: create the first reusable term layer for internal links.
+
+Expected scope:
+
+- add `/glossary/`
+- include initial terms for marketplace frontend, smart contract, metadata, collection page, trading history, aggregator, launchpad, community fork, archived URL, dead domain, rebrand, acquisition, delisting, royalties, and creator fee
+- keep terms as short definitions, not full articles
+- link to the two core guides and methodology
+- update sitemap generator
 
 ### PR-045: Add updates index
 
@@ -212,4 +220,4 @@ Expected pattern:
 
 ## Current next action
 
-Proceed to PR-043: add the frontend vs smart contract guide.
+Proceed to PR-044: add the glossary index.
