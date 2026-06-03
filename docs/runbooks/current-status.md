@@ -31,11 +31,22 @@ Result:
 - Confirmed that separate `/gone/` and `/active/` pages are not v0 blockers while status filtering exists.
 - Identified the reading-layer gap: `/guides/`, two core guides, `/glossary/`, and `/updates/`.
 
+### PR-041 equivalent
+
+Committed directly to `main` because new branch creation remained blocked by the tool safety layer during this session.
+
+Result:
+
+- Added `/guides/` as the v0 reading-layer entry point.
+- Framed guides as registry-support pages, not broad NFT blog content.
+- Added links to the two planned v0 guide pages.
+- Updated sitemap generation to include `/guides/`.
+
 ## Operating rule
 
-After each merged PR, update this file before moving to the next work item. Each update must include:
+After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
 
-1. what was merged,
+1. what was merged or committed,
 2. the full remaining schedule,
 3. the current position,
 4. the next PR to open.
@@ -69,7 +80,7 @@ Required state:
 - Validation and build checks
 - Source-reviewed seed records
 
-Current assessment: mostly implemented. The route audit is done. Next focus is the v0 reading layer.
+Current assessment: mostly implemented. The route audit is done. The guides index is added. Next focus is the first core guide.
 
 ### v0 reading layer
 
@@ -77,8 +88,8 @@ Goal: add only the minimum reading pages that strengthen the registry.
 
 Required state:
 
-- Guides index
-- What happens when an NFT marketplace shuts down?
+- Guides index: done
+- What happens when an NFT marketplace shuts down?: next
 - Frontend vs smart contract: what actually remains?
 - Glossary index
 - Updates index / registry changelog entry point
@@ -152,21 +163,17 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-041: Add or align guides index
-
-Purpose: make guide content discoverable as a registry-support layer.
-
-Expected scope:
-
-- add `/guides/`
-- explain that guides support the registry
-- link to the two planned v0 guide pages
-- keep encyclopedia as the primary product CTA
-- update sitemap generator if the route is added
-
 ### PR-042: Add or align shutdown guide
 
 Purpose: publish or standardize the first guide: what happens when an NFT marketplace shuts down.
+
+Expected scope:
+
+- add `/guides/what-happens-when-nft-marketplace-shuts-down/`
+- explain marketplace shutdown without claiming NFTs or assets necessarily disappear
+- include sections for what may be gone, what may remain, and how M&G records it
+- link back to `/guides/`, `/encyclopedia/`, and `/methodology/`
+- update sitemap generator
 
 ### PR-043: Add or align frontend vs smart contract guide
 
@@ -197,4 +204,4 @@ Expected pattern:
 
 ## Current next action
 
-Proceed to PR-041: add or align the `/guides/` index.
+Proceed to PR-042: add the shutdown guide.
