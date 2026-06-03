@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { updateEntries } from '../../data/updateEntries';
 
 const updateTypes = [
   ['Added records', 'New marketplace records that have been reviewed enough to enter the public draft archive.'],
@@ -33,6 +34,21 @@ const notIncluded = [
     <p class="mock-note">Updates should only describe reviewed or merged registry changes. Unreviewed candidates and raw monitoring signals stay out of public update copy.</p>
 
     <section class="framed-panel definition-card">
+      <p class="eyebrow">Latest entries</p>
+      <h2>Registry changelog</h2>
+      <div class="definition-grid">
+        {updateEntries.map((entry) => (
+          <article class="definition-card">
+            <p class="eyebrow">{entry.date} · {entry.label}</p>
+            <h3><a class="text-link" href={`/updates/${entry.slug}/`}>{entry.title}</a></h3>
+            <p>{entry.summary}</p>
+            <a class="btn" href={`/updates/${entry.slug}/`}>Open update →</a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="framed-panel definition-card">
       <p class="eyebrow">What belongs here</p>
       <h2>Registry changes with reviewable context</h2>
       <div class="definition-grid">
@@ -52,13 +68,6 @@ const notIncluded = [
       <ul class="plain-list">
         {notIncluded.map((item) => <li>{item}</li>)}
       </ul>
-    </section>
-
-    <section class="framed-panel definition-card">
-      <p class="eyebrow">Initial update</p>
-      <h2>v0 reading layer added</h2>
-      <p>The v0 reading layer now includes a guide index, two core guides, and a glossary index. These pages explain marketplace shutdowns, frontend and smart contract layers, metadata, archives, and continuity without turning the archive into a broad NFT blog.</p>
-      <div class="hero-actions"><a class="btn" href="/guides/">Guides</a><a class="btn" href="/glossary/">Glossary</a><a class="btn" href="/methodology/">Methodology</a></div>
     </section>
 
     <section class="framed-panel definition-card">
