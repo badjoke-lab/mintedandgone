@@ -31,11 +31,17 @@ const guides = [
     href: '/guides/what-is-an-nft-marketplace-aggregator/',
     status: 'v0.5 guide',
     summary: 'Explains aggregator layers, listing aggregation, marketplace dependency, routing surfaces, and why aggregator closure is not the same as every indexed marketplace disappearing.'
+  },
+  {
+    title: 'What is an NFT launchpad marketplace?',
+    href: '/guides/what-is-an-nft-launchpad-marketplace/',
+    status: 'v0.5 guide',
+    summary: 'Explains launchpad marketplaces as primary release surfaces for drops, mints, claims, campaign pages, and secondary-market handoffs.'
   }
 ];
 
 const futureGuides = [
-  'What is an NFT launchpad marketplace?'
+  'More guide candidates can be added after validation and internal linking work.'
 ];
 ---
 <BaseLayout title="Guides — Minted & Gone" description="Short field-guide explainers for reading NFT marketplace history without overclaiming what disappeared or remained.">
@@ -81,7 +87,7 @@ const futureGuides = [
       <ul class="plain-list">
         {futureGuides.map((item) => <li>{item}</li>)}
       </ul>
-      <p class="subtle">This candidate is deferred until the current guide layer remains stable after validation.</p>
+      <p class="subtle">This guide layer should stay registry-support focused and avoid broad NFT blogging.</p>
     </section>
   </div>
 </BaseLayout>
