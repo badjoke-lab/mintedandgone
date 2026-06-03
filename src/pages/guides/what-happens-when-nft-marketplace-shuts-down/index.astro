@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RelatedGlossaryLinks from '../../../components/RelatedGlossaryLinks.astro';
 
 const goneItems = [
   'the public marketplace website or app view',
@@ -15,6 +16,13 @@ const remainItems = [
   'metadata or media if the storage path still resolves',
   'third-party marketplace views when another marketplace indexes the collection',
   'archived pages, public notices, and external source traces'
+];
+
+const glossaryLinks = [
+  { title: 'Marketplace shutdown', href: '/glossary/marketplace-shutdown/' },
+  { title: 'Frontend closed', href: '/glossary/frontend-closed/' },
+  { title: 'Archived URL', href: '/glossary/archived-url/' },
+  { title: 'Asset migration', href: '/glossary/asset-migration/' }
 ];
 ---
 <BaseLayout title="What happens when an NFT marketplace shuts down? — Minted & Gone" description="A field-guide explanation of what may close, what may remain, and how Minted & Gone records NFT marketplace shutdowns without overclaiming asset loss.">
@@ -38,6 +46,8 @@ const remainItems = [
       <p>When an NFT marketplace shuts down, the website, app, listings, collection pages, trading screens, or support pages may stop working. That does not automatically mean every token, smart contract, metadata reference, archived page, or third-party view has disappeared.</p>
       <p>Minted &amp; Gone records this split instead of reducing every case to a single statement.</p>
     </section>
+
+    <RelatedGlossaryLinks terms={glossaryLinks} />
 
     <section class="guide-grid">
       <article class="framed-panel guide-card">
