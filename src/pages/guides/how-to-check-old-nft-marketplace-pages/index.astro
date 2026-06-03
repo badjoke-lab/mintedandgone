@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import RelatedGlossaryLinks from '../../../components/RelatedGlossaryLinks.astro';
+import RelatedRecordLinks from '../../../components/RelatedRecordLinks.astro';
 
 const steps = [
   {
@@ -39,6 +40,12 @@ const glossaryLinks = [
   { title: 'Collection page', href: '/glossary/collection-page/' },
   { title: 'Rebrand', href: '/glossary/rebrand/' }
 ];
+
+const relatedRecords = [
+  { title: 'RECUR Marketplace', href: '/encyclopedia/recur-marketplace/', note: 'Inactive / under-review record useful for checking original domain, archive, and continuity fields.' },
+  { title: 'Hro Marketplace', href: '/encyclopedia/hro-marketplace/', note: 'Licensed collectibles record useful for comparing live-unverified pages with archive review needs.' },
+  { title: 'FanCraze Marketplace', href: '/encyclopedia/fancraze-marketplace/', note: 'Sports collectibles record useful for old-domain and marketplace-scope review examples.' }
+];
 ---
 <BaseLayout title="How to check old NFT marketplace pages — Minted & Gone" description="A field-guide workflow for checking old NFT marketplace pages with domains, archived URLs, official notices, frontend state, and source-backed uncertainty.">
   <div class="shell guide-page">
@@ -62,6 +69,7 @@ const glossaryLinks = [
     </section>
 
     <RelatedGlossaryLinks terms={glossaryLinks} />
+    <RelatedRecordLinks records={relatedRecords} />
 
     <section class="guide-grid numbered">
       {steps.map((step, index) => (
