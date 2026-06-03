@@ -114,6 +114,7 @@ Result:
 - Updated `/guides/` to list the new guide as a v0.5 guide.
 - Updated sitemap generation to include the new guide route.
 - Kept the guide framed as a registry-support workflow, not an NFT blog post.
+- Confirmed local terminal check passed after the change: sitemap generated with 351 URLs, validation passed, and 351 pages built.
 
 ## Operating rule
 
@@ -181,7 +182,7 @@ Current status:
 - hardening checklist added
 - duplicate slug validation issue fixed
 - CSS warning fixed
-- `npm run check` passed locally with 350 pages built
+- `npm run check` passed locally with 350 pages built before PR-047 and 351 pages built after PR-047
 - browser/mobile visual review remains recommended
 
 ### v0.5
@@ -191,6 +192,7 @@ Goal: expand search-intake pages without weakening the registry.
 Current status:
 
 - first v0.5 guide added: `/guides/how-to-check-old-nft-marketplace-pages/`
+- terminal check passed after first v0.5 guide
 
 Planned additions:
 
@@ -242,13 +244,9 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-048: Validation check or next reviewed content batch
+### PR-048: Next reviewed content batch
 
-Preferred next action:
-
-- run `npm run check` after the new guide/sitemap change.
-
-If check passes, continue with one of the following:
+Recommended next options:
 
 - next guide: `Do NFTs disappear when a marketplace closes?`
 - glossary detail page structure
@@ -268,4 +266,4 @@ Expected pattern:
 
 ## Current next action
 
-Run `npm run check` after pulling main. If it passes, proceed with the next reviewed content/record batch.
+Proceed with the next reviewed content/record batch.
