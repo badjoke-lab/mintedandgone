@@ -104,14 +104,34 @@
     line-height: 1.22 !important;
   }
 
-  /* Body copy */
-  .guide-page > .field-hero p:not(.eyebrow):not(.lede),
-  .appendix-page > .field-hero p:not(.eyebrow):not(.lede),
-  .support-page > .support-hero p:not(.eyebrow):not(.lede) {
+  /* Body copy. Use direct hero-copy selectors instead of chained :not() selectors to avoid CSS minifier warnings. */
+  .guide-page > .field-hero .hero-copy > p,
+  .guide-page > .field-hero .plate-copy > p,
+  .appendix-page > .field-hero .hero-copy > p,
+  .appendix-page > .field-hero .plate-copy > p,
+  .support-page > .support-hero .support-hero-copy > p {
     max-width: none !important;
     margin: 0 !important;
     font-size: 13px !important;
     line-height: 1.45 !important;
+  }
+
+  .guide-page > .field-hero .hero-copy > p.eyebrow,
+  .guide-page > .field-hero .plate-copy > p.eyebrow,
+  .appendix-page > .field-hero .hero-copy > p.eyebrow,
+  .appendix-page > .field-hero .plate-copy > p.eyebrow,
+  .support-page > .support-hero .support-hero-copy > p.eyebrow {
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+  }
+
+  .guide-page > .field-hero .hero-copy > p.lede,
+  .guide-page > .field-hero .plate-copy > p.lede,
+  .appendix-page > .field-hero .hero-copy > p.lede,
+  .appendix-page > .field-hero .plate-copy > p.lede,
+  .support-page > .support-hero .support-hero-copy > p.lede {
+    font-size: 18px !important;
+    line-height: 1.22 !important;
   }
 
   /* CTA row */
