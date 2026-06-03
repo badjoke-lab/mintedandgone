@@ -42,6 +42,18 @@ Result:
 - Added links to the two planned v0 guide pages.
 - Updated sitemap generation to include `/guides/`.
 
+### PR-042 equivalent
+
+Committed directly to `main` because branch creation remained blocked by the tool safety layer during this session.
+
+Result:
+
+- Added `/guides/what-happens-when-nft-marketplace-shuts-down/`.
+- Explained marketplace shutdown without claiming NFTs or assets necessarily disappear.
+- Added sections for what may be gone, what may remain, and how M&G records shutdown states.
+- Linked back to guides, encyclopedia, methodology, and the next planned guide.
+- Updated sitemap generation to include the shutdown guide.
+
 ## Operating rule
 
 After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
@@ -80,7 +92,7 @@ Required state:
 - Validation and build checks
 - Source-reviewed seed records
 
-Current assessment: mostly implemented. The route audit is done. The guides index is added. Next focus is the first core guide.
+Current assessment: mostly implemented. The route audit is done. The guides index and first guide are added. Next focus is the second core guide.
 
 ### v0 reading layer
 
@@ -89,8 +101,8 @@ Goal: add only the minimum reading pages that strengthen the registry.
 Required state:
 
 - Guides index: done
-- What happens when an NFT marketplace shuts down?: next
-- Frontend vs smart contract: what actually remains?
+- What happens when an NFT marketplace shuts down?: done
+- Frontend vs smart contract: what actually remains?: next
 - Glossary index
 - Updates index / registry changelog entry point
 
@@ -163,21 +175,17 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-042: Add or align shutdown guide
-
-Purpose: publish or standardize the first guide: what happens when an NFT marketplace shuts down.
-
-Expected scope:
-
-- add `/guides/what-happens-when-nft-marketplace-shuts-down/`
-- explain marketplace shutdown without claiming NFTs or assets necessarily disappear
-- include sections for what may be gone, what may remain, and how M&G records it
-- link back to `/guides/`, `/encyclopedia/`, and `/methodology/`
-- update sitemap generator
-
 ### PR-043: Add or align frontend vs smart contract guide
 
 Purpose: publish or standardize the second guide: what remains when frontend and smart contract are separated.
+
+Expected scope:
+
+- add `/guides/frontend-vs-smart-contract-what-remains/`
+- explain frontend, marketplace operation, smart contracts, metadata, wallet visibility, and archives as separate layers
+- avoid overclaiming that a closed frontend equals lost assets
+- link back to `/guides/`, `/encyclopedia/`, `/methodology/`, and the shutdown guide
+- update sitemap generator
 
 ### PR-044: Add glossary index
 
@@ -204,4 +212,4 @@ Expected pattern:
 
 ## Current next action
 
-Proceed to PR-042: add the shutdown guide.
+Proceed to PR-043: add the frontend vs smart contract guide.
