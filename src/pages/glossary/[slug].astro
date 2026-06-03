@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { glossaryTerms } from '../../data/glossaryTerms';
+
+export function getStaticPaths() {
+  return glossaryTerms.map((item) => ({ params: { slug: item.slug }, props: { item } }));
+}
+
+const { item } = Astro.props;
+---
+<BaseLayout title={`${item.term} — Glossary — Minted & Gone`} description={`${item.term}: ${item.short}`}>
+  <div class="shell guide-page glossary-term-page">
+    <section class="field-hero simple-hero compact-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Glossary term</p>
+        <h1>{item.term}</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">{item.short}</p>
+        <p>Glossary terms explain how Minted &amp; Gone describes NFT marketplace history. They are archive labels, not legal, financial, ownership, or technical audit conclusions.</p>
+        <div class="hero-actions"><a class="btn primary" href="/glossary/">Back to glossary</a><a class="btn" href="/encyclopedia/">Browse records</a></div>
+      </div>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Definition</p>
+      <h2>{item.term}</h2>
+      <p>{item.detail}</p>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Related guides</p>
+      <h2>Read this term in context</h2>
+      <div class="hero-actions">
+        {item.relatedGuides.map((guide) => <a class="btn" href={guide.href}>{guide.title}</a>)}
+        <a class="btn" href="/methodology/">Methodology</a>
+      </div>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Archive note</p>
+      <h2>Keep the layer visible</h2>
+      <p>When this term appears in a marketplace record, read it with the record status, timeline events, evidence notes, archive URL, and confidence fields. A term should clarify the layer being discussed rather than imply more certainty than the sources support.</p>
+    </section>
+  </div>
+</BaseLayout>
