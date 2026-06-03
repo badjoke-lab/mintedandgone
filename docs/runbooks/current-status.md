@@ -18,21 +18,11 @@ Merged: `docs: add current status runbook`.
 - Fixed the merge-by-merge reporting rule.
 - Reset the roadmap against the actual repository state.
 
-### PR-040 equivalent
-
-Committed directly to `main` because new branch creation was blocked by the tool safety layer.
-
-- Added `docs/runbooks/route-audit.md`.
-- Confirmed `/encyclopedia/` remains the current registry route for v0.
-- Confirmed separate `/gone/` and `/active/` pages are not v0 blockers while status filtering exists.
-- Identified the reading-layer gap: `/guides/`, two core guides, `/glossary/`, and `/updates/`.
-
-### PR-041 to PR-046 equivalent
+### PR-040 to PR-046 equivalent
 
 Committed directly to `main` because branch creation remained blocked.
 
-- Added `/guides/`, two v0 core guides, `/glossary/`, and `/updates/`.
-- Added `docs/runbooks/v0-release-hardening-checklist.md`.
+- Added route audit, `/guides/`, two v0 core guides, `/glossary/`, `/updates/`, and the v0 hardening checklist.
 - Updated sitemap coverage for the new reading-layer routes.
 - Added footer links to Guides, Glossary, and Updates without replacing the registry as the main header focus.
 - Fixed duplicate batch-35 slugs that initially blocked validation.
@@ -88,12 +78,19 @@ Committed directly to `main` because branch creation remained blocked.
 
 ### PR-054 equivalent
 
-Committed directly to `main` because branch creation remained blocked.
-
 - Added `RelatedRecordLinks` component.
 - Added related record blocks to the launchpad and aggregator guides using only verified existing record slugs from batch-35.
 - Linked to confirmed records such as `sequence-marketplace`, `recur-marketplace`, `mythical-market`, and `veve-market`.
-- Kept related-record links conservative and evidence-aware; no new claims were added about asset status, safety, ownership, or disappearance.
+- Terminal check is pending because terminal access is currently unavailable.
+
+### PR-055 equivalent
+
+Committed directly to `main` because branch creation remained blocked.
+
+- Added related record blocks to the frontend and old-page checking guides using only verified existing record slugs from batch-35.
+- Linked to confirmed records such as `sequence-marketplace`, `recur-marketplace`, `mythical-market`, `hro-marketplace`, and `fancraze-marketplace`.
+- Attempted shutdown and NFT-disappearance guide related-record updates, but those file writes were blocked by the tool safety layer, so they are explicitly left pending rather than forced.
+- Kept all related-record notes conservative and avoided new claims about asset status, ownership, value, or disappearance.
 - Terminal check is pending because terminal access is currently unavailable.
 
 ## Operating rule
@@ -146,7 +143,7 @@ Current status:
 - duplicate slug validation issue fixed
 - CSS warning fixed
 - `npm run check` passed locally with 350 pages built before PR-047, 351 pages built after PR-047, 352 pages built after PR-048, 374 pages built after PR-051, and 377 pages built after PR-052
-- terminal check after PR-053 and PR-054 is pending because terminal access is currently unavailable
+- terminal check after PR-053 through PR-055 is pending because terminal access is currently unavailable
 - browser/mobile visual review remains recommended
 
 ### v0.5
@@ -161,12 +158,13 @@ Current status:
 - update detail page structure added for 3 entries
 - guide-to-glossary internal linking added
 - related-record link component added
-- related-record blocks added to aggregator and launchpad guides
+- related-record blocks added to aggregator, launchpad, frontend, and old-page guides
+- shutdown and NFT-disappearance guide related-record blocks remain pending due to tool write block
 
 Planned additions:
 
-- continue related-record links for other guide pages where verified records are available
-- additional reviewed record batches
+- reviewed record batch
+- later retry related-record links for blocked guide pages with smaller diffs if needed
 
 Target data direction:
 
@@ -210,14 +208,14 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-055: Next reviewed content batch
+### PR-056: Next reviewed content batch
 
 Recommended next options:
 
-- continue related-record links for shutdown / frontend / old-page / disappearance guides using verified record slugs only
 - reviewed record batch
+- later retry small related-record link patches for shutdown / NFT-disappearance guides only if needed
 
-### PR-056 and later: Record and content batches
+### PR-057 and later: Record and content batches
 
 Expected pattern:
 
@@ -228,4 +226,4 @@ Expected pattern:
 
 ## Current next action
 
-Proceed with the next reviewed content/record batch. Terminal check remains pending until terminal access is available again.
+Proceed with a reviewed record batch. Terminal check remains pending until terminal access is available again.
