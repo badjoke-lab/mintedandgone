@@ -18,6 +18,7 @@ const staticPaths = [
   '/guides/frontend-vs-smart-contract-what-remains/',
   '/guides/how-to-check-old-nft-marketplace-pages/',
   '/guides/do-nfts-disappear-when-a-marketplace-closes/',
+  '/guides/what-is-an-nft-marketplace-aggregator/',
   '/glossary/',
   '/updates/',
   '/methodology/',
