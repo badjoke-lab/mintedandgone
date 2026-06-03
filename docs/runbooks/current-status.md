@@ -164,6 +164,7 @@ Result:
 - Added `/glossary/[slug]/` detail pages for 20 glossary terms.
 - Updated sitemap generation to include glossary term pages.
 - Kept glossary detail pages compact and registry-support focused.
+- Confirmed local terminal check passed after the change: sitemap generated with 374 URLs, validation passed, and 374 pages built.
 
 ## Operating rule
 
@@ -231,7 +232,7 @@ Current status:
 - hardening checklist added
 - duplicate slug validation issue fixed
 - CSS warning fixed
-- `npm run check` passed locally with 350 pages built before PR-047, 351 pages built after PR-047, and 352 pages built after PR-048
+- `npm run check` passed locally with 350 pages built before PR-047, 351 pages built after PR-047, 352 pages built after PR-048, and 374 pages built after PR-051
 - browser/mobile visual review remains recommended
 
 ### v0.5
@@ -245,8 +246,7 @@ Current status:
 - third v0.5 guide added: `/guides/what-is-an-nft-marketplace-aggregator/`
 - fourth v0.5 guide added: `/guides/what-is-an-nft-launchpad-marketplace/`
 - glossary detail page structure added for 20 terms
-- terminal check passed after the first two v0.5 guides
-- terminal check pending after the aggregator, launchpad, and glossary-detail changes
+- terminal check passed after glossary-detail changes
 
 Planned additions:
 
@@ -296,13 +296,9 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-052: Validation check or next reviewed content batch
+### PR-052: Next reviewed content batch
 
-Preferred next action:
-
-- run `npm run check` after the aggregator, launchpad, and glossary-detail changes.
-
-If check passes, continue with one of the following:
+Recommended next options:
 
 - update detail page structure
 - reviewed record batch
@@ -321,4 +317,4 @@ Expected pattern:
 
 ## Current next action
 
-Run `npm run check` after pulling main. If it passes, proceed with the next reviewed content/record batch.
+Proceed with the next reviewed content/record batch.
