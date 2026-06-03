@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RelatedGlossaryLinks from '../../../components/RelatedGlossaryLinks.astro';
 
 const layers = [
   {
@@ -35,6 +36,13 @@ const recordSignals = [
   'Did it shut down, merge, rebrand, or get acquired?',
   'Did its closure affect how users found older NFT listings?'
 ];
+
+const glossaryLinks = [
+  { title: 'Aggregator', href: '/glossary/aggregator/' },
+  { title: 'NFT marketplace', href: '/glossary/nft-marketplace/' },
+  { title: 'Trading history', href: '/glossary/trading-history/' },
+  { title: 'Acquisition', href: '/glossary/acquisition/' }
+];
 ---
 <BaseLayout title="What is an NFT marketplace aggregator? — Minted & Gone" description="A field-guide explanation of NFT marketplace aggregators, listing aggregation, routing surfaces, marketplace dependency, archives, and M&G classification.">
   <div class="shell guide-page">
@@ -57,6 +65,8 @@ const recordSignals = [
       <p>An NFT marketplace aggregator usually helps users discover, compare, or route listings across multiple marketplaces or liquidity sources. It may not be the original marketplace for every listed asset. Its historical record can depend on both its own interface and the marketplaces it indexed.</p>
       <p>For Minted &amp; Gone, this means aggregator records need careful wording: an aggregator page can change without proving that every underlying marketplace, collection, token, or listing disappeared.</p>
     </section>
+
+    <RelatedGlossaryLinks terms={glossaryLinks} />
 
     <section class="guide-grid numbered">
       {layers.map((layer, index) => (
