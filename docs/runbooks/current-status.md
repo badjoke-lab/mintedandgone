@@ -104,6 +104,17 @@ Result:
 - Fixed CSS selector warnings in the mobile subpage/stat styles.
 - Confirmed local terminal check passed with no CSS warning: stats generated, sitemap generated with 350 URLs, validation passed, and 350 pages built.
 
+### PR-047 equivalent
+
+Committed directly to `main` because branch creation remained blocked by the tool safety layer during this session.
+
+Result:
+
+- Added `/guides/how-to-check-old-nft-marketplace-pages/` as the first v0.5 reading-layer guide.
+- Updated `/guides/` to list the new guide as a v0.5 guide.
+- Updated sitemap generation to include the new guide route.
+- Kept the guide framed as a registry-support workflow, not an NFT blog post.
+
 ## Operating rule
 
 After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
@@ -177,6 +188,10 @@ Current status:
 
 Goal: expand search-intake pages without weakening the registry.
 
+Current status:
+
+- first v0.5 guide added: `/guides/how-to-check-old-nft-marketplace-pages/`
+
 Planned additions:
 
 - additional guides
@@ -227,17 +242,20 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-047: Browser/mobile visual review or next reviewed record/content batch
+### PR-048: Validation check or next reviewed content batch
 
-Preferred next action if visual review is available:
+Preferred next action:
 
-- browser review for `/guides/`, both guide pages, `/glossary/`, `/updates/`
-- mobile review for header/footer wrapping and guide/glossary/update pages
-- check CTA links and CSS regressions visually
+- run `npm run check` after the new guide/sitemap change.
 
-If visual review is not being done now, proceed with the next small reviewed record/content batch.
+If check passes, continue with one of the following:
 
-### PR-048 and later: Record and content batches
+- next guide: `Do NFTs disappear when a marketplace closes?`
+- glossary detail page structure
+- update detail page structure
+- reviewed record batch
+
+### PR-049 and later: Record and content batches
 
 Purpose: continue with small reviewed batches.
 
@@ -250,4 +268,4 @@ Expected pattern:
 
 ## Current next action
 
-Either run browser/mobile visual review or proceed to the next reviewed record/content batch.
+Run `npm run check` after pulling main. If it passes, proceed with the next reviewed content/record batch.
