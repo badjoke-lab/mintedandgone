@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const goneItems = [
+  'the public marketplace website or app view',
+  'collection pages hosted by the marketplace',
+  'marketplace search, listings, and account screens',
+  'support pages, announcements, or old help-center content',
+  'the original domain if it expires, redirects, or changes use'
+];
+
+const remainItems = [
+  'wallet-visible tokens, depending on the chain and metadata path',
+  'smart contracts or on-chain records that are still readable',
+  'metadata or media if the storage path still resolves',
+  'third-party marketplace views when another marketplace indexes the collection',
+  'archived pages, public notices, and external source traces'
+];
+---
+<BaseLayout title="What happens when an NFT marketplace shuts down? — Minted & Gone" description="A field-guide explanation of what may close, what may remain, and how Minted & Gone records NFT marketplace shutdowns without overclaiming asset loss.">
+  <div class="shell guide-page">
+    <section class="field-hero simple-hero compact-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Guide</p>
+        <h1>What happens when an NFT marketplace shuts down?</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">A marketplace can close without every related NFT record disappearing.</p>
+        <p>This guide explains the difference between a marketplace operation ending, a frontend becoming unavailable, and other parts of an NFT record remaining readable elsewhere.</p>
+        <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse records</a><a class="btn" href="/guides/">Back to guides</a></div>
+      </div>
+    </section>
+
+    <p class="mock-note">This guide is educational. It does not determine ownership, legal status, asset safety, or whether a particular wallet-held item is recoverable.</p>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Short answer</p>
+      <h2>The marketplace surface may end, but the historical trail can split into several states</h2>
+      <p>When an NFT marketplace shuts down, the website, app, listings, collection pages, trading screens, or support pages may stop working. That does not automatically mean every token, smart contract, metadata reference, archived page, or third-party view has disappeared.</p>
+      <p>Minted &amp; Gone records this split instead of reducing every case to a single statement.</p>
+    </section>
+
+    <section class="guide-grid">
+      <article class="framed-panel guide-card">
+        <span class="num">01</span>
+        <h2>What may be gone</h2>
+        <ul class="plain-list">
+          {goneItems.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article class="framed-panel guide-card">
+        <span class="num">02</span>
+        <h2>What may remain</h2>
+        <ul class="plain-list">
+          {remainItems.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Why it matters</p>
+      <h2>Shutdown language can be misleading if it is too broad</h2>
+      <p>Words like closed, gone, dead, or disappeared can describe different layers. A marketplace frontend may close. A domain may expire. A company may stop operating a product. A collection page may no longer load. But other traces can remain through wallets, contracts, archives, successor products, community tools, or other marketplaces.</p>
+      <p>For that reason, Minted &amp; Gone avoids treating marketplace closure as automatic proof that NFTs or assets disappeared.</p>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">How M&amp;G records it</p>
+      <h2>Each record separates status, evidence, and continuity notes</h2>
+      <div class="reading-guide-grid" aria-label="How Minted and Gone records marketplace shutdowns">
+        <article><strong>Status</strong><span>active, inactive, dead, acquired, limited, or unknown based on current source support.</span></article>
+        <article><strong>Timeline events</strong><span>launches, closure notices, frontend changes, acquisitions, forks, or archive findings.</span></article>
+        <article><strong>Evidence notes</strong><span>official pages, archived captures, source notes, reputable reporting, and review flags.</span></article>
+      </div>
+      <p>Marketplace records also expose what remains where the current sources support it. If the trail is unclear, the record should say so instead of forcing certainty.</p>
+    </section>
+
+    <section class="guide-grid">
+      <article class="framed-panel guide-card">
+        <h2>Common shutdown outcomes</h2>
+        <p>A marketplace may fully close, become inactive without a clear closure notice, redirect to a successor, become part of an acquired product, or leave only archived traces. These outcomes should not be collapsed into one label without evidence.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Archived pages matter</h2>
+        <p>For old marketplaces, the safest historical view is often an archived page rather than the original domain. Domains can expire or be reused, so Minted &amp; Gone treats archive links as historical evidence, not just convenience links.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Uncertainty is part of the record</h2>
+        <p>If current frontend behavior, contract status, metadata visibility, or successor path is unclear, the record should keep that uncertainty visible through notes and review flags.</p>
+      </article>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Related reading</p>
+      <h2>Continue through the archive</h2>
+      <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse marketplace records</a><a class="btn" href="/methodology/">Read methodology</a><a class="btn" href="/guides/frontend-vs-smart-contract-what-remains/">Next guide →</a></div>
+    </section>
+  </div>
+</BaseLayout>
