@@ -129,6 +129,18 @@ Result:
 - Avoided overclaiming that marketplace closure means NFT or asset disappearance.
 - Confirmed local terminal check passed after the change: sitemap generated with 352 URLs, validation passed, and 352 pages built.
 
+### PR-049 equivalent
+
+Committed directly to `main` because branch creation remained blocked by the tool safety layer during this session.
+
+Result:
+
+- Added `/guides/what-is-an-nft-marketplace-aggregator/` as the third v0.5 reading-layer guide.
+- Updated `/guides/` to list the new aggregator guide.
+- Updated sitemap generation to include the new guide route.
+- Kept the guide focused on aggregator-specific layers: aggregated listings, routing surface, marketplace dependency, independent interface, archive complexity, and M&G classification.
+- Avoided claiming that an aggregator closure means every indexed marketplace or asset disappeared.
+
 ## Operating rule
 
 After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
@@ -206,7 +218,9 @@ Current status:
 
 - first v0.5 guide added: `/guides/how-to-check-old-nft-marketplace-pages/`
 - second v0.5 guide added: `/guides/do-nfts-disappear-when-a-marketplace-closes/`
-- terminal check passed after both v0.5 guides
+- third v0.5 guide added: `/guides/what-is-an-nft-marketplace-aggregator/`
+- terminal check passed after the first two v0.5 guides
+- terminal check pending after the aggregator guide
 
 Planned additions:
 
@@ -258,16 +272,20 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-049: Next reviewed content batch
+### PR-050: Validation check or next reviewed content batch
 
-Recommended next options:
+Preferred next action:
 
-- next guide: `What is an NFT marketplace aggregator?`
+- run `npm run check` after the aggregator guide/sitemap change.
+
+If check passes, continue with one of the following:
+
+- next guide: `What is an NFT launchpad marketplace?`
 - glossary detail page structure
 - update detail page structure
 - reviewed record batch
 
-### PR-050 and later: Record and content batches
+### PR-051 and later: Record and content batches
 
 Purpose: continue with small reviewed batches.
 
@@ -280,4 +298,4 @@ Expected pattern:
 
 ## Current next action
 
-Proceed with the next reviewed content/record batch.
+Run `npm run check` after pulling main. If it passes, proceed with the next reviewed content/record batch.
