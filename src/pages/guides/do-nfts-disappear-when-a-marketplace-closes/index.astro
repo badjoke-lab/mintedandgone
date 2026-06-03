@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const layers = [
+  {
+    title: 'Marketplace page',
+    copy: 'Collection pages, search pages, listings, and account screens may stop loading when a marketplace closes or changes product direction.'
+  },
+  {
+    title: 'Token record',
+    copy: 'A token record may remain readable on-chain if the chain, contract, and explorer or tool path remain available.'
+  },
+  {
+    title: 'Metadata path',
+    copy: 'Metadata may remain available, partially fail, or move depending on where it was stored and whether that storage path still resolves.'
+  },
+  {
+    title: 'Media file',
+    copy: 'Image, video, audio, or 3D media availability can differ from metadata availability. A marketplace closure alone does not settle it.'
+  },
+  {
+    title: 'Wallet display',
+    copy: 'A wallet or external viewer may still display an NFT if it can read the token and metadata path, even when the original marketplace no longer loads.'
+  },
+  {
+    title: 'Trading path',
+    copy: 'Trading may stop on the original marketplace while another marketplace, aggregator, or community tool may or may not support the asset.'
+  }
+];
+
+const safeClaims = [
+  'The original marketplace frontend appears unavailable.',
+  'The collection page is no longer visible at the original URL.',
+  'The marketplace operation ended according to the cited source.',
+  'The asset path needs separate review.',
+  'Wallet, metadata, and third-party marketplace visibility are not confirmed by this record.'
+];
+
+const unsafeClaims = [
+  'The NFT disappeared.',
+  'The asset was lost.',
+  'The collection is gone forever.',
+  'The marketplace was a scam.',
+  'No one can access the asset anymore.'
+];
+---
+<BaseLayout title="Do NFTs disappear when a marketplace closes? — Minted & Gone" description="A field-guide explanation of why marketplace closure does not automatically mean NFTs, metadata, media, wallets, or trading paths disappeared.">
+  <div class="shell guide-page">
+    <section class="field-hero simple-hero compact-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Guide</p>
+        <h1>Do NFTs disappear when a marketplace closes?</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">Not automatically. A marketplace can disappear while other layers remain.</p>
+        <p>This guide explains why a closed NFT marketplace frontend is not enough to claim that NFTs, metadata, media, wallets, or trading paths disappeared.</p>
+        <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse records</a><a class="btn" href="/guides/">Back to guides</a></div>
+      </div>
+    </section>
+
+    <p class="mock-note">This page is educational and archive-focused. It does not verify any individual token, ownership claim, recovery path, legal status, or asset value.</p>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Short answer</p>
+      <h2>Marketplace closure is a frontend/product event, not a complete asset verdict</h2>
+      <p>When a marketplace closes, the marketplace page, listings, search, account views, or trading interface may stop working. But token records, contracts, metadata, media, wallet display, third-party views, or archived pages may follow different paths.</p>
+      <p>Minted &amp; Gone records those layers separately. A record should only claim disappearance when sources support the exact layer being described.</p>
+    </section>
+
+    <section class="guide-grid numbered">
+      {layers.map((layer, index) => (
+        <article class="framed-panel guide-card">
+          <span class="num">{String(index + 1).padStart(2, '0')}</span>
+          <h2>{layer.title}</h2>
+          <p>{layer.copy}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Safer wording</p>
+      <h2>Say what the source actually supports</h2>
+      <p>Most old marketplace records should use narrow, source-backed language. This keeps the archive useful without overstating loss or risk.</p>
+      <div class="reading-guide-grid" aria-label="Safe and unsafe claim examples">
+        <article><strong>Safer claims</strong><span>{safeClaims.join(' ')}</span></article>
+        <article><strong>Avoid unless proven</strong><span>{unsafeClaims.join(' ')}</span></article>
+      </div>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">How M&amp;G records it</p>
+      <h2>Records should separate what is gone from what remains</h2>
+      <p>Marketplace pages should keep separate notes for what is gone, what remains, where users or assets may have gone, and which parts are unknown. A source may prove that a marketplace sunset happened while leaving the asset, metadata, and wallet questions unresolved.</p>
+      <div class="hero-actions"><a class="btn" href="/guides/frontend-vs-smart-contract-what-remains/">Frontend vs contract guide</a><a class="btn" href="/guides/how-to-check-old-nft-marketplace-pages/">Page checking guide</a><a class="btn" href="/methodology/">Methodology</a></div>
+    </section>
+
+    <section class="guide-grid">
+      <article class="framed-panel guide-card">
+        <h2>If the marketplace page is gone</h2>
+        <p>Record the page state and archive URL. Do not automatically extend that claim to contracts, metadata, media, wallets, or other marketplaces.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>If metadata is unclear</h2>
+        <p>Use review flags. Unknown metadata state is better than a false claim that all assets disappeared or all assets remain safely accessible.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>If another market displays it</h2>
+        <p>Record that as a continuity signal, not as proof that the original marketplace is still operating.</p>
+      </article>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Related reading</p>
+      <h2>Continue through the archive</h2>
+      <p>Use this guide with individual records and evidence notes. The strongest record is often the one that admits which layer is still unknown.</p>
+      <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse marketplace records</a><a class="btn" href="/guides/what-happens-when-nft-marketplace-shuts-down/">Shutdown guide</a><a class="btn" href="/glossary/">Glossary</a></div>
+    </section>
+  </div>
+</BaseLayout>
