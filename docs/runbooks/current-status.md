@@ -100,7 +100,9 @@ Result:
 - Checked BaseLayout metadata coverage: title, description, robots, canonical, OG, Twitter, favicon, sitemap link, and JSON-LD WebSite block.
 - Confirmed sitemap generator covers the current static routes and generated marketplace records.
 - Added footer links to Guides, Glossary, and Updates so the reading layer is discoverable without replacing the registry as the main header focus.
-- Recorded remaining terminal/browser checks: `npm run check`, sitemap generation confirmation, mobile review, CTA link review, and CSS regression check.
+- Fixed duplicate batch-35 slugs that initially blocked validation.
+- Fixed CSS selector warnings in the mobile subpage/stat styles.
+- Confirmed local terminal check passed with no CSS warning: stats generated, sitemap generated with 350 URLs, validation passed, and 350 pages built.
 
 ## Operating rule
 
@@ -140,7 +142,7 @@ Required state:
 - Validation and build checks
 - Source-reviewed seed records
 
-Current assessment: mostly implemented. The route audit, v0 reading layer, and release-hardening checklist are in place. Terminal/browser verification is still required before calling v0 ready.
+Current assessment: implemented at source/build level. The route audit, v0 reading layer, release-hardening checklist, and local terminal check are complete. Browser/mobile visual review is still useful, but terminal validation/build no longer blocks v0.
 
 ### v0 reading layer
 
@@ -166,7 +168,10 @@ Current status:
 - sitemap route list checked at source level
 - reading-layer footer discovery added
 - hardening checklist added
-- terminal/browser verification remains pending
+- duplicate slug validation issue fixed
+- CSS warning fixed
+- `npm run check` passed locally with 350 pages built
+- browser/mobile visual review remains recommended
 
 ### v0.5
 
@@ -222,17 +227,15 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-047: Terminal/browser verification or record/content batch
+### PR-047: Browser/mobile visual review or next reviewed record/content batch
 
-Preferred next action if local/runtime access is available:
+Preferred next action if visual review is available:
 
-- run `npm run check`
-- confirm generated `public/sitemap.xml` includes new static routes
 - browser review for `/guides/`, both guide pages, `/glossary/`, `/updates/`
 - mobile review for header/footer wrapping and guide/glossary/update pages
-- check CTA links and CSS regressions
+- check CTA links and CSS regressions visually
 
-If runtime/browser verification is not available from the tool layer, proceed with the next small reviewed record/content batch and keep verification pending in the checklist.
+If visual review is not being done now, proceed with the next small reviewed record/content batch.
 
 ### PR-048 and later: Record and content batches
 
@@ -247,4 +250,4 @@ Expected pattern:
 
 ## Current next action
 
-Run terminal/browser verification if available. If not, continue with the next reviewed record/content batch while keeping verification pending.
+Either run browser/mobile visual review or proceed to the next reviewed record/content batch.
