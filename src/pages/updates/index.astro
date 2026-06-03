@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const updateTypes = [
+  ['Added records', 'New marketplace records that have been reviewed enough to enter the public draft archive.'],
+  ['Status changes', 'Source-backed changes to active, inactive, dead, acquired, limited, rebranded, merged, or unknown classifications.'],
+  ['Evidence additions', 'New official pages, archive captures, reporting, documentation, or source notes connected to existing records.'],
+  ['Archive links', 'New or improved archived URLs for closed, redirected, repurposed, or historically important marketplace pages.'],
+  ['Methodology changes', 'Changes to how Minted & Gone explains status, evidence, uncertainty, coverage, or review rules.']
+];
+
+const notIncluded = [
+  'unreviewed monitoring signals',
+  'unmerged candidate records',
+  'raw source scraping output',
+  'speculation about marketplace failure',
+  'generic NFT news without a registry change'
+];
+---
+<BaseLayout title="Updates — Minted & Gone" description="Registry updates for Minted & Gone: added NFT marketplace records, status changes, evidence additions, archive links, and methodology changes.">
+  <div class="shell guide-page updates-page">
+    <section class="field-hero simple-hero compact-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Registry updates</p>
+        <h1>Updates</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">A changelog for the archive, not an NFT news feed.</p>
+        <p>Updates record what changed inside Minted &amp; Gone: marketplace records added, status labels revised, evidence notes improved, archive links added, and methodology wording clarified.</p>
+        <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse records</a><a class="btn" href="/submit/">Submit correction</a></div>
+      </div>
+    </section>
+
+    <p class="mock-note">Updates should only describe reviewed or merged registry changes. Unreviewed candidates and raw monitoring signals stay out of public update copy.</p>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">What belongs here</p>
+      <h2>Registry changes with reviewable context</h2>
+      <div class="definition-grid">
+        {updateTypes.map(([title, copy]) => (
+          <article class="definition-card">
+            <h3>{title}</h3>
+            <p>{copy}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">What stays out</p>
+      <h2>Not every signal becomes an update</h2>
+      <p>Minted &amp; Gone should not publish raw monitoring output or weak candidate claims as if they were final registry changes.</p>
+      <ul class="plain-list">
+        {notIncluded.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Initial update</p>
+      <h2>v0 reading layer added</h2>
+      <p>The v0 reading layer now includes a guide index, two core guides, and a glossary index. These pages explain marketplace shutdowns, frontend and smart contract layers, metadata, archives, and continuity without turning the archive into a broad NFT blog.</p>
+      <div class="hero-actions"><a class="btn" href="/guides/">Guides</a><a class="btn" href="/glossary/">Glossary</a><a class="btn" href="/methodology/">Methodology</a></div>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Correction path</p>
+      <h2>Updates should improve records</h2>
+      <p>If a record has a better source, archive capture, shutdown notice, successor path, or correction, submit it with source links. Future update entries should point back to the affected records and evidence changes.</p>
+      <div class="hero-actions"><a class="btn primary" href="/submit/">Submit a note</a><a class="btn" href="/about/">About the archive</a></div>
+    </section>
+  </div>
+</BaseLayout>
