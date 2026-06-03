@@ -55,13 +55,30 @@
   line-height:1.22;
 }
 
-.encyclopedia-shell>.field-hero .hero-copy p:not(.eyebrow):not(.lede),
-.appendix-page>.field-hero .hero-copy p:not(.eyebrow):not(.lede),
-.guide-page>.field-hero .hero-copy p:not(.eyebrow):not(.lede),
-.support-page>.support-hero .support-hero-copy p:not(.eyebrow):not(.lede){
+/* Body copy: avoid chained :not() selectors because CSS minifiers can warn on this rule in the concatenated bundle. */
+.encyclopedia-shell>.field-hero .hero-copy>p,
+.appendix-page>.field-hero .hero-copy>p,
+.guide-page>.field-hero .hero-copy>p,
+.support-page>.support-hero .support-hero-copy>p{
   max-width:760px;
   font-size:16px;
   line-height:1.55;
+}
+
+.encyclopedia-shell>.field-hero .hero-copy>p.eyebrow,
+.appendix-page>.field-hero .hero-copy>p.eyebrow,
+.guide-page>.field-hero .hero-copy>p.eyebrow,
+.support-page>.support-hero .support-hero-copy>p.eyebrow{
+  font-size:inherit;
+  line-height:inherit;
+}
+
+.encyclopedia-shell>.field-hero .hero-copy>p.lede,
+.appendix-page>.field-hero .hero-copy>p.lede,
+.guide-page>.field-hero .hero-copy>p.lede,
+.support-page>.support-hero .support-hero-copy>p.lede{
+  font-size:clamp(23px,2.2vw,29px);
+  line-height:1.22;
 }
 
 .encyclopedia-shell>.field-hero .hero-botanical,
