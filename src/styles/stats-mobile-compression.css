@@ -32,9 +32,22 @@
     line-height: 1.2;
   }
 
-  .appendix-page > .field-hero p:no  .ayebrow):not(.lede) {
+  .appendix-page > .field-hero .hero-copy > p,
+  .appendix-page > .field-hero .plate-copy > p {
     font-size: 13px !important;
     line-height: 1.45;
+  }
+
+  .appendix-page > .field-hero .hero-copy > p.eyebrow,
+  .appendix-page > .field-hero .plate-copy > p.eyebrow {
+    font-size: 10px !important;
+    line-height: 1.1;
+  }
+
+  .appendix-page > .field-hero .hero-copy > p.lede,
+  .appendix-page > .field-hero .plate-copy > p.lede {
+    font-size: 18px !important;
+    line-height: 1.2;
   }
 
   .appendix-page > .mock-note {
