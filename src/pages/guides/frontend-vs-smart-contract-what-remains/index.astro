@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RelatedGlossaryLinks from '../../../components/RelatedGlossaryLinks.astro';
 
 const layers = [
   {
@@ -35,6 +36,13 @@ const recordQuestions = [
   'Is there an archived page or source-backed notice?',
   'Is the status clear, or should the record keep uncertainty visible?'
 ];
+
+const glossaryLinks = [
+  { title: 'Marketplace frontend', href: '/glossary/marketplace-frontend/' },
+  { title: 'Smart contract', href: '/glossary/smart-contract/' },
+  { title: 'Asset metadata', href: '/glossary/asset-metadata/' },
+  { title: 'Contract deprecated', href: '/glossary/contract-deprecated/' }
+];
 ---
 <BaseLayout title="Frontend vs smart contract: what actually remains? — Minted & Gone" description="A field-guide explanation of frontend closure, marketplace operation, smart contracts, metadata, wallets, and archives as separate layers in NFT marketplace history.">
   <div class="shell guide-page">
@@ -57,6 +65,8 @@ const recordQuestions = [
       <p>An NFT marketplace can lose its visible frontend while some on-chain or archived traces remain. A smart contract can remain readable while the original product is no longer operated. Metadata may remain available, become partly unavailable, or need further review.</p>
       <p>Minted &amp; Gone records these layers separately so a closed frontend is not automatically treated as proof that assets, contracts, metadata, or history disappeared.</p>
     </section>
+
+    <RelatedGlossaryLinks terms={glossaryLinks} />
 
     <section class="guide-grid numbered">
       {layers.map((layer, index) => (
