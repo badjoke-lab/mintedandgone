@@ -17,6 +17,7 @@ const staticPaths = [
   '/guides/what-happens-when-nft-marketplace-shuts-down/',
   '/guides/frontend-vs-smart-contract-what-remains/',
   '/glossary/',
+  '/updates/',
   '/methodology/',
   '/about/',
   '/submit/',
