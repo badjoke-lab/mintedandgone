@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const layers = [
+  {
+    title: 'Primary release surface',
+    copy: 'A launchpad marketplace often focuses on new drops, mints, creator releases, or initial sales before secondary trading becomes the main activity.'
+  },
+  {
+    title: 'Creator or brand onboarding',
+    copy: 'Launchpads commonly provide tools, curation, access rules, or campaign pages for creators, games, brands, or communities.'
+  },
+  {
+    title: 'Minting path',
+    copy: 'The important historical question may be how users minted or claimed assets, not only how they later traded them.'
+  },
+  {
+    title: 'Secondary market handoff',
+    copy: 'After a drop, assets may move to another marketplace, aggregator, wallet view, or collection page outside the original launchpad.'
+  },
+  {
+    title: 'Campaign-specific pages',
+    copy: 'A launchpad may have short-lived campaign pages. Those pages can disappear even when the broader platform, contracts, or assets remain.'
+  },
+  {
+    title: 'M&G classification',
+    copy: 'Minted & Gone records launchpads when they function as marketplace-like release surfaces or important parts of NFT marketplace history.'
+  }
+];
+
+const recordQuestions = [
+  'Was the product mainly a launchpad, a marketplace, or both?',
+  'Did it support primary mints, drops, claims, auctions, or curated releases?',
+  'Where did assets go after the initial release?',
+  'Did launch pages disappear while the platform or collections remained elsewhere?',
+  'Is there an official notice, archived page, or source-backed migration path?'
+];
+---
+<BaseLayout title="What is an NFT launchpad marketplace? — Minted & Gone" description="A field-guide explanation of NFT launchpad marketplaces, primary releases, mint paths, campaign pages, secondary-market handoffs, and M&G classification.">
+  <div class="shell guide-page">
+    <section class="field-hero simple-hero compact-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Guide</p>
+        <h1>What is an NFT launchpad marketplace?</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">Launchpads are release surfaces, not only trading venues.</p>
+        <p>This guide explains how NFT launchpad marketplaces differ from secondary marketplaces, why short-lived drop pages matter, and how Minted &amp; Gone records them.</p>
+        <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse records</a><a class="btn" href="/guides/">Back to guides</a></div>
+      </div>
+    </section>
+
+    <p class="mock-note">This guide is educational. It does not verify any mint eligibility, asset ownership, trading safety, recovery path, or marketplace reliability.</p>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Short answer</p>
+      <h2>A launchpad marketplace helps NFTs enter circulation</h2>
+      <p>An NFT launchpad marketplace is usually a place where creators, brands, games, or communities release NFTs through drops, mints, claims, auctions, or curated sale pages. Some launchpads also support secondary trading, while others hand assets off to external marketplaces or wallet views after the initial release.</p>
+      <p>For Minted &amp; Gone, the key is not just whether a trading page remains. The archive should also ask what happened to the release surface, campaign pages, minting path, and post-launch continuity.</p>
+    </section>
+
+    <section class="guide-grid numbered">
+      {layers.map((layer, index) => (
+        <article class="framed-panel guide-card">
+          <span class="num">{String(index + 1).padStart(2, '0')}</span>
+          <h2>{layer.title}</h2>
+          <p>{layer.copy}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Why launchpads matter</p>
+      <h2>They can vanish differently from secondary marketplaces</h2>
+      <p>A launchpad may shut down a specific drop page, end creator onboarding, discontinue mint tools, or merge into a broader marketplace. Those changes can affect how historical releases are discovered, but they do not automatically prove that every minted asset, contract, or metadata path disappeared.</p>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">How M&amp;G records it</p>
+      <h2>Launchpad records should track release and continuity paths</h2>
+      <ul class="plain-list">
+        {recordQuestions.map((item) => <li>{item}</li>)}
+      </ul>
+      <p>If only a campaign page is gone, the record should say that narrowly. If the entire platform ended, the record should use source-backed evidence and archive links to separate platform closure from asset or contract claims.</p>
+    </section>
+
+    <section class="guide-grid">
+      <article class="framed-panel guide-card">
+        <h2>Drop page gone</h2>
+        <p>A specific release or campaign page can disappear while the broader platform, collection, wallet display, or secondary trading path remains.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Platform closed</h2>
+        <p>If the launchpad itself ended, M&amp;G should record the original URL, archived URL, official notice, and any successor or migration path.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Secondary market moved</h2>
+        <p>A launchpad may never have been the long-term trading home. Post-launch activity can move to another marketplace or aggregator.</p>
+      </article>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Related reading</p>
+      <h2>Use launchpad records with marketplace-layer guides</h2>
+      <p>Launchpad history is easiest to read alongside the guides on shutdowns, old page checks, aggregator dependency, and NFT disappearance claims.</p>
+      <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse marketplace records</a><a class="btn" href="/guides/what-is-an-nft-marketplace-aggregator/">Aggregator guide</a><a class="btn" href="/glossary/">Glossary</a></div>
+    </section>
+  </div>
+</BaseLayout>
