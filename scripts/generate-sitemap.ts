@@ -19,6 +19,7 @@ const staticPaths = [
   '/guides/how-to-check-old-nft-marketplace-pages/',
   '/guides/do-nfts-disappear-when-a-marketplace-closes/',
   '/guides/what-is-an-nft-marketplace-aggregator/',
+  '/guides/what-is-an-nft-launchpad-marketplace/',
   '/glossary/',
   '/updates/',
   '/methodology/',
