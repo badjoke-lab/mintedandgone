@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import RelatedGlossaryLinks from '../../../components/RelatedGlossaryLinks.astro';
+import RelatedRecordLinks from '../../../components/RelatedRecordLinks.astro';
 
 const layers = [
   {
@@ -43,6 +44,12 @@ const glossaryLinks = [
   { title: 'Collection page', href: '/glossary/collection-page/' },
   { title: 'Aggregator', href: '/glossary/aggregator/' }
 ];
+
+const relatedRecords = [
+  { title: 'Sequence Marketplace', href: '/encyclopedia/sequence-marketplace/', note: 'Marketplace-adjacent infrastructure example for launch, game, and creator tooling scope review.' },
+  { title: 'RECUR Marketplace', href: '/encyclopedia/recur-marketplace/', note: 'Brand NFT infrastructure record useful for reading shutdown and post-launch continuity questions.' },
+  { title: 'Mythical Market', href: '/encyclopedia/mythical-market/', note: 'Gaming asset marketplace example where launch, game ecosystem, and secondary market context may overlap.' }
+];
 ---
 <BaseLayout title="What is an NFT launchpad marketplace? — Minted & Gone" description="A field-guide explanation of NFT launchpad marketplaces, primary releases, mint paths, campaign pages, secondary-market handoffs, and M&G classification.">
   <div class="shell guide-page">
@@ -67,6 +74,7 @@ const glossaryLinks = [
     </section>
 
     <RelatedGlossaryLinks terms={glossaryLinks} />
+    <RelatedRecordLinks records={relatedRecords} />
 
     <section class="guide-grid numbered">
       {layers.map((layer, index) => (
