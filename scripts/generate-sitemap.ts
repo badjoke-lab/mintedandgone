@@ -9,6 +9,29 @@ const readMany = (prefix: string) => readdirSync('data')
 const site = (process.env.PUBLIC_SITE_URL ?? 'https://mag.badjoke-lab.com').replace(/\/$/, '');
 const marketplaces = readMany('marketplaces');
 
+const glossarySlugs = [
+  'nft-marketplace',
+  'marketplace-frontend',
+  'smart-contract',
+  'asset-metadata',
+  'collection-page',
+  'trading-history',
+  'aggregator',
+  'launchpad-marketplace',
+  'community-fork',
+  'marketplace-shutdown',
+  'frontend-closed',
+  'contract-deprecated',
+  'asset-migration',
+  'archived-url',
+  'dead-domain',
+  'rebrand',
+  'acquisition',
+  'delisting',
+  'royalties',
+  'creator-fee'
+];
+
 const staticPaths = [
   '/',
   '/encyclopedia/',
@@ -21,6 +44,7 @@ const staticPaths = [
   '/guides/what-is-an-nft-marketplace-aggregator/',
   '/guides/what-is-an-nft-launchpad-marketplace/',
   '/glossary/',
+  ...glossarySlugs.map((slug) => '/glossary/' + slug + '/'),
   '/updates/',
   '/methodology/',
   '/about/',
