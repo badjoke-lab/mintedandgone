@@ -25,11 +25,16 @@ const guides = [
     href: '/guides/do-nfts-disappear-when-a-marketplace-closes/',
     status: 'v0.5 guide',
     summary: 'Explains why marketplace closure does not automatically settle token records, metadata, media, wallet display, third-party views, or trading paths.'
+  },
+  {
+    title: 'What is an NFT marketplace aggregator?',
+    href: '/guides/what-is-an-nft-marketplace-aggregator/',
+    status: 'v0.5 guide',
+    summary: 'Explains aggregator layers, listing aggregation, marketplace dependency, routing surfaces, and why aggregator closure is not the same as every indexed marketplace disappearing.'
   }
 ];
 
 const futureGuides = [
-  'What is an NFT marketplace aggregator?',
   'What is an NFT launchpad marketplace?'
 ];
 ---
@@ -76,7 +81,7 @@ const futureGuides = [
       <ul class="plain-list">
         {futureGuides.map((item) => <li>{item}</li>)}
       </ul>
-      <p class="subtle">These are deferred until the core reading layer and first v0.5 guides are stable.</p>
+      <p class="subtle">This candidate is deferred until the current guide layer remains stable after validation.</p>
     </section>
   </div>
 </BaseLayout>
