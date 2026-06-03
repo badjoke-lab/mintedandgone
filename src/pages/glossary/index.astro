@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const terms = [
+  ['NFT marketplace', 'A public or semi-public surface where NFTs can be listed, discovered, bought, sold, minted, or otherwise exchanged. Minted & Gone records marketplace identities, not individual NFT ownership.'],
+  ['Marketplace frontend', 'The website or app interface used to view listings, collection pages, search, account features, or marketplace actions. A frontend can close while other traces remain.'],
+  ['Smart contract', 'On-chain code that may support minting, trading, escrow, royalties, or other marketplace behavior. A readable contract does not necessarily mean the original marketplace still operates.'],
+  ['Asset metadata', 'Data that describes an NFT, often including name, description, attributes, and media references. Availability depends on the metadata path and storage layer.'],
+  ['Collection page', 'A marketplace-hosted page for a collection. It may disappear when the marketplace frontend closes even if tokens or metadata remain readable elsewhere.'],
+  ['Trading history', 'A record of marketplace activity such as sales or transfers. It may exist in marketplace databases, block explorers, third-party indexers, or archives depending on the case.'],
+  ['Aggregator', 'A service that combines listings or trading routes from multiple marketplaces. Aggregators can remain active even when one indexed marketplace changes or closes.'],
+  ['Launchpad marketplace', 'A marketplace or product surface focused on new NFT drops, mints, creator releases, or primary sales rather than only secondary trading.'],
+  ['Community fork', 'A community-run continuation, fork, or alternative interface that appears after an original marketplace changes, closes, or becomes unavailable.'],
+  ['Marketplace shutdown', 'A source-backed end or major reduction of marketplace operation. It can refer to the frontend, business operation, marketplace feature, or a specific product surface.'],
+  ['Frontend closed', 'The original public interface is no longer available or no longer works in its prior marketplace form. This does not automatically prove tokens or contracts disappeared.'],
+  ['Contract deprecated', 'A contract or protocol path is no longer recommended, maintained, or used as the current route. Deprecated is not the same as erased.'],
+  ['Asset migration', 'A source-backed movement or recommended path from one product, contract, metadata route, or marketplace surface to another.'],
+  ['Archived URL', 'A historical capture or archive search for a page. For dead or redirected domains, archive links are often safer historical references than current domains.'],
+  ['Dead domain', 'A domain that no longer resolves, serves the original marketplace, or remains controlled for the original purpose. Domains can also be repurposed.'],
+  ['Rebrand', 'A marketplace identity changes name, visual identity, product framing, or destination while some continuity may remain.'],
+  ['Acquisition', 'A marketplace or related product becomes owned or absorbed by another company, ecosystem, or product group.'],
+  ['Delisting', 'A collection, asset, or marketplace surface is removed from a listing view. Delisting is narrower than marketplace shutdown.'],
+  ['Royalties', 'Creator compensation rules or payments attached to NFT sales, often implemented through marketplace policy, contracts, or metadata standards.'],
+  ['Creator fee', 'A marketplace-level or protocol-level fee intended for creators. Creator fee behavior can change even when a marketplace remains active.']
+];
+---
+<BaseLayout title="Glossary — Minted & Gone" description="Short glossary terms for reading NFT marketplace records, shutdown guides, frontend notes, contracts, metadata, archives, and continuity states.">
+  <div class="shell guide-page glossary-page">
+    <section class="field-hero simple-hero compact-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Glossary</p>
+        <h1>Marketplace terms</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">Short definitions for reading the archive.</p>
+        <p>This glossary supports Minted &amp; Gone records and guides. It keeps terms compact so readers can move between marketplace records, evidence notes, and methodology without turning the site into a broad NFT encyclopedia.</p>
+        <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse records</a><a class="btn" href="/guides/">Read guides</a></div>
+      </div>
+    </section>
+
+    <p class="mock-note">Glossary terms are explanatory labels for this archive. They are not legal, financial, ownership, or technical audit definitions.</p>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">How to use this glossary</p>
+      <h2>Terms explain record language</h2>
+      <p>Minted &amp; Gone separates marketplace frontends, operations, contracts, metadata, archives, and continuity paths. These short definitions help keep that separation visible when reading records and guides.</p>
+      <div class="hero-actions"><a class="btn" href="/guides/what-happens-when-nft-marketplace-shuts-down/">Shutdown guide</a><a class="btn" href="/guides/frontend-vs-smart-contract-what-remains/">Frontend vs contract guide</a><a class="btn" href="/methodology/">Methodology</a></div>
+    </section>
+
+    <section class="definition-grid glossary-grid" aria-label="Minted and Gone glossary terms">
+      {terms.map(([term, copy]) => (
+        <article class="definition-card framed-panel" id={term.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}>
+          <h2>{term}</h2>
+          <p>{copy}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Later expansion</p>
+      <h2>Individual term pages are deferred</h2>
+      <p>For v0, the glossary remains one index page. v0.5 can add individual term pages only after the core reading layer and update log are in place.</p>
+    </section>
+  </div>
+</BaseLayout>
