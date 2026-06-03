@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import RelatedGlossaryLinks from '../../../components/RelatedGlossaryLinks.astro';
+import RelatedRecordLinks from '../../../components/RelatedRecordLinks.astro';
 
 const layers = [
   {
@@ -43,6 +44,12 @@ const glossaryLinks = [
   { title: 'Trading history', href: '/glossary/trading-history/' },
   { title: 'Acquisition', href: '/glossary/acquisition/' }
 ];
+
+const relatedRecords = [
+  { title: 'Sequence Marketplace', href: '/encyclopedia/sequence-marketplace/', note: 'Infrastructure-style marketplace record useful for reading aggregator and tooling boundaries.' },
+  { title: 'Mythical Market', href: '/encyclopedia/mythical-market/', note: 'Gaming asset marketplace example where marketplace, ecosystem, and asset visibility can overlap.' },
+  { title: 'VeVe Market', href: '/encyclopedia/veve-market/', note: 'Licensed collectibles marketplace example for comparing marketplace-specific and external visibility paths.' }
+];
 ---
 <BaseLayout title="What is an NFT marketplace aggregator? — Minted & Gone" description="A field-guide explanation of NFT marketplace aggregators, listing aggregation, routing surfaces, marketplace dependency, archives, and M&G classification.">
   <div class="shell guide-page">
@@ -67,6 +74,7 @@ const glossaryLinks = [
     </section>
 
     <RelatedGlossaryLinks terms={glossaryLinks} />
+    <RelatedRecordLinks records={relatedRecords} />
 
     <section class="guide-grid numbered">
       {layers.map((layer, index) => (
