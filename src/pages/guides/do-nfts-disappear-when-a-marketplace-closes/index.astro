@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RelatedGlossaryLinks from '../../../components/RelatedGlossaryLinks.astro';
 
 const layers = [
   {
@@ -43,6 +44,13 @@ const unsafeClaims = [
   'The marketplace was a scam.',
   'No one can access the asset anymore.'
 ];
+
+const glossaryLinks = [
+  { title: 'Asset metadata', href: '/glossary/asset-metadata/' },
+  { title: 'Smart contract', href: '/glossary/smart-contract/' },
+  { title: 'Collection page', href: '/glossary/collection-page/' },
+  { title: 'Delisting', href: '/glossary/delisting/' }
+];
 ---
 <BaseLayout title="Do NFTs disappear when a marketplace closes? — Minted & Gone" description="A field-guide explanation of why marketplace closure does not automatically mean NFTs, metadata, media, wallets, or trading paths disappeared.">
   <div class="shell guide-page">
@@ -65,6 +73,8 @@ const unsafeClaims = [
       <p>When a marketplace closes, the marketplace page, listings, search, account views, or trading interface may stop working. But token records, contracts, metadata, media, wallet display, third-party views, or archived pages may follow different paths.</p>
       <p>Minted &amp; Gone records those layers separately. A record should only claim disappearance when sources support the exact layer being described.</p>
     </section>
+
+    <RelatedGlossaryLinks terms={glossaryLinks} />
 
     <section class="guide-grid numbered">
       {layers.map((layer, index) => (
