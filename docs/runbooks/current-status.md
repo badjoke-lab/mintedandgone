@@ -153,6 +153,18 @@ Result:
 - Kept the guide focused on launchpad-specific layers: primary release surface, creator/brand onboarding, minting path, secondary-market handoff, campaign-specific pages, and M&G classification.
 - Avoided claiming that a launchpad or campaign-page closure means every minted asset, contract, or metadata path disappeared.
 
+### PR-051 equivalent
+
+Committed directly to `main` because branch creation remained blocked by the tool safety layer during this session.
+
+Result:
+
+- Added shared glossary term data in `src/data/glossaryTerms.ts`.
+- Updated `/glossary/` to use the shared term data.
+- Added `/glossary/[slug]/` detail pages for 20 glossary terms.
+- Updated sitemap generation to include glossary term pages.
+- Kept glossary detail pages compact and registry-support focused.
+
 ## Operating rule
 
 After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
@@ -232,12 +244,12 @@ Current status:
 - second v0.5 guide added: `/guides/do-nfts-disappear-when-a-marketplace-closes/`
 - third v0.5 guide added: `/guides/what-is-an-nft-marketplace-aggregator/`
 - fourth v0.5 guide added: `/guides/what-is-an-nft-launchpad-marketplace/`
+- glossary detail page structure added for 20 terms
 - terminal check passed after the first two v0.5 guides
-- terminal check pending after the aggregator and launchpad guides
+- terminal check pending after the aggregator, launchpad, and glossary-detail changes
 
 Planned additions:
 
-- glossary detail pages for major terms
 - update detail page structure
 - stronger related-record links from guides/glossary to marketplace records
 - additional reviewed record batches
@@ -284,20 +296,19 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-051: Validation check or next reviewed content batch
+### PR-052: Validation check or next reviewed content batch
 
 Preferred next action:
 
-- run `npm run check` after the aggregator and launchpad guide/sitemap changes.
+- run `npm run check` after the aggregator, launchpad, and glossary-detail changes.
 
 If check passes, continue with one of the following:
 
-- glossary detail page structure
 - update detail page structure
 - reviewed record batch
-- internal linking pass from glossary to guides
+- internal linking pass from glossary to guides/records
 
-### PR-052 and later: Record and content batches
+### PR-053 and later: Record and content batches
 
 Purpose: continue with small reviewed batches.
 
