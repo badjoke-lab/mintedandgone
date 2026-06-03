@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const steps = [
+  {
+    title: 'Start with the original domain',
+    copy: 'Record the original URL or domain before following redirects. A current redirect can hide what the marketplace looked like when it was active.'
+  },
+  {
+    title: 'Check an archive search, not only the live page',
+    copy: 'Use archived captures to understand historical pages, shutdown notices, collection pages, help pages, or redirects. A current live page is not always the historical marketplace.'
+  },
+  {
+    title: 'Look for official notices first',
+    copy: 'Official blogs, help-center posts, social announcements, docs, and product notices are stronger than unsourced summaries.'
+  },
+  {
+    title: 'Separate frontend state from asset state',
+    copy: 'A page not loading can show frontend closure, but it does not automatically prove that contracts, metadata, tokens, or third-party views disappeared.'
+  },
+  {
+    title: 'Keep the uncertainty visible',
+    copy: 'If the current state is unclear, the record should say that review is needed instead of forcing a closed, active, or gone label.'
+  }
+];
+
+const warningItems = [
+  'Do not treat a parked or repurposed domain as proof of the old marketplace state.',
+  'Do not use an archive capture as proof that the current marketplace is active.',
+  'Do not claim NFTs disappeared unless a source supports that narrower claim.',
+  'Do not rely on a single social post if an official notice or archive exists.',
+  'Do not erase uncertainty just to make a record look complete.'
+];
+---
+<BaseLayout title="How to check old NFT marketplace pages — Minted & Gone" description="A field-guide workflow for checking old NFT marketplace pages with domains, archived URLs, official notices, frontend state, and source-backed uncertainty.">
+  <div class="shell guide-page">
+    <section class="field-hero simple-hero compact-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Guide</p>
+        <h1>How to check old NFT marketplace pages</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">Old marketplace pages need archive-first reading.</p>
+        <p>A dead domain, redirect, or blank page is only one signal. This guide explains how to check old NFT marketplace pages without overstating what disappeared or remained.</p>
+        <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse records</a><a class="btn" href="/guides/">Back to guides</a></div>
+      </div>
+    </section>
+
+    <p class="mock-note">This guide is a research workflow. It does not verify any wallet, token, ownership claim, legal status, or recovery path.</p>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Short answer</p>
+      <h2>Check the domain, archives, official sources, and record layer separately</h2>
+      <p>For an old NFT marketplace, the safest first question is not simply whether the live URL works today. The better question is what the original page was, whether archived captures exist, whether an official notice explains the change, and which layer changed: frontend, operation, contract, metadata, or user path.</p>
+    </section>
+
+    <section class="guide-grid numbered">
+      {steps.map((step, index) => (
+        <article class="framed-panel guide-card">
+          <span class="num">{String(index + 1).padStart(2, '0')}</span>
+          <h2>{step.title}</h2>
+          <p>{step.copy}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">What to record</p>
+      <h2>Useful notes for a marketplace record</h2>
+      <div class="reading-guide-grid" aria-label="Old marketplace page evidence fields">
+        <article><strong>Original URL</strong><span>The old marketplace domain or page path before redirects or domain reuse.</span></article>
+        <article><strong>Archived URL</strong><span>A historical capture or archive search that preserves the old surface.</span></article>
+        <article><strong>Current state</strong><span>Whether the live page works, redirects, parks, errors, or serves unrelated content.</span></article>
+        <article><strong>Official notice</strong><span>Shutdown, migration, acquisition, sunset, or rebrand notes from official channels.</span></article>
+        <article><strong>Continuity note</strong><span>What may remain visible through wallets, contracts, third-party marketplaces, or archives.</span></article>
+        <article><strong>Confidence</strong><span>Whether the record is clear, partial, unknown, or still needs source review.</span></article>
+      </div>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Common mistakes</p>
+      <h2>Do not turn a page check into an asset claim</h2>
+      <ul class="plain-list">
+        {warningItems.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <section class="guide-grid">
+      <article class="framed-panel guide-card">
+        <h2>Dead domain</h2>
+        <p>A dead or parked domain can show that the original web surface is no longer available. It does not automatically describe contracts, metadata, wallets, or other marketplaces.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Redirect</h2>
+        <p>A redirect can point to a successor product, parent company, unrelated domain, or generic landing page. The record should explain the destination if the source supports it.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Archive found</h2>
+        <p>An archived page can preserve evidence of the old marketplace. It should be treated as historical support, not as proof of present availability.</p>
+      </article>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Related reading</p>
+      <h2>Use this workflow with M&amp;G records</h2>
+      <p>After checking an old page, compare the record status, timeline events, evidence notes, archive URL, and continuity fields. Good records keep the source trail visible even when the conclusion is still partial.</p>
+      <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse marketplace records</a><a class="btn" href="/guides/what-happens-when-nft-marketplace-shuts-down/">Shutdown guide</a><a class="btn" href="/methodology/">Methodology</a></div>
+    </section>
+  </div>
+</BaseLayout>
