@@ -141,6 +141,18 @@ Result:
 - Kept the guide focused on aggregator-specific layers: aggregated listings, routing surface, marketplace dependency, independent interface, archive complexity, and M&G classification.
 - Avoided claiming that an aggregator closure means every indexed marketplace or asset disappeared.
 
+### PR-050 equivalent
+
+Committed directly to `main` because branch creation remained blocked by the tool safety layer during this session.
+
+Result:
+
+- Added `/guides/what-is-an-nft-launchpad-marketplace/` as the fourth v0.5 reading-layer guide.
+- Updated `/guides/` to list the new launchpad guide.
+- Updated sitemap generation to include the new guide route.
+- Kept the guide focused on launchpad-specific layers: primary release surface, creator/brand onboarding, minting path, secondary-market handoff, campaign-specific pages, and M&G classification.
+- Avoided claiming that a launchpad or campaign-page closure means every minted asset, contract, or metadata path disappeared.
+
 ## Operating rule
 
 After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
@@ -219,12 +231,12 @@ Current status:
 - first v0.5 guide added: `/guides/how-to-check-old-nft-marketplace-pages/`
 - second v0.5 guide added: `/guides/do-nfts-disappear-when-a-marketplace-closes/`
 - third v0.5 guide added: `/guides/what-is-an-nft-marketplace-aggregator/`
+- fourth v0.5 guide added: `/guides/what-is-an-nft-launchpad-marketplace/`
 - terminal check passed after the first two v0.5 guides
-- terminal check pending after the aggregator guide
+- terminal check pending after the aggregator and launchpad guides
 
 Planned additions:
 
-- additional guides
 - glossary detail pages for major terms
 - update detail page structure
 - stronger related-record links from guides/glossary to marketplace records
@@ -272,20 +284,20 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-050: Validation check or next reviewed content batch
+### PR-051: Validation check or next reviewed content batch
 
 Preferred next action:
 
-- run `npm run check` after the aggregator guide/sitemap change.
+- run `npm run check` after the aggregator and launchpad guide/sitemap changes.
 
 If check passes, continue with one of the following:
 
-- next guide: `What is an NFT launchpad marketplace?`
 - glossary detail page structure
 - update detail page structure
 - reviewed record batch
+- internal linking pass from glossary to guides
 
-### PR-051 and later: Record and content batches
+### PR-052 and later: Record and content batches
 
 Purpose: continue with small reviewed batches.
 
