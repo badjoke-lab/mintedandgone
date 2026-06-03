@@ -15,6 +15,7 @@ const staticPaths = [
   '/stats/',
   '/guides/',
   '/guides/what-happens-when-nft-marketplace-shuts-down/',
+  '/guides/frontend-vs-smart-contract-what-remains/',
   '/methodology/',
   '/about/',
   '/submit/',
