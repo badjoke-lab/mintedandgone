@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const layers = [
+  {
+    title: 'Aggregated listings',
+    copy: 'An aggregator may show listings from multiple marketplaces instead of hosting every listing directly.'
+  },
+  {
+    title: 'Routing surface',
+    copy: 'Some aggregators help users find or route trades across marketplaces, protocols, or liquidity sources.'
+  },
+  {
+    title: 'Marketplace dependency',
+    copy: 'If an indexed marketplace changes, closes, or removes listings, the aggregator view may also change.'
+  },
+  {
+    title: 'Independent interface',
+    copy: 'An aggregator can remain active even when one underlying marketplace becomes inactive or disappears.'
+  },
+  {
+    title: 'Archive complexity',
+    copy: 'Archived aggregator pages may preserve a view of listings, but they do not prove the underlying marketplace is still active.'
+  },
+  {
+    title: 'M&G classification',
+    copy: 'Minted & Gone records aggregators as marketplace infrastructure or aggregator-style marketplace records when they are central to marketplace history.'
+  }
+];
+
+const recordSignals = [
+  'Does the product primarily aggregate listings from other marketplaces?',
+  'Does it also host its own marketplace or trading surface?',
+  'Which marketplaces, chains, or ecosystems did it index?',
+  'Did it shut down, merge, rebrand, or get acquired?',
+  'Did its closure affect how users found older NFT listings?'
+];
+---
+<BaseLayout title="What is an NFT marketplace aggregator? — Minted & Gone" description="A field-guide explanation of NFT marketplace aggregators, listing aggregation, routing surfaces, marketplace dependency, archives, and M&G classification.">
+  <div class="shell guide-page">
+    <section class="field-hero simple-hero compact-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Guide</p>
+        <h1>What is an NFT marketplace aggregator?</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">Aggregators are discovery and routing layers around marketplaces.</p>
+        <p>This guide explains how NFT marketplace aggregators differ from single marketplaces, why they matter historically, and how Minted &amp; Gone records them.</p>
+        <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse records</a><a class="btn" href="/guides/">Back to guides</a></div>
+      </div>
+    </section>
+
+    <p class="mock-note">This guide is educational. It does not verify current liquidity, asset availability, trading safety, ownership, or marketplace reliability.</p>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Short answer</p>
+      <h2>An aggregator collects marketplace visibility into one interface</h2>
+      <p>An NFT marketplace aggregator usually helps users discover, compare, or route listings across multiple marketplaces or liquidity sources. It may not be the original marketplace for every listed asset. Its historical record can depend on both its own interface and the marketplaces it indexed.</p>
+      <p>For Minted &amp; Gone, this means aggregator records need careful wording: an aggregator page can change without proving that every underlying marketplace, collection, token, or listing disappeared.</p>
+    </section>
+
+    <section class="guide-grid numbered">
+      {layers.map((layer, index) => (
+        <article class="framed-panel guide-card">
+          <span class="num">{String(index + 1).padStart(2, '0')}</span>
+          <h2>{layer.title}</h2>
+          <p>{layer.copy}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Why aggregators matter</p>
+      <h2>They preserve and reshape how marketplace history is seen</h2>
+      <p>Aggregators can become the main way users discover listings across many marketplaces. When an aggregator closes, changes ownership, or rebrands, the historical trail can split between the aggregator interface and the underlying marketplace records. Minted &amp; Gone should record both layers when the sources support it.</p>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">How M&amp;G records it</p>
+      <h2>Aggregator records should answer dependency questions</h2>
+      <ul class="plain-list">
+        {recordSignals.map((item) => <li>{item}</li>)}
+      </ul>
+      <p>If the evidence only proves that an aggregator interface changed, the record should not claim that all indexed marketplaces or assets changed with it.</p>
+    </section>
+
+    <section class="guide-grid">
+      <article class="framed-panel guide-card">
+        <h2>Aggregator closed</h2>
+        <p>This can mean the unified discovery or routing interface ended. It does not automatically prove that every underlying marketplace stopped operating.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Underlying market changed</h2>
+        <p>If an indexed marketplace closes or changes listing behavior, the aggregator view may lose coverage even if the aggregator itself remains active.</p>
+      </article>
+      <article class="framed-panel guide-card">
+        <h2>Acquired or rebranded</h2>
+        <p>Aggregator products often become part of larger marketplace stacks. M&amp;G records acquisition and rebrand paths as continuity signals, not automatic disappearance.</p>
+      </article>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Related reading</p>
+      <h2>Use aggregator records with layer-specific guides</h2>
+      <p>Aggregator history is easiest to read alongside the guides on shutdowns, frontend layers, old page checks, and NFT disappearance claims.</p>
+      <div class="hero-actions"><a class="btn primary" href="/encyclopedia/">Browse marketplace records</a><a class="btn" href="/guides/frontend-vs-smart-contract-what-remains/">Frontend vs contract guide</a><a class="btn" href="/glossary/">Glossary</a></div>
+    </section>
+  </div>
+</BaseLayout>
