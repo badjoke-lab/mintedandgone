@@ -1,23 +1,28 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const plannedGuides = [
+const guides = [
   {
     title: 'What happens when an NFT marketplace shuts down?',
     href: '/guides/what-happens-when-nft-marketplace-shuts-down/',
-    status: 'Planned v0 guide',
+    status: 'v0 guide',
     summary: 'Explains what may happen to the marketplace frontend, collection pages, trading history, metadata visibility, and archive trail when a marketplace closes or fades.'
   },
   {
     title: 'Frontend vs smart contract: what actually remains?',
     href: '/guides/frontend-vs-smart-contract-what-remains/',
-    status: 'Planned v0 guide',
+    status: 'v0 guide',
     summary: 'Separates the public website, marketplace UI, smart contracts, metadata, wallet visibility, and third-party marketplace paths so readers do not overread closure language.'
+  },
+  {
+    title: 'How to check old NFT marketplace pages',
+    href: '/guides/how-to-check-old-nft-marketplace-pages/',
+    status: 'v0.5 guide',
+    summary: 'A practical workflow for checking old domains, archived pages, official notices, redirects, and continuity notes without turning page checks into asset claims.'
   }
 ];
 
 const futureGuides = [
-  'How to check old NFT marketplace pages',
   'Do NFTs disappear when a marketplace closes?',
   'What is an NFT marketplace aggregator?',
   'What is an NFT launchpad marketplace?'
@@ -39,7 +44,7 @@ const futureGuides = [
     <p class="mock-note">Guides are registry-support pages. They do not determine asset ownership, market safety, investment value, or legal status.</p>
 
     <section class="guide-grid">
-      {plannedGuides.map((guide) => (
+      {guides.map((guide) => (
         <article class="framed-panel guide-card">
           <p class="eyebrow">{guide.status}</p>
           <h2><a class="text-link" href={guide.href}>{guide.title}</a></h2>
@@ -66,7 +71,7 @@ const futureGuides = [
       <ul class="plain-list">
         {futureGuides.map((item) => <li>{item}</li>)}
       </ul>
-      <p class="subtle">These are deferred until the two core v0 guides and the glossary/update entry points are in place.</p>
+      <p class="subtle">These are deferred until the core reading layer and first v0.5 guide are stable.</p>
     </section>
   </div>
 </BaseLayout>
