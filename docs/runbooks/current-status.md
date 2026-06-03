@@ -127,6 +127,7 @@ Result:
 - Updated sitemap generation to include the new guide route.
 - Kept the guide focused on layer separation: marketplace page, token record, metadata path, media file, wallet display, and trading path.
 - Avoided overclaiming that marketplace closure means NFT or asset disappearance.
+- Confirmed local terminal check passed after the change: sitemap generated with 352 URLs, validation passed, and 352 pages built.
 
 ## Operating rule
 
@@ -194,7 +195,7 @@ Current status:
 - hardening checklist added
 - duplicate slug validation issue fixed
 - CSS warning fixed
-- `npm run check` passed locally with 350 pages built before PR-047 and 351 pages built after PR-047
+- `npm run check` passed locally with 350 pages built before PR-047, 351 pages built after PR-047, and 352 pages built after PR-048
 - browser/mobile visual review remains recommended
 
 ### v0.5
@@ -205,14 +206,13 @@ Current status:
 
 - first v0.5 guide added: `/guides/how-to-check-old-nft-marketplace-pages/`
 - second v0.5 guide added: `/guides/do-nfts-disappear-when-a-marketplace-closes/`
-- terminal check passed after first v0.5 guide
-- terminal check pending after second v0.5 guide
+- terminal check passed after both v0.5 guides
 
 Planned additions:
 
 - additional guides
 - glossary detail pages for major terms
-- update detail pages
+- update detail page structure
 - stronger related-record links from guides/glossary to marketplace records
 - additional reviewed record batches
 
@@ -258,13 +258,9 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-049: Validation check or next reviewed content batch
+### PR-049: Next reviewed content batch
 
-Preferred next action:
-
-- run `npm run check` after the new guide/sitemap change.
-
-If check passes, continue with one of the following:
+Recommended next options:
 
 - next guide: `What is an NFT marketplace aggregator?`
 - glossary detail page structure
@@ -284,4 +280,4 @@ Expected pattern:
 
 ## Current next action
 
-Run `npm run check` after pulling main. If it passes, proceed with the next reviewed content/record batch.
+Proceed with the next reviewed content/record batch.
