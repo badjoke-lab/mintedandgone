@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { updateEntries } from '../../data/updateEntries';
+
+export function getStaticPaths() {
+  return updateEntries.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+---
+<BaseLayout title={`${entry.title} — Updates — Minted & Gone`} description={entry.summary}>
+  <div class="shell guide-page update-detail-page">
+    <section class="field-hero simple-hero compact-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Registry update · {entry.date}</p>
+        <h1>{entry.title}</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">{entry.summary}</p>
+        <p>Updates describe reviewed or merged changes inside Minted &amp; Gone. They are not generic NFT news items and should not include raw monitoring signals or unmerged candidates.</p>
+        <div class="hero-actions"><a class="btn primary" href="/updates/">Back to updates</a><a class="btn" href="/encyclopedia/">Browse records</a></div>
+      </div>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Update type</p>
+      <h2>{entry.label}</h2>
+      <ul class="plain-list">
+        {entry.details.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Related pages</p>
+      <h2>Review the affected surfaces</h2>
+      <div class="hero-actions">
+        {entry.links.map((link) => <a class="btn" href={link.href}>{link.title}</a>)}
+        <a class="btn" href="/methodology/">Methodology</a>
+      </div>
+    </section>
+
+    <section class="framed-panel definition-card">
+      <p class="eyebrow">Archive note</p>
+      <h2>Update entries should remain source-conscious</h2>
+      <p>This entry describes changes to the registry itself. It should not be read as a claim about asset value, ownership, legal status, marketplace safety, or whether every related NFT remains visible.</p>
+    </section>
+  </div>
+</BaseLayout>
