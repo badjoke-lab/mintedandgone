@@ -179,6 +179,17 @@ Result:
 - Kept update detail pages as registry changelog entries, not NFT news articles.
 - Confirmed local terminal check passed after the change: sitemap generated with 377 URLs, validation passed, and 377 pages built.
 
+### PR-053 equivalent
+
+Committed directly to `main` because branch creation remained blocked by the tool safety layer during this session.
+
+Result:
+
+- Added `RelatedGlossaryLinks` component.
+- Added related glossary term blocks to all six guide pages.
+- Strengthened guide-to-glossary internal linking without changing sitemap route count.
+- Kept links focused on archive vocabulary and layer-specific interpretation rather than broad NFT education.
+
 ## Operating rule
 
 After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
@@ -260,7 +271,9 @@ Current status:
 - fourth v0.5 guide added: `/guides/what-is-an-nft-launchpad-marketplace/`
 - glossary detail page structure added for 20 terms
 - update detail page structure added for 3 entries
+- guide-to-glossary internal linking added
 - terminal check passed after update-detail changes
+- terminal check pending after internal-linking changes
 
 Planned additions:
 
@@ -309,14 +322,18 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-053: Next reviewed content batch
+### PR-054: Validation check or next reviewed content batch
 
-Recommended next options:
+Preferred next action:
 
-- internal linking pass from glossary to guides/records
+- run `npm run check` after the internal-linking changes.
+
+If check passes, continue with one of the following:
+
 - reviewed record batch
+- stronger related-record links from guides/glossary to marketplace records
 
-### PR-054 and later: Record and content batches
+### PR-055 and later: Record and content batches
 
 Purpose: continue with small reviewed batches.
 
@@ -329,4 +346,4 @@ Expected pattern:
 
 ## Current next action
 
-Proceed with the next reviewed content/record batch.
+Run `npm run check` after pulling main. If it passes, proceed with the next reviewed content/record batch.
