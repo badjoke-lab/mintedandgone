@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RelatedGlossaryLinks from '../../../components/RelatedGlossaryLinks.astro';
 
 const steps = [
   {
@@ -31,6 +32,13 @@ const warningItems = [
   'Do not rely on a single social post if an official notice or archive exists.',
   'Do not erase uncertainty just to make a record look complete.'
 ];
+
+const glossaryLinks = [
+  { title: 'Archived URL', href: '/glossary/archived-url/' },
+  { title: 'Dead domain', href: '/glossary/dead-domain/' },
+  { title: 'Collection page', href: '/glossary/collection-page/' },
+  { title: 'Rebrand', href: '/glossary/rebrand/' }
+];
 ---
 <BaseLayout title="How to check old NFT marketplace pages — Minted & Gone" description="A field-guide workflow for checking old NFT marketplace pages with domains, archived URLs, official notices, frontend state, and source-backed uncertainty.">
   <div class="shell guide-page">
@@ -52,6 +60,8 @@ const warningItems = [
       <h2>Check the domain, archives, official sources, and record layer separately</h2>
       <p>For an old NFT marketplace, the safest first question is not simply whether the live URL works today. The better question is what the original page was, whether archived captures exist, whether an official notice explains the change, and which layer changed: frontend, operation, contract, metadata, or user path.</p>
     </section>
+
+    <RelatedGlossaryLinks terms={glossaryLinks} />
 
     <section class="guide-grid numbered">
       {steps.map((step, index) => (
