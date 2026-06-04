@@ -63,22 +63,22 @@ export const updateEntries: UpdateEntry[] = [
     ]
   },
   {
-    slug: 'reviewed-record-batches-36-38-added',
-    title: 'Reviewed record batches 36–38 added',
+    slug: 'reviewed-record-batch-36-added',
+    title: 'Reviewed record batch 36 added',
     date: '2026-06-04',
     label: 'Records',
-    summary: 'Added 15 reviewed-staging marketplace records across batches 36, 37, and 38, with matching event and evidence files.',
+    summary: 'Added two reviewed-staging marketplace records in batch 36, with matching event and evidence files.',
     details: [
-      'Batch 36 added Magic Eden, Foundation Marketplace, SuperRare, Zora, and Manifold as conservative reviewed-staging records.',
-      'Batch 37 added OpenSea, Blur, LooksRare, X2Y2, and Sudoswap, with X2Y2 classified conservatively as inactive / under review because the original domain redirects away from the prior marketplace surface.',
-      'Batch 38 added Rarible, Objkt, Tensor, Gamma, and fxhash as conservative reviewed-staging records.',
-      'Each record batch includes matching event and evidence files using official-domain and Wayback archive-search references.'
+      'Batch 36 now contains Foundation Marketplace and Manifold as conservative reviewed-staging records.',
+      'Duplicate additions from later review passes were removed before validation retest.',
+      'The remaining batch-36 records include matching event and evidence files using official-domain and Wayback archive-search references.',
+      'Both records remain under review for marketplace scope, frontend state, contract status, and asset-path interpretation.'
     ],
     links: [
       { title: 'Marketplace encyclopedia', href: '/encyclopedia/' },
-      { title: 'OpenSea', href: '/encyclopedia/opensea/' },
-      { title: 'Magic Eden', href: '/encyclopedia/magic-eden/' },
-      { title: 'Rarible', href: '/encyclopedia/rarible/' }
+      { title: 'Foundation Marketplace', href: '/encyclopedia/foundation-marketplace/' },
+      { title: 'Manifold', href: '/encyclopedia/manifold/' },
+      { title: 'Methodology', href: '/methodology/' }
     ]
   }
 ];
