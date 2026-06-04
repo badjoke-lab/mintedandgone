@@ -36,7 +36,7 @@ const updateSlugs = [
   'v0-reading-layer-added',
   'v0-5-guide-expansion-added',
   'glossary-detail-pages-added',
-  'reviewed-record-batches-36-38-added'
+  'reviewed-record-batch-36-added'
 ];
 
 const staticPaths = [
