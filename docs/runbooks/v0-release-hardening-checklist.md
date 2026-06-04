@@ -78,9 +78,9 @@ Preferred wording used:
 - source review is needed
 - records are draft and open to correction
 
-## Still requires terminal/browser verification
+## Still requires local/browser verification
 
-These items should be checked outside the GitHub file-editing tool:
+These items should be checked before treating the v0 draft surface as release-ready:
 
 - run `npm run check`
 - confirm generated `public/sitemap.xml` includes new static routes
@@ -91,13 +91,13 @@ These items should be checked outside the GitHub file-editing tool:
 
 ## v0 release position
 
-After this pass, the v0 reading layer is in place and the public surface is structurally ready for terminal/browser verification.
+After this pass, the v0 reading layer is in place and the public surface is structurally ready for local/browser verification.
 
 Do not call the project final. It remains a source-reviewed draft archive.
 
 ## Next work
 
-After terminal/browser verification, continue with PR-047 and later:
+After local/browser verification, continue with:
 
 - small reviewed record batches
 - internal-link improvements
