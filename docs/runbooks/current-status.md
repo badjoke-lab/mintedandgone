@@ -127,7 +127,16 @@ Completed:
 - Matching batch-37 event records.
 - Matching batch-37 evidence records with official-domain and Wayback archive-search references.
 
-All batch-36 and batch-37 records are conservative reviewed-staging entries with review flags for scope, current live state, asset status, and contract status where appropriate. `x2y2` is classified conservatively as inactive / under review because the original domain currently redirects away from the prior marketplace surface.
+- Batch-38 added five reviewed-staging marketplace records:
+  - `rarible`
+  - `objkt`
+  - `tensor`
+  - `gamma`
+  - `fxhash`
+- Matching batch-38 event records.
+- Matching batch-38 evidence records with official-domain and Wayback archive-search references.
+
+All batch-36, batch-37, and batch-38 records are conservative reviewed-staging entries with review flags for scope, current live state, asset status, and contract status where appropriate. `x2y2` is classified conservatively as inactive / under review because the original domain currently redirects away from the prior marketplace surface.
 
 ## Build and validation status
 
@@ -145,6 +154,7 @@ Latest additions after the last recorded validation:
 - guide-to-record internal links
 - batch-36 records/events/evidence
 - batch-37 records/events/evidence
+- batch-38 records/events/evidence
 
 Recommended next check:
 
@@ -200,6 +210,7 @@ Implemented:
 - guide-to-record linking for selected pages
 - batch-36 reviewed-staging records
 - batch-37 reviewed-staging records
+- batch-38 reviewed-staging records
 
 Planned:
 
