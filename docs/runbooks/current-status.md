@@ -91,7 +91,7 @@ Current update detail pages:
 - `/updates/v0-reading-layer-added/`
 - `/updates/v0-5-guide-expansion-added/`
 - `/updates/glossary-detail-pages-added/`
-- `/updates/reviewed-record-batches-36-38-added/`
+- `/updates/reviewed-record-batch-36-added/`
 
 ### Internal linking improvements
 
@@ -110,42 +110,27 @@ Pending:
 
 Completed:
 
-- Batch-36 added five reviewed-staging marketplace records:
-  - `magic-eden`
+- Batch-36 currently contains two reviewed-staging marketplace records:
   - `foundation-marketplace`
-  - `superrare`
-  - `zora`
   - `manifold`
 - Matching batch-36 event records.
 - Matching batch-36 evidence records with official-domain and Wayback archive-search references.
 
-- Batch-37 added five reviewed-staging marketplace records:
-  - `opensea`
-  - `blur`
-  - `looksrare`
-  - `x2y2`
-  - `sudoswap`
-- Matching batch-37 event records.
-- Matching batch-37 evidence records with official-domain and Wayback archive-search references.
+Duplicate cleanup:
 
-- Batch-38 added five reviewed-staging marketplace records:
-  - `rarible`
-  - `objkt`
-  - `tensor`
-  - `gamma`
-  - `fxhash`
-- Matching batch-38 event records.
-- Matching batch-38 evidence records with official-domain and Wayback archive-search references.
+- Removed duplicate batch-36 records for `magic-eden`, `superrare`, and `zora`.
+- Removed batch-37 and batch-38 files because their records duplicated existing marketplace slugs already present elsewhere in the registry.
+- Corrected the update entry and sitemap route from the earlier batch-36-to-38 summary to the current batch-36-only update.
 
-All batch-36, batch-37, and batch-38 records are conservative reviewed-staging entries with review flags for scope, current live state, asset status, and contract status where appropriate. `x2y2` is classified conservatively as inactive / under review because the original domain currently redirects away from the prior marketplace surface.
+Remaining batch-36 records are conservative reviewed-staging entries with review flags for scope, current live state, asset status, and contract status where appropriate.
 
 ### Registry update entry
 
 Completed:
 
-- Added `/updates/reviewed-record-batches-36-38-added/`.
-- Updated sitemap generation to include the new update entry.
-- The update entry summarizes batches 36 through 38 as registry changes, not NFT news.
+- Added `/updates/reviewed-record-batch-36-added/`.
+- Updated sitemap generation to include the corrected update entry.
+- The update entry summarizes batch 36 as a registry change, not NFT news.
 
 ## Build and validation status
 
@@ -162,9 +147,8 @@ Latest additions after the last recorded validation:
 - guide-to-glossary internal links
 - guide-to-record internal links
 - batch-36 records/events/evidence
-- batch-37 records/events/evidence
-- batch-38 records/events/evidence
-- record-batch update entry and sitemap route
+- duplicate cleanup for batch-36, batch-37, and batch-38
+- corrected record-batch update entry and sitemap route
 
 Recommended next check:
 
@@ -219,12 +203,10 @@ Implemented:
 - guide-to-glossary linking
 - guide-to-record linking for selected pages
 - batch-36 reviewed-staging records
-- batch-37 reviewed-staging records
-- batch-38 reviewed-staging records
 
 Planned:
 
-- run validation/build before adding many more records
+- run validation/build before adding more records
 - more related-record links where verified record slugs exist
 - additional update entries when meaningful registry changes are made
 
@@ -273,6 +255,6 @@ Current status: postponed.
 Recommended next options:
 
 1. Run `npm run check`.
-2. Review and fix any validation issues from batches 36 through 38.
+2. Review and fix any remaining validation issues.
 3. Add related-record links to remaining guide pages only where verified record slugs are available.
 4. Continue with another small reviewed record batch after validation passes.
