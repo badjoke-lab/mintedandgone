@@ -134,27 +134,21 @@ Completed:
 
 ## Build and validation status
 
-Last recorded successful validation/build results:
+Latest validation/build result:
+
+- `npm run check` passed on 2026-06-04 after duplicate cleanup.
+- Stats generation passed.
+- Sitemap generation passed with 380 URLs.
+- Data validation passed.
+- Static build passed with 380 pages built.
+
+Previous recorded successful validation/build results:
 
 - 350 pages built after the v0 reading-layer and hardening pass.
 - 351 pages built after the old marketplace page guide.
 - 352 pages built after the NFT disappearance guide.
 - 374 pages built after glossary detail pages.
 - 377 pages built after update detail pages.
-
-Latest additions after the last recorded validation:
-
-- guide-to-glossary internal links
-- guide-to-record internal links
-- batch-36 records/events/evidence
-- duplicate cleanup for batch-36, batch-37, and batch-38
-- corrected record-batch update entry and sitemap route
-
-Recommended next check:
-
-```bash
-npm run check
-```
 
 ## Product direction
 
@@ -186,7 +180,6 @@ Implemented:
 
 Recommended before public push:
 
-- run build/validation
 - browser review
 - mobile review
 - key link review
@@ -203,12 +196,13 @@ Implemented:
 - guide-to-glossary linking
 - guide-to-record linking for selected pages
 - batch-36 reviewed-staging records
+- validation/build passed after duplicate cleanup
 
 Planned:
 
-- run validation/build before adding more records
 - more related-record links where verified record slugs exist
 - additional update entries when meaningful registry changes are made
+- continue with another small reviewed record batch only after checking existing registry coverage first
 
 Target data direction:
 
@@ -254,7 +248,6 @@ Current status: postponed.
 
 Recommended next options:
 
-1. Run `npm run check`.
-2. Review and fix any remaining validation issues.
-3. Add related-record links to remaining guide pages only where verified record slugs are available.
-4. Continue with another small reviewed record batch after validation passes.
+1. Add related-record links to remaining guide pages only where verified record slugs are available.
+2. Review browser/mobile display for `/guides/`, `/glossary/`, `/updates/`, and selected encyclopedia pages.
+3. Continue with another small reviewed record batch only after checking existing registry coverage first.
