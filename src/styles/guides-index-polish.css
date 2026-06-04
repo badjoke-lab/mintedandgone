@@ -1,18 +1,44 @@
-/* Guides index polish.
-   Keep the guide landing page compact and readable without affecting guide detail pages. */
+/* Guide page polish.
+   Fix guide hero pages that do not include a decorative grid column. */
 
+.guide-page > .field-hero,
+.guide-page > .field-hero.simple-hero,
+.guide-page > .field-hero.compact-hero{
+  grid-template-columns:1fr !important;
+  min-height:0 !important;
+  align-items:start;
+  padding:34px;
+}
+
+.guide-page > .field-hero .hero-copy,
+.guide-page > .field-hero .plate-copy{
+  grid-column:1 / -1 !important;
+  width:100%;
+  max-width:760px;
+}
+
+.guide-page > .field-hero .hero-copy > p,
+.guide-page > .field-hero .plate-copy > p{
+  max-width:620px;
+}
+
+.guide-page > .field-hero h1{
+  max-width:760px;
+}
+
+.guide-page > .field-hero .lede{
+  max-width:560px;
+}
+
+/* Guides index: keep landing cards readable and not oversized. */
 .guides-index-page > .field-hero,
 .guides-index-page > .field-hero.simple-hero,
 .guides-index-page > .field-hero.compact-hero{
-  grid-template-columns:minmax(0,560px) 1fr;
-  min-height:0;
-  align-items:start;
   padding:34px;
 }
 
 .guides-index-page > .field-hero .hero-copy,
 .guides-index-page > .field-hero .plate-copy{
-  grid-column:1;
   max-width:560px;
 }
 
@@ -56,14 +82,15 @@
   margin-top:4px;
 }
 
-.guides-index-page .reading-guide-grid{
+/* Shared reading-guide block: prevent strong/span text from visually merging. */
+.guide-page .reading-guide-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:12px;
   margin-top:14px;
 }
 
-.guides-index-page .reading-guide-grid article{
+.guide-page .reading-guide-grid article{
   display:grid;
   gap:5px;
   align-content:start;
@@ -73,13 +100,13 @@
   padding:12px;
 }
 
-.guides-index-page .reading-guide-grid strong{
+.guide-page .reading-guide-grid strong{
   display:block;
   font-size:14px;
   line-height:1.2;
 }
 
-.guides-index-page .reading-guide-grid span{
+.guide-page .reading-guide-grid span{
   display:block;
   color:var(--ink-soft);
   font-size:14px;
@@ -96,27 +123,23 @@
 }
 
 @media(max-width:1200px){
-  .guides-index-page > .field-hero,
-  .guides-index-page > .field-hero.simple-hero,
-  .guides-index-page > .field-hero.compact-hero{
-    grid-template-columns:1fr;
-  }
-
-  .guides-index-page .reading-guide-grid{
+  .guide-page .reading-guide-grid{
     grid-template-columns:1fr;
   }
 }
 
 @media(max-width:720px){
-  .guides-index-page > .field-hero,
-  .guides-index-page > .field-hero.simple-hero,
-  .guides-index-page > .field-hero.compact-hero{
+  .guide-page > .field-hero,
+  .guide-page > .field-hero.simple-hero,
+  .guide-page > .field-hero.compact-hero{
     padding:16px!important;
   }
 
-  .guides-index-page > .field-hero .hero-copy > p,
-  .guides-index-page > .field-hero .plate-copy > p,
-  .guides-index-page > .field-hero .lede{
+  .guide-page > .field-hero .hero-copy,
+  .guide-page > .field-hero .plate-copy,
+  .guide-page > .field-hero .hero-copy > p,
+  .guide-page > .field-hero .plate-copy > p,
+  .guide-page > .field-hero .lede{
     max-width:none;
   }
 
@@ -150,7 +173,7 @@
     font-size:clamp(28px,9vw,36px);
   }
 
-  .guides-index-page .reading-guide-grid article{
+  .guide-page .reading-guide-grid article{
     padding:10px;
   }
 }
