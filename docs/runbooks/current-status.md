@@ -91,6 +91,7 @@ Current update detail pages:
 - `/updates/v0-reading-layer-added/`
 - `/updates/v0-5-guide-expansion-added/`
 - `/updates/glossary-detail-pages-added/`
+- `/updates/reviewed-record-batches-36-38-added/`
 
 ### Internal linking improvements
 
@@ -138,6 +139,14 @@ Completed:
 
 All batch-36, batch-37, and batch-38 records are conservative reviewed-staging entries with review flags for scope, current live state, asset status, and contract status where appropriate. `x2y2` is classified conservatively as inactive / under review because the original domain currently redirects away from the prior marketplace surface.
 
+### Registry update entry
+
+Completed:
+
+- Added `/updates/reviewed-record-batches-36-38-added/`.
+- Updated sitemap generation to include the new update entry.
+- The update entry summarizes batches 36 through 38 as registry changes, not NFT news.
+
 ## Build and validation status
 
 Last recorded successful validation/build results:
@@ -155,6 +164,7 @@ Latest additions after the last recorded validation:
 - batch-36 records/events/evidence
 - batch-37 records/events/evidence
 - batch-38 records/events/evidence
+- record-batch update entry and sitemap route
 
 Recommended next check:
 
@@ -205,7 +215,7 @@ Implemented:
 
 - four v0.5 guide pages
 - 20 glossary detail pages
-- 3 update detail pages
+- 4 update detail pages
 - guide-to-glossary linking
 - guide-to-record linking for selected pages
 - batch-36 reviewed-staging records
@@ -214,7 +224,7 @@ Implemented:
 
 Planned:
 
-- more reviewed record batches
+- run validation/build before adding many more records
 - more related-record links where verified record slugs exist
 - additional update entries when meaningful registry changes are made
 
@@ -263,6 +273,6 @@ Current status: postponed.
 Recommended next options:
 
 1. Run `npm run check`.
-2. Continue with another small reviewed record batch.
+2. Review and fix any validation issues from batches 36 through 38.
 3. Add related-record links to remaining guide pages only where verified record slugs are available.
-4. Add a new update entry after the next meaningful registry change.
+4. Continue with another small reviewed record batch after validation passes.
