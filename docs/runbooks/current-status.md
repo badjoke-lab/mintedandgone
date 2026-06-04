@@ -15,6 +15,7 @@ Minted & Gone is an NFT marketplace historical registry and field guide. The rep
 - glossary index and glossary detail pages
 - updates index and update detail pages
 - internal-linking components for related glossary terms and related records
+- browser/mobile review checklist
 - ongoing reviewed record batches
 
 The public product should remain registry-first. Reading pages support the archive; they should not turn the site into a generic NFT blog.
@@ -132,6 +133,14 @@ Completed:
 - Updated sitemap generation to include the corrected update entry.
 - The update entry summarizes batch 36 as a registry change, not NFT news.
 
+### Browser/mobile review checklist
+
+Completed:
+
+- Added `docs/runbooks/browser-mobile-review-checklist.md`.
+- The checklist covers desktop routes, mobile widths, representative record pages, navigation flows, wording checks, record data checks, and pass criteria.
+- Latest baseline in the checklist reflects the passing state: sitemap generated with 380 URLs, validation passed, and static build passed with 380 pages built.
+
 ## Build and validation status
 
 Latest validation/build result:
@@ -177,6 +186,7 @@ Implemented:
 - Validation and build scripts
 - Source-reviewed seed records
 - v0 reading layer
+- browser/mobile review checklist
 
 Recommended before public push:
 
@@ -248,6 +258,6 @@ Current status: postponed.
 
 Recommended next options:
 
-1. Add related-record links to remaining guide pages only where verified record slugs are available.
-2. Review browser/mobile display for `/guides/`, `/glossary/`, `/updates/`, and selected encyclopedia pages.
+1. Review browser/mobile display using `docs/runbooks/browser-mobile-review-checklist.md`.
+2. Add related-record links to remaining guide pages only where verified record slugs are available.
 3. Continue with another small reviewed record batch only after checking existing registry coverage first.
