@@ -1,6 +1,6 @@
 # Minted & Gone Current Status
 
-Last updated: 2026-06-03
+Last updated: 2026-06-04
 
 ## Current position
 
@@ -118,7 +118,16 @@ Completed:
 - Matching batch-36 event records.
 - Matching batch-36 evidence records with official-domain and Wayback archive-search references.
 
-All batch-36 records are conservative active / under-review entries with review flags for scope, current live state, asset status, and contract status where appropriate.
+- Batch-37 added five reviewed-staging marketplace records:
+  - `opensea`
+  - `blur`
+  - `looksrare`
+  - `x2y2`
+  - `sudoswap`
+- Matching batch-37 event records.
+- Matching batch-37 evidence records with official-domain and Wayback archive-search references.
+
+All batch-36 and batch-37 records are conservative reviewed-staging entries with review flags for scope, current live state, asset status, and contract status where appropriate. `x2y2` is classified conservatively as inactive / under review because the original domain currently redirects away from the prior marketplace surface.
 
 ## Build and validation status
 
@@ -135,6 +144,7 @@ Latest additions after the last recorded validation:
 - guide-to-glossary internal links
 - guide-to-record internal links
 - batch-36 records/events/evidence
+- batch-37 records/events/evidence
 
 Recommended next check:
 
@@ -189,6 +199,7 @@ Implemented:
 - guide-to-glossary linking
 - guide-to-record linking for selected pages
 - batch-36 reviewed-staging records
+- batch-37 reviewed-staging records
 
 Planned:
 
