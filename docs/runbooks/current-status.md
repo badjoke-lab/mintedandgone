@@ -4,7 +4,7 @@ Last updated: 2026-06-03
 
 ## Current position
 
-Minted & Gone is past the bare foundation stage. The repository has the static site foundation, JSON-driven marketplace records, generated encyclopedia pages, stats/sitemap/validation scripts, methodology/about/submit pages, v0 reading-layer pages, v0.5 guide pages, glossary detail pages, update detail pages, and internal-linking components.
+Minted & Gone is past the bare foundation stage. The repository has the static site foundation, JSON-driven marketplace records, generated encyclopedia pages, stats/sitemap/validation scripts, methodology/about/submit pages, v0 reading-layer pages, v0.5 guide pages, glossary detail pages, update detail pages, internal-linking components, and ongoing reviewed record batches.
 
 The earlier v0 plan should be treated as partially complete, not restarted.
 
@@ -85,12 +85,19 @@ Committed directly to `main` because branch creation remained blocked.
 
 ### PR-055 equivalent
 
-Committed directly to `main` because branch creation remained blocked.
-
 - Added related record blocks to the frontend and old-page checking guides using only verified existing record slugs from batch-35.
 - Linked to confirmed records such as `sequence-marketplace`, `recur-marketplace`, `mythical-market`, `hro-marketplace`, and `fancraze-marketplace`.
 - Attempted shutdown and NFT-disappearance guide related-record updates, but those file writes were blocked by the tool safety layer, so they are explicitly left pending rather than forced.
-- Kept all related-record notes conservative and avoided new claims about asset status, ownership, value, or disappearance.
+- Terminal check is pending because terminal access is currently unavailable.
+
+### PR-056 equivalent
+
+Committed directly to `main` because branch creation remained blocked.
+
+- Added `data/marketplaces-batch-36.json` with five reviewed-staging marketplace records: `magic-eden`, `foundation-marketplace`, `superrare`, `zora`, and `manifold`.
+- Added matching `data/events-batch-36.json` entries for all five records.
+- Added matching `data/evidence-batch-36.json` entries with official-domain and Wayback archive-search evidence for all five records.
+- Kept all five records conservative as active / under review, with `needs_scope_review`, `current_status_live_unverified`, `needs_asset_status_review`, and `needs_contract_review` flags where appropriate.
 - Terminal check is pending because terminal access is currently unavailable.
 
 ## Operating rule
@@ -143,7 +150,7 @@ Current status:
 - duplicate slug validation issue fixed
 - CSS warning fixed
 - `npm run check` passed locally with 350 pages built before PR-047, 351 pages built after PR-047, 352 pages built after PR-048, 374 pages built after PR-051, and 377 pages built after PR-052
-- terminal check after PR-053 through PR-055 is pending because terminal access is currently unavailable
+- terminal check after PR-053 through PR-056 is pending because terminal access is currently unavailable
 - browser/mobile visual review remains recommended
 
 ### v0.5
@@ -160,10 +167,11 @@ Current status:
 - related-record link component added
 - related-record blocks added to aggregator, launchpad, frontend, and old-page guides
 - shutdown and NFT-disappearance guide related-record blocks remain pending due to tool write block
+- batch-36 added five active / under-review marketplace records
 
 Planned additions:
 
-- reviewed record batch
+- more reviewed record batches
 - later retry related-record links for blocked guide pages with smaller diffs if needed
 
 Target data direction:
@@ -208,14 +216,15 @@ Current status: postponed.
 
 ## PR schedule from here
 
-### PR-056: Next reviewed content batch
+### PR-057: Next reviewed record batch or validation check
 
 Recommended next options:
 
-- reviewed record batch
+- run `npm run check` when terminal access returns
+- continue with another small reviewed record batch if terminal access remains unavailable
 - later retry small related-record link patches for shutdown / NFT-disappearance guides only if needed
 
-### PR-057 and later: Record and content batches
+### PR-058 and later: Record and content batches
 
 Expected pattern:
 
@@ -226,4 +235,4 @@ Expected pattern:
 
 ## Current next action
 
-Proceed with a reviewed record batch. Terminal check remains pending until terminal access is available again.
+Run validation when terminal access returns, or proceed with the next small reviewed record batch if terminal remains unavailable.
