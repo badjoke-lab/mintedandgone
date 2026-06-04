@@ -4,112 +4,143 @@ Last updated: 2026-06-03
 
 ## Current position
 
-Minted & Gone is past the bare foundation stage. The repository has the static site foundation, JSON-driven marketplace records, generated encyclopedia pages, stats/sitemap/validation scripts, methodology/about/submit pages, v0 reading-layer pages, v0.5 guide pages, glossary detail pages, update detail pages, internal-linking components, and ongoing reviewed record batches.
+Minted & Gone is an NFT marketplace historical registry and field guide. The repository currently includes:
 
-The earlier v0 plan should be treated as partially complete, not restarted.
+- static site foundation
+- JSON-driven marketplace records
+- generated encyclopedia pages
+- stats, sitemap, validation, and build scripts
+- methodology, about, submit, support, and contact pages
+- guide pages
+- glossary index and glossary detail pages
+- updates index and update detail pages
+- internal-linking components for related glossary terms and related records
+- ongoing reviewed record batches
+
+The public product should remain registry-first. Reading pages support the archive; they should not turn the site into a generic NFT blog.
 
 ## Latest completed work
 
-### PR-039
+### Registry foundation and v0 reading layer
 
-Merged: `docs: add current status runbook`.
+Completed:
 
-- Added this runbook.
-- Fixed the merge-by-merge reporting rule.
-- Reset the roadmap against the actual repository state.
+- Route audit for the existing public surface.
+- `/guides/` index.
+- `/guides/what-happens-when-nft-marketplace-shuts-down/`.
+- `/guides/frontend-vs-smart-contract-what-remains/`.
+- `/glossary/` index.
+- `/updates/` index.
+- v0 release-hardening checklist.
+- Footer discovery links for Guides, Glossary, Updates, Submit correction, Contact, and Support.
+- Duplicate slug cleanup for batch-35.
+- CSS warning cleanup for mobile subpage/stat styles.
 
-### PR-040 to PR-046 equivalent
+### v0.5 guide expansion
 
-Committed directly to `main` because branch creation remained blocked.
+Completed:
 
-- Added route audit, `/guides/`, two v0 core guides, `/glossary/`, `/updates/`, and the v0 hardening checklist.
-- Updated sitemap coverage for the new reading-layer routes.
-- Added footer links to Guides, Glossary, and Updates without replacing the registry as the main header focus.
-- Fixed duplicate batch-35 slugs that initially blocked validation.
-- Fixed CSS selector warnings in mobile subpage/stat styles.
-- Confirmed local terminal check passed at the time with 350 pages built.
+- `/guides/how-to-check-old-nft-marketplace-pages/`.
+- `/guides/do-nfts-disappear-when-a-marketplace-closes/`.
+- `/guides/what-is-an-nft-marketplace-aggregator/`.
+- `/guides/what-is-an-nft-launchpad-marketplace/`.
 
-### PR-047 equivalent
+The guide layer remains focused on source-backed marketplace history, archive interpretation, and layer separation. It avoids broad claims that a marketplace closure automatically means NFT, metadata, media, wallet display, or asset-path disappearance.
 
-- Added `/guides/how-to-check-old-nft-marketplace-pages/` as the first v0.5 reading-layer guide.
-- Updated `/guides/` and sitemap.
-- Confirmed local terminal check passed after the change: sitemap generated with 351 URLs, validation passed, and 351 pages built.
+### Glossary detail pages
 
-### PR-048 equivalent
+Completed:
 
-- Added `/guides/do-nfts-disappear-when-a-marketplace-closes/` as the second v0.5 reading-layer guide.
-- Updated `/guides/` and sitemap.
-- Confirmed local terminal check passed after the change: sitemap generated with 352 URLs, validation passed, and 352 pages built.
+- Shared glossary term data in `src/data/glossaryTerms.ts`.
+- `/glossary/[slug]/` detail pages for 20 glossary terms.
+- Sitemap coverage for glossary detail pages.
 
-### PR-049 equivalent
+Current glossary terms include:
 
-- Added `/guides/what-is-an-nft-marketplace-aggregator/` as the third v0.5 reading-layer guide.
-- Updated `/guides/` and sitemap.
-- Kept the guide focused on aggregator-specific layers and avoided claiming that aggregator closure means every indexed marketplace or asset disappeared.
+- `nft-marketplace`
+- `marketplace-frontend`
+- `smart-contract`
+- `asset-metadata`
+- `collection-page`
+- `trading-history`
+- `aggregator`
+- `launchpad-marketplace`
+- `community-fork`
+- `marketplace-shutdown`
+- `frontend-closed`
+- `contract-deprecated`
+- `asset-migration`
+- `archived-url`
+- `dead-domain`
+- `rebrand`
+- `acquisition`
+- `delisting`
+- `royalties`
+- `creator-fee`
 
-### PR-050 equivalent
+### Update detail pages
 
-- Added `/guides/what-is-an-nft-launchpad-marketplace/` as the fourth v0.5 reading-layer guide.
-- Updated `/guides/` and sitemap.
-- Kept the guide focused on launchpad-specific layers and avoided claiming that launchpad or campaign-page closure means minted assets, contracts, or metadata disappeared.
+Completed:
 
-### PR-051 equivalent
+- Shared update entry data in `src/data/updateEntries.ts`.
+- `/updates/[slug]/` detail pages for registry update entries.
+- Sitemap coverage for update detail pages.
 
-- Added shared glossary term data in `src/data/glossaryTerms.ts`.
-- Updated `/glossary/` to use shared term data.
-- Added `/glossary/[slug]/` detail pages for 20 glossary terms.
-- Updated sitemap generation to include glossary term pages.
-- Confirmed local terminal check passed after the change: sitemap generated with 374 URLs, validation passed, and 374 pages built.
+Current update detail pages:
 
-### PR-052 equivalent
+- `/updates/v0-reading-layer-added/`
+- `/updates/v0-5-guide-expansion-added/`
+- `/updates/glossary-detail-pages-added/`
 
-- Added shared update entry data in `src/data/updateEntries.ts`.
-- Updated `/updates/` to use shared update entry data.
-- Added `/updates/[slug]/` detail pages for registry update entries.
-- Updated sitemap generation to include update detail pages.
-- Confirmed local terminal check passed after the change: sitemap generated with 377 URLs, validation passed, and 377 pages built.
+### Internal linking improvements
 
-### PR-053 equivalent
+Completed:
 
-- Added `RelatedGlossaryLinks` component.
-- Added related glossary term blocks to all six guide pages.
-- Strengthened guide-to-glossary internal linking without changing sitemap route count.
-- Terminal check is pending because terminal access is currently unavailable.
+- `RelatedGlossaryLinks` component.
+- Related glossary term blocks across the guide pages.
+- `RelatedRecordLinks` component.
+- Related record blocks for aggregator, launchpad, frontend, and old-page checking guides where verified existing record slugs were available.
 
-### PR-054 equivalent
+Pending:
 
-- Added `RelatedRecordLinks` component.
-- Added related record blocks to the launchpad and aggregator guides using only verified existing record slugs from batch-35.
-- Linked to confirmed records such as `sequence-marketplace`, `recur-marketplace`, `mythical-market`, and `veve-market`.
-- Terminal check is pending because terminal access is currently unavailable.
+- Additional related-record blocks for remaining guide pages where safe, verified record links are available.
 
-### PR-055 equivalent
+### Reviewed record batches
 
-- Added related record blocks to the frontend and old-page checking guides using only verified existing record slugs from batch-35.
-- Linked to confirmed records such as `sequence-marketplace`, `recur-marketplace`, `mythical-market`, `hro-marketplace`, and `fancraze-marketplace`.
-- Attempted shutdown and NFT-disappearance guide related-record updates, but those file writes were blocked by the tool safety layer, so they are explicitly left pending rather than forced.
-- Terminal check is pending because terminal access is currently unavailable.
+Completed:
 
-### PR-056 equivalent
+- Batch-36 added five reviewed-staging marketplace records:
+  - `magic-eden`
+  - `foundation-marketplace`
+  - `superrare`
+  - `zora`
+  - `manifold`
+- Matching batch-36 event records.
+- Matching batch-36 evidence records with official-domain and Wayback archive-search references.
 
-Committed directly to `main` because branch creation remained blocked.
+All batch-36 records are conservative active / under-review entries with review flags for scope, current live state, asset status, and contract status where appropriate.
 
-- Added `data/marketplaces-batch-36.json` with five reviewed-staging marketplace records: `magic-eden`, `foundation-marketplace`, `superrare`, `zora`, and `manifold`.
-- Added matching `data/events-batch-36.json` entries for all five records.
-- Added matching `data/evidence-batch-36.json` entries with official-domain and Wayback archive-search evidence for all five records.
-- Kept all five records conservative as active / under review, with `needs_scope_review`, `current_status_live_unverified`, `needs_asset_status_review`, and `needs_contract_review` flags where appropriate.
-- Terminal check is pending because terminal access is currently unavailable.
+## Build and validation status
 
-## Operating rule
+Last recorded successful validation/build results:
 
-After each merged PR or PR-equivalent commit, update this file before moving to the next work item. Each update must include:
+- 350 pages built after the v0 reading-layer and hardening pass.
+- 351 pages built after the old marketplace page guide.
+- 352 pages built after the NFT disappearance guide.
+- 374 pages built after glossary detail pages.
+- 377 pages built after update detail pages.
 
-1. what was merged or committed,
-2. the full remaining schedule,
-3. the current position,
-4. the next PR to open.
+Latest additions after the last recorded validation:
 
-If branch creation is blocked and a direct commit is the only available path, record that exception here before continuing.
+- guide-to-glossary internal links
+- guide-to-record internal links
+- batch-36 records/events/evidence
+
+Recommended next check:
+
+```bash
+npm run check
+```
 
 ## Product direction
 
@@ -125,54 +156,45 @@ NFT ownership or testnet NFT experience remains postponed.
 
 Goal: make the registry credible and navigable.
 
-Current assessment: implemented at source/build level. Browser/mobile visual review is still useful, but terminal validation/build no longer blocked v0 as of the last successful check.
+Implemented:
 
-### v0 reading layer
+- Home page
+- Marketplace encyclopedia / registry index
+- Marketplace detail pages
+- Methodology
+- About
+- Submit / correction path
+- Stats / archive-at-a-glance support
+- Sitemap and robots support
+- Validation and build scripts
+- Source-reviewed seed records
+- v0 reading layer
 
-Required state:
+Recommended before public push:
 
-- Guides index: done
-- What happens when an NFT marketplace shuts down?: done
-- Frontend vs smart contract: what actually remains?: done
-- Glossary index: done
-- Updates index / registry changelog entry point: done
-
-Do not expand into broad NFT blogging.
-
-### v0 release hardening
-
-Current status:
-
-- metadata structure checked
-- sitemap route list checked at source level
-- reading-layer footer discovery added
-- hardening checklist added
-- duplicate slug validation issue fixed
-- CSS warning fixed
-- `npm run check` passed locally with 350 pages built before PR-047, 351 pages built after PR-047, 352 pages built after PR-048, 374 pages built after PR-051, and 377 pages built after PR-052
-- terminal check after PR-053 through PR-056 is pending because terminal access is currently unavailable
-- browser/mobile visual review remains recommended
+- run build/validation
+- browser review
+- mobile review
+- key link review
 
 ### v0.5
 
-Current status:
+Goal: expand search-intake pages without weakening the registry.
 
-- first v0.5 guide added: `/guides/how-to-check-old-nft-marketplace-pages/`
-- second v0.5 guide added: `/guides/do-nfts-disappear-when-a-marketplace-closes/`
-- third v0.5 guide added: `/guides/what-is-an-nft-marketplace-aggregator/`
-- fourth v0.5 guide added: `/guides/what-is-an-nft-launchpad-marketplace/`
-- glossary detail page structure added for 20 terms
-- update detail page structure added for 3 entries
-- guide-to-glossary internal linking added
-- related-record link component added
-- related-record blocks added to aggregator, launchpad, frontend, and old-page guides
-- shutdown and NFT-disappearance guide related-record blocks remain pending due to tool write block
-- batch-36 added five active / under-review marketplace records
+Implemented:
 
-Planned additions:
+- four v0.5 guide pages
+- 20 glossary detail pages
+- 3 update detail pages
+- guide-to-glossary linking
+- guide-to-record linking for selected pages
+- batch-36 reviewed-staging records
+
+Planned:
 
 - more reviewed record batches
-- later retry related-record links for blocked guide pages with smaller diffs if needed
+- more related-record links where verified record slugs exist
+- additional update entries when meaningful registry changes are made
 
 Target data direction:
 
@@ -214,25 +236,11 @@ Possible additions:
 
 Current status: postponed.
 
-## PR schedule from here
-
-### PR-057: Next reviewed record batch or validation check
+## Next work
 
 Recommended next options:
 
-- run `npm run check` when terminal access returns
-- continue with another small reviewed record batch if terminal access remains unavailable
-- later retry small related-record link patches for shutdown / NFT-disappearance guides only if needed
-
-### PR-058 and later: Record and content batches
-
-Expected pattern:
-
-- record batch PRs
-- reading page PRs
-- internal-linking PRs
-- current-status update after every merge
-
-## Current next action
-
-Run validation when terminal access returns, or proceed with the next small reviewed record batch if terminal remains unavailable.
+1. Run `npm run check`.
+2. Continue with another small reviewed record batch.
+3. Add related-record links to remaining guide pages only where verified record slugs are available.
+4. Add a new update entry after the next meaningful registry change.
