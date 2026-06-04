@@ -61,5 +61,24 @@ export const updateEntries: UpdateEntry[] = [
       { title: 'Smart contract', href: '/glossary/smart-contract/' },
       { title: 'Archived URL', href: '/glossary/archived-url/' }
     ]
+  },
+  {
+    slug: 'reviewed-record-batches-36-38-added',
+    title: 'Reviewed record batches 36–38 added',
+    date: '2026-06-04',
+    label: 'Records',
+    summary: 'Added 15 reviewed-staging marketplace records across batches 36, 37, and 38, with matching event and evidence files.',
+    details: [
+      'Batch 36 added Magic Eden, Foundation Marketplace, SuperRare, Zora, and Manifold as conservative reviewed-staging records.',
+      'Batch 37 added OpenSea, Blur, LooksRare, X2Y2, and Sudoswap, with X2Y2 classified conservatively as inactive / under review because the original domain redirects away from the prior marketplace surface.',
+      'Batch 38 added Rarible, Objkt, Tensor, Gamma, and fxhash as conservative reviewed-staging records.',
+      'Each record batch includes matching event and evidence files using official-domain and Wayback archive-search references.'
+    ],
+    links: [
+      { title: 'Marketplace encyclopedia', href: '/encyclopedia/' },
+      { title: 'OpenSea', href: '/encyclopedia/opensea/' },
+      { title: 'Magic Eden', href: '/encyclopedia/magic-eden/' },
+      { title: 'Rarible', href: '/encyclopedia/rarible/' }
+    ]
   }
 ];
