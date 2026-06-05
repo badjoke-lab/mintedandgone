@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import RelatedGlossaryLinks from '../../../components/RelatedGlossaryLinks.astro';
+import RelatedRecordLinks from '../../../components/RelatedRecordLinks.astro';
 
 const goneItems = [
   'the public marketplace website or app view',
@@ -23,6 +24,12 @@ const glossaryLinks = [
   { title: 'Frontend closed', href: '/glossary/frontend-closed/' },
   { title: 'Archived URL', href: '/glossary/archived-url/' },
   { title: 'Asset migration', href: '/glossary/asset-migration/' }
+];
+
+const relatedRecords = [
+  { title: 'RECUR Marketplace', href: '/encyclopedia/recur-marketplace/', note: 'Record useful for reading marketplace continuity, source notes, and review flags.' },
+  { title: 'Foundation Marketplace', href: '/encyclopedia/foundation-marketplace/', note: 'Art marketplace record with conservative active / under-review classification.' },
+  { title: 'Manifold', href: '/encyclopedia/manifold/', note: 'Creator tooling record useful for separating platform state from token and metadata questions.' }
 ];
 ---
 <BaseLayout title="What happens when an NFT marketplace shuts down? — Minted & Gone" description="A field-guide explanation of what may close, what may remain, and how Minted & Gone records NFT marketplace shutdowns without overclaiming asset loss.">
@@ -49,6 +56,7 @@ const glossaryLinks = [
     </section>
 
     <RelatedGlossaryLinks terms={glossaryLinks} />
+    <RelatedRecordLinks records={relatedRecords} />
 
     <section class="guide-grid">
       <article class="framed-panel guide-card">
