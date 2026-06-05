@@ -1,55 +1,5 @@
 /* Guide page polish.
-   Fix guide hero pages that do not include a decorative grid column. */
-
-.guide-page > .field-hero,
-.guide-page > .field-hero.simple-hero,
-.guide-page > .field-hero.compact-hero{
-  grid-template-columns:1fr !important;
-  min-height:0 !important;
-  align-items:start;
-  padding:34px;
-}
-
-.guide-page > .field-hero .hero-copy,
-.guide-page > .field-hero .plate-copy{
-  grid-column:1 / -1 !important;
-  width:100%;
-  max-width:760px;
-}
-
-.guide-page > .field-hero .hero-copy > p,
-.guide-page > .field-hero .plate-copy > p{
-  max-width:620px;
-}
-
-.guide-page > .field-hero h1{
-  max-width:760px;
-}
-
-.guide-page > .field-hero .lede{
-  max-width:560px;
-}
-
-/* Guides index: keep landing cards readable and not oversized. */
-.guides-index-page > .field-hero,
-.guides-index-page > .field-hero.simple-hero,
-.guides-index-page > .field-hero.compact-hero{
-  padding:34px;
-}
-
-.guides-index-page > .field-hero .hero-copy,
-.guides-index-page > .field-hero .plate-copy{
-  max-width:560px;
-}
-
-.guides-index-page > .field-hero .hero-copy > p,
-.guides-index-page > .field-hero .plate-copy > p{
-  max-width:420px;
-}
-
-.guides-index-page > .field-hero .lede{
-  max-width:360px;
-}
+   Guide pages should use the shared subpage hero structure, not a custom layout. */
 
 .guides-index-page .guide-grid{
   align-items:stretch;
@@ -129,20 +79,6 @@
 }
 
 @media(max-width:720px){
-  .guide-page > .field-hero,
-  .guide-page > .field-hero.simple-hero,
-  .guide-page > .field-hero.compact-hero{
-    padding:16px!important;
-  }
-
-  .guide-page > .field-hero .hero-copy,
-  .guide-page > .field-hero .plate-copy,
-  .guide-page > .field-hero .hero-copy > p,
-  .guide-page > .field-hero .plate-copy > p,
-  .guide-page > .field-hero .lede{
-    max-width:none;
-  }
-
   .guides-index-page .guide-card{
     padding:18px;
     gap:8px;
