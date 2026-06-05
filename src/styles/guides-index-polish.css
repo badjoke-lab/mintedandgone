@@ -1,6 +1,16 @@
 /* Guide page polish.
    Guide pages should use the shared subpage hero structure, not a custom layout. */
 
+.guide-page > .field-hero h1{
+  font-size:clamp(44px,4.6vw,62px);
+  line-height:.96;
+}
+
+.guide-page > .field-hero .lede{
+  font-size:clamp(20px,1.9vw,25px);
+  line-height:1.25;
+}
+
 .guides-index-page .guide-grid{
   align-items:stretch;
 }
@@ -13,6 +23,7 @@
   padding:22px;
 }
 
+.guide-page .guide-card h2,
 .guides-index-page .guide-card h2{
   font-size:clamp(22px,2.2vw,30px);
   line-height:1.04;
@@ -20,6 +31,13 @@
   margin:0;
 }
 
+.guide-page .definition-card h2{
+  font-size:clamp(28px,3vw,38px);
+  line-height:1;
+  letter-spacing:-.035em;
+}
+
+.guide-page .guide-card p:not(.eyebrow),
 .guides-index-page .guide-card p:not(.eyebrow){
   font-size:15px;
   line-height:1.45;
@@ -30,6 +48,15 @@
   align-self:end;
   justify-self:start;
   margin-top:6px;
+}
+
+.guide-page .guide-grid{
+  gap:18px;
+}
+
+.guide-page .guide-card{
+  min-height:0;
+  padding:22px;
 }
 
 /* Shared reading-guide block: prevent strong/span text from visually merging. */
@@ -67,11 +94,6 @@
   padding:24px;
 }
 
-.guides-index-page > .definition-card h2{
-  font-size:clamp(28px,3vw,38px);
-  line-height:1;
-}
-
 @media(max-width:1200px){
   .guide-page .reading-guide-grid{
     grid-template-columns:1fr;
@@ -79,16 +101,31 @@
 }
 
 @media(max-width:720px){
+  .guide-page > .field-hero h1{
+    font-size:clamp(34px,10vw,48px);
+  }
+
+  .guide-page > .field-hero .lede{
+    font-size:19px;
+  }
+
+  .guide-page .guide-card,
   .guides-index-page .guide-card{
     padding:18px;
     gap:9px;
   }
 
+  .guide-page .guide-card h2,
   .guides-index-page .guide-card h2{
     font-size:clamp(24px,7vw,30px);
     line-height:1.04;
   }
 
+  .guide-page .definition-card h2{
+    font-size:clamp(26px,8vw,32px);
+  }
+
+  .guide-page .guide-card p:not(.eyebrow),
   .guides-index-page .guide-card p:not(.eyebrow){
     font-size:13px;
     line-height:1.42;
@@ -102,10 +139,6 @@
 
   .guides-index-page > .definition-card{
     padding:18px;
-  }
-
-  .guides-index-page > .definition-card h2{
-    font-size:clamp(26px,8vw,32px);
   }
 
   .guide-page .reading-guide-grid article{
