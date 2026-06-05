@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import RelatedGlossaryLinks from '../../../components/RelatedGlossaryLinks.astro';
+import RelatedRecordLinks from '../../../components/RelatedRecordLinks.astro';
 
 const layers = [
   {
@@ -51,6 +52,12 @@ const glossaryLinks = [
   { title: 'Collection page', href: '/glossary/collection-page/' },
   { title: 'Delisting', href: '/glossary/delisting/' }
 ];
+
+const relatedRecords = [
+  { title: 'RECUR Marketplace', href: '/encyclopedia/recur-marketplace/', note: 'Useful for comparing marketplace state with asset-path uncertainty.' },
+  { title: 'Foundation Marketplace', href: '/encyclopedia/foundation-marketplace/', note: 'Art marketplace record with review flags for frontend, contract, and asset interpretation.' },
+  { title: 'Manifold', href: '/encyclopedia/manifold/', note: 'Creator tooling record useful for separating platform state from token and metadata questions.' }
+];
 ---
 <BaseLayout title="Do NFTs disappear when a marketplace closes? — Minted & Gone" description="A field-guide explanation of why marketplace closure does not automatically mean NFTs, metadata, media, wallets, or trading paths disappeared.">
   <div class="shell guide-page">
@@ -76,6 +83,7 @@ const glossaryLinks = [
     </section>
 
     <RelatedGlossaryLinks terms={glossaryLinks} />
+    <RelatedRecordLinks records={relatedRecords} />
 
     <section class="guide-grid numbered">
       {layers.map((layer, index) => (
