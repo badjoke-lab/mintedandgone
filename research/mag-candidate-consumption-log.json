@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "purpose": "Consumption log for MAG candidate backlog promotions. Entries are appended whenever a candidate is promoted, rejected, or held.",
+  "generated_at": "2026-06-07",
+  "entries": []
+}
