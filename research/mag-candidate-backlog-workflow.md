@@ -25,6 +25,7 @@ Use the generated `/encyclopedia/<slug>/index.html` route list from that check o
 research/mag-candidate-backlog.json
 research/mag-candidate-consumption-log.json
 research/mag-candidate-backlog-workflow.md
+scripts/validate-mag-candidate-backlog.mjs
 ```
 
 ## Candidate states
@@ -54,11 +55,47 @@ Before creating any new data batch, check every candidate against:
 
 GitHub code search alone is not sufficient. It can return stale index results.
 
+## Local candidate validation gate
+
+`npm run check` now includes:
+
+```bash
+npm run validate:candidates
+```
+
+The candidate validator scans all `data/marketplaces*.json` files and active backlog candidates whose `consumption.status` is `candidate` or `ready`.
+
+It fails on:
+
+- candidate slug already used by existing marketplace data
+- candidate name matching an existing canonical name or alias
+- candidate domain matching an existing marketplace domain or URL
+- duplicate candidate slug/name/domain inside the backlog
+- missing candidate identity fields
+
+This check is intentionally stricter than GitHub code search and should catch stale-index misses before a batch is created.
+
+## Backlog readiness rule
+
+Do not promote candidates whose `duplicate_check.needs_full_data_file_scan` is still `true`.
+
+Promotion path:
+
+```txt
+candidate
+↓ full data-file scan passes
+ready
+↓ promoted into batch data files
+consumed
+```
+
+Rejected duplicates should stay in the backlog with `consumption.status = rejected` and a note explaining the match.
+
 ## Batch creation rule
 
 For each new batch:
 
-1. Select candidates whose `consumption.status` is `candidate` or `ready`.
+1. Select candidates whose `consumption.status` is `ready`.
 2. Re-check slug/name/domain against latest data and latest build output.
 3. Promote only checked candidates into:
    - `data/marketplaces-batch-XX.json`
