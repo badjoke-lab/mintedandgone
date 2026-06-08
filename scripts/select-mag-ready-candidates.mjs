@@ -4,6 +4,7 @@ import path from 'node:path';
 const ROOT = process.cwd();
 const DATA_DIR = path.join(ROOT, 'data');
 const RESEARCH_DIR = path.join(ROOT, 'research');
+const CONSUMPTION_LOG_PATH = path.join(RESEARCH_DIR, 'mag-candidate-consumption-log.json');
 const LIMIT = Number(process.argv[2] || 10);
 
 const REJECTED_STATUSES = new Set(['consumed', 'hold', 'rejected']);
@@ -71,6 +72,18 @@ function collectExistingRecords() {
   return records;
 }
 
+function collectConsumedCandidateIds() {
+  if (!fs.existsSync(CONSUMPTION_LOG_PATH)) return new Set();
+  const parsed = readJson(CONSUMPTION_LOG_PATH);
+  const consumed = new Set();
+  for (const entry of parsed.entries || []) {
+    if (entry.candidate_id && ['consumed', 'hold', 'rejected'].includes(entry.action)) {
+      consumed.add(entry.candidate_id);
+    }
+  }
+  return consumed;
+}
+
 function collectCandidates() {
   const files = fs
     .readdirSync(RESEARCH_DIR)
@@ -122,6 +135,7 @@ function priorityRank(priority) {
 function main() {
   const existing = collectExistingRecords();
   const candidates = collectCandidates();
+  const consumedCandidateIds = collectConsumedCandidateIds();
 
   const existingSlugs = new Map();
   const existingNames = new Map();
@@ -137,6 +151,7 @@ function main() {
 
   const seenCandidateIds = new Set();
   const selectedKeys = new Set();
+  const selectedDomains = new Set();
   const skipped = [];
   const selected = [];
 
@@ -150,6 +165,11 @@ function main() {
       continue;
     }
     seenCandidateIds.add(candidate.candidate_id);
+
+    if (consumedCandidateIds.has(candidate.candidate_id)) {
+      skipped.push({ candidate, reason: 'consumption_log_excluded' });
+      continue;
+    }
 
     if (REJECTED_STATUSES.has(candidate.status)) {
       skipped.push({ candidate, reason: `status_${candidate.status}` });
@@ -176,6 +196,10 @@ function main() {
       skipped.push({ candidate, reason: `existing_domain:${domainKey}` });
       continue;
     }
+    if (domainKey && selectedDomains.has(domainKey)) {
+      skipped.push({ candidate, reason: `duplicate_domain_with_selected:${domainKey}` });
+      continue;
+    }
 
     const uniqueKey = `${slug}|${nameKey}|${domainKey}`;
     if (selectedKeys.has(uniqueKey)) {
@@ -183,6 +207,7 @@ function main() {
       continue;
     }
     selectedKeys.add(uniqueKey);
+    selectedDomains.add(domainKey);
     selected.push(candidate);
     if (selected.length >= LIMIT) break;
   }
@@ -190,6 +215,7 @@ function main() {
   console.log(JSON.stringify({
     existing_marketplace_records_scanned: existing.length,
     candidate_records_scanned: candidates.length,
+    consumption_log_exclusions: consumedCandidateIds.size,
     selected_count: selected.length,
     selected,
     skipped_sample: skipped.slice(0, 25),
