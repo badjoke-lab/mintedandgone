@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const ROOT = process.cwd();
 const DATA_DIR = path.join(ROOT, 'data');
-const BACKLOG_PATH = path.join(ROOT, 'research', 'mag-candidate-backlog.json');
+const RESEARCH_DIR = path.join(ROOT, 'research');
 
 const ACTIVE_CANDIDATE_STATUSES = new Set(['candidate', 'ready']);
 
@@ -63,6 +63,35 @@ function collectExistingMarketplaces() {
   return records;
 }
 
+function collectCandidateFiles() {
+  if (!fs.existsSync(RESEARCH_DIR)) {
+    throw new Error('Missing research directory.');
+  }
+
+  return fs
+    .readdirSync(RESEARCH_DIR)
+    .filter((name) => /^mag-candidate-backlog(?:-[0-9]{3})?\.json$/.test(name))
+    .sort()
+    .map((name) => path.join(RESEARCH_DIR, name));
+}
+
+function collectCandidates() {
+  const files = collectCandidateFiles();
+  const candidates = [];
+
+  for (const filePath of files) {
+    const parsed = readJson(filePath);
+    const sourceFile = path.relative(ROOT, filePath);
+    const fileCandidates = Array.isArray(parsed.candidates) ? parsed.candidates : [];
+
+    for (const candidate of fileCandidates) {
+      candidates.push({ ...candidate, __file: sourceFile });
+    }
+  }
+
+  return { candidates, files };
+}
+
 function addToMap(map, key, value) {
   if (!key) return;
   if (!map.has(key)) map.set(key, []);
@@ -70,8 +99,7 @@ function addToMap(map, key, value) {
 }
 
 function main() {
-  const backlog = readJson(BACKLOG_PATH);
-  const candidates = Array.isArray(backlog.candidates) ? backlog.candidates : [];
+  const { candidates, files: candidateFiles } = collectCandidates();
   const existing = collectExistingMarketplaces();
 
   const existingSlugs = new Map();
@@ -88,6 +116,7 @@ function main() {
     addToMap(existingDomains, normalizeDomain(record.official_url_original), record);
   }
 
+  const candidateIds = new Map();
   const candidateSlugs = new Map();
   const candidateNames = new Map();
   const candidateDomains = new Map();
@@ -95,9 +124,12 @@ function main() {
 
   for (const candidate of candidates) {
     const status = candidate?.consumption?.status || 'candidate';
+    const label = `${candidate.candidate_id || '(missing id)'} ${candidate.name || '(missing name)'} in ${candidate.__file || '(unknown file)'}`;
+
+    addToMap(candidateIds, candidate.candidate_id, label);
+
     if (!ACTIVE_CANDIDATE_STATUSES.has(status)) continue;
 
-    const label = `${candidate.candidate_id || '(missing id)'} ${candidate.name || '(missing name)'}`;
     const slug = candidate.slug || '';
     const nameKey = normalizeText(candidate.name);
     const domainKey = normalizeDomain(candidate.domain || candidate.official_url);
@@ -129,6 +161,9 @@ function main() {
     addToMap(candidateDomains, domainKey, label);
   }
 
+  for (const [id, entries] of candidateIds) {
+    if (id && entries.length > 1) problems.push(`Duplicate candidate id ${id}: ${entries.join(' | ')}`);
+  }
   for (const [slug, entries] of candidateSlugs) {
     if (slug && entries.length > 1) problems.push(`Duplicate candidate slug ${slug}: ${entries.join(' | ')}`);
   }
@@ -141,7 +176,9 @@ function main() {
 
   const activeCandidates = candidates.filter((candidate) => ACTIVE_CANDIDATE_STATUSES.has(candidate?.consumption?.status || 'candidate')).length;
   console.log(`MAG candidate backlog check`);
+  console.log(`Candidate backlog files scanned: ${candidateFiles.length}`);
   console.log(`Existing marketplace records scanned: ${existing.length}`);
+  console.log(`Total backlog candidates scanned: ${candidates.length}`);
   console.log(`Active backlog candidates checked: ${activeCandidates}`);
 
   if (problems.length) {
