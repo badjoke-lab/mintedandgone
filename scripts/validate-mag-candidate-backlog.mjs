@@ -70,9 +70,54 @@ function collectCandidateFiles() {
 
   return fs
     .readdirSync(RESEARCH_DIR)
-    .filter((name) => /^mag-candidate-backlog(?:-[0-9]{3})?\.json$/.test(name))
+    .filter((name) => /^mag-candidate-backlog(?:-[0-9]{3})?\.(json|tsv)$/.test(name))
     .sort()
     .map((name) => path.join(RESEARCH_DIR, name));
+}
+
+function parseTsvCandidateFile(filePath) {
+  const sourceFile = path.relative(ROOT, filePath);
+  const lines = fs.readFileSync(filePath, 'utf8').split(/\r?\n/).filter((line) => line.trim() && !line.startsWith('#'));
+  if (lines.length === 0) return [];
+
+  const headers = lines[0].split('\t').map((value) => value.trim());
+  const required = ['candidate_id', 'name', 'slug', 'official_url', 'domain', 'candidate_scope', 'category', 'chain_scope', 'priority'];
+  for (const header of required) {
+    if (!headers.includes(header)) throw new Error(`${sourceFile}: missing TSV column ${header}`);
+  }
+
+  return lines.slice(1).map((line, index) => {
+    const values = line.split('\t');
+    const row = Object.fromEntries(headers.map((header, i) => [header, values[i] || '']));
+    const status = row.status || 'candidate';
+    return {
+      candidate_id: row.candidate_id,
+      name: row.name,
+      slug: row.slug,
+      official_url: row.official_url,
+      domain: row.domain,
+      candidate_scope: row.candidate_scope,
+      category: row.category,
+      chain_scope: row.chain_scope ? row.chain_scope.split(',').map((value) => value.trim()).filter(Boolean) : [],
+      status_guess: row.status_guess || 'unknown',
+      priority: row.priority,
+      duplicate_check: {
+        checked_against: row.checked_against || 'validate-mag-candidate-backlog.mjs',
+        result: row.duplicate_result || 'candidate_seed_unverified',
+        needs_full_data_file_scan: row.needs_full_data_file_scan !== 'false',
+      },
+      consumption: {
+        status,
+        batch: row.batch || null,
+        marketplace_id: row.marketplace_id || null,
+        event_id: row.event_id || null,
+        evidence_ids: row.evidence_ids ? row.evidence_ids.split(',').map((value) => value.trim()).filter(Boolean) : [],
+        consumed_at: row.consumed_at || null,
+      },
+      notes: row.notes || `Candidate from ${sourceFile} row ${index + 2}. Not verified registry data.`,
+      __file: sourceFile,
+    };
+  });
 }
 
 function collectCandidates() {
@@ -80,8 +125,13 @@ function collectCandidates() {
   const candidates = [];
 
   for (const filePath of files) {
-    const parsed = readJson(filePath);
     const sourceFile = path.relative(ROOT, filePath);
+    if (filePath.endsWith('.tsv')) {
+      candidates.push(...parseTsvCandidateFile(filePath));
+      continue;
+    }
+
+    const parsed = readJson(filePath);
     const fileCandidates = Array.isArray(parsed.candidates) ? parsed.candidates : [];
 
     for (const candidate of fileCandidates) {
