@@ -2,5 +2,17 @@
   "version": 1,
   "purpose": "Consumption log for MAG candidate backlog promotions. Entries are appended whenever a candidate is promoted, rejected, or held.",
   "generated_at": "2026-06-07",
-  "entries": []
+  "entries": [
+    {"candidate_id":"mag_candidate_000001","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000351","event_id":"mag_ev_real_000354","evidence_ids":["mag_src_real_000708","mag_src_real_000709"],"processed_at":"2026-06-08","notes":"Promoted as ThetaDrop."},
+    {"candidate_id":"mag_candidate_000002","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000352","event_id":"mag_ev_real_000355","evidence_ids":["mag_src_real_000710","mag_src_real_000711"],"processed_at":"2026-06-08","notes":"Promoted as MLB Champions."},
+    {"candidate_id":"mag_candidate_000003","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000353","event_id":"mag_ev_real_000356","evidence_ids":["mag_src_real_000712","mag_src_real_000713"],"processed_at":"2026-06-08","notes":"Promoted as Disney Pinnacle."},
+    {"candidate_id":"mag_candidate_000004","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000354","event_id":"mag_ev_real_000357","evidence_ids":["mag_src_real_000714","mag_src_real_000715"],"processed_at":"2026-06-08","notes":"Promoted as TIMEPieces."},
+    {"candidate_id":"mag_candidate_000005","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000355","event_id":"mag_ev_real_000358","evidence_ids":["mag_src_real_000716","mag_src_real_000717"],"processed_at":"2026-06-08","notes":"Promoted as Unicly."},
+    {"candidate_id":"mag_candidate_000006","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000356","event_id":"mag_ev_real_000359","evidence_ids":["mag_src_real_000718","mag_src_real_000719"],"processed_at":"2026-06-08","notes":"Promoted as Coral Cube."},
+    {"candidate_id":"mag_candidate_000007","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000357","event_id":"mag_ev_real_000360","evidence_ids":["mag_src_real_000720","mag_src_real_000721"],"processed_at":"2026-06-08","notes":"Promoted as Keepsake Marketplace."},
+    {"candidate_id":"mag_candidate_000008","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000358","event_id":"mag_ev_real_000361","evidence_ids":["mag_src_real_000722","mag_src_real_000723"],"processed_at":"2026-06-08","notes":"Promoted as Stratos NFT Marketplace."},
+    {"candidate_id":"mag_candidate_000009","action":"hold","batch":null,"marketplace_id":null,"event_id":null,"evidence_ids":[],"processed_at":"2026-06-08","notes":"Held because existing /encyclopedia/illuvium-marketplace/ is a near duplicate. Revisit only if distinct marketplace identity is proven."},
+    {"candidate_id":"mag_candidate_000010","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000359","event_id":"mag_ev_real_000362","evidence_ids":["mag_src_real_000724","mag_src_real_000725"],"processed_at":"2026-06-08","notes":"Promoted as Big Time Marketplace."},
+    {"candidate_id":"mag_candidate_000011","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000360","event_id":"mag_ev_real_000363","evidence_ids":["mag_src_real_000726","mag_src_real_000727"],"processed_at":"2026-06-08","notes":"Promoted as MotoGP Ignition Marketplace."}
+  ]
 }
