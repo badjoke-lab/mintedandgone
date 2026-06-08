@@ -5,7 +5,7 @@ const ROOT = process.cwd();
 const DATA_DIR = path.join(ROOT, 'data');
 const RESEARCH_DIR = path.join(ROOT, 'research');
 
-const ACTIVE_CANDIDATE_STATUSES = new Set(['candidate', 'ready']);
+const READY_CANDIDATE_STATUSES = new Set(['ready']);
 
 function readJson(filePath) {
   try {
@@ -167,9 +167,9 @@ function main() {
   }
 
   const candidateIds = new Map();
-  const candidateSlugs = new Map();
-  const candidateNames = new Map();
-  const candidateDomains = new Map();
+  const readyCandidateSlugs = new Map();
+  const readyCandidateNames = new Map();
+  const readyCandidateDomains = new Map();
   const problems = [];
 
   for (const candidate of candidates) {
@@ -178,13 +178,14 @@ function main() {
 
     addToMap(candidateIds, candidate.candidate_id, label);
 
-    if (!ACTIVE_CANDIDATE_STATUSES.has(status)) continue;
+    if (!candidate.candidate_id) problems.push(`${label}: missing candidate_id`);
+
+    if (!READY_CANDIDATE_STATUSES.has(status)) continue;
 
     const slug = candidate.slug || '';
     const nameKey = normalizeText(candidate.name);
     const domainKey = normalizeDomain(candidate.domain || candidate.official_url);
 
-    if (!candidate.candidate_id) problems.push(`${label}: missing candidate_id`);
     if (!candidate.name) problems.push(`${label}: missing name`);
     if (!slug) problems.push(`${label}: missing slug`);
     if (!candidate.official_url) problems.push(`${label}: missing official_url`);
@@ -206,30 +207,30 @@ function main() {
       problems.push(`${label}: domain already exists (${domainKey}: ${hits})`);
     }
 
-    addToMap(candidateSlugs, slug, label);
-    addToMap(candidateNames, nameKey, label);
-    addToMap(candidateDomains, domainKey, label);
+    addToMap(readyCandidateSlugs, slug, label);
+    addToMap(readyCandidateNames, nameKey, label);
+    addToMap(readyCandidateDomains, domainKey, label);
   }
 
   for (const [id, entries] of candidateIds) {
     if (id && entries.length > 1) problems.push(`Duplicate candidate id ${id}: ${entries.join(' | ')}`);
   }
-  for (const [slug, entries] of candidateSlugs) {
-    if (slug && entries.length > 1) problems.push(`Duplicate candidate slug ${slug}: ${entries.join(' | ')}`);
+  for (const [slug, entries] of readyCandidateSlugs) {
+    if (slug && entries.length > 1) problems.push(`Duplicate ready candidate slug ${slug}: ${entries.join(' | ')}`);
   }
-  for (const [name, entries] of candidateNames) {
-    if (name && entries.length > 1) problems.push(`Duplicate candidate name ${name}: ${entries.join(' | ')}`);
+  for (const [name, entries] of readyCandidateNames) {
+    if (name && entries.length > 1) problems.push(`Duplicate ready candidate name ${name}: ${entries.join(' | ')}`);
   }
-  for (const [domain, entries] of candidateDomains) {
-    if (domain && entries.length > 1) problems.push(`Duplicate candidate domain ${domain}: ${entries.join(' | ')}`);
+  for (const [domain, entries] of readyCandidateDomains) {
+    if (domain && entries.length > 1) problems.push(`Duplicate ready candidate domain ${domain}: ${entries.join(' | ')}`);
   }
 
-  const activeCandidates = candidates.filter((candidate) => ACTIVE_CANDIDATE_STATUSES.has(candidate?.consumption?.status || 'candidate')).length;
+  const readyCandidates = candidates.filter((candidate) => READY_CANDIDATE_STATUSES.has(candidate?.consumption?.status || 'candidate')).length;
   console.log(`MAG candidate backlog check`);
   console.log(`Candidate backlog files scanned: ${candidateFiles.length}`);
   console.log(`Existing marketplace records scanned: ${existing.length}`);
   console.log(`Total backlog candidates scanned: ${candidates.length}`);
-  console.log(`Active backlog candidates checked: ${activeCandidates}`);
+  console.log(`Ready backlog candidates checked against existing data: ${readyCandidates}`);
 
   if (problems.length) {
     console.error('\nCandidate backlog validation failed:');
