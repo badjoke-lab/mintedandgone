@@ -34,13 +34,24 @@ function add(map, key, value) {
   map.get(key).push(value);
 }
 
-function main() {
-  const batchFile = process.argv[2];
-  if (!batchFile) {
-    console.error('Usage: node scripts/check-mag-batch-candidates.mjs data/marketplaces-batch-XX.json');
-    process.exit(1);
-  }
+function resolveBatchFile(input) {
+  if (input && input !== 'latest') return input;
 
+  const files = fs
+    .readdirSync(DATA_DIR)
+    .map((name) => {
+      const match = name.match(/^marketplaces-batch-(\d+)\.json$/);
+      return match ? { name, batch: Number(match[1]) } : null;
+    })
+    .filter(Boolean)
+    .sort((a, b) => b.batch - a.batch);
+
+  if (!files.length) throw new Error('No marketplaces-batch-XX.json files found.');
+  return path.join('data', files[0].name);
+}
+
+function main() {
+  const batchFile = resolveBatchFile(process.argv[2] || 'latest');
   const batchPath = path.join(ROOT, batchFile);
   const batch = readJson(batchPath);
   if (!Array.isArray(batch)) throw new Error(`${batchFile} must be a JSON array`);
