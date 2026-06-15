@@ -17,4 +17,15 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-audit --no-fund
-      - run: npm run check
+      - name: Generate stats
+        run: npm run generate:stats
+      - name: Generate sitemap
+        run: npm run generate:sitemap
+      - name: Validate data
+        run: npm run validate
+      - name: Validate candidate backlog
+        run: npm run validate:candidates
+      - name: Validate latest marketplace batch
+        run: npm run validate:latest-batch
+      - name: Build site
+        run: npm run build:site
