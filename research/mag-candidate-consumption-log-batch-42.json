@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "batch": "batch-42",
+  "status": "quarantined",
+  "reason": "Current-state classifications require stronger source review before publication.",
+  "entries": [
+    {"candidate_id":"mag_candidate_000073","marketplace_id":"mag_nfm_real_000401","event_id":"mag_ev_real_000404","evidence_ids":["mag_src_real_000808","mag_src_real_000809"]},
+    {"candidate_id":"mag_candidate_000074","marketplace_id":"mag_nfm_real_000402","event_id":"mag_ev_real_000405","evidence_ids":["mag_src_real_000810","mag_src_real_000811"]},
+    {"candidate_id":"mag_candidate_000075","marketplace_id":"mag_nfm_real_000403","event_id":"mag_ev_real_000406","evidence_ids":["mag_src_real_000812","mag_src_real_000813"]},
+    {"candidate_id":"mag_candidate_000076","marketplace_id":"mag_nfm_real_000404","event_id":"mag_ev_real_000407","evidence_ids":["mag_src_real_000814","mag_src_real_000815"]},
+    {"candidate_id":"mag_candidate_000077","marketplace_id":"mag_nfm_real_000405","event_id":"mag_ev_real_000408","evidence_ids":["mag_src_real_000816","mag_src_real_000817"]},
+    {"candidate_id":"mag_candidate_000078","marketplace_id":"mag_nfm_real_000406","event_id":"mag_ev_real_000409","evidence_ids":["mag_src_real_000818","mag_src_real_000819"]},
+    {"candidate_id":"mag_candidate_000079","marketplace_id":"mag_nfm_real_000407","event_id":"mag_ev_real_000410","evidence_ids":["mag_src_real_000820","mag_src_real_000821"]},
+    {"candidate_id":"mag_candidate_000080","marketplace_id":"mag_nfm_real_000408","event_id":"mag_ev_real_000411","evidence_ids":["mag_src_real_000822","mag_src_real_000823"]},
+    {"candidate_id":"mag_candidate_000081","marketplace_id":"mag_nfm_real_000409","event_id":"mag_ev_real_000412","evidence_ids":["mag_src_real_000824","mag_src_real_000825"]},
+    {"candidate_id":"mag_candidate_000082","marketplace_id":"mag_nfm_real_000410","event_id":"mag_ev_real_000413","evidence_ids":["mag_src_real_000826","mag_src_real_000827"]}
+  ]
+}
