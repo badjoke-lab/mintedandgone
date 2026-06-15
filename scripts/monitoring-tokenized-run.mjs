@@ -7,6 +7,7 @@ import { runRecordQuality } from './monitoring-tokenized-quality.mjs';
 import { runCandidateState } from './monitoring-tokenized-candidate-state.mjs';
 import { runUrlHealth } from './monitoring-tokenized-url.mjs';
 import { createRunId, writeMonitoringReport } from './monitoring-tokenized-report.mjs';
+import { writeJson } from './monitoring-tokenized-fs.mjs';
 
 const args = process.argv.slice(2);
 const has = (name) => args.includes(name);
@@ -41,6 +42,7 @@ const findings = monitorResults.flatMap((result) => result.findings.map((item, i
 
 const severity = Object.fromEntries(['critical', 'high', 'medium', 'low'].map((level) => [level, findings.filter((item) => item.severity === level).length]));
 const tokenizedIds = new Set(data.tokenized.map((record) => record.id));
+const urlMonitor = monitorResults.find((result) => result.monitor === 'url-health');
 
 const report = {
   schema_version: 1,
@@ -54,14 +56,18 @@ const report = {
     marketplaces: data.tokenized.length,
     events: data.events.filter((event) => tokenizedIds.has(event.marketplace_id)).length,
     evidence: data.evidence.filter((source) => tokenizedIds.has(source.marketplace_id)).length,
-    url_targets: monitorResults.find((result) => result.monitor === 'url-health')?.summary.targets || 0,
-    url_checks: monitorResults.find((result) => result.monitor === 'url-health')?.summary.checked || 0,
+    url_targets: urlMonitor?.summary.targets || 0,
+    url_checks: urlMonitor?.summary.checked || 0,
     findings: findings.length,
     ...severity
   },
   monitors: monitorResults,
   findings
 };
+
+if (live && publish && urlMonitor?.state) {
+  writeJson(statePath, urlMonitor.state);
+}
 
 if (forceReport || (publish && findings.length)) {
   const written = writeMonitoringReport(report, { outputRoot });
