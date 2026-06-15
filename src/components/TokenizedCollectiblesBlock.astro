@@ -1,0 +1,30 @@
+---
+import { formatLabel } from '../lib/format';
+const { record } = Astro.props;
+const facts = [
+  ['Physical backing', record.asset_backing],
+  ['Custody model', record.custody_model],
+  ['Redemption', record.redemption_status],
+  ['Randomized sale', record.randomized_sale_model],
+  ['Buyback model', record.buyback_model]
+];
+const roles = record.platform_roles ?? [];
+const assets = record.asset_categories ?? [];
+---
+<section class="framed-panel tokenized-record-block">
+  <div class="section-head tokenized-record-head">
+    <div>
+      <p class="eyebrow">Tokenized Collectibles</p>
+      <h2>Physical-linked market model</h2>
+    </div>
+    <a class="text-link" href="/tokenized-collectibles/">Category guide →</a>
+  </div>
+  <p class="tokenized-record-intro">These fields separate the marketplace, physical backing, custody, redemption, randomized-sale, and buyback layers. They summarize reviewed documentation and do not constitute an independent custody audit.</p>
+  <dl class="tokenized-fact-grid">
+    {facts.map(([label, value]) => <div><dt>{label}</dt><dd>{formatLabel(value)}</dd></div>)}
+  </dl>
+  <div class="tokenized-tag-groups">
+    <div><h3>Platform roles</h3><div class="tokenized-tags">{roles.map((role) => <span>{formatLabel(role)}</span>)}</div></div>
+    <div><h3>Asset categories</h3><div class="tokenized-tags">{assets.map((asset) => <span>{formatLabel(asset)}</span>)}</div></div>
+  </div>
+</section>
