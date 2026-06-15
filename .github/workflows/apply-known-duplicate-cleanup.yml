@@ -1,6 +1,7 @@
 name: Apply known duplicate cleanup
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - fix/deduplicate-marketplaces
