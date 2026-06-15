@@ -15,6 +15,7 @@ export function buildSummary(report) {
     `- Marketplaces: ${report.summary.marketplaces}`,
     `- Events: ${report.summary.events}`,
     `- Evidence: ${report.summary.evidence}`,
+    `- URL checks: ${report.summary.url_checks} / ${report.summary.url_targets}`,
     `- Findings: ${report.summary.findings}`,
     `- Critical: ${report.summary.critical} · High: ${report.summary.high} · Medium: ${report.summary.medium} · Low: ${report.summary.low}`,
     '',
@@ -41,11 +42,18 @@ export function writeMonitoringReport(report, options = {}) {
   const dated = path.join(root, report.checked_at.slice(0, 10));
   const latest = path.join(root, 'latest');
   const summary = buildSummary(report);
+  const urlMonitor = report.monitors.find((monitor) => monitor.monitor === 'url-health');
 
   writeJson(path.join(dated, 'report.json'), report);
   writeText(path.join(dated, 'summary.md'), summary);
   writeJson(path.join(latest, 'report.json'), report);
   writeText(path.join(latest, 'summary.md'), summary);
+
+  if (urlMonitor?.checks?.length) {
+    writeJson(path.join(dated, 'url-checks.json'), urlMonitor.checks);
+    writeJson(path.join(latest, 'url-checks.json'), urlMonitor.checks);
+    writeJson(path.join(root, 'state', 'url-state.json'), urlMonitor.state);
+  }
 
   return { dated, latest };
 }
