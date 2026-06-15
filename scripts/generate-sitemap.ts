@@ -42,6 +42,7 @@ const updateSlugs = [
 const staticPaths = [
   '/',
   '/encyclopedia/',
+  '/tokenized-collectibles/',
   '/stats/',
   '/guides/',
   '/guides/what-happens-when-nft-marketplace-shuts-down/',

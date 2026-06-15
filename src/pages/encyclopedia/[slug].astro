@@ -8,6 +8,7 @@ import UrlArchiveBlock from '../../components/UrlArchiveBlock.astro';
 import Timeline from '../../components/Timeline.astro';
 import EvidenceList from '../../components/EvidenceList.astro';
 import MarketplaceCard from '../../components/MarketplaceCard.astro';
+import TokenizedCollectiblesBlock from '../../components/TokenizedCollectiblesBlock.astro';
 import { getMarketplaces, getEventsForMarketplace, getEvidenceForMarketplace, getRelatedMarketplaces } from '../../lib/data';
 import { formatCategory, formatYearRange } from '../../lib/format';
 export function getStaticPaths() { return getMarketplaces().map((record) => ({ params: { slug: record.slug }, props: { record } })); }
@@ -38,6 +39,7 @@ const archiveLabel = record.archived_url ? (record.archived_url.includes('/web/*
       </aside>
       <main class="record-main">
         <section class="framed-panel overview-card"><p class="eyebrow">Overview</p><h2>Classification notes</h2><p>{record.summary}</p><p>The record below separates frontend state, contracts, assets, evidence, and archive links so uncertainty stays visible.</p><FactGrid record={record} /></section>
+        {record.category === 'tokenized_collectibles' && <TokenizedCollectiblesBlock record={record} />}
         <WhatRemainsBlock record={record} />
         <Timeline events={events} />
         <EvidenceList evidence={evidence} isSourceReviewed={isSourceReviewed} />

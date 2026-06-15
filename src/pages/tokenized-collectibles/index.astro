@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarketplaceCard from '../../components/MarketplaceCard.astro';
+import { getMarketplaces } from '../../lib/data';
+import { formatLabel } from '../../lib/format';
+
+const records = getMarketplaces().filter((record) => record.category === 'tokenized_collectibles');
+const activeRedemption = records.filter((record) => record.redemption_status === 'active').length;
+const oneToOne = records.filter((record) => record.asset_backing === 'physical_1_to_1').length;
+const randomized = records.filter((record) => !['none', 'unknown', undefined].includes(record.randomized_sale_model)).length;
+---
+<BaseLayout title="Tokenized Collectibles — Minted & Gone" description="A registry view of NFT marketplaces linked to vaulted physical cards and other collectibles.">
+  <div class="shell tokenized-category-shell">
+    <section class="field-hero tokenized-category-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Category guide</p>
+        <h1>Tokenized Collectibles</h1>
+        <div class="flourish" aria-hidden="true">✦</div>
+        <p class="lede">Markets that connect blockchain records to physically stored collectible assets.</p>
+        <p>This category separates the marketplace layer from backing, custody, redemption, randomized-sale, and buyback models. It is narrower than the broad term RWA.</p>
+        <div class="hero-actions"><a class="btn primary" href="/encyclopedia/?category=tokenized_collectibles">Browse filtered records</a><a class="btn" href="/methodology/#tokenized-collectibles">Read methodology</a></div>
+      </div>
+      <aside class="hero-plate tokenized-hero-model" aria-label="Tokenized collectible lifecycle">
+        <span>Physical item</span><b>→</b><span>Vault or custodian</span><b>→</b><span>Tokenized market</span><b>→</b><span>Redemption</span>
+      </aside>
+    </section>
+
+    <section class="tokenized-summary-grid" aria-label="Category summary">
+      <div class="framed-panel"><strong>{records.length}</strong><span>records</span></div>
+      <div class="framed-panel"><strong>{oneToOne}</strong><span>one-to-one backing</span></div>
+      <div class="framed-panel"><strong>{activeRedemption}</strong><span>active redemption</span></div>
+      <div class="framed-panel"><strong>{randomized}</strong><span>randomized-sale models</span></div>
+    </section>
+
+    <section class="framed-panel tokenized-definition-panel">
+      <div class="section-head"><div><p class="eyebrow">How to read these records</p><h2>Separate the operating layers</h2></div></div>
+      <div class="tokenized-definition-grid">
+        {[
+          ['Backing', 'How the token is represented as connected to a physical item or pool.'],
+          ['Custody', 'Who stores or coordinates storage of the physical collectible.'],
+          ['Redemption', 'Whether and under what status a holder can request the physical item.'],
+          ['Randomized sale', 'Mystery pack, gacha, repack, or other randomized allocation model.'],
+          ['Buyback', 'Whether the platform itself offers an exit or resale mechanism.'],
+          ['Evidence', 'Official documentation and archived sources supporting each recorded claim.']
+        ].map(([title, copy]) => <article><h3>{title}</h3><p>{copy}</p></article>)}
+      </div>
+      <p class="mock-note">A marketplace record does not independently prove that every physical item exists, is insured, or is bankruptcy-remote. Unknown values remain unknown instead of being inferred.</p>
+    </section>
+
+    <section class="framed-panel tokenized-records-panel">
+      <div class="section-head"><div><p class="eyebrow">Registry records</p><h2>Current category entries</h2></div><a class="text-link" href="/encyclopedia/?category=tokenized_collectibles">Open in encyclopedia →</a></div>
+      <div class="grid cards tokenized-record-grid">{records.map((record) => <MarketplaceCard record={record} />)}</div>
+    </section>
+
+    <section class="framed-panel tokenized-enum-panel">
+      <p class="eyebrow">Classification vocabulary</p>
+      <div class="tokenized-enum-grid">
+        <div><h3>Backing</h3>{[...new Set(records.map((record) => record.asset_backing).filter(Boolean))].map((value) => <span>{formatLabel(value)}</span>)}</div>
+        <div><h3>Custody</h3>{[...new Set(records.map((record) => record.custody_model).filter(Boolean))].map((value) => <span>{formatLabel(value)}</span>)}</div>
+        <div><h3>Redemption</h3>{[...new Set(records.map((record) => record.redemption_status).filter(Boolean))].map((value) => <span>{formatLabel(value)}</span>)}</div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
