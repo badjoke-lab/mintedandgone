@@ -16,14 +16,20 @@ export function buildSummary(report) {
     `- Events: ${report.summary.events}`,
     `- Evidence: ${report.summary.evidence}`,
     `- Findings: ${report.summary.findings}`,
+    `- Critical: ${report.summary.critical} · High: ${report.summary.high} · Medium: ${report.summary.medium} · Low: ${report.summary.low}`,
     '',
-    '## Findings',
+    '## Monitor summary',
     ''
   ];
 
+  for (const monitor of report.monitors) {
+    lines.push(`- **${monitor.monitor}**: ${monitor.status} · ${monitor.summary.findings ?? 0} findings`);
+  }
+
+  lines.push('', '## Findings', '');
   if (!report.findings.length) lines.push('No findings.');
   for (const item of report.findings) {
-    lines.push(`- **${item.severity.toUpperCase()}** ${item.title} — ${item.details}`);
+    lines.push(`- **${item.severity.toUpperCase()}** [${item.monitor}] ${item.title} — ${item.details}`);
   }
 
   lines.push('', '## Safety', '', 'This monitoring run did not modify canonical marketplace, event, or evidence files.');
