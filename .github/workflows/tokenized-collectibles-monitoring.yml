@@ -1,4 +1,61 @@
 name: Tokenized Collectibles Monitoring
 
 on:
+  schedule:
+    - cron: "0 3 * * 1"
   workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: tokenized-collectibles-monitoring
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Restore URL state
+        uses: actions/cache@v4
+        with:
+          path: .monitoring-state
+          key: tokenized-url-state-${{ github.run_id }}
+          restore-keys: |
+            tokenized-url-state-
+
+      - name: Run live monitoring
+        run: npm run monitor:tokenized:live:publish -- --url-state=.monitoring-state/url-state.json
+
+      - name: Guard canonical files
+        shell: bash
+        run: |
+          if git status --porcelain -- data | grep -E 'data/(marketplaces|events|evidence).*\.json'; then
+            echo "Monitoring changed canonical data."
+            exit 1
+          fi
+
+      - name: Detect monitoring output
+        id: changes
+        shell: bash
+        run: |
+          if [ -n "$(git status --porcelain -- data-staging/monitoring/tokenized-collectibles)" ]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
