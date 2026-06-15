@@ -44,7 +44,7 @@ const counts = {
         </details>
       </aside>
       <section class="catalog-panel framed-panel encyclopedia-catalog">
-        <div class="catalog-toolbar encyclopedia-toolbar"><p><strong data-result-count>{records.length}</strong> results</p><div class="filter-pills"><span>Status: All ×</span><span>Chain: All ×</span><span>Category: All ×</span></div><a class="text-link" href="/encyclopedia/">Clear all</a><span class="view-icons" aria-hidden="true">▦ ☰</span></div>
+        <div class="catalog-toolbar encyclopedia-toolbar"><p><strong data-result-count>{records.length}</strong> results</p><div class="filter-pills"><span>Status: All ×</span><span>Chain: All ×</span><span>Category: All ×</span></div><a class="text-link" href="/tokenized-collectibles/">Tokenized Collectibles guide →</a><span class="view-icons" aria-hidden="true">▦ ☰</span></div>
         <div class="grid cards catalog-grid encyclopedia-grid" data-card-list>{records.map((record) => <EncyclopediaCard record={record} />)}</div>
         <div class="load-more-wrap" data-load-more-wrap>
           <button class="btn" data-load-more type="button">Load more records</button>
@@ -91,6 +91,14 @@ const counts = {
       };
 
       syncFilterDetailsState();
+
+      const params = new URLSearchParams(window.location.search);
+      const initialSearch = params.get('search') || params.get('q');
+      if (initialSearch) input.value = initialSearch;
+      ['status', 'category', 'chain'].forEach((name) => {
+        const selectedValues = params.getAll(name).flatMap((value) => value.split(',')).filter(Boolean);
+        checks.filter((checkbox) => checkbox.dataset.filter === name && selectedValues.includes(checkbox.value)).forEach((checkbox) => { checkbox.checked = true; });
+      });
 
       const getSelectedFilters = () => {
         const selected = { status: [], category: [], chain: [] };
@@ -159,6 +167,7 @@ const counts = {
         clearButton.addEventListener('click', () => {
           input.value = '';
           checks.forEach((checkbox) => { checkbox.checked = false; });
+          history.replaceState({}, '', window.location.pathname);
           update({ resetLimit: true });
         });
       }
