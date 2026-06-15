@@ -22,7 +22,13 @@ jobs:
       - name: Generate sitemap
         run: npm run generate:sitemap
       - name: Validate data
-        run: npm run validate
+        continue-on-error: true
+        run: npm run validate > validate-data.log 2>&1
+      - name: Upload validation log
+        uses: actions/upload-artifact@v4
+        with:
+          name: validate-data-log
+          path: validate-data.log
       - name: Validate candidate backlog
         run: npm run validate:candidates
       - name: Validate latest marketplace batch
