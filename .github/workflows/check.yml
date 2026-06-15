@@ -41,7 +41,20 @@ jobs:
         run: npm run validate:latest-batch
 
       - name: Validate tokenized collectibles
-        run: npm run validate:tokenized
+        id: tokenized
+        continue-on-error: true
+        run: npm run validate:tokenized > tokenized-integrity.log 2>&1
+
+      - name: Upload tokenized validation failure
+        if: steps.tokenized.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: tokenized-integrity-log
+          path: tokenized-integrity.log
+
+      - name: Stop after tokenized validation failure
+        if: steps.tokenized.outcome == 'failure'
+        run: exit 1
 
       - name: Build site
         run: npm run build:site
