@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-06-15",
+  "decisions": [
+    {"candidate_id":"mag_rwa_candidate_000003","canonical_name":"PACKS","decision":"promote","reason":"Official terms establish a native marketplace, individual asset representation, platform storage, resale, auctions, gacha, and physical redemption.","marketplace_id":"mag_nfm_real_000415"},
+    {"candidate_id":"mag_rwa_candidate_000004","canonical_name":"TCG STORE","decision":"promote","reason":"The official service now exposes shop, market, randomized products, stored cards, blockchain ownership records, and physical shipping requests; the marketplace boundary is established.","marketplace_id":"mag_nfm_real_000416"},
+    {"candidate_id":"mag_rwa_candidate_000008","canonical_name":"Holos","decision":"promote","reason":"Official documentation establishes a native marketplace, one-to-one physical backing, Polygon issuance, distributed professional storage, resale, packs, and burn-based redemption.","marketplace_id":"mag_nfm_real_000417"},
+    {"candidate_id":"mag_rwa_candidate_000007","canonical_name":"Artifacte","decision":"promote_conservatively","reason":"The official Solana marketplace and auction surface includes authenticated real-world collectibles and digital collections. Custody and redemption remain unknown and are not asserted.","marketplace_id":"mag_nfm_real_000418"},
+    {"candidate_id":"mag_rwa_candidate_000009","canonical_name":"Deadstock","decision":"hold","reason":"The exact Web3 service identity and official domain remain unresolved, while multiple unrelated conventional marketplaces use the same name. No canonical record is created."}
+  ]
+}
