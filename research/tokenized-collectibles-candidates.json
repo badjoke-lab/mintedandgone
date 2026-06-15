@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-06-15",
+  "purpose": "Research-only candidate ledger for tokenized physical collectible marketplaces considered for Minted & Gone.",
+  "publication_status": "research_only",
+  "methodology": "docs/tokenized-collectibles-methodology.md",
+  "duplicate_policy": {
+    "github_search_is_not_sufficient": true,
+    "required_before_promotion": [
+      "scan all data/marketplaces*.json files",
+      "check slug",
+      "check canonical_name",
+      "check aliases",
+      "check official_domain_original",
+      "check official_url_original",
+      "check same-batch domains",
+      "check research/mag-candidate-consumption-log.json"
+    ]
+  },
+  "candidates": [
+    {
+      "candidate_id": "mag_rwa_candidate_000001",
+      "canonical_name": "Courtyard",
+      "aliases": ["Courtyard.io"],
+      "official_domain_candidate": "courtyard.io",
+      "official_url_candidate": "https://courtyard.io/",
+      "research_status": "ready_for_record_drafting",
+      "scope_status": "marketplace_confirmed",
+      "category": "tokenized_collectibles",
+      "asset_backing_candidate": "physical_1_to_1",
+      "platform_roles_candidate": ["marketplace", "tokenizer", "custody_orchestrator", "redemption_operator", "mystery_pack_operator"],
+      "custody_model_candidate": "third_party_vault",
+      "redemption_status_candidate": "active",
+      "randomized_sale_model_candidate": "mystery_pack",
+      "buyback_model_candidate": "open_market_only",
+      "asset_categories_candidate": ["trading_cards", "sports_cards", "graded_collectibles"],
+      "chain_candidates": ["polygon"],
+      "source_urls": [
+        "https://docs.courtyard.io/courtyard",
+        "https://docs.courtyard.io/courtyard/technology/proof-of-integrity",
+        "https://docs.courtyard.io/courtyard/resources/courtyard-vault-transition"
+      ],
+      "missing_evidence": ["current redemption fee and regional restriction source", "current custodian identity source"],
+      "duplicate_check": {
+        "status": "preliminary_no_match",
+        "method": "github_code_search_only",
+        "full_repository_scan_required": true
+      },
+      "notes": "Strong official documentation supports marketplace, vault, token-to-item relationship, and redemption research. Exact custody assertions remain conservative until current contractual evidence is captured."
+    },
+    {
+      "candidate_id": "mag_rwa_candidate_000002",
+      "canonical_name": "Collector Crypt",
+      "aliases": ["CollectorCrypt", "Collector Crypt Gacha"],
+      "official_domain_candidate": "collectorcrypt.com",
+      "official_url_candidate": "https://collectorcrypt.com/",
+      "research_status": "ready_for_record_drafting",
+      "scope_status": "marketplace_confirmed",
+      "category": "tokenized_collectibles",
+      "asset_backing_candidate": "physical_redeemable",
+      "platform_roles_candidate": ["marketplace", "tokenizer", "custody_orchestrator", "mystery_pack_operator", "buyback_counterparty", "redemption_operator"],
+      "custody_model_candidate": "unknown",
+      "redemption_status_candidate": "active",
+      "randomized_sale_model_candidate": "gacha",
+      "buyback_model_candidate": "instant_buyback",
+      "asset_categories_candidate": ["pokemon_cards", "trading_cards"],
+      "chain_candidates": ["solana"],
+      "source_urls": [
+        "https://collectorcrypt.com/",
+        "https://gacha.collectorcrypt.com/",
+        "https://gacha.collectorcrypt.com/yolo"
+      ],
+      "missing_evidence": ["official legal terms", "official custody terms", "official redemption procedure and fee source"],
+      "duplicate_check": {
+        "status": "preliminary_no_match",
+        "method": "github_code_search_only",
+        "full_repository_scan_required": true
+      },
+      "notes": "Use only collectorcrypt.com. The similar collectercrypt.com domain is unrelated. Strong product evidence exists, but legal and custody claims must remain limited until official terms are captured."
+    },
+    {
+      "candidate_id": "mag_rwa_candidate_000003",
+      "canonical_name": "PACKS",
+      "aliases": ["PACKS NFT", "PACKS NFT Gacha"],
+      "official_domain_candidate": "packs777.xyz",
+      "official_url_candidate": "https://packs777.xyz/",
+      "research_status": "needs_official_terms",
+      "scope_status": "probable_marketplace",
+      "category": "tokenized_collectibles",
+      "asset_backing_candidate": "physical_redeemable",
+      "platform_roles_candidate": ["marketplace", "issuer", "mystery_pack_operator", "redemption_operator"],
+      "custody_model_candidate": "unknown",
+      "redemption_status_candidate": "unknown",
+      "randomized_sale_model_candidate": "gacha",
+      "buyback_model_candidate": "unknown",
+      "asset_categories_candidate": ["trading_cards"],
+      "chain_candidates": ["unknown"],
+      "source_urls": [
+        "https://packs777.xyz/",
+        "https://prtimes.jp/main/html/rd/p/000000010.000146850.html"
+      ],
+      "missing_evidence": ["official terms", "official custody model", "official redemption rules", "chain documentation", "current operational status"],
+      "duplicate_check": {
+        "status": "preliminary_no_match",
+        "method": "github_code_search_only",
+        "full_repository_scan_required": true
+      },
+      "notes": "Japanese launch reporting supports the service concept, but publication requires first-party terms and current operational verification."
+    },
+    {
+      "candidate_id": "mag_rwa_candidate_000004",
+      "canonical_name": "TCG STORE",
+      "aliases": ["TCG STORE NFT"],
+      "official_domain_candidate": "tcgstore.io",
+      "official_url_candidate": "https://tcgstore.io/",
+      "research_status": "needs_marketplace_boundary_review",
+      "scope_status": "issuer_or_market_infrastructure_unclear",
+      "category": "tokenized_collectibles",
+      "asset_backing_candidate": "physical_redeemable",
+      "platform_roles_candidate": ["tokenizer", "issuer", "redemption_operator"],
+      "custody_model_candidate": "unknown",
+      "redemption_status_candidate": "unknown",
+      "randomized_sale_model_candidate": "unknown",
+      "buyback_model_candidate": "open_market_only",
+      "asset_categories_candidate": ["trading_cards"],
+      "chain_candidates": ["oasys", "polygon"],
+      "source_urls": [
+        "https://tcgstore.io/",
+        "https://www.watch.impress.co.jp/docs/news/2039548.html"
+      ],
+      "missing_evidence": ["proof of a distinct native marketplace", "official terms", "official custody model", "official redemption rules", "relationship to external marketplaces"],
+      "duplicate_check": {
+        "status": "preliminary_no_match",
+        "method": "github_code_search_only",
+        "full_repository_scan_required": true
+      },
+      "notes": "May be an issuer and redemption layer whose assets trade on external markets. Do not promote until the marketplace entity boundary is established."
+    },
+    {
+      "candidate_id": "mag_rwa_candidate_000005",
+      "canonical_name": "Phygitals",
+      "aliases": ["Phygitals Marketplace"],
+      "official_domain_candidate": "phygitals.com",
+      "official_url_candidate": "https://www.phygitals.com/",
+      "research_status": "ready_for_record_drafting",
+      "scope_status": "marketplace_confirmed",
+      "category": "tokenized_collectibles",
+      "asset_backing_candidate": "physical_1_to_1",
+      "platform_roles_candidate": ["marketplace", "tokenizer", "custody_orchestrator", "redemption_operator"],
+      "custody_model_candidate": "platform_vault",
+      "redemption_status_candidate": "active",
+      "randomized_sale_model_candidate": "none",
+      "buyback_model_candidate": "open_market_only",
+      "asset_categories_candidate": ["trading_cards", "graded_collectibles"],
+      "chain_candidates": ["unknown"],
+      "source_urls": [
+        "https://www.phygitals.com/",
+        "https://docs.phygitals.com/",
+        "https://docs.phygitals.com/about-phygitals/welcome-to-phygitals-the-future-of-collecting/marketplace",
+        "https://docs.phygitals.com/about-phygitals/digitize-and-vault-collectibles"
+      ],
+      "missing_evidence": ["current chain documentation", "current redemption fees and regional restrictions"],
+      "duplicate_check": {
+        "status": "preliminary_no_match",
+        "method": "github_code_search_only",
+        "full_repository_scan_required": true
+      },
+      "notes": "Official documentation directly describes a marketplace, one-to-one graded-card backing, vaulting, tokenization, and redemption."
+    },
+    {
+      "candidate_id": "mag_rwa_candidate_000006",
+      "canonical_name": "Tradible",
+      "aliases": ["Tradible Marketplace"],
+      "official_domain_candidate": "tradible.io",
+      "official_url_candidate": "https://tradible.io/",
+      "research_status": "ready_for_record_drafting",
+      "scope_status": "marketplace_confirmed",
+      "category": "tokenized_collectibles",
+      "asset_backing_candidate": "physical_1_to_1",
+      "platform_roles_candidate": ["marketplace", "tokenizer", "custody_orchestrator", "redemption_operator"],
+      "custody_model_candidate": "unknown",
+      "redemption_status_candidate": "active",
+      "randomized_sale_model_candidate": "unknown",
+      "buyback_model_candidate": "open_market_only",
+      "asset_categories_candidate": ["trading_cards"],
+      "chain_candidates": ["unknown"],
+      "source_urls": [
+        "https://tradible.gitbook.io/tradible",
+        "https://tradible.gitbook.io/tradible/resources/faq"
+      ],
+      "missing_evidence": ["current marketplace operational check", "current custodian identity", "chain documentation", "archive capture"],
+      "duplicate_check": {
+        "status": "preliminary_no_match",
+        "method": "github_code_search_only",
+        "full_repository_scan_required": true
+      },
+      "notes": "Official documentation describes vaulting, tokenization, marketplace operation, and redemption of the physical card. Current-state verification remains required."
+    },
+    {
+      "candidate_id": "mag_rwa_candidate_000007",
+      "canonical_name": "Artifacte",
+      "aliases": ["Artifacte Marketplace"],
+      "official_domain_candidate": "artifacte.io",
+      "official_url_candidate": "https://artifacte.io/",
+      "research_status": "needs_redemption_and_custody_evidence",
+      "scope_status": "marketplace_confirmed",
+      "category": "tokenized_collectibles",
+      "asset_backing_candidate": "unclear",
+      "platform_roles_candidate": ["marketplace", "auction_operator", "tokenizer"],
+      "custody_model_candidate": "unknown",
+      "redemption_status_candidate": "unknown",
+      "randomized_sale_model_candidate": "none",
+      "buyback_model_candidate": "open_market_only",
+      "asset_categories_candidate": ["collectibles", "digital_art"],
+      "chain_candidates": ["solana"],
+      "source_urls": [
+        "https://artifacte.io/",
+        "https://artifacte.io/digital-art"
+      ],
+      "missing_evidence": ["official physical-backing terms", "official custody model", "official redemption process", "clear physical collectible marketplace boundary"],
+      "duplicate_check": {
+        "status": "preliminary_no_match",
+        "method": "github_code_search_only",
+        "full_repository_scan_required": true
+      },
+      "notes": "Official material supports a collectible marketplace and auction role, but physical backing and redemption must not be inferred without stronger first-party evidence."
+    },
+    {
+      "candidate_id": "mag_rwa_candidate_000008",
+      "canonical_name": "Holos",
+      "aliases": ["Holos Marketplace"],
+      "official_domain_candidate": null,
+      "official_url_candidate": null,
+      "research_status": "needs_official_source",
+      "scope_status": "reported_marketplace_unverified",
+      "category": "tokenized_collectibles",
+      "asset_backing_candidate": "unclear",
+      "platform_roles_candidate": ["marketplace", "tokenizer", "redemption_operator"],
+      "custody_model_candidate": "unknown",
+      "redemption_status_candidate": "unknown",
+      "randomized_sale_model_candidate": "unknown",
+      "buyback_model_candidate": "unknown",
+      "asset_categories_candidate": ["collectibles"],
+      "chain_candidates": ["unknown"],
+      "source_urls": [
+        "https://news.bitcoin.com/holos-launches-an-nft-rwa-marketplace-for-collectibles-trading-that-bridges-physical-and-digital-assets/"
+      ],
+      "missing_evidence": ["official domain", "official marketplace page", "official terms", "official custody and redemption rules", "current operational status"],
+      "duplicate_check": {
+        "status": "not_started",
+        "method": null,
+        "full_repository_scan_required": true
+      },
+      "notes": "Third-party launch reporting is insufficient for publication. Hold until the official identity and terms are verified."
+    },
+    {
+      "candidate_id": "mag_rwa_candidate_000009",
+      "canonical_name": "Deadstock",
+      "aliases": ["Deadstock Marketplace"],
+      "official_domain_candidate": null,
+      "official_url_candidate": null,
+      "research_status": "needs_official_source",
+      "scope_status": "reported_marketplace_unverified",
+      "category": "tokenized_collectibles",
+      "asset_backing_candidate": "unclear",
+      "platform_roles_candidate": ["marketplace", "mystery_pack_operator"],
+      "custody_model_candidate": "unknown",
+      "redemption_status_candidate": "unknown",
+      "randomized_sale_model_candidate": "unknown",
+      "buyback_model_candidate": "unknown",
+      "asset_categories_candidate": ["trading_cards"],
+      "chain_candidates": ["unknown"],
+      "source_urls": [],
+      "missing_evidence": ["official identity", "official domain", "official marketplace page", "official backing terms", "official custody and redemption rules", "current operational status"],
+      "duplicate_check": {
+        "status": "not_started",
+        "method": null,
+        "full_repository_scan_required": true
+      },
+      "notes": "Name collision risk is high. Do not create a marketplace record until the exact service identity is established."
+    }
+  ]
+}
