@@ -1,0 +1,39 @@
+name: Apply known duplicate cleanup
+
+on:
+  push:
+    branches:
+      - fix/deduplicate-marketplaces
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/deduplicate-marketplaces
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply deterministic cleanup
+        run: node scripts/apply-known-duplicate-cleanup.mjs
+      - name: Commit cleanup result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/marketplaces-batch-38.json data/events-batch-38.json data/evidence-batch-38.json \
+                  data/marketplaces-batch-39.json data/events-batch-39.json data/evidence-batch-39.json \
+                  data/marketplaces-batch-40.json data/events-batch-40.json data/evidence-batch-40.json \
+                  data/marketplaces-batch-41.json data/events-batch-41.json data/evidence-batch-41.json \
+                  research/mag-candidate-consumption-log.json research/duplicate-cleanup-2026-06-15.json
+          if git diff --cached --quiet; then
+            echo "No cleanup changes."
+          else
+            git commit -m "Apply known marketplace duplicate cleanup"
+            git push origin HEAD:fix/deduplicate-marketplaces
+          fi
