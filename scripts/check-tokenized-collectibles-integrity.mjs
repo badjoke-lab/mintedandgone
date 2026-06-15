@@ -11,6 +11,13 @@ const evidence = readMany('evidence');
 const errors = [];
 
 const allowedEventTypes = new Set([
+  'launched',
+  'rebranded',
+  'acquired',
+  'merged',
+  'shutdown_announced',
+  'shutdown_effective',
+  'other',
   'status_review',
   'tokenization_launch',
   'marketplace_launch',
