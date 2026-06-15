@@ -12,10 +12,14 @@
     "validate:candidates": "node scripts/validate-mag-candidate-backlog.mjs",
     "validate:latest-batch": "node scripts/check-mag-batch-candidates.mjs latest",
     "validate:tokenized": "node scripts/check-tokenized-collectibles-integrity.mjs",
+    "monitor:tokenized": "node scripts/monitoring-tokenized-run.mjs",
+    "monitor:tokenized:publish": "node scripts/monitoring-tokenized-run.mjs --publish",
+    "monitor:tokenized:smoke": "node scripts/monitoring-tokenized-run.mjs --force-report --output-root=.tmp/tokenized-monitoring",
+    "guard:tokenized-canonical": "node scripts/monitoring-tokenized-guard.mjs",
     "select:mag-ready": "node scripts/select-mag-ready-candidates.mjs 10",
     "generate:stats": "command -v tsx >/dev/null 2>&1 && tsx scripts/generate-stats.ts || node --loader ./scripts/ts-loader.mjs scripts/generate-stats.ts",
     "generate:sitemap": "command -v tsx >/dev/null 2>&1 && tsx scripts/generate-sitemap.ts || node --loader ./scripts/ts-loader.mjs scripts/generate-sitemap.ts",
-    "check": "npm run generate:stats && npm run generate:sitemap && npm run validate && npm run validate:candidates && npm run validate:latest-batch && npm run validate:tokenized && npm run build:site",
+    "check": "npm run generate:stats && npm run generate:sitemap && npm run validate && npm run validate:candidates && npm run validate:latest-batch && npm run validate:tokenized && npm run monitor:tokenized && npm run build:site",
     "import:assets": "node scripts/import-assets.mjs"
   },
   "dependencies": {

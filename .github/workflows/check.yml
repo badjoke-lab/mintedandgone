@@ -56,5 +56,16 @@ jobs:
         if: steps.tokenized.outcome == 'failure'
         run: exit 1
 
+      - name: Run tokenized monitoring dry run
+        run: npm run monitor:tokenized
+
+      - name: Smoke test tokenized report writer
+        run: npm run monitor:tokenized:smoke
+
+      - name: Verify tokenized smoke outputs
+        run: |
+          test -f .tmp/tokenized-monitoring/latest/report.json
+          test -f .tmp/tokenized-monitoring/latest/summary.md
+
       - name: Build site
         run: npm run build:site
