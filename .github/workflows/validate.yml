@@ -24,11 +24,15 @@ jobs:
       - name: Validate data
         continue-on-error: true
         run: npm run validate > validate-data.log 2>&1
-      - name: Upload validation log
+      - name: Report tokenized batch conflicts
+        run: node scripts/report-tokenized-batch-conflicts.mjs > tokenized-batch-conflicts.log
+      - name: Upload diagnostics
         uses: actions/upload-artifact@v4
         with:
-          name: validate-data-log
-          path: validate-data.log
+          name: mag-validation-diagnostics
+          path: |
+            validate-data.log
+            tokenized-batch-conflicts.log
       - name: Validate candidate backlog
         run: npm run validate:candidates
       - name: Validate latest marketplace batch
