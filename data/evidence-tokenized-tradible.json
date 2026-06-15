@@ -1,0 +1,5 @@
+[
+  {"id":"mag_src_real_000846","marketplace_id":"mag_nfm_real_000414","event_id":"mag_ev_real_000417","source_type":"marketplace_page","title":"Welcome to Tradible","url":"https://tradible.gitbook.io/tradible","publisher":"Tradible","reliability":"high","claim_scope":"marketplace"},
+  {"id":"mag_src_real_000847","marketplace_id":"mag_nfm_real_000414","event_id":"mag_ev_real_000417","source_type":"official_document","title":"Technology Overview","url":"https://tradible.gitbook.io/tradible/technology/overview","publisher":"Tradible","reliability":"high","claim_scope":"physical_backing"},
+  {"id":"mag_src_real_000848","marketplace_id":"mag_nfm_real_000414","event_id":"mag_ev_real_000417","source_type":"official_document","title":"Tradible FAQ","url":"https://tradible.gitbook.io/tradible/resources/faq","publisher":"Tradible","reliability":"high","claim_scope":"redemption"}
+]
