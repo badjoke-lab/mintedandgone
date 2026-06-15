@@ -56,6 +56,9 @@ jobs:
         if: steps.tokenized.outcome == 'failure'
         run: exit 1
 
+      - name: Test tokenized URL classifications
+        run: npm run test:monitoring:tokenized-url
+
       - name: Run tokenized monitoring dry run
         run: npm run monitor:tokenized
 
