@@ -3,56 +3,614 @@
   "purpose": "Consumption log for MAG candidate backlog promotions. Entries are appended whenever a candidate is promoted, rejected, or held.",
   "generated_at": "2026-06-07",
   "entries": [
-    {"candidate_id":"mag_candidate_000001","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000351","event_id":"mag_ev_real_000354","evidence_ids":["mag_src_real_000708","mag_src_real_000709"],"processed_at":"2026-06-08","notes":"Promoted as ThetaDrop."},
-    {"candidate_id":"mag_candidate_000002","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000352","event_id":"mag_ev_real_000355","evidence_ids":["mag_src_real_000710","mag_src_real_000711"],"processed_at":"2026-06-08","notes":"Promoted as MLB Champions."},
-    {"candidate_id":"mag_candidate_000003","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000353","event_id":"mag_ev_real_000356","evidence_ids":["mag_src_real_000712","mag_src_real_000713"],"processed_at":"2026-06-08","notes":"Promoted as Disney Pinnacle."},
-    {"candidate_id":"mag_candidate_000004","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000354","event_id":"mag_ev_real_000357","evidence_ids":["mag_src_real_000714","mag_src_real_000715"],"processed_at":"2026-06-08","notes":"Promoted as TIMEPieces."},
-    {"candidate_id":"mag_candidate_000005","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000355","event_id":"mag_ev_real_000358","evidence_ids":["mag_src_real_000716","mag_src_real_000717"],"processed_at":"2026-06-08","notes":"Promoted as Unicly."},
-    {"candidate_id":"mag_candidate_000006","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000356","event_id":"mag_ev_real_000359","evidence_ids":["mag_src_real_000718","mag_src_real_000719"],"processed_at":"2026-06-08","notes":"Promoted as Coral Cube."},
-    {"candidate_id":"mag_candidate_000007","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000357","event_id":"mag_ev_real_000360","evidence_ids":["mag_src_real_000720","mag_src_real_000721"],"processed_at":"2026-06-08","notes":"Promoted as Keepsake Marketplace."},
-    {"candidate_id":"mag_candidate_000008","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000358","event_id":"mag_ev_real_000361","evidence_ids":["mag_src_real_000722","mag_src_real_000723"],"processed_at":"2026-06-08","notes":"Promoted as Stratos NFT Marketplace."},
-    {"candidate_id":"mag_candidate_000009","action":"hold","batch":null,"marketplace_id":null,"event_id":null,"evidence_ids":[],"processed_at":"2026-06-08","notes":"Held because existing /encyclopedia/illuvium-marketplace/ is a near duplicate. Revisit only if distinct marketplace identity is proven."},
-    {"candidate_id":"mag_candidate_000010","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000359","event_id":"mag_ev_real_000362","evidence_ids":["mag_src_real_000724","mag_src_real_000725"],"processed_at":"2026-06-08","notes":"Promoted as Big Time Marketplace."},
-    {"candidate_id":"mag_candidate_000011","action":"consumed","batch":"batch-37","marketplace_id":"mag_nfm_real_000360","event_id":"mag_ev_real_000363","evidence_ids":["mag_src_real_000726","mag_src_real_000727"],"processed_at":"2026-06-08","notes":"Promoted as MotoGP Ignition Marketplace."},
-    {"candidate_id":"mag_candidate_000021","action":"consumed","batch":"batch-38","marketplace_id":"mag_nfm_real_000361","event_id":"mag_ev_real_000364","evidence_ids":["mag_src_real_000728","mag_src_real_000729"],"processed_at":"2026-06-09","notes":"Promoted as NFTb."},
-    {"candidate_id":"mag_candidate_000022","action":"consumed","batch":"batch-38","marketplace_id":"mag_nfm_real_000362","event_id":"mag_ev_real_000365","evidence_ids":["mag_src_real_000730","mag_src_real_000731"],"processed_at":"2026-06-09","notes":"Promoted as Treasureland."},
-    {"candidate_id":"mag_candidate_000023","action":"consumed","batch":"batch-38","marketplace_id":"mag_nfm_real_000363","event_id":"mag_ev_real_000366","evidence_ids":["mag_src_real_000732","mag_src_real_000733"],"processed_at":"2026-06-09","notes":"Promoted as Refinable."},
-    {"candidate_id":"mag_candidate_000024","action":"consumed","batch":"batch-38","marketplace_id":"mag_nfm_real_000364","event_id":"mag_ev_real_000367","evidence_ids":["mag_src_real_000734","mag_src_real_000735"],"processed_at":"2026-06-09","notes":"Promoted as Artano."},
-    {"candidate_id":"mag_candidate_000025","action":"consumed","batch":"batch-38","marketplace_id":"mag_nfm_real_000365","event_id":"mag_ev_real_000368","evidence_ids":["mag_src_real_000736","mag_src_real_000737"],"processed_at":"2026-06-09","notes":"Promoted as Tokhun."},
-    {"candidate_id":"mag_candidate_000026","action":"consumed","batch":"batch-38","marketplace_id":"mag_nfm_real_000366","event_id":"mag_ev_real_000369","evidence_ids":["mag_src_real_000738","mag_src_real_000739"],"processed_at":"2026-06-09","notes":"Promoted as Blockparty."},
-    {"candidate_id":"mag_candidate_000027","action":"consumed","batch":"batch-38","marketplace_id":"mag_nfm_real_000367","event_id":"mag_ev_real_000370","evidence_ids":["mag_src_real_000740","mag_src_real_000741"],"processed_at":"2026-06-09","notes":"Promoted as Portion."},
-    {"candidate_id":"mag_candidate_000028","action":"consumed","batch":"batch-38","marketplace_id":"mag_nfm_real_000368","event_id":"mag_ev_real_000371","evidence_ids":["mag_src_real_000742","mag_src_real_000743"],"processed_at":"2026-06-09","notes":"Promoted as Cargo."},
-    {"candidate_id":"mag_candidate_000029","action":"consumed","batch":"batch-38","marketplace_id":"mag_nfm_real_000369","event_id":"mag_ev_real_000372","evidence_ids":["mag_src_real_000744","mag_src_real_000745"],"processed_at":"2026-06-09","notes":"Promoted as NFTify."},
-    {"candidate_id":"mag_candidate_000030","action":"consumed","batch":"batch-38","marketplace_id":"mag_nfm_real_000370","event_id":"mag_ev_real_000373","evidence_ids":["mag_src_real_000746","mag_src_real_000747"],"processed_at":"2026-06-09","notes":"Promoted as NiftyKit."},
-    {"candidate_id":"mag_candidate_000036","action":"consumed","batch":"batch-39","marketplace_id":"mag_nfm_real_000371","event_id":"mag_ev_real_000374","evidence_ids":["mag_src_real_000748","mag_src_real_000749"],"processed_at":"2026-06-10","notes":"Promoted as OneMint."},
-    {"candidate_id":"mag_candidate_000037","action":"consumed","batch":"batch-39","marketplace_id":"mag_nfm_real_000372","event_id":"mag_ev_real_000375","evidence_ids":["mag_src_real_000750","mag_src_real_000751"],"processed_at":"2026-06-10","notes":"Promoted as MintGate."},
-    {"candidate_id":"mag_candidate_000039","action":"consumed","batch":"batch-39","marketplace_id":"mag_nfm_real_000373","event_id":"mag_ev_real_000376","evidence_ids":["mag_src_real_000752","mag_src_real_000753"],"processed_at":"2026-06-10","notes":"Promoted as NFT Stars."},
-    {"candidate_id":"mag_candidate_000041","action":"consumed","batch":"batch-39","marketplace_id":"mag_nfm_real_000374","event_id":"mag_ev_real_000377","evidence_ids":["mag_src_real_000754","mag_src_real_000755"],"processed_at":"2026-06-10","notes":"Promoted as DoinGud."},
-    {"candidate_id":"mag_candidate_000042","action":"consumed","batch":"batch-39","marketplace_id":"mag_nfm_real_000375","event_id":"mag_ev_real_000378","evidence_ids":["mag_src_real_000756","mag_src_real_000757"],"processed_at":"2026-06-10","notes":"Promoted as Mint Gold Dust."},
-    {"candidate_id":"mag_candidate_000044","action":"consumed","batch":"batch-39","marketplace_id":"mag_nfm_real_000376","event_id":"mag_ev_real_000379","evidence_ids":["mag_src_real_000758","mag_src_real_000759"],"processed_at":"2026-06-10","notes":"Promoted as Artcrypted."},
-    {"candidate_id":"mag_candidate_000045","action":"consumed","batch":"batch-39","marketplace_id":"mag_nfm_real_000377","event_id":"mag_ev_real_000380","evidence_ids":["mag_src_real_000760","mag_src_real_000761"],"processed_at":"2026-06-10","notes":"Promoted as Snark.art."},
-    {"candidate_id":"mag_candidate_000046","action":"consumed","batch":"batch-39","marketplace_id":"mag_nfm_real_000378","event_id":"mag_ev_real_000381","evidence_ids":["mag_src_real_000762","mag_src_real_000763"],"processed_at":"2026-06-10","notes":"Promoted as Aorist."},
-    {"candidate_id":"mag_candidate_000047","action":"consumed","batch":"batch-39","marketplace_id":"mag_nfm_real_000379","event_id":"mag_ev_real_000382","evidence_ids":["mag_src_real_000764","mag_src_real_000765"],"processed_at":"2026-06-10","notes":"Promoted as Sedition."},
-    {"candidate_id":"mag_candidate_000048","action":"consumed","batch":"batch-39","marketplace_id":"mag_nfm_real_000380","event_id":"mag_ev_real_000383","evidence_ids":["mag_src_real_000766","mag_src_real_000767"],"processed_at":"2026-06-10","notes":"Promoted as LaCollection."},
-    {"candidate_id":"mag_candidate_000049","action":"consumed","batch":"batch-40","marketplace_id":"mag_nfm_real_000381","event_id":"mag_ev_real_000384","evidence_ids":["mag_src_real_000768","mag_src_real_000769"],"processed_at":"2026-06-10","notes":"Promoted as Institut NFT."},
-    {"candidate_id":"mag_candidate_000050","action":"consumed","batch":"batch-40","marketplace_id":"mag_nfm_real_000382","event_id":"mag_ev_real_000385","evidence_ids":["mag_src_real_000770","mag_src_real_000771"],"processed_at":"2026-06-10","notes":"Promoted as ArtGrails."},
-    {"candidate_id":"mag_candidate_000051","action":"consumed","batch":"batch-40","marketplace_id":"mag_nfm_real_000383","event_id":"mag_ev_real_000386","evidence_ids":["mag_src_real_000772","mag_src_real_000773"],"processed_at":"2026-06-10","notes":"Promoted as Quantum Art."},
-    {"candidate_id":"mag_candidate_000052","action":"consumed","batch":"batch-40","marketplace_id":"mag_nfm_real_000384","event_id":"mag_ev_real_000387","evidence_ids":["mag_src_real_000774","mag_src_real_000775"],"processed_at":"2026-06-10","notes":"Promoted as Transient Labs."},
-    {"candidate_id":"mag_candidate_000053","action":"consumed","batch":"batch-40","marketplace_id":"mag_nfm_real_000385","event_id":"mag_ev_real_000388","evidence_ids":["mag_src_real_000776","mag_src_real_000777"],"processed_at":"2026-06-10","notes":"Promoted as Sansa."},
-    {"candidate_id":"mag_candidate_000054","action":"consumed","batch":"batch-40","marketplace_id":"mag_nfm_real_000386","event_id":"mag_ev_real_000389","evidence_ids":["mag_src_real_000778","mag_src_real_000779"],"processed_at":"2026-06-10","notes":"Promoted as The Hug."},
-    {"candidate_id":"mag_candidate_000055","action":"consumed","batch":"batch-40","marketplace_id":"mag_nfm_real_000387","event_id":"mag_ev_real_000390","evidence_ids":["mag_src_real_000780","mag_src_real_000781"],"processed_at":"2026-06-10","notes":"Promoted as Wildxyz."},
-    {"candidate_id":"mag_candidate_000056","action":"consumed","batch":"batch-40","marketplace_id":"mag_nfm_real_000388","event_id":"mag_ev_real_000391","evidence_ids":["mag_src_real_000782","mag_src_real_000783"],"processed_at":"2026-06-10","notes":"Promoted as LiveArt."},
-    {"candidate_id":"mag_candidate_000057","action":"consumed","batch":"batch-40","marketplace_id":"mag_nfm_real_000389","event_id":"mag_ev_real_000392","evidence_ids":["mag_src_real_000784","mag_src_real_000785"],"processed_at":"2026-06-10","notes":"Promoted as VIV3."},
-    {"candidate_id":"mag_candidate_000058","action":"consumed","batch":"batch-40","marketplace_id":"mag_nfm_real_000390","event_id":"mag_ev_real_000393","evidence_ids":["mag_src_real_000786","mag_src_real_000787"],"processed_at":"2026-06-10","notes":"Promoted as Mynte."},
-    {"candidate_id":"mag_candidate_000063","action":"consumed","batch":"batch-41","marketplace_id":"mag_nfm_real_000391","event_id":"mag_ev_real_000394","evidence_ids":["mag_src_real_000788","mag_src_real_000789"],"processed_at":"2026-06-10","notes":"Promoted as Kanvas."},
-    {"candidate_id":"mag_candidate_000064","action":"consumed","batch":"batch-41","marketplace_id":"mag_nfm_real_000392","event_id":"mag_ev_real_000395","evidence_ids":["mag_src_real_000790","mag_src_real_000791"],"processed_at":"2026-06-10","notes":"Promoted as Hicdex."},
-    {"candidate_id":"mag_candidate_000065","action":"consumed","batch":"batch-41","marketplace_id":"mag_nfm_real_000393","event_id":"mag_ev_real_000396","evidence_ids":["mag_src_real_000792","mag_src_real_000793"],"processed_at":"2026-06-10","notes":"Promoted as Gen.art."},
-    {"candidate_id":"mag_candidate_000066","action":"consumed","batch":"batch-41","marketplace_id":"mag_nfm_real_000394","event_id":"mag_ev_real_000397","evidence_ids":["mag_src_real_000794","mag_src_real_000795"],"processed_at":"2026-06-10","notes":"Promoted as Minteed."},
-    {"candidate_id":"mag_candidate_000067","action":"consumed","batch":"batch-41","marketplace_id":"mag_nfm_real_000395","event_id":"mag_ev_real_000398","evidence_ids":["mag_src_real_000796","mag_src_real_000797"],"processed_at":"2026-06-10","notes":"Promoted as Nina Protocol."},
-    {"candidate_id":"mag_candidate_000068","action":"consumed","batch":"batch-41","marketplace_id":"mag_nfm_real_000396","event_id":"mag_ev_real_000399","evidence_ids":["mag_src_real_000798","mag_src_real_000799"],"processed_at":"2026-06-10","notes":"Promoted as Audius Collectibles."},
-    {"candidate_id":"mag_candidate_000069","action":"consumed","batch":"batch-41","marketplace_id":"mag_nfm_real_000397","event_id":"mag_ev_real_000400","evidence_ids":["mag_src_real_000800","mag_src_real_000801"],"processed_at":"2026-06-10","notes":"Promoted as Glass Protocol."},
-    {"candidate_id":"mag_candidate_000070","action":"consumed","batch":"batch-41","marketplace_id":"mag_nfm_real_000398","event_id":"mag_ev_real_000401","evidence_ids":["mag_src_real_000802","mag_src_real_000803"],"processed_at":"2026-06-10","notes":"Promoted as Pianity."},
-    {"candidate_id":"mag_candidate_000071","action":"consumed","batch":"batch-41","marketplace_id":"mag_nfm_real_000399","event_id":"mag_ev_real_000402","evidence_ids":["mag_src_real_000804","mag_src_real_000805"],"processed_at":"2026-06-10","notes":"Promoted as Starly."},
-    {"candidate_id":"mag_candidate_000072","action":"consumed","batch":"batch-41","marketplace_id":"mag_nfm_real_000400","event_id":"mag_ev_real_000403","evidence_ids":["mag_src_real_000806","mag_src_real_000807"],"processed_at":"2026-06-10","notes":"Promoted as Fantastec SWAP."}
+    {
+      "candidate_id": "mag_candidate_000001",
+      "action": "consumed",
+      "batch": "batch-37",
+      "marketplace_id": "mag_nfm_real_000351",
+      "event_id": "mag_ev_real_000354",
+      "evidence_ids": [
+        "mag_src_real_000708",
+        "mag_src_real_000709"
+      ],
+      "processed_at": "2026-06-08",
+      "notes": "Promoted as ThetaDrop."
+    },
+    {
+      "candidate_id": "mag_candidate_000002",
+      "action": "consumed",
+      "batch": "batch-37",
+      "marketplace_id": "mag_nfm_real_000352",
+      "event_id": "mag_ev_real_000355",
+      "evidence_ids": [
+        "mag_src_real_000710",
+        "mag_src_real_000711"
+      ],
+      "processed_at": "2026-06-08",
+      "notes": "Promoted as MLB Champions."
+    },
+    {
+      "candidate_id": "mag_candidate_000003",
+      "action": "consumed",
+      "batch": "batch-37",
+      "marketplace_id": "mag_nfm_real_000353",
+      "event_id": "mag_ev_real_000356",
+      "evidence_ids": [
+        "mag_src_real_000712",
+        "mag_src_real_000713"
+      ],
+      "processed_at": "2026-06-08",
+      "notes": "Promoted as Disney Pinnacle."
+    },
+    {
+      "candidate_id": "mag_candidate_000004",
+      "action": "consumed",
+      "batch": "batch-37",
+      "marketplace_id": "mag_nfm_real_000354",
+      "event_id": "mag_ev_real_000357",
+      "evidence_ids": [
+        "mag_src_real_000714",
+        "mag_src_real_000715"
+      ],
+      "processed_at": "2026-06-08",
+      "notes": "Promoted as TIMEPieces."
+    },
+    {
+      "candidate_id": "mag_candidate_000005",
+      "action": "consumed",
+      "batch": "batch-37",
+      "marketplace_id": "mag_nfm_real_000355",
+      "event_id": "mag_ev_real_000358",
+      "evidence_ids": [
+        "mag_src_real_000716",
+        "mag_src_real_000717"
+      ],
+      "processed_at": "2026-06-08",
+      "notes": "Promoted as Unicly."
+    },
+    {
+      "candidate_id": "mag_candidate_000006",
+      "action": "consumed",
+      "batch": "batch-37",
+      "marketplace_id": "mag_nfm_real_000356",
+      "event_id": "mag_ev_real_000359",
+      "evidence_ids": [
+        "mag_src_real_000718",
+        "mag_src_real_000719"
+      ],
+      "processed_at": "2026-06-08",
+      "notes": "Promoted as Coral Cube."
+    },
+    {
+      "candidate_id": "mag_candidate_000007",
+      "action": "consumed",
+      "batch": "batch-37",
+      "marketplace_id": "mag_nfm_real_000357",
+      "event_id": "mag_ev_real_000360",
+      "evidence_ids": [
+        "mag_src_real_000720",
+        "mag_src_real_000721"
+      ],
+      "processed_at": "2026-06-08",
+      "notes": "Promoted as Keepsake Marketplace."
+    },
+    {
+      "candidate_id": "mag_candidate_000008",
+      "action": "consumed",
+      "batch": "batch-37",
+      "marketplace_id": "mag_nfm_real_000358",
+      "event_id": "mag_ev_real_000361",
+      "evidence_ids": [
+        "mag_src_real_000722",
+        "mag_src_real_000723"
+      ],
+      "processed_at": "2026-06-08",
+      "notes": "Promoted as Stratos NFT Marketplace."
+    },
+    {
+      "candidate_id": "mag_candidate_000009",
+      "action": "hold",
+      "batch": null,
+      "marketplace_id": null,
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-08",
+      "notes": "Held because existing /encyclopedia/illuvium-marketplace/ is a near duplicate. Revisit only if distinct marketplace identity is proven."
+    },
+    {
+      "candidate_id": "mag_candidate_000010",
+      "action": "consumed",
+      "batch": "batch-37",
+      "marketplace_id": "mag_nfm_real_000359",
+      "event_id": "mag_ev_real_000362",
+      "evidence_ids": [
+        "mag_src_real_000724",
+        "mag_src_real_000725"
+      ],
+      "processed_at": "2026-06-08",
+      "notes": "Promoted as Big Time Marketplace."
+    },
+    {
+      "candidate_id": "mag_candidate_000011",
+      "action": "consumed",
+      "batch": "batch-37",
+      "marketplace_id": "mag_nfm_real_000360",
+      "event_id": "mag_ev_real_000363",
+      "evidence_ids": [
+        "mag_src_real_000726",
+        "mag_src_real_000727"
+      ],
+      "processed_at": "2026-06-08",
+      "notes": "Promoted as MotoGP Ignition Marketplace."
+    },
+    {
+      "candidate_id": "mag_candidate_000021",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000134",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "NFTb was already present as mag_nfm_real_000134; the later promotion mag_nfm_real_000361 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000022",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000136",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Treasureland was already present as mag_nfm_real_000136; the later promotion mag_nfm_real_000362 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000023",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000135",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Refinable was already present as mag_nfm_real_000135; the later promotion mag_nfm_real_000363 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000024",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000099",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Artano was already present as mag_nfm_real_000099; the later promotion mag_nfm_real_000364 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000025",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000062",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Tokhun was already present as mag_nfm_real_000062; the later promotion mag_nfm_real_000365 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000026",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000033",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Blockparty was already present as mag_nfm_real_000033; the later promotion mag_nfm_real_000366 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000027",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000034",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Portion was already present as mag_nfm_real_000034; the later promotion mag_nfm_real_000367 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000028",
+      "action": "consumed",
+      "batch": "batch-38",
+      "marketplace_id": "mag_nfm_real_000368",
+      "event_id": "mag_ev_real_000371",
+      "evidence_ids": [
+        "mag_src_real_000742",
+        "mag_src_real_000743"
+      ],
+      "processed_at": "2026-06-09",
+      "notes": "Promoted as Cargo."
+    },
+    {
+      "candidate_id": "mag_candidate_000029",
+      "action": "consumed",
+      "batch": "batch-38",
+      "marketplace_id": "mag_nfm_real_000369",
+      "event_id": "mag_ev_real_000372",
+      "evidence_ids": [
+        "mag_src_real_000744",
+        "mag_src_real_000745"
+      ],
+      "processed_at": "2026-06-09",
+      "notes": "Promoted as NFTify."
+    },
+    {
+      "candidate_id": "mag_candidate_000030",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000129",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "NiftyKit was already present as mag_nfm_real_000129; the later promotion mag_nfm_real_000370 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000036",
+      "action": "consumed",
+      "batch": "batch-39",
+      "marketplace_id": "mag_nfm_real_000371",
+      "event_id": "mag_ev_real_000374",
+      "evidence_ids": [
+        "mag_src_real_000748",
+        "mag_src_real_000749"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as OneMint."
+    },
+    {
+      "candidate_id": "mag_candidate_000037",
+      "action": "consumed",
+      "batch": "batch-39",
+      "marketplace_id": "mag_nfm_real_000372",
+      "event_id": "mag_ev_real_000375",
+      "evidence_ids": [
+        "mag_src_real_000750",
+        "mag_src_real_000751"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as MintGate."
+    },
+    {
+      "candidate_id": "mag_candidate_000039",
+      "action": "consumed",
+      "batch": "batch-39",
+      "marketplace_id": "mag_nfm_real_000373",
+      "event_id": "mag_ev_real_000376",
+      "evidence_ids": [
+        "mag_src_real_000752",
+        "mag_src_real_000753"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as NFT Stars."
+    },
+    {
+      "candidate_id": "mag_candidate_000041",
+      "action": "consumed",
+      "batch": "batch-39",
+      "marketplace_id": "mag_nfm_real_000374",
+      "event_id": "mag_ev_real_000377",
+      "evidence_ids": [
+        "mag_src_real_000754",
+        "mag_src_real_000755"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as DoinGud."
+    },
+    {
+      "candidate_id": "mag_candidate_000042",
+      "action": "consumed",
+      "batch": "batch-39",
+      "marketplace_id": "mag_nfm_real_000375",
+      "event_id": "mag_ev_real_000378",
+      "evidence_ids": [
+        "mag_src_real_000756",
+        "mag_src_real_000757"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Mint Gold Dust."
+    },
+    {
+      "candidate_id": "mag_candidate_000044",
+      "action": "consumed",
+      "batch": "batch-39",
+      "marketplace_id": "mag_nfm_real_000376",
+      "event_id": "mag_ev_real_000379",
+      "evidence_ids": [
+        "mag_src_real_000758",
+        "mag_src_real_000759"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Artcrypted."
+    },
+    {
+      "candidate_id": "mag_candidate_000045",
+      "action": "consumed",
+      "batch": "batch-39",
+      "marketplace_id": "mag_nfm_real_000377",
+      "event_id": "mag_ev_real_000380",
+      "evidence_ids": [
+        "mag_src_real_000760",
+        "mag_src_real_000761"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Snark.art."
+    },
+    {
+      "candidate_id": "mag_candidate_000046",
+      "action": "consumed",
+      "batch": "batch-39",
+      "marketplace_id": "mag_nfm_real_000378",
+      "event_id": "mag_ev_real_000381",
+      "evidence_ids": [
+        "mag_src_real_000762",
+        "mag_src_real_000763"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Aorist."
+    },
+    {
+      "candidate_id": "mag_candidate_000047",
+      "action": "consumed",
+      "batch": "batch-39",
+      "marketplace_id": "mag_nfm_real_000379",
+      "event_id": "mag_ev_real_000382",
+      "evidence_ids": [
+        "mag_src_real_000764",
+        "mag_src_real_000765"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Sedition."
+    },
+    {
+      "candidate_id": "mag_candidate_000048",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000097",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "LaCollection was already present as mag_nfm_real_000097; the later promotion mag_nfm_real_000380 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000049",
+      "action": "consumed",
+      "batch": "batch-40",
+      "marketplace_id": "mag_nfm_real_000381",
+      "event_id": "mag_ev_real_000384",
+      "evidence_ids": [
+        "mag_src_real_000768",
+        "mag_src_real_000769"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Institut NFT."
+    },
+    {
+      "candidate_id": "mag_candidate_000050",
+      "action": "consumed",
+      "batch": "batch-40",
+      "marketplace_id": "mag_nfm_real_000382",
+      "event_id": "mag_ev_real_000385",
+      "evidence_ids": [
+        "mag_src_real_000770",
+        "mag_src_real_000771"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as ArtGrails."
+    },
+    {
+      "candidate_id": "mag_candidate_000051",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000094",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Quantum Art was already present as mag_nfm_real_000094; the later promotion mag_nfm_real_000383 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000052",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000268",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Transient Labs was already present as mag_nfm_real_000268; the later promotion mag_nfm_real_000384 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000053",
+      "action": "consumed",
+      "batch": "batch-40",
+      "marketplace_id": "mag_nfm_real_000385",
+      "event_id": "mag_ev_real_000388",
+      "evidence_ids": [
+        "mag_src_real_000776",
+        "mag_src_real_000777"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Sansa."
+    },
+    {
+      "candidate_id": "mag_candidate_000054",
+      "action": "consumed",
+      "batch": "batch-40",
+      "marketplace_id": "mag_nfm_real_000386",
+      "event_id": "mag_ev_real_000389",
+      "evidence_ids": [
+        "mag_src_real_000778",
+        "mag_src_real_000779"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as The Hug."
+    },
+    {
+      "candidate_id": "mag_candidate_000055",
+      "action": "consumed",
+      "batch": "batch-40",
+      "marketplace_id": "mag_nfm_real_000387",
+      "event_id": "mag_ev_real_000390",
+      "evidence_ids": [
+        "mag_src_real_000780",
+        "mag_src_real_000781"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Wildxyz."
+    },
+    {
+      "candidate_id": "mag_candidate_000056",
+      "action": "consumed",
+      "batch": "batch-40",
+      "marketplace_id": "mag_nfm_real_000388",
+      "event_id": "mag_ev_real_000391",
+      "evidence_ids": [
+        "mag_src_real_000782",
+        "mag_src_real_000783"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as LiveArt."
+    },
+    {
+      "candidate_id": "mag_candidate_000057",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000131",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "VIV3 was already present as mag_nfm_real_000131; the later promotion mag_nfm_real_000389 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000058",
+      "action": "consumed",
+      "batch": "batch-40",
+      "marketplace_id": "mag_nfm_real_000390",
+      "event_id": "mag_ev_real_000393",
+      "evidence_ids": [
+        "mag_src_real_000786",
+        "mag_src_real_000787"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Mynte."
+    },
+    {
+      "candidate_id": "mag_candidate_000063",
+      "action": "consumed",
+      "batch": "batch-41",
+      "marketplace_id": "mag_nfm_real_000391",
+      "event_id": "mag_ev_real_000394",
+      "evidence_ids": [
+        "mag_src_real_000788",
+        "mag_src_real_000789"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Kanvas."
+    },
+    {
+      "candidate_id": "mag_candidate_000064",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000040",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Hicdex was already present as mag_nfm_real_000040; the later promotion mag_nfm_real_000392 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000065",
+      "action": "consumed",
+      "batch": "batch-41",
+      "marketplace_id": "mag_nfm_real_000393",
+      "event_id": "mag_ev_real_000396",
+      "evidence_ids": [
+        "mag_src_real_000792",
+        "mag_src_real_000793"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Gen.art."
+    },
+    {
+      "candidate_id": "mag_candidate_000066",
+      "action": "consumed",
+      "batch": "batch-41",
+      "marketplace_id": "mag_nfm_real_000394",
+      "event_id": "mag_ev_real_000397",
+      "evidence_ids": [
+        "mag_src_real_000794",
+        "mag_src_real_000795"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Minteed."
+    },
+    {
+      "candidate_id": "mag_candidate_000067",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000245",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Nina Protocol was already present as mag_nfm_real_000245; the later promotion mag_nfm_real_000395 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000068",
+      "action": "consumed",
+      "batch": "batch-41",
+      "marketplace_id": "mag_nfm_real_000396",
+      "event_id": "mag_ev_real_000399",
+      "evidence_ids": [
+        "mag_src_real_000798",
+        "mag_src_real_000799"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Audius Collectibles."
+    },
+    {
+      "candidate_id": "mag_candidate_000069",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000247",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Glass Protocol was already present as mag_nfm_real_000247; the later promotion mag_nfm_real_000397 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000070",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000240",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Pianity was already present as mag_nfm_real_000240; the later promotion mag_nfm_real_000398 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000071",
+      "action": "duplicate",
+      "batch": null,
+      "marketplace_id": "mag_nfm_real_000145",
+      "event_id": null,
+      "evidence_ids": [],
+      "processed_at": "2026-06-15",
+      "notes": "Starly was already present as mag_nfm_real_000145; the later promotion mag_nfm_real_000399 and its supporting records were removed."
+    },
+    {
+      "candidate_id": "mag_candidate_000072",
+      "action": "consumed",
+      "batch": "batch-41",
+      "marketplace_id": "mag_nfm_real_000400",
+      "event_id": "mag_ev_real_000403",
+      "evidence_ids": [
+        "mag_src_real_000806",
+        "mag_src_real_000807"
+      ],
+      "processed_at": "2026-06-10",
+      "notes": "Promoted as Fantastec SWAP."
+    }
   ]
 }
