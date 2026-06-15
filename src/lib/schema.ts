@@ -10,6 +10,10 @@ export type Marketplace = {
   official_url_status?: string; archived_url?: string | null; successor_marketplace?: string | null; predecessor_marketplace?: string | null;
   summary: string; what_is_gone?: string | null; what_remains?: string | null; where_users_or_assets_went?: string | null;
   confidence: string; review_status: string; record_quality_flags: string[]; last_verified_at: string; notes?: string | null;
+  asset_backing?: string; platform_roles?: string[]; custody_model?: string; redemption_status?: string;
+  randomized_sale_model?: string; buyback_model?: string; asset_categories?: string[];
+  custodian_name?: string | null; insurance_status?: string | null; redemption_fee?: string | null;
+  redemption_regions?: string[]; proof_of_backing_model?: string | null; legal_title_model?: string | null;
 };
 export type Event = { id:string; marketplace_id:string; event_type:string; event_date:string; event_date_precision:string; title:string; description:string; confidence:string; sort_order?:number; [key:string]: unknown };
 export type Evidence = { id:string; marketplace_id:string; event_id?:string; source_type:string; title:string; url:string; publisher:string; published_at?:string|null; archived_url?:string|null; accessed_at?:string|null; reliability:string; claim_scope:string; notes?:string|null; [key:string]: unknown };
