@@ -1,0 +1,74 @@
+name: Tokenized Collectibles Monitoring
+
+on:
+  schedule:
+    - cron: "0 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: tokenized-collectibles-monitoring
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Restore URL state
+        uses: actions/cache@v4
+        with:
+          path: .monitoring-state
+          key: tokenized-url-state-${{ github.run_id }}
+          restore-keys: |
+            tokenized-url-state-
+
+      - name: Run live monitoring
+        run: npm run monitor:tokenized:live:publish -- --url-state=.monitoring-state/url-state.json
+
+      - name: Guard canonical files
+        shell: bash
+        run: |
+          if git status --porcelain -- data | grep -E 'data/(marketplaces|events|evidence).*\.json'; then
+            echo "Monitoring changed canonical data."
+            exit 1
+          fi
+
+      - name: Detect monitoring output
+        id: changes
+        shell: bash
+        run: |
+          if [ -n "$(git status --porcelain -- data-staging/monitoring/tokenized-collectibles)" ]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create or update monitoring pull request
+        if: steps.changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ github.token }}
+          commit-message: Add tokenized collectibles monitoring report
+          branch: auto/tokenized-collectibles-monitoring
+          delete-branch: true
+          title: Auto monitoring report: Tokenized Collectibles
+          body-path: data-staging/monitoring/tokenized-collectibles/latest/summary.md
+          add-paths: |
+            data-staging/monitoring/tokenized-collectibles/**
