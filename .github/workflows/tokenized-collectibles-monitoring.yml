@@ -1,0 +1,4 @@
+name: Tokenized Collectibles Monitoring
+
+on:
+  workflow_dispatch:
