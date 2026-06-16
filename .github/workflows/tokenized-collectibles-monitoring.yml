@@ -1,11 +1,6 @@
 name: Tokenized Collectibles Monitoring
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - docs/initial-live-monitoring-trigger.md
   schedule:
     - cron: "0 3 * * 1"
   workflow_dispatch:
@@ -45,16 +40,9 @@ jobs:
             tokenized-url-state-
 
       - name: Run live monitoring
-        id: live_monitor
-        continue-on-error: ${{ github.event_name == 'push' }}
-        shell: bash
-        run: |
-          set -o pipefail
-          mkdir -p .monitoring-state
-          npm run monitor:tokenized:live:publish -- --url-state=.monitoring-state/url-state.json 2>&1 | tee .monitoring-state/live-monitoring.log
+        run: npm run monitor:tokenized:live:publish -- --url-state=.monitoring-state/url-state.json
 
       - name: Guard canonical files
-        id: canonical_guard
         shell: bash
         run: |
           if git status --porcelain -- data | grep -E 'data/(marketplaces|events|evidence).*\.json'; then
@@ -62,49 +50,7 @@ jobs:
             exit 1
           fi
 
-      - name: Record initial live observation
-        if: always() && github.event_name == 'push'
-        env:
-          LIVE_OUTCOME: ${{ steps.live_monitor.outcome }}
-          GUARD_OUTCOME: ${{ steps.canonical_guard.outcome }}
-        shell: bash
-        run: |
-          output_dir="data-staging/monitoring/tokenized-collectibles/initial-live-verification"
-          mkdir -p "$output_dir"
-          report_exists=false
-          if [ -f data-staging/monitoring/tokenized-collectibles/latest/report.json ]; then
-            report_exists=true
-          fi
-          cat > "$output_dir/verification.json" <<EOF
-          {
-            "schema_version": 1,
-            "run_id": "${GITHUB_RUN_ID}",
-            "run_attempt": "${GITHUB_RUN_ATTEMPT}",
-            "commit_sha": "${GITHUB_SHA}",
-            "event_name": "${GITHUB_EVENT_NAME}",
-            "live_monitor_outcome": "${LIVE_OUTCOME}",
-            "canonical_guard_outcome": "${GUARD_OUTCOME}",
-            "report_exists": ${report_exists},
-            "recorded_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          }
-          EOF
-          if [ -f .monitoring-state/live-monitoring.log ]; then
-            cp .monitoring-state/live-monitoring.log "$output_dir/live-monitoring.log"
-          fi
-
-      - name: Publish initial verification branch
-        if: always() && github.event_name == 'push'
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -B auto/tokenized-live-verification
-          git add data-staging/monitoring/tokenized-collectibles
-          git commit -m "Record initial tokenized live monitoring verification"
-          git push --force origin auto/tokenized-live-verification
-
       - name: Detect monitoring output
-        if: github.event_name != 'push'
         id: changes
         shell: bash
         run: |
@@ -115,7 +61,7 @@ jobs:
           fi
 
       - name: Create or update monitoring pull request
-        if: github.event_name != 'push' && steps.changes.outputs.has_changes == 'true'
+        if: steps.changes.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ github.token }}
@@ -126,7 +72,3 @@ jobs:
           body-path: data-staging/monitoring/tokenized-collectibles/latest/summary.md
           add-paths: |
             data-staging/monitoring/tokenized-collectibles/**
-
-      - name: Fail after publishing initial verification
-        if: always() && github.event_name == 'push' && (steps.live_monitor.outcome == 'failure' || steps.canonical_guard.outcome == 'failure')
-        run: exit 1

@@ -1,6 +1,6 @@
 # Tokenized Collectibles Implementation Audit — 2026-06-15
 
-Status: implementation complete; first live workflow run pending observation
+Status: implementation complete; initial live monitoring observed on 2026-06-16
 
 ## Completed data work
 
@@ -58,13 +58,39 @@ The following checks passed during the implementation pull requests:
 - report-writer smoke test
 - static site build
 
+## Initial live monitoring observation
+
+A one-time live CI run completed successfully on 2026-06-16.
+
+Observed result:
+
+```text
+Marketplaces: 8
+Linked events: 9
+Linked evidence: 51
+URL targets checked: 38 / 38
+URL status: 36 ok, 1 reachable_restricted, 1 network_error
+Critical findings: 0
+High findings: 0
+Medium findings: 6
+Low findings: 6
+Canonical files modified: no
+```
+
+The single URL error was the Collector Crypt evidence URL `https://alpha.collectorcrypt.com/`. It was the first transient failure and therefore remained low severity.
+
+The six medium findings came from unrelated legacy mock events. This exposed an implementation defect: the Tokenized Collectibles record-quality monitor was checking `source_count` across all registry events instead of only category-linked events. The defect is scheduled for a separate monitoring-scope correction and is not a canonical Tokenized Collectibles data failure.
+
+The five remaining low record-quality findings are deliberately unresolved fields for Artifacte and Collector Crypt and must not be replaced with unsupported assertions.
+
 ## Residual operational observations
 
-1. The first full live scheduled or manually dispatched workflow run still needs observation because external services can respond differently from offline tests.
-2. Access restrictions, temporary failures, and redirects require manual interpretation.
-3. The committed `data/stats.json` may lag behind current split data; the build pipeline regenerates stats before site build.
-4. `data/batch-42` is not part of the published mainline and must remain isolated unless re-audited.
-5. Monitoring findings must not be merged as canonical status changes.
+1. Access restrictions, temporary failures, and redirects require manual interpretation.
+2. The Collector Crypt evidence URL requires confirmation only if the failure repeats.
+3. The record-quality monitor must be restricted to Tokenized Collectibles-linked events and evidence.
+4. The committed `data/stats.json` may lag behind current split data; the build pipeline regenerates stats before site build.
+5. `data/batch-42` is not part of the published mainline and must remain isolated unless re-audited.
+6. Monitoring findings must not be merged as canonical status changes.
 
 ## Completion decision
 
@@ -72,7 +98,8 @@ The Tokenized Collectibles category implementation is complete enough for normal
 
 The next work is maintenance rather than category construction:
 
-- observe monitoring output
-- resolve evidence and stale-record findings
+- correct the monitor scope discovered by the first live run
+- observe repeated URL failures before escalating them
+- resolve evidence and stale-record findings when stronger sources exist
 - add future services through the reviewed candidate process
 - consider extracting shared monitoring modules only after operational stability is demonstrated
