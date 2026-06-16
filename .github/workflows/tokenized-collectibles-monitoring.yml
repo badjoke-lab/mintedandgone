@@ -1,6 +1,11 @@
 name: Tokenized Collectibles Monitoring
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - docs/initial-live-monitoring-trigger.md
   schedule:
     - cron: "0 3 * * 1"
   workflow_dispatch:
