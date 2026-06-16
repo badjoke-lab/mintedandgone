@@ -70,5 +70,29 @@ jobs:
           test -f .tmp/tokenized-monitoring/latest/report.json
           test -f .tmp/tokenized-monitoring/latest/summary.md
 
+      - name: Run initial live tokenized verification
+        id: live_verification
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p .tmp/tokenized-live-verification
+          node scripts/monitoring-tokenized-run.mjs \
+            --live \
+            --force-report \
+            --output-root=.tmp/tokenized-live-verification \
+            2>&1 | tee .tmp/tokenized-live-verification/live-monitoring.log
+
+      - name: Upload initial live verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tokenized-live-verification
+          path: .tmp/tokenized-live-verification
+
+      - name: Stop after live verification failure
+        if: steps.live_verification.outcome == 'failure'
+        run: exit 1
+
       - name: Build site
         run: npm run build:site
