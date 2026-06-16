@@ -70,5 +70,34 @@ jobs:
           test -f .tmp/tokenized-monitoring/latest/report.json
           test -f .tmp/tokenized-monitoring/latest/summary.md
 
+      - name: Verify backlog-only findings do not write a report
+        run: |
+          rm -rf .tmp/tokenized-backlog-policy
+          node scripts/monitoring-tokenized-run.mjs --publish --output-root=.tmp/tokenized-backlog-policy
+          test ! -f .tmp/tokenized-backlog-policy/latest/report.json
+
+      - name: Run post-fix live tokenized verification
+        shell: bash
+        run: |
+          set -o pipefail
+          rm -rf .tmp/tokenized-live-recheck
+          node scripts/monitoring-tokenized-run.mjs \
+            --live \
+            --force-report \
+            --output-root=.tmp/tokenized-live-recheck \
+            2>&1 | tee .tmp/tokenized-live-recheck.log
+
+      - name: Verify post-fix live report
+        run: |
+          node -e "const fs=require('fs');const r=JSON.parse(fs.readFileSync('.tmp/tokenized-live-recheck/latest/report.json','utf8'));if(r.canonical_files_modified)process.exit(1);if(r.summary.critical!==0||r.summary.high!==0||r.summary.medium!==0)process.exit(1);if(r.summary.backlog_findings!==5)process.exit(1);console.log(JSON.stringify(r.summary));"
+
+      - name: Upload post-fix live verification
+        uses: actions/upload-artifact@v4
+        with:
+          name: tokenized-live-recheck
+          path: |
+            .tmp/tokenized-live-recheck
+            .tmp/tokenized-live-recheck.log
+
       - name: Build site
         run: npm run build:site
