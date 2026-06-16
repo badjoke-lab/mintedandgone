@@ -1,3 +1,3 @@
 # Initial live monitoring trigger
 
-This temporary file triggers the first live Tokenized Collectibles monitoring run after merge. It will be removed after the workflow result is reviewed.
+Observation attempt 2 records a mandatory verification marker and live-monitor log on a dedicated branch. This temporary trigger will be removed after the result is reviewed.
