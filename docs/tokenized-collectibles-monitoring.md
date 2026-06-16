@@ -9,9 +9,9 @@ The monitoring system covers only the `tokenized_collectibles` category and its 
 It checks:
 
 - canonical JSON readability
-- duplicate IDs and slugs
-- broken cross-file references
-- event `source_count` consistency
+- duplicate IDs and slugs affecting the category
+- broken category-linked cross-file references
+- category event `source_count` consistency
 - evidence depth and archive coverage
 - claim-specific evidence
 - stale `last_verified_at` values
@@ -35,7 +35,7 @@ Workflow file:
 
 ## Output
 
-Monitoring writes only when findings exist:
+Monitoring writes a report when notification findings exist. Forced local smoke runs may also write reports.
 
 ```text
 data-staging/monitoring/tokenized-collectibles/YYYY-MM-DD/report.json
@@ -53,10 +53,10 @@ The weekly workflow restores consecutive-failure state through the GitHub Action
 
 ### Critical
 
-- duplicate canonical IDs or slugs
-- missing marketplace references
-- missing event references
-- evidence linked to the wrong marketplace
+- duplicate category-affecting canonical IDs or slugs
+- missing category marketplace references
+- missing category event references
+- category evidence linked to the wrong marketplace
 - canonical mutation by monitoring
 
 ### High
@@ -69,7 +69,7 @@ The weekly workflow restores consecutive-failure state through the GitHub Action
 
 ### Medium
 
-- `source_count` mismatch
+- category `source_count` mismatch
 - missing archive coverage
 - stale verification date
 - evidence URL returns 404 or 410
@@ -82,6 +82,28 @@ The weekly workflow restores consecutive-failure state through the GitHub Action
 - cross-domain redirect
 - unresolved `unknown` or `unclear` field
 - long-held research candidate
+
+## Notification policy
+
+Not every low finding should create a weekly pull request.
+
+The following low categories are backlog-only:
+
+```text
+unresolved_field
+stale_hold_candidate
+```
+
+Backlog-only findings remain available in forced reports and internal results, but they do not create a monitoring pull request by themselves.
+
+A monitoring pull request is created when at least one notification finding exists. Notification findings include:
+
+- every critical, high, or medium finding
+- low URL failures
+- low cross-domain redirects
+- other low findings not explicitly classified as backlog-only
+
+This prevents known `unknown` or `unclear` fields from reopening the same monitoring pull request every week.
 
 ## HTTP classification
 
@@ -110,7 +132,7 @@ A successful or access-restricted response resets the consecutive transient fail
 
 ## Pull request behavior
 
-The workflow creates or updates a pull request only when monitoring output changed.
+The workflow creates or updates a pull request only when monitoring output changed because a notification finding exists.
 
 Fixed branch:
 
@@ -155,4 +177,4 @@ These must remain monitoring findings until manually reviewed.
 
 The first live CI observation completed on 2026-06-16. It checked 38 URL targets and completed without canonical changes. Thirty-six targets were reachable normally, one returned an access-restricted response, and one Collector Crypt evidence URL had a first-run network error.
 
-The live run also revealed that the internal `source_count` monitor was scanning unrelated legacy events. That scope defect is tracked as a monitor implementation issue rather than a Tokenized Collectibles data issue.
+The live run also revealed that the internal `source_count` monitor was scanning unrelated legacy events. The monitor was subsequently restricted to category-linked events and evidence, with regression coverage added.
