@@ -6,6 +6,7 @@ import { runMonitoringHealth } from './monitoring-tokenized-health.mjs';
 import { runRecordQuality } from './monitoring-tokenized-quality.mjs';
 import { runCandidateState } from './monitoring-tokenized-candidate-state.mjs';
 import { runUrlHealth } from './monitoring-tokenized-url.mjs';
+import { classifyNotificationFindings } from './monitoring-tokenized-notification.mjs';
 import { createRunId, writeMonitoringReport } from './monitoring-tokenized-report.mjs';
 import { writeJson } from './monitoring-tokenized-fs.mjs';
 
@@ -40,6 +41,7 @@ const findings = monitorResults.flatMap((result) => result.findings.map((item, i
   detected_at: now.toISOString()
 })));
 
+const notification = classifyNotificationFindings(findings);
 const severity = Object.fromEntries(['critical', 'high', 'medium', 'low'].map((level) => [level, findings.filter((item) => item.severity === level).length]));
 const tokenizedIds = new Set(data.tokenized.map((record) => record.id));
 const urlMonitor = monitorResults.find((result) => result.monitor === 'url-health');
@@ -52,6 +54,12 @@ const report = {
   category: CATEGORY,
   canonical_files_modified: false,
   thresholds: { stale_days: staleDays, hold_days: holdDays, url_timeout_ms: timeoutMs },
+  notification_policy: {
+    should_notify: notification.shouldNotify,
+    notification_findings: notification.notificationFindings.length,
+    backlog_findings: notification.backlogFindings.length,
+    backlog_only_categories: ['unresolved_field', 'stale_hold_candidate']
+  },
   summary: {
     marketplaces: data.tokenized.length,
     events: data.events.filter((event) => tokenizedIds.has(event.marketplace_id)).length,
@@ -59,6 +67,8 @@ const report = {
     url_targets: urlMonitor?.summary.targets || 0,
     url_checks: urlMonitor?.summary.checked || 0,
     findings: findings.length,
+    notification_findings: notification.notificationFindings.length,
+    backlog_findings: notification.backlogFindings.length,
     ...severity
   },
   monitors: monitorResults,
@@ -69,11 +79,11 @@ if (live && publish && urlMonitor?.state) {
   writeJson(statePath, urlMonitor.state);
 }
 
-if (forceReport || (publish && findings.length)) {
+if (forceReport || (publish && notification.shouldNotify)) {
   const written = writeMonitoringReport(report, { outputRoot });
   console.log(`Monitoring report written to ${written.dated}`);
 } else {
-  console.log('No report written. Use --force-report for a smoke artifact or --publish when findings exist.');
+  console.log('No report written. Backlog-only low findings do not create monitoring pull requests.');
 }
 
 console.log(JSON.stringify(report.summary));
