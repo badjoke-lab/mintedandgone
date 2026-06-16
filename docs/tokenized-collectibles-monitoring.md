@@ -151,6 +151,8 @@ Common false positives include:
 
 These must remain monitoring findings until manually reviewed.
 
-## First-run note
+## Initial live observation
 
-The workflow definition and its offline components are covered by CI. The first full live scheduled or manually dispatched run remains an operational observation point because external services can respond differently from CI fixtures.
+The first live CI observation completed on 2026-06-16. It checked 38 URL targets and completed without canonical changes. Thirty-six targets were reachable normally, one returned an access-restricted response, and one Collector Crypt evidence URL had a first-run network error.
+
+The live run also revealed that the internal `source_count` monitor was scanning unrelated legacy events. That scope defect is tracked as a monitor implementation issue rather than a Tokenized Collectibles data issue.
