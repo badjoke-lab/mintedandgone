@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "command -v astro >/dev/null 2>&1 && astro dev || node scripts/static-build.mjs --serve",
     "build:site": "command -v astro >/dev/null 2>&1 && astro build || node scripts/static-build.mjs",
-    "build": "npm run generate:stats && npm run generate:sitemap && npm run build:site",
+    "build": "npm run generate:stats && npm run generate:public-data && npm run generate:sitemap && npm run build:site && npm run check:public",
     "preview": "command -v astro >/dev/null 2>&1 && astro preview || node scripts/static-build.mjs --serve",
     "validate": "command -v tsx >/dev/null 2>&1 && tsx scripts/validate-data.ts || node --loader ./scripts/ts-loader.mjs scripts/validate-data.ts",
     "validate:candidates": "node scripts/validate-mag-candidate-backlog.mjs",
@@ -24,8 +24,10 @@
     "guard:tokenized-canonical": "node scripts/monitoring-tokenized-guard.mjs",
     "select:mag-ready": "node scripts/select-mag-ready-candidates.mjs 10",
     "generate:stats": "command -v tsx >/dev/null 2>&1 && tsx scripts/generate-stats.ts || node --loader ./scripts/ts-loader.mjs scripts/generate-stats.ts",
+    "generate:public-data": "node scripts/generate-public-data.mjs",
     "generate:sitemap": "command -v tsx >/dev/null 2>&1 && tsx scripts/generate-sitemap.ts || node --loader ./scripts/ts-loader.mjs scripts/generate-sitemap.ts",
-    "check": "npm run generate:stats && npm run generate:sitemap && npm run validate && npm run validate:candidates && npm run validate:latest-batch && npm run validate:tokenized && npm run test:monitoring:tokenized && npm run monitor:tokenized && npm run build:site",
+    "check:public": "node scripts/check-public-consistency.mjs",
+    "check": "npm run generate:stats && npm run generate:public-data && npm run generate:sitemap && npm run validate && npm run validate:candidates && npm run validate:latest-batch && npm run validate:tokenized && npm run test:monitoring:tokenized && npm run monitor:tokenized && npm run build:site && npm run check:public",
     "import:assets": "node scripts/import-assets.mjs"
   },
   "dependencies": {
