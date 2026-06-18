@@ -1,6 +1,6 @@
 ---
 const { stats } = Astro.props;
 const k = stats.kpis;
-const items = [['Marketplaces', k.total_marketplaces], ['Events', k.total_events], ['Evidence notes', k.total_evidence], ['Faded/transitioned', k.faded_total], ['Archive coverage', `${Math.round(k.archive_coverage*100)}%`], ['Reviewed share', `${Math.round(k.reviewed_share*100)}%`], ['Active', k.active_total], ['Dead', k.dead_total]];
+const items = [['Marketplaces', k.total_marketplaces], ['Events', k.total_events], ['Evidence notes', k.total_evidence], ['Faded/transitioned', k.faded_total], ['Archive coverage', `${Math.round(k.archive_coverage*100)}%`], ['Source-reviewed drafts', `${Math.round(k.reviewed_share*100)}%`], ['Active', k.active_total], ['Dead', k.dead_total]];
 ---
 <div class="kpi-grid">{items.map(([label,value]) => <div class="card kpi"><strong>{value}</strong><p>{label}</p></div>)}</div>
