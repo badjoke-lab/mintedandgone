@@ -1,47 +1,76 @@
 # Minted & Gone
 
-Minted & Gone is a static-first NFT marketplace historical registry and field guide.
+Minted & Gone is a static-first historical registry of NFT marketplaces.
 
-It records NFT marketplaces as historical entries: active, limited, inactive, dead, acquired, merged, rebranded, or unknown.
+It records marketplace identity, status, timeline events, evidence notes, archive links, and unresolved review work. It is not a marketplace ranking, price tracker, safety certification, or investment guide.
 
-## Current status
+## Canonical source of truth
 
-This repository contains:
-
-- Astro static site implementation
-- source-reviewed marketplace records
-- generated marketplace encyclopedia pages
-- stats, sitemap, validation, and build scripts
-- methodology, about, stats, submit, and encyclopedia pages
-- Tokenized Collectibles category records and category-specific UI
-- Tokenized Collectibles integrity and monitoring scripts
-- weekly monitoring workflow with monitoring-only pull requests
-
-The registry preserves uncertainty through confidence values, evidence notes, review states, and record quality flags. It is not a marketplace safety certification or trading dashboard.
-
-## Data file layout
-
-Canonical data is stored in split JSON files discovered by prefix:
+Canonical records are stored only in these split-file series:
 
 ```text
-data/marketplaces*.json
-data/events*.json
-data/evidence*.json
+data/marketplaces.json
+data/marketplaces-batch-*.json
+data/events.json
+data/events-batch-*.json
+data/evidence.json
+data/evidence-batch-*.json
 ```
 
-The site loader, validator, stats generator, sitemap generator, and monitoring scripts read these files automatically.
+The public HTML, statistics, sitemap, version metadata, manifest, and public JSON files are generated from those canonical series. Candidate backlogs, research notes, monitoring output, and unmerged branches are excluded.
 
-Future batches should follow the same split-file pattern unless an intentional consolidation is reviewed separately.
+Current public counts must not be maintained by hand in documentation. Use the generated endpoints instead:
 
-## Important
+```text
+https://mag.badjoke-lab.com/version.json
+https://mag.badjoke-lab.com/data/manifest.json
+https://mag.badjoke-lab.com/data/marketplaces.json
+https://mag.badjoke-lab.com/data/events.json
+https://mag.badjoke-lab.com/data/evidence.json
+https://mag.badjoke-lab.com/data/stats.json
+```
 
-Do not treat status labels as real-time marketplace guarantees.
+## Review-state model
 
-Dead, inactive, acquired, and active classifications must remain conservative. If official closure or status evidence is weak, use inactive or under-review wording rather than overclaiming.
+`review_status` is a fixed machine-readable field.
 
-For Tokenized Collectibles, marketplace status, physical backing, custody, redemption, randomized-sale models, and buyback models are separate claims. Each stronger claim requires matching evidence.
+- `reviewed_staging` — **Source-reviewed draft**. The record has enough source review for canonical public draft publication. Open review flags may remain. This is not final public-quality certification.
+- `public_quality_reviewed` — **Public-quality reviewed**. The record has passed the stricter public-quality criteria.
 
-## Main commands
+The public registry must not use the ambiguous label `Reviewed` by itself as a quality guarantee.
+
+`record_quality_flags` exposes unresolved work such as missing official sources, exact archive captures, frontend checks, contract review, asset-path review, or successor review. A non-empty flag list does not make a record an internal candidate; it means the canonical public draft still has open review work.
+
+## Count definitions
+
+Each marketplace has exactly one status. The exclusive status breakdown sums to the total marketplace count.
+
+- active-side = `active + limited`
+- faded-side = `inactive + dead + acquired + merged + rebranded`
+- unknown-side = `unknown`
+- transitioned = `acquired + merged + rebranded`, which is a subset of faded-side
+
+Category and marketplace scope are single-valued in the current schema. Chain scope and platform roles are multi-valued, so those breakdown totals can exceed the marketplace count.
+
+## Generated machine-readable layer
+
+The build writes:
+
+```text
+/version.json
+/data/manifest.json
+/data/marketplaces.json
+/data/events.json
+/data/evidence.json
+/data/stats.json
+/llms.txt
+/ai.txt
+/sitemap.xml
+```
+
+Generated files include `generated_at`, `schema_version`, and `canonical_only` metadata. Public record JSON files contain the same record IDs used by the HTML detail pages.
+
+## Validation
 
 ```text
 npm install
@@ -51,44 +80,34 @@ npm run validate
 npm run validate:candidates
 npm run validate:latest-batch
 npm run validate:tokenized
-npm run test:monitoring:tokenized-url
+npm run test:monitoring:tokenized
 npm run monitor:tokenized
-npm run monitor:tokenized:smoke
-npm run monitor:tokenized:live
 npm run build
-npm run check
+node scripts/check-built-registry.mjs
 ```
 
-`npm run check` runs generation, canonical validation, candidate validation, latest-batch duplicate validation, Tokenized Collectibles validation, URL-monitor classification tests, offline monitoring, and the site build.
+The registry consistency CI checks:
 
-## Tokenized Collectibles operations
+- canonical counts against public JSON, version, manifest, stats, and HTML
+- marketplace, event, and evidence record identities
+- exclusive status totals and active/faded/unknown partition totals
+- review-state enum values and exposed quality flags
+- sitemap detail-page coverage
+- canonical URLs, discovery links, JSON-LD, meta descriptions, and OGP
+- stale known count phrases and ambiguous `Reviewed share` wording
+- robots.txt, llms.txt, and ai.txt
 
-Operational documentation:
+## Tokenized Collectibles monitoring
 
-- `docs/tokenized-collectibles-methodology.md`
-- `docs/tokenized-collectibles-operations.md`
-- `docs/tokenized-collectibles-monitoring.md`
-- `docs/tokenized-collectibles-review.md`
-
-Automated monitoring may write only to:
+Tokenized Collectibles monitoring may write only to:
 
 ```text
 data-staging/monitoring/tokenized-collectibles/**
 ```
 
-It must not directly change canonical marketplace, event, or evidence files. Any justified correction requires a separate reviewed pull request.
+It must not directly modify canonical marketplace, event, or evidence files. Any justified correction requires a separate reviewed pull request.
 
-## Monitoring schedule
-
-The Tokenized Collectibles monitoring workflow runs every Monday at 03:00 UTC and can also be started manually.
-
-The workflow:
-
-1. runs internal quality and candidate-state checks
-2. checks official and evidence URLs
-3. verifies that canonical files did not change
-4. creates or updates a monitoring-only pull request when findings exist
-5. creates no pull request when no monitoring output changed
+The monitoring workflow runs every Monday at 03:00 UTC and can also be started manually.
 
 ## Development notes
 
@@ -96,11 +115,3 @@ The workflow:
 - GitHub search alone is not sufficient for duplicate checking.
 - Monitoring reports are review inputs, not canonical updates.
 - External URL failures must be reviewed manually before changing status.
-
-## Next maintenance work
-
-- observe the first full live monitoring run
-- review and resolve monitoring findings
-- continue evidence and archive improvements
-- add new marketplace records in small reviewed groups
-- extract reusable monitoring components only after the MAG implementation is stable
