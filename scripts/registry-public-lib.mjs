@@ -16,12 +16,17 @@ export const REVIEW_STATES = {
   }
 };
 
-const canonicalPattern = (prefix) => new RegExp(`^${prefix}(?:-batch-\\d+)?\\.json$`);
+const INTERNAL_FILE_MARKERS = ['candidate', 'staging', 'monitoring', 'manifest', 'stats', 'history'];
+
+export function isCanonicalSeriesFile(name, prefix) {
+  if (!name.startsWith(prefix) || !name.endsWith('.json')) return false;
+  const normalized = name.toLowerCase();
+  return !INTERNAL_FILE_MARKERS.some((marker) => normalized.includes(marker));
+}
 
 export function readCanonicalSeries(prefix) {
-  const pattern = canonicalPattern(prefix);
   return readdirSync('data')
-    .filter((name) => pattern.test(name))
+    .filter((name) => isCanonicalSeriesFile(name, prefix))
     .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
     .flatMap((name) => JSON.parse(readFileSync(`data/${name}`, 'utf8')));
 }
