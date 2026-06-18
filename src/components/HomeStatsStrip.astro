@@ -13,10 +13,6 @@ const items = [
 ---
 <div class="home-stats-grid">
   {items.map(([icon, label, value]) => (
-    <div class="home-stat-card">
-      <span aria-hidden="true">{icon}</span>
-      <strong>{value}</strong>
-      <small>{label}</small>
-    </div>
+    <div class="home-stat-card"><span aria-hidden="true">{icon}</span><strong>{value}</strong><small>{label}</small></div>
   ))}
 </div>
