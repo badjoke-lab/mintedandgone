@@ -15,7 +15,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Generate canonical public registry
-        run: node scripts/generate-public-registry-all.mjs
+        id: generator
+        continue-on-error: true
+        run: node scripts/generate-public-registry-all.mjs > registry-generator.log 2>&1
+      - name: Upload generator diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: registry-generator-log
+          path: registry-generator.log
+      - name: Stop on generator failure
+        if: steps.generator.outcome == 'failure'
+        run: cat registry-generator.log && exit 1
       - uses: actions/setup-node@v4
         with:
           node-version: 24
