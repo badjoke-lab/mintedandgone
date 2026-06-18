@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEvents, getMarketplaces, getStats } from '../../lib/data';
+const events = getEvents().sort((a, b) => b.event_date.localeCompare(a.event_date) || a.id.localeCompare(b.id));
+const marketplaces = new Map(getMarketplaces().map((record) => [record.id, record]));
+const stats = getStats();
+---
+<BaseLayout title="Marketplace timeline — Minted & Gone" description={`A canonical timeline of ${stats.kpis.total_events} NFT marketplace events linked to ${stats.kpis.total_marketplaces} marketplace records.`}>
+  <div class="shell appendix-page">
+    <section class="field-hero simple-hero compact-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Canonical event records</p>
+        <h1>Marketplace timeline</h1>
+        <p class="lede">{stats.kpis.total_events} events generated from the same canonical data used by marketplace pages and the public event JSON.</p>
+        <div class="hero-actions"><a class="btn primary" href="/data/events.json">Open event JSON</a><a class="btn" href="/data/manifest.json">Read data manifest</a></div>
+      </div>
+    </section>
+    <p class="mock-note">Every event has one event ID and one marketplace reference. This page is not a live incident feed.</p>
+    <section class="framed-panel">
+      <div class="timeline">
+        {events.map((event) => {
+          const marketplace = marketplaces.get(event.marketplace_id);
+          return <article class="timeline-item">
+            <h2>{event.title}</h2>
+            <p><strong>{event.event_date}</strong> · {event.event_type} · {event.id}</p>
+            <p>{event.description}</p>
+            {marketplace && <a class="text-link" href={`/encyclopedia/${marketplace.slug}/`}>{marketplace.canonical_name} →</a>}
+          </article>;
+        })}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

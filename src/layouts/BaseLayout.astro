@@ -3,10 +3,13 @@ import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import { getStats } from '../lib/data';
 
+const stats = getStats();
+const defaultDescription = `Minted & Gone is a historical registry of ${stats.kpis.total_marketplaces} NFT marketplaces, with ${stats.kpis.total_events} events and ${stats.kpis.total_evidence} evidence notes.`;
 const {
   title = 'Minted & Gone',
-  description = 'A warm field-guide registry of NFT marketplaces that are active, faded, closed, or transformed.',
+  description = defaultDescription,
   image = '/og-image.svg',
   type = 'website'
 } = Astro.props;
@@ -17,10 +20,34 @@ const imageUrl = new URL(image, site).toString();
 const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION;
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'Minted & Gone',
-  url: new URL('/', site).toString(),
-  description
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: 'Minted & Gone',
+      url: new URL('/', site).toString(),
+      description
+    },
+    {
+      '@type': 'Dataset',
+      name: 'Minted & Gone canonical NFT marketplace registry',
+      description: 'Canonical marketplace, event, and evidence records used to generate the public HTML and machine-readable registry files.',
+      url: new URL('/data/manifest.json', site).toString(),
+      version: stats.schema_version,
+      dateModified: stats.generated_at,
+      isAccessibleForFree: true,
+      additionalProperty: [
+        { '@type': 'PropertyValue', name: 'canonical_only', value: true },
+        { '@type': 'PropertyValue', name: 'marketplaces', value: stats.kpis.total_marketplaces },
+        { '@type': 'PropertyValue', name: 'events', value: stats.kpis.total_events },
+        { '@type': 'PropertyValue', name: 'evidence', value: stats.kpis.total_evidence }
+      ],
+      distribution: [
+        { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: new URL('/data/marketplaces.json', site).toString() },
+        { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: new URL('/data/events.json', site).toString() },
+        { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: new URL('/data/evidence.json', site).toString() }
+      ]
+    }
+  ]
 };
 ---
 <!doctype html>
@@ -33,6 +60,13 @@ const jsonLd = {
     <meta name="robots" content="index,follow,max-image-preview:large" />
     {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/json" href="/version.json" title="MAG version metadata" />
+    <link rel="alternate" type="application/json" href="/data/manifest.json" title="MAG data manifest" />
+    <link rel="alternate" type="application/json" href="/data/marketplaces.json" title="MAG canonical marketplace records" />
+    <link rel="alternate" type="application/json" href="/data/events.json" title="MAG canonical event records" />
+    <link rel="alternate" type="application/json" href="/data/evidence.json" title="MAG canonical evidence records" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="MAG machine-readable guide" />
+    <link rel="alternate" type="text/plain" href="/ai.txt" title="MAG concise machine-readable guide" />
     <meta property="og:site_name" content="Minted & Gone" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

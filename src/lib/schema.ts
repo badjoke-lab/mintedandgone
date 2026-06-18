@@ -1,5 +1,7 @@
 export const STATUSES = ['active','limited','inactive','dead','acquired','merged','rebranded','unknown'] as const;
 export type MarketplaceStatus = typeof STATUSES[number];
+export const REVIEW_STATES = ['reviewed_staging','public_quality_reviewed'] as const;
+export type MarketplaceReviewState = typeof REVIEW_STATES[number];
 export type Marketplace = {
   id: string; slug: string; canonical_name: string; aliases: string[]; status: MarketplaceStatus;
   category: string; marketplace_scope: string; chain_scope: string[]; origin_bucket: string;
@@ -9,7 +11,7 @@ export type Marketplace = {
   country_or_origin?: string | null; official_url_original?: string | null; official_domain_original?: string | null;
   official_url_status?: string; archived_url?: string | null; successor_marketplace?: string | null; predecessor_marketplace?: string | null;
   summary: string; what_is_gone?: string | null; what_remains?: string | null; where_users_or_assets_went?: string | null;
-  confidence: string; review_status: string; record_quality_flags: string[]; last_verified_at: string; notes?: string | null;
+  confidence: string; review_status: MarketplaceReviewState; record_quality_flags: string[]; last_verified_at: string; notes?: string | null;
   asset_backing?: string; platform_roles?: string[]; custody_model?: string; redemption_status?: string;
   randomized_sale_model?: string; buyback_model?: string; asset_categories?: string[];
   custodian_name?: string | null; insurance_status?: string | null; redemption_fee?: string | null;

@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEvidence, getStats } from '../../lib/data';
+const evidence = getEvidence();
+const stats = getStats();
+const sourceTypes = evidence.reduce((acc, item) => { acc[item.source_type] = (acc[item.source_type] ?? 0) + 1; return acc; }, {});
+const reliability = evidence.reduce((acc, item) => { acc[item.reliability] = (acc[item.reliability] ?? 0) + 1; return acc; }, {});
+---
+<BaseLayout title="Evidence index — Minted & Gone" description={`Evidence index for ${stats.kpis.total_evidence} canonical source notes linked to ${stats.kpis.total_marketplaces} NFT marketplace records.`}>
+  <div class="shell appendix-page">
+    <section class="field-hero simple-hero compact-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Canonical evidence records</p>
+        <h1>Evidence index</h1>
+        <p class="lede">{stats.kpis.total_evidence} evidence notes generated from the same canonical data used by marketplace pages.</p>
+        <div class="hero-actions"><a class="btn primary" href="/data/evidence.json">Open evidence JSON</a><a class="btn" href="/data/manifest.json">Read data manifest</a></div>
+      </div>
+    </section>
+    <p class="mock-note">Evidence notes support individual claims. They do not convert a source-reviewed draft into public-quality completion by themselves.</p>
+    <section class="stats-analysis-grid two">
+      <article class="framed-panel"><p class="eyebrow">Source types</p><ul class="plain-list">{Object.entries(sourceTypes).sort((a,b) => b[1]-a[1]).map(([type,count]) => <li><strong>{type}</strong>: {count}</li>)}</ul></article>
+      <article class="framed-panel"><p class="eyebrow">Reliability labels</p><ul class="plain-list">{Object.entries(reliability).sort((a,b) => b[1]-a[1]).map(([type,count]) => <li><strong>{type}</strong>: {count}</li>)}</ul></article>
+    </section>
+    <section class="framed-panel definition-card"><p class="eyebrow">Complete dataset</p><h2>One public JSON file, one canonical source</h2><p>The complete evidence set is available at the machine-readable endpoint. Candidate and monitoring files are excluded from that file.</p><a class="btn" href="/data/evidence.json">Open all evidence records</a></section>
+  </div>
+</BaseLayout>
