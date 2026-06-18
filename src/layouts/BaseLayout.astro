@@ -3,10 +3,11 @@ import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import statsJson from '../../data/stats.json';
 
 const {
   title = 'Minted & Gone',
-  description = 'A warm field-guide registry of NFT marketplaces that are active, faded, closed, or transformed.',
+  description = 'A historical registry of NFT marketplaces, their status changes, timeline events, and supporting evidence.',
   image = '/og-image.svg',
   type = 'website'
 } = Astro.props;
@@ -15,12 +16,26 @@ const site = Astro.site ?? new URL('https://mag.badjoke-lab.com');
 const canonical = new URL(Astro.url.pathname, site).toString();
 const imageUrl = new URL(image, site).toString();
 const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION;
+const counts = {
+  marketplaces: statsJson.source.marketplaces_count,
+  events: statsJson.source.events_count,
+  evidence: statsJson.source.evidence_count
+};
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'WebSite',
+  '@type': 'Dataset',
   name: 'Minted & Gone',
   url: new URL('/', site).toString(),
-  description
+  description,
+  version: '1.0.0',
+  dateModified: statsJson.generated_at,
+  isAccessibleForFree: true,
+  license: new URL('/about/', site).toString(),
+  distribution: [
+    { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: new URL('/data/marketplaces.json', site).toString(), name: `${counts.marketplaces} canonical marketplace records` },
+    { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: new URL('/data/events.json', site).toString(), name: `${counts.events} canonical event records` },
+    { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: new URL('/data/evidence.json', site).toString(), name: `${counts.evidence} canonical evidence records` }
+  ]
 };
 ---
 <!doctype html>
@@ -33,6 +48,10 @@ const jsonLd = {
     <meta name="robots" content="index,follow,max-image-preview:large" />
     {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/json" href="/version.json" title="Minted & Gone version metadata" />
+    <link rel="alternate" type="application/json" href="/data/manifest.json" title="Minted & Gone data manifest" />
+    <link rel="alternate" type="application/json" href="/data/marketplaces.json" title="Canonical marketplace records" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Minted & Gone machine-readable guide" />
     <meta property="og:site_name" content="Minted & Gone" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
