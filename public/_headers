@@ -1,0 +1,8 @@
+/version.json
+  Cache-Control: max-age=0, must-revalidate
+/data/*
+  Cache-Control: max-age=0, must-revalidate
+/llms.txt
+  Cache-Control: max-age=0, must-revalidate
+/ai.txt
+  Cache-Control: max-age=0, must-revalidate
