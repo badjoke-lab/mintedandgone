@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Generate canonical public registry
-        run: node scripts/generate-public-registry.mjs
+        run: node scripts/generate-public-registry-all.mjs
       - uses: actions/setup-node@v4
         with:
           node-version: 24
