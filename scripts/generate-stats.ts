@@ -1,1 +1,1 @@
-import './generate-public-registry.mjs';
+import './generate-public-registry-all.mjs';
