@@ -2,8 +2,8 @@ import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const read = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
 const readMany = (prefix: string) => readdirSync('data')
-  .filter((name) => name.startsWith(prefix) && name.endsWith('.json'))
-  .sort()
+  .filter((name) => new RegExp(`^${prefix}(?:-batch-\\d+)?\\.json$`).test(name))
+  .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
   .flatMap((name) => read('data/' + name));
 
 const site = (process.env.PUBLIC_SITE_URL ?? 'https://mag.badjoke-lab.com').replace(/\/$/, '');
@@ -43,6 +43,8 @@ const staticPaths = [
   '/',
   '/encyclopedia/',
   '/tokenized-collectibles/',
+  '/timeline/',
+  '/evidence/',
   '/stats/',
   '/guides/',
   '/guides/what-happens-when-nft-marketplace-shuts-down/',
