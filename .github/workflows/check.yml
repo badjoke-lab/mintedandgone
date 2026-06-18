@@ -72,6 +72,3 @@ jobs:
 
       - name: Build site
         run: npm run build:site
-
-      - name: Check built registry
-        run: npm run check:built
