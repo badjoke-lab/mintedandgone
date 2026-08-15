@@ -1,0 +1,11 @@
+[
+  {
+    "candidate_id": "mag_candidate_001021",
+    "name": "NFT-P2P",
+    "url": "https://nftp2p.com/",
+    "allowed_hosts": ["nftp2p.com", "www.nftp2p.com"],
+    "status": "needs_research",
+    "canonical_record": false,
+    "monitor_for": ["domain_availability", "http_status", "redirect_target"]
+  }
+]
