@@ -1,0 +1,73 @@
+name: Candidate Intake Monitoring
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/monitoring/candidate-intake-sources.json'
+      - 'scripts/monitoring/mag-candidate-intake-monitor.mjs'
+      - '.github/workflows/candidate-intake-monitoring.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/monitoring/candidate-intake-sources.json'
+      - 'scripts/monitoring/mag-candidate-intake-monitor.mjs'
+      - '.github/workflows/candidate-intake-monitoring.yml'
+  schedule:
+    - cron: '7 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mag-candidate-intake-monitoring
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate candidate monitoring config
+        run: node scripts/monitoring/mag-candidate-intake-monitor.mjs --validate
+      - name: Syntax check monitor
+        run: node --check scripts/monitoring/mag-candidate-intake-monitor.mjs
+
+  monitor:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run read-only candidate monitoring
+        id: monitor
+        shell: bash
+        run: |
+          RUN_ID="$(date -u +%Y%m%dT%H%M%SZ)-${GITHUB_SHA::8}"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          MAG_CANDIDATE_MONITOR_RUN_ID="$RUN_ID" node scripts/monitoring/mag-candidate-intake-monitor.mjs
+      - name: Guard canonical data
+        shell: bash
+        run: |
+          if git status --porcelain -- data | grep -E 'data/(marketplaces|events|evidence).*\.json'; then
+            echo "Candidate monitoring changed canonical data."
+            exit 1
+          fi
+      - name: Upload private monitoring artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mag-candidate-intake-${{ steps.monitor.outputs.run_id }}
+          path: data-staging/monitoring/candidate-intake/${{ steps.monitor.outputs.run_id }}
+          if-no-files-found: error
+          retention-days: 30
