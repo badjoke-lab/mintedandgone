@@ -4,6 +4,19 @@ on:
   push:
     branches:
       - main
+    paths:
+      - src/**
+      - public/**
+      - data/**
+      - scripts/generate-public-registry.mjs
+      - scripts/registry-public-lib.mjs
+      - scripts/generate-stats.ts
+      - scripts/generate-sitemap.ts
+      - scripts/generate-sitemap-v2.ts
+      - scripts/generate-sitemap-canonical.ts
+      - scripts/static-build.mjs
+      - astro.config.mjs
+      - package.json
   workflow_dispatch:
     inputs:
       expected_commit:

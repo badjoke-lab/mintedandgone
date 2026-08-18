@@ -3,8 +3,17 @@
   "project": "Minted & Gone",
   "repository": "badjoke-lab/mintedandgone",
   "authority": "LEDGER_SERIES_PHASE5",
-  "status": "active_after_merge",
+  "status": "complete",
   "activation_base_sha": "7caf92bdaeda744772aaf85e459a54bedab1d5c8",
+  "closeout_main_sha": "da8d57e5b14570714d326a138fc84202f5c2f1ff",
+  "accepted_production_sha": "c5736e09942cfd0a2c8de767f4766ba9d867fe91",
+  "accepted_production_run": 32164720048,
+  "accepted_production_status": "mag-phase5-reviewed-production:success",
+  "accepted_public_counts": {
+    "marketplaces": 385,
+    "events": 388,
+    "evidence": 811
+  },
   "goal": "Strengthen MAG from a historical NFT marketplace encyclopedia into a deterministic lifecycle registry with closure aftermath, migration/successor history, record-level machine-readable output, structured discovery, Compare, and lifecycle/quality Stats.",
   "required_references": [
     "AGENTS.md",
@@ -14,18 +23,19 @@
     "docs/03-minted-and-gone-methodology.md",
     "docs/06-minted-and-gone-implementation-plan.md",
     "docs/ai-era-registry-spec.md",
-    "docs/ai-era-execution-schedule.md"
+    "docs/ai-era-execution-schedule.md",
+    "docs/audits/ledger-series-phase5-closeout-2026-08-19.md"
   ],
-  "stages": [
-    "1-gap-audit",
-    "2-schema-decision-gate",
-    "3-record-level-json",
-    "4-structured-filters",
-    "5-compare",
-    "6-stats",
-    "7-production-verification",
-    "8-closeout"
-  ],
+  "stages": {
+    "1-gap-audit": "complete",
+    "2-schema-decision-gate": "complete_no_schema_expansion",
+    "3-record-level-json": "complete",
+    "4-structured-filters": "complete",
+    "5-compare": "complete",
+    "6-stats": "complete",
+    "7-production-verification": "complete",
+    "8-closeout": "complete"
+  },
   "safety": {
     "preserve_existing_v0_schema_by_default": true,
     "canonical_mutation_requires_separate_reviewed_pr": true,
@@ -35,6 +45,6 @@
     "chatbot_first_surface": false,
     "unknown_values_remain_unknown": true
   },
-  "implementation_rule": "Audit first. Reuse existing encyclopedia search, detail lifecycle presentation, aggregate machine-readable layer, and Stats. Implement only verified gaps. Each stage requires focused PR, CI/validation green, merge, and production verification when public output changes.",
+  "implementation_rule": "Phase 5 is closed. Continue ordinary reviewed MAG record growth, evidence maintenance, lifecycle follow-up, and monitoring without reopening Phase 5 implementation. Any new public product phase requires a fresh reviewed authority.",
   "automatic_continuation_after_stage8": false
 }
