@@ -28,6 +28,7 @@ https://mag.badjoke-lab.com/data/marketplaces.json
 https://mag.badjoke-lab.com/data/events.json
 https://mag.badjoke-lab.com/data/evidence.json
 https://mag.badjoke-lab.com/data/stats.json
+https://mag.badjoke-lab.com/data/marketplace/{slug}.json
 ```
 
 ## Review-state model
@@ -63,10 +64,13 @@ The build writes:
 /data/events.json
 /data/evidence.json
 /data/stats.json
+/data/marketplace/{slug}.json
 /llms.txt
 /ai.txt
 /sitemap.xml
 ```
+
+Each `/data/marketplace/{slug}.json` dossier is generated from the same canonical marketplace/event/evidence series as the HTML detail route. It contains the canonical marketplace record, ordered linked events, linked evidence, canonical predecessor/successor references when present, and stable human/machine URLs. Candidate, monitoring, research, and unmerged material are excluded.
 
 Generated files include `generated_at`, `schema_version`, and `canonical_only` metadata. Public record JSON files contain the same record IDs used by the HTML detail pages.
 
@@ -77,6 +81,7 @@ npm install
 npm run generate:stats
 npm run generate:sitemap
 npm run validate
+npm run validate:record-json
 npm run validate:candidates
 npm run validate:latest-batch
 npm run validate:tokenized
@@ -90,6 +95,7 @@ The registry consistency CI checks:
 
 - canonical counts against public JSON, version, manifest, stats, and HTML
 - marketplace, event, and evidence record identities
+- per-marketplace dossier file-set, canonical payload, linked event/evidence ordering, relationships, and discovery metadata
 - exclusive status totals and active/faded/unknown partition totals
 - review-state enum values and exposed quality flags
 - sitemap detail-page coverage
