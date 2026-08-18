@@ -1,0 +1,42 @@
+name: MAG Phase 5 Production Verification
+
+on:
+  workflow_run:
+    workflows:
+      - Deploy to GitHub Pages
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: Exact main commit expected on production
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mag-phase5-production-verification
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    env:
+      EXPECTED_COMMIT: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || inputs.expected_commit || github.sha }}
+      MAG_PRODUCTION_ORIGIN: https://mag.badjoke-lab.com
+    steps:
+      - name: Checkout exact deployed commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.EXPECTED_COMMIT }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Verify exact production surfaces
+        run: node scripts/check-phase5-production.mjs "$EXPECTED_COMMIT"
