@@ -43,8 +43,18 @@ for (const marker of [
 }
 
 if (workflow.includes('workflow_run:')) fail('Production workflow must not duplicate verification through workflow_run');
-if (!deployWorkflow.includes('group: pages') || !deployWorkflow.includes('cancel-in-progress: true')) {
-  fail('Deploy workflow must cancel stale Pages revisions so exact-production verification can converge on latest main');
+for (const marker of [
+  'group: pages',
+  'cancel-in-progress: true',
+  'statuses: write',
+  'mag-pages-deploy',
+  'Publish pending deploy status',
+  'publish-deploy-status:',
+  'BUILD_RESULT',
+  'DEPLOY_RESULT',
+  'target_url: targetUrl'
+]) {
+  if (!deployWorkflow.includes(marker)) fail(`Deploy workflow missing observability marker: ${marker}`);
 }
 if (verifier.includes('writeFile') || verifier.includes('createFile')) fail('Production verifier must remain read-only');
 console.log('MAG Phase 5 production verification contract passed');
