@@ -1,8 +1,7 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 
 const verifier = readFileSync('scripts/check-phase5-production.mjs', 'utf8');
 const workflow = readFileSync('.github/workflows/phase5-production-verification.yml', 'utf8');
-const deployWorkflow = readFileSync('.github/workflows/deploy.yml', 'utf8');
 const fail = (message) => { throw new Error(message); };
 
 for (const marker of [
@@ -43,24 +42,8 @@ for (const marker of [
 }
 
 if (workflow.includes('workflow_run:')) fail('Production workflow must not duplicate verification through workflow_run');
-for (const marker of [
-  'group: pages',
-  'cancel-in-progress: true',
-  'statuses: write',
-  'mag-pages-deploy',
-  'Publish pending deploy status',
-  'publish-deploy-status:',
-  'BUILD_RESULT',
-  'DEPLOY_RESULT',
-  'target_url: targetUrl',
-  'node-version: 24'
-]) {
-  if (!deployWorkflow.includes(marker)) fail(`Deploy workflow missing observability/runtime marker: ${marker}`);
-}
-const generateIndex = deployWorkflow.indexOf('name: Generate stats');
-const validateIndex = deployWorkflow.indexOf('name: Validate data');
-if (generateIndex < 0 || validateIndex < 0 || generateIndex > validateIndex) {
-  fail('Deploy workflow must generate data/stats.json before validation');
+if (existsSync('.github/workflows/deploy.yml')) {
+  fail('Obsolete GitHub Pages deploy workflow must remain removed; production publication is verified from the custom domain instead of a disabled Pages project');
 }
 if (verifier.includes('writeFile') || verifier.includes('createFile')) fail('Production verifier must remain read-only');
 console.log('MAG Phase 5 production verification contract passed');
