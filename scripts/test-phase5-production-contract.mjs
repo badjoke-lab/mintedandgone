@@ -15,7 +15,11 @@ for (const marker of [
   "'/compare/'",
   "'/data/stats.json'",
   "'/stats/'",
-  "'/sitemap.xml'"
+  "'/sitemap.xml'",
+  'normalizeHtmlForMarkers',
+  '.replace(/&amp;/gi',
+  'Successor & migration coverage',
+  'Coverage & provenance'
 ]) {
   if (!verifier.includes(marker)) fail(`Production verifier missing marker: ${marker}`);
 }
