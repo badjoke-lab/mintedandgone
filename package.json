@@ -16,7 +16,7 @@
     "validate:tokenized": "node scripts/check-tokenized-collectibles-integrity.mjs",
     "test:phase5-filters": "tsx scripts/test-phase5-filters.ts",
     "test:phase5-compare": "node scripts/test-phase5-compare.mjs",
-    "test:phase5-production": "node --check scripts/check-phase5-production.mjs && node scripts/test-phase5-production-contract.mjs",
+    "test:phase5-production": "node --check scripts/check-phase5-production.mjs && node --check scripts/check-phase5-reviewed-production.mjs && node scripts/test-phase5-production-contract.mjs",
     "monitor:tokenized": "node scripts/monitoring-tokenized-run.mjs",
     "monitor:tokenized:publish": "node scripts/monitoring-tokenized-run.mjs --publish",
     "monitor:tokenized:live": "node scripts/monitoring-tokenized-run.mjs --live",
