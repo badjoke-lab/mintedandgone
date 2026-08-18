@@ -38,13 +38,15 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const targetUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
             await github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
               sha: process.env.EXPECTED_COMMIT,
               state: 'pending',
               context: 'mag-phase5-production',
-              description: 'Exact production verification running'
+              description: 'Exact production verification running',
+              target_url: targetUrl
             });
 
       - name: Checkout exact deployed commit
@@ -58,20 +60,34 @@ jobs:
           node-version: 24
 
       - name: Verify exact production surfaces
-        run: node scripts/check-phase5-production.mjs "$EXPECTED_COMMIT"
+        id: production_verify
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/check-phase5-production.mjs "$EXPECTED_COMMIT" 2>&1 | tee phase5-production-verification.log
+
+      - name: Upload production verification diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mag-phase5-production-verification-${{ env.EXPECTED_COMMIT }}
+          path: phase5-production-verification.log
+          if-no-files-found: warn
 
       - name: Publish successful production status
         if: success()
         uses: actions/github-script@v7
         with:
           script: |
+            const targetUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
             await github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
               sha: process.env.EXPECTED_COMMIT,
               state: 'success',
               context: 'mag-phase5-production',
-              description: 'Exact production verification passed'
+              description: 'Exact production verification passed',
+              target_url: targetUrl
             });
 
       - name: Publish failed production status
@@ -79,11 +95,13 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const targetUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
             await github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
               sha: process.env.EXPECTED_COMMIT,
               state: 'failure',
               context: 'mag-phase5-production',
-              description: 'Exact production verification failed'
+              description: 'Exact production verification failed',
+              target_url: targetUrl
             });

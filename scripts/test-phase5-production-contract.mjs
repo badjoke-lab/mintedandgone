@@ -29,7 +29,11 @@ for (const marker of [
   'github.event.workflow_run.head_sha',
   'Checkout exact deployed commit',
   'check-phase5-production.mjs',
-  'mag-phase5-production'
+  'mag-phase5-production',
+  'context.runId',
+  'target_url: targetUrl',
+  'phase5-production-verification.log',
+  'actions/upload-artifact@v4'
 ]) {
   if (!workflow.includes(marker)) fail(`Production workflow missing marker: ${marker}`);
 }
