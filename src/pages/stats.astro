@@ -16,8 +16,11 @@ const activeSide = { active: status.active ?? 0, limited: status.limited ?? 0 };
 const fadedSide = { inactive: status.inactive ?? 0, dead: status.dead ?? 0, rebranded: status.rebranded ?? 0, acquired: status.acquired ?? 0, merged: status.merged ?? 0 };
 const populationSides = { active_side: stats.kpis.active_side_total ?? 0, faded_side: stats.kpis.faded_side_total ?? 0, unknown: stats.kpis.unknown_total ?? 0 };
 const topFlags = Object.fromEntries(Object.entries(flags).sort((a, b) => Number(b[1]) - Number(a[1])).slice(0, 8));
+
 const coverageRows = [
-  ['Archive coverage', `${pct(stats.kpis.archive_coverage)} · ${stats.coverage.archive_coverage.count}/${stats.coverage.archive_coverage.total}`, 'Records with an archived URL present.'],
+  ['Archive coverage', `${pct(stats.kpis.archive_coverage)} · ${stats.coverage.archive_coverage.count}/${stats.coverage.archive_coverage.total}`, 'Records with a marketplace archived URL present.'],
+  ['High-reliability evidence coverage', `${pct(stats.coverage.high_reliability_evidence.share)} · ${stats.coverage.high_reliability_evidence.count}/${stats.coverage.high_reliability_evidence.total}`, 'Records with at least one canonical high-reliability evidence item.'],
+  ['Archived-evidence coverage', `${pct(stats.coverage.archived_evidence.share)} · ${stats.coverage.archived_evidence.count}/${stats.coverage.archived_evidence.total}`, 'Records with at least one evidence item carrying an archive URL.'],
   ['Source-reviewed drafts', `${stats.kpis.source_reviewed_draft_total} · ${pct(stats.kpis.source_reviewed_draft_share)}`, 'Canonical public drafts with source review; not final public-quality certification.'],
   ['Public-quality reviewed', `${stats.kpis.public_quality_reviewed_total} · ${pct(stats.kpis.public_quality_reviewed_share)}`, 'Records that have completed the stricter public-quality review state.'],
   ['Records with open flags', `${stats.kpis.records_with_open_flags} · ${pct(stats.kpis.open_flag_share)}`, 'Canonical records that still expose unresolved review work.'],
@@ -25,23 +28,46 @@ const coverageRows = [
   ['Quality flags', flagTotal, 'Total open review flags; one record may carry multiple flags.'],
   ['Generated from', `${stats.source.marketplaces_count} records`, `${stats.source.events_count} events and ${stats.source.evidence_count} evidence notes.`]
 ];
+
+const lifecycleRows = [
+  ['Faded records with successor / migration', `${stats.lifecycle.faded_with_successor_or_migration.count}/${stats.lifecycle.faded_with_successor_or_migration.total} · ${pct(stats.lifecycle.faded_with_successor_or_migration.share)}`, 'Canonical faded-side records with a successor marketplace or an asset-migration event recorded. Absence means not recorded.'],
+  ['Successor links recorded', stats.lifecycle.successor_recorded, 'Marketplace records with canonical successor_marketplace.'],
+  ['Predecessor links recorded', stats.lifecycle.predecessor_recorded, 'Marketplace records with canonical predecessor_marketplace.'],
+  ['Migration events recorded', stats.lifecycle.migration_event_recorded, 'Distinct marketplaces with canonical asset_migration_announced events.'],
+  ['Lifespan computable', `${stats.lifecycle.lifespan.eligible_count}/${stats.lifecycle.lifespan.total_marketplaces} · ${pct(stats.lifecycle.lifespan.coverage_share)}`, 'Only records with both canonical launch_year and end_year are included in lifespan buckets.']
+];
 ---
 <BaseLayout title="Stats appendix — Minted & Gone" description={`Canonical MAG statistics generated from ${stats.source.marketplaces_count} marketplaces, ${stats.source.events_count} events, and ${stats.source.evidence_count} evidence notes.`}>
   <div class="shell appendix-page stats-page">
     <section class="field-hero appendix-hero">
       <figure class="hero-botanical hero-page-art" aria-hidden="true"><img src="/assets/stats/stats-counting-rod-chart.png" alt="" loading="eager" /></figure>
-      <div class="hero-copy plate-copy"><p class="eyebrow">Field-guide appendix</p><h1>Archive counts</h1><div class="flourish" aria-hidden="true">✦</div><p class="lede">Static counts generated from the canonical registry records.</p><p>These figures summarize registry coverage, exclusive status counts, chain coverage, marketplace scope, and review-quality signals. They are not live market analytics, rankings, uptime monitoring, or price data.</p></div>
+      <div class="hero-copy plate-copy"><p class="eyebrow">Field-guide appendix</p><h1>Archive counts</h1><div class="flourish" aria-hidden="true">✦</div><p class="lede">Static counts generated from the canonical registry records.</p><p>These figures summarize registry coverage, lifecycle aftermath, exclusive status counts, chain coverage, marketplace scope, and review-quality signals. They are not live market analytics, rankings, uptime monitoring, or price data.</p></div>
     </section>
-    <p class="mock-note">Review-state note: <code>reviewed_staging</code> means a source-reviewed canonical draft, not final public-quality certification. Open work remains visible in <code>record_quality_flags</code>.</p>
+
+    <p class="mock-note">Review-state note: <code>reviewed_staging</code> means a source-reviewed canonical draft, not final public-quality certification. Missing lifecycle or successor data means “not recorded in the registry”, not proof that no event occurred.</p>
+
     <section class="framed-panel stats-glance"><p class="eyebrow">Archive at a glance</p><StatsKpiGrid stats={stats} /></section>
+
     <section class="stats-section-title"><p class="eyebrow">Core analysis</p><h2>What the archive looks like now</h2></section>
     <section class="stats-analysis-grid core"><StatsBreakdown title="Exclusive status breakdown" data={stats.breakdowns.by_status} limit={8} note="Each marketplace has one status; these values sum to the marketplace total." /><StatsComposition title="Active-side, faded-side, and unknown" data={populationSides} note="These three groups are mutually exclusive and sum to the total." /><StatsComposition title="Active-side status mix" data={activeSide} note="Active-side is active + limited." /><StatsComposition title="Faded-side status mix" data={fadedSide} note="Faded-side is inactive + dead + rebranded + acquired + merged. Dead and transitioned are subgroups, not extra records." /></section>
+
+    <section class="stats-section-title"><p class="eyebrow">Lifecycle aftermath</p><h2>How marketplace histories end or continue</h2></section>
+    <section class="stats-analysis-grid wide">
+      <StatsBreakdown title="Closure / change reasons — faded side" data={stats.breakdowns.by_closure_reason_faded_side} limit={12} note="Only inactive, dead, acquired, merged and rebranded records are counted. Unknown stays explicit." />
+      <StatsComposition title="Recorded lifespan buckets" data={stats.lifecycle.lifespan.buckets} note="Only records with both canonical launch and end years are included; same-year records remain a separate bucket." />
+      <StatsMetricTable title="Successor & migration coverage" rows={lifecycleRows} note="These are recorded lifecycle links and events, not inferred outcomes." />
+      <StatsComposition title="Lifecycle event depth" data={stats.quality.lifecycle_event_depth} note="Number of canonical event records linked to each marketplace, grouped as zero / one / multiple." />
+    </section>
+
     <section class="stats-section-title"><p class="eyebrow">Breakdowns</p><h2>Where the records cluster</h2></section>
-    <section class="stats-analysis-grid wide"><StatsBreakdown title="Category leaders" data={stats.breakdowns.by_category} limit={10} note="Category is single-valued in the current schema." /><StatsBreakdown title="Marketplace scope" data={stats.breakdowns.by_marketplace_scope} limit={9} note="Marketplace scope is single-valued." /><StatsBreakdown title="Chain leaders" data={stats.breakdowns.by_chain} limit={12} note="Chain scope is multi-valued, so chain totals can exceed the marketplace total." /><StatsMetricTable title="Coverage & quality" rows={coverageRows} note="Coverage and review states are shown as exact values." /></section>
+    <section class="stats-analysis-grid wide"><StatsBreakdown title="Category leaders" data={stats.breakdowns.by_category} limit={10} note="Category is single-valued in the current schema." /><StatsBreakdown title="Marketplace scope" data={stats.breakdowns.by_marketplace_scope} limit={9} note="Marketplace scope is single-valued." /><StatsBreakdown title="Chain leaders" data={stats.breakdowns.by_chain} limit={12} note="Chain scope is multi-valued, so chain totals can exceed the marketplace total." /><StatsMetricTable title="Coverage & provenance" rows={coverageRows} note="Evidence coverage is descriptive registry provenance depth, not a marketplace safety or quality score." /></section>
+
     <section class="stats-section-title"><p class="eyebrow">Registry timelines</p><h2>Launch and end-year distributions</h2></section>
     <section class="stats-analysis-grid two"><StatsHistogram title="Launch-year distribution" data={stats.distributions.launch_year} note="Yearly counts are shown as a column distribution." /><StatsHistogram title="End-year distribution" data={stats.distributions.end_year} note="Unknown-heavy data stays visible without pretending it is a normal ranking." /></section>
+
     <section class="stats-section-title"><p class="eyebrow">Deep quality notes</p><h2>Review signals</h2></section>
     <section class="stats-analysis-grid deep"><StatsBreakdown title="Top review-quality flags" data={topFlags} limit={8} note="A record may carry multiple open flags." /><StatsComposition title="Evidence depth" data={stats.quality.evidence_depth} /><StatsComposition title="Confidence labels" data={stats.breakdowns.by_confidence} /><StatsComposition title="Machine-readable review state" data={stats.breakdowns.by_review_status} /></section>
-    <section class="framed-panel definition-card stats-reading-guide"><p class="eyebrow">Coverage / quality</p><h2>How to read these figures</h2><div class="reading-guide-grid" aria-label="How to read archive statistics"><article><strong>Counts are canonical records.</strong><span>They show archive coverage, not market rank or traffic.</span></article><article><strong>Source review is not public-quality completion.</strong><span>The fixed review state and open flags remain machine-readable.</span></article><article><strong>Multi-value fields can overlap.</strong><span>Chain and platform-role totals may exceed the marketplace total.</span></article></div><p class="source-summary">Generated from {stats.source.marketplaces_count} marketplaces, {stats.source.events_count} events, and {stats.source.evidence_count} evidence notes.</p><div class="hero-actions"><a class="btn" href="/methodology/">Read methodology</a><a class="btn" href="/data/manifest.json">Open data manifest</a></div></section>
+
+    <section class="framed-panel definition-card stats-reading-guide"><p class="eyebrow">Coverage / quality</p><h2>How to read these figures</h2><div class="reading-guide-grid" aria-label="How to read archive statistics"><article><strong>Counts are canonical records.</strong><span>They show archive coverage, not market rank or traffic.</span></article><article><strong>Source review is not public-quality completion.</strong><span>The fixed review state and open flags remain machine-readable.</span></article><article><strong>Lifecycle absence is not negative evidence.</strong><span>No recorded successor, migration, or closure detail does not prove that none existed.</span></article><article><strong>Multi-value fields can overlap.</strong><span>Chain and platform-role totals may exceed the marketplace total.</span></article></div><p class="source-summary">Generated from {stats.source.marketplaces_count} marketplaces, {stats.source.events_count} events, and {stats.source.evidence_count} evidence notes.</p><div class="hero-actions"><a class="btn" href="/methodology/">Read methodology</a><a class="btn" href="/data/manifest.json">Open data manifest</a></div></section>
   </div>
 </BaseLayout>
