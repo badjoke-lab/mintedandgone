@@ -20,11 +20,16 @@ for (const marker of [
 }
 
 for (const marker of [
+  'push:',
+  'branches:',
+  '- main',
   'workflow_run:',
   'Deploy to GitHub Pages',
+  "github.event_name == 'push'",
   'github.event.workflow_run.head_sha',
   'Checkout exact deployed commit',
-  'check-phase5-production.mjs'
+  'check-phase5-production.mjs',
+  'mag-phase5-production'
 ]) {
   if (!workflow.includes(marker)) fail(`Production workflow missing marker: ${marker}`);
 }
