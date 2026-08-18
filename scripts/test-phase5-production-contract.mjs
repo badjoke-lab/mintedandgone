@@ -23,10 +23,9 @@ for (const marker of [
   'push:',
   'branches:',
   '- main',
-  'workflow_run:',
-  'Deploy to GitHub Pages',
-  "github.event_name == 'push'",
-  'github.event.workflow_run.head_sha',
+  'workflow_dispatch:',
+  'cancel-in-progress: true',
+  'inputs.expected_commit || github.sha',
   'Checkout exact deployed commit',
   'check-phase5-production.mjs',
   'mag-phase5-production',
@@ -38,5 +37,6 @@ for (const marker of [
   if (!workflow.includes(marker)) fail(`Production workflow missing marker: ${marker}`);
 }
 
+if (workflow.includes('workflow_run:')) fail('Production workflow must not duplicate verification through workflow_run');
 if (verifier.includes('writeFile') || verifier.includes('createFile')) fail('Production verifier must remain read-only');
 console.log('MAG Phase 5 production verification contract passed');
