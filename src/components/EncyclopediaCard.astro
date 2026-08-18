@@ -1,12 +1,39 @@
 ---
 import StatusChip from './StatusChip.astro';
 import { formatCategory, formatYearRange } from '../lib/format';
-const { record } = Astro.props;
-const searchText = [record.canonical_name, record.slug, record.summary, record.category, record.marketplace_scope, ...(record.chain_scope ?? [])].join(' ').toLowerCase();
+const { record, filterMeta = {} } = Astro.props;
+const searchText = [
+  record.canonical_name,
+  record.slug,
+  record.summary,
+  record.category,
+  record.marketplace_scope,
+  ...(record.chain_scope ?? []),
+  ...(record.aliases ?? []),
+  record.closure_reason,
+  record.what_is_gone,
+  record.what_remains,
+  record.where_users_or_assets_went,
+  record.successor_marketplace,
+  record.predecessor_marketplace,
+  ...(record.record_quality_flags ?? [])
+].filter(Boolean).join(' ').toLowerCase();
 const primaryChain = record.chain_scope?.[0] ?? 'unknown';
 const formatLabel = (value) => (value ?? 'unknown').toString().replace(/_/g, ' ').replace(/\b\w/g, (m) => m.toUpperCase());
 ---
-<a class="card encyclopedia-card marketplace-card" href={`/encyclopedia/${record.slug}/`} data-search={searchText} data-status={record.status} data-category={record.category} data-chains={(record.chain_scope ?? []).join('|')}>
+<a
+  class="card encyclopedia-card marketplace-card"
+  href={`/encyclopedia/${record.slug}/`}
+  data-search={searchText}
+  data-status={record.status}
+  data-category={record.category}
+  data-chains={(record.chain_scope ?? []).join('|')}
+  data-closure={record.closure_reason || 'unknown'}
+  data-launch-year={record.launch_year ? String(record.launch_year) : 'unknown'}
+  data-end-year={record.end_year ? String(record.end_year) : 'unknown'}
+  data-lifecycle={(filterMeta.lifecycle ?? []).join('|')}
+  data-evidence-flags={(filterMeta.evidenceFlags ?? []).join('|')}
+>
   <div class="encyclopedia-card__icon" aria-hidden="true">{record.canonical_name.slice(0, 2)}</div>
   <div class="encyclopedia-card__body">
     <div class="encyclopedia-card__top">
