@@ -18,6 +18,16 @@ async function fetchJson(path) {
   catch (error) { throw new Error(`${path}: invalid JSON: ${error.message}`); }
 }
 
+function normalizeHtmlForMarkers(html) {
+  return html
+    .replace(/&amp;/gi, '&')
+    .replace(/&#0*38;/g, '&')
+    .replace(/&#x0*26;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#0*39;/g, "'")
+    .replace(/&#x0*27;/gi, "'");
+}
+
 let version;
 let lastVersionError;
 for (let attempt = 1; attempt <= attempts; attempt += 1) {
@@ -56,12 +66,12 @@ check(gameStop.marketplace?.status === 'dead', 'GameStop NFT status mismatch');
 check(gameStop.marketplace?.end_year === 2024, 'GameStop NFT end year mismatch');
 check(gameStop.marketplace?.closure_reason === 'parent_company_shutdown', 'GameStop NFT closure reason mismatch');
 
-const encyclopediaHtml = await fetchText('/encyclopedia/');
+const encyclopediaHtml = normalizeHtmlForMarkers(await fetchText('/encyclopedia/'));
 for (const marker of ['Closure / change reason', 'Lifecycle relationships', 'Evidence / review state', 'data-launch-year', 'data-end-year']) {
   check(encyclopediaHtml.includes(marker), `Encyclopedia missing production marker: ${marker}`);
 }
 
-const compareHtml = await fetchText('/compare/');
+const compareHtml = normalizeHtmlForMarkers(await fetchText('/compare/'));
 for (const marker of ['Compare marketplace histories', 'Show differences only', 'Evidence counts describe registry provenance depth']) {
   check(compareHtml.includes(marker), `Compare missing production marker: ${marker}`);
 }
@@ -73,7 +83,7 @@ check(Number.isInteger(stats.lifecycle?.successor_recorded), 'Stats successor co
 check(Boolean(stats.coverage?.high_reliability_evidence), 'Stats high-reliability evidence coverage missing');
 check(Boolean(stats.coverage?.archived_evidence), 'Stats archived-evidence coverage missing');
 
-const statsHtml = await fetchText('/stats/');
+const statsHtml = normalizeHtmlForMarkers(await fetchText('/stats/'));
 for (const marker of ['Lifecycle aftermath', 'Successor & migration coverage', 'Coverage & provenance']) {
   check(statsHtml.includes(marker), `Stats page missing production marker: ${marker}`);
 }
