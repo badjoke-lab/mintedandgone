@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "project": "Minted & Gone",
+  "repository": "badjoke-lab/mintedandgone",
+  "authority": "LEDGER_SERIES_PHASE5",
+  "status": "active_after_merge",
+  "activation_base_sha": "7caf92bdaeda744772aaf85e459a54bedab1d5c8",
+  "goal": "Strengthen MAG from a historical NFT marketplace encyclopedia into a deterministic lifecycle registry with closure aftermath, migration/successor history, record-level machine-readable output, structured discovery, Compare, and lifecycle/quality Stats.",
+  "required_references": [
+    "AGENTS.md",
+    "docs/00-minted-and-gone-v0-spec.md",
+    "docs/01-minted-and-gone-design.md",
+    "docs/02-minted-and-gone-schema-stats-ready.md",
+    "docs/03-minted-and-gone-methodology.md",
+    "docs/06-minted-and-gone-implementation-plan.md",
+    "docs/ai-era-registry-spec.md",
+    "docs/ai-era-execution-schedule.md"
+  ],
+  "stages": [
+    "1-gap-audit",
+    "2-schema-decision-gate",
+    "3-record-level-json",
+    "4-structured-filters",
+    "5-compare",
+    "6-stats",
+    "7-production-verification",
+    "8-closeout"
+  ],
+  "safety": {
+    "preserve_existing_v0_schema_by_default": true,
+    "canonical_mutation_requires_separate_reviewed_pr": true,
+    "candidate_auto_promotion": false,
+    "ai_generated_canonical_history": false,
+    "ranking_or_safety_score": false,
+    "chatbot_first_surface": false,
+    "unknown_values_remain_unknown": true
+  },
+  "implementation_rule": "Audit first. Reuse existing encyclopedia search, detail lifecycle presentation, aggregate machine-readable layer, and Stats. Implement only verified gaps. Each stage requires focused PR, CI/validation green, merge, and production verification when public output changes.",
+  "automatic_continuation_after_stage8": false
+}
