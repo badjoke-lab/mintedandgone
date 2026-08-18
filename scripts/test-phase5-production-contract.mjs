@@ -52,9 +52,15 @@ for (const marker of [
   'publish-deploy-status:',
   'BUILD_RESULT',
   'DEPLOY_RESULT',
-  'target_url: targetUrl'
+  'target_url: targetUrl',
+  'node-version: 24'
 ]) {
-  if (!deployWorkflow.includes(marker)) fail(`Deploy workflow missing observability marker: ${marker}`);
+  if (!deployWorkflow.includes(marker)) fail(`Deploy workflow missing observability/runtime marker: ${marker}`);
+}
+const generateIndex = deployWorkflow.indexOf('name: Generate stats');
+const validateIndex = deployWorkflow.indexOf('name: Validate data');
+if (generateIndex < 0 || validateIndex < 0 || generateIndex > validateIndex) {
+  fail('Deploy workflow must generate data/stats.json before validation');
 }
 if (verifier.includes('writeFile') || verifier.includes('createFile')) fail('Production verifier must remain read-only');
 console.log('MAG Phase 5 production verification contract passed');
