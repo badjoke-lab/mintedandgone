@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "project": "Minted & Gone",
+  "phase": "Ledger Series Phase 5",
+  "status": "complete",
+  "closed_at": "2026-08-19",
+  "implementation_floor_sha": "d5c6c56dd787cbf3ae09ba2df83f97c15bbefcad",
+  "accepted_production_sha": "c5736e09942cfd0a2c8de767f4766ba9d867fe91",
+  "reviewed_main_at_acceptance": "da8d57e5b14570714d326a138fc84202f5c2f1ff",
+  "production_evidence": {
+    "run_id": 32164720048,
+    "job_id": 95801511830,
+    "artifact_id": 9334947090,
+    "status_context": "mag-phase5-reviewed-production",
+    "status": "success"
+  },
+  "public_counts": {
+    "marketplaces": 385,
+    "events": 388,
+    "evidence": 811
+  },
+  "completed_surfaces": [
+    "per-marketplace-machine-readable-dossiers",
+    "lifecycle-and-provenance-filters",
+    "historical-compare",
+    "lifecycle-aftermath-stats",
+    "production-verification"
+  ],
+  "canonical_delta": 0,
+  "schema_taxonomy_delta": 0,
+  "automatic_continuation": false,
+  "next_horizontal_phase": "Ledger Series Phase 6 — WLR audit/closeout mapping before any new implementation"
+}
