@@ -1,0 +1,212 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getMarketplaces, getEvents, getEvidence } from '../lib/data';
+
+const marketplaces = getMarketplaces();
+const events = getEvents();
+const evidence = getEvidence();
+
+const compareRecords = marketplaces.map((record) => {
+  const linkedEvents = events.filter((event) => event.marketplace_id === record.id);
+  const linkedEvidence = evidence.filter((item) => item.marketplace_id === record.id);
+  return {
+    slug: record.slug,
+    name: record.canonical_name,
+    status: record.status,
+    category: record.category,
+    marketplace_scope: record.marketplace_scope,
+    chain_scope: record.chain_scope,
+    launch_year: record.launch_year ?? null,
+    end_year: record.end_year ?? null,
+    closure_reason: record.closure_reason ?? 'unknown',
+    frontend_status: record.frontend_status ?? 'unknown',
+    contract_status: record.contract_status ?? 'unknown',
+    asset_status: record.asset_status ?? 'unknown',
+    predecessor_marketplace: record.predecessor_marketplace ?? null,
+    successor_marketplace: record.successor_marketplace ?? null,
+    what_remains: record.what_remains ?? null,
+    where_users_or_assets_went: record.where_users_or_assets_went ?? null,
+    confidence: record.confidence,
+    review_status: record.review_status,
+    last_verified_at: record.last_verified_at,
+    record_quality_flags: record.record_quality_flags ?? [],
+    event_types: [...new Set(linkedEvents.map((event) => event.event_type))].sort(),
+    evidence_count: linkedEvidence.length,
+    high_reliability_evidence_count: linkedEvidence.filter((item) => item.reliability === 'high').length,
+    archived_evidence_count: linkedEvidence.filter((item) => Boolean(item.archived_url)).length
+  };
+}).sort((a, b) => a.name.localeCompare(b.name));
+
+const defaultSlugs = ['hic-et-nunc', 'teia'].filter((slug) => compareRecords.some((record) => record.slug === slug));
+if (defaultSlugs.length < 2) defaultSlugs.push(...compareRecords.map((record) => record.slug).filter((slug) => !defaultSlugs.includes(slug)).slice(0, 2 - defaultSlugs.length));
+const compareJson = JSON.stringify(compareRecords).replace(/</g, '\\u003c');
+---
+<BaseLayout title="Compare NFT marketplace histories — Minted & Gone" description="Compare 2–4 reviewed NFT marketplace records across lifecycle, closure, what remains, relationships, and evidence provenance.">
+  <div class="shell compare-shell">
+    <section class="field-hero">
+      <div class="hero-copy plate-copy">
+        <p class="eyebrow">Historical Compare</p>
+        <h1>Compare marketplace histories</h1>
+        <p class="lede">Place 2–4 canonical records side by side. Compare recorded lifecycle facts and provenance without rankings or synthetic safety scores.</p>
+      </div>
+    </section>
+
+    <section class="framed-panel compare-controls" aria-labelledby="compare-controls-title">
+      <div class="section-head"><div><p class="eyebrow">Selection</p><h2 id="compare-controls-title">Choose 2–4 marketplaces</h2></div></div>
+      <div class="compare-select-grid">
+        {[0,1,2,3].map((slot) => <label>Marketplace {slot + 1}<select class="search" data-compare-slot={slot}><option value="">{slot < 2 ? 'Choose a marketplace' : 'Optional'}</option>{compareRecords.map((record) => <option value={record.slug} selected={defaultSlugs[slot] === record.slug}>{record.name}</option>)}</select></label>)}
+      </div>
+      <div class="compare-actions">
+        <label class="check"><input type="checkbox" data-differences-only /><span>Show differences only</span></label>
+        <button class="btn" type="button" data-copy-link>Copy share link</button>
+        <span class="subtle" data-copy-status aria-live="polite"></span>
+      </div>
+      <p class="mock-note">Only canonical reviewed fields are compared. Missing values stay “Not recorded”. Evidence counts describe registry provenance depth, not marketplace safety or quality.</p>
+    </section>
+
+    <section class="framed-panel compare-results" aria-live="polite">
+      <div data-compare-message class="card empty"></div>
+      <div class="compare-table-wrap" data-compare-table-wrap hidden>
+        <table class="compare-table">
+          <thead data-compare-head></thead>
+          <tbody data-compare-body></tbody>
+        </table>
+      </div>
+    </section>
+
+    <p><a class="text-link" href="/encyclopedia/">← Back to the Encyclopedia</a></p>
+  </div>
+
+  <script type="application/json" id="compare-data" set:html={compareJson}></script>
+  <script define:vars={{ defaultSlugs }}>
+    const records = JSON.parse(document.getElementById('compare-data')?.textContent || '[]');
+    const bySlug = new Map(records.map((record) => [record.slug, record]));
+    const selects = [...document.querySelectorAll('[data-compare-slot]')];
+    const differenceOnly = document.querySelector('[data-differences-only]');
+    const message = document.querySelector('[data-compare-message]');
+    const tableWrap = document.querySelector('[data-compare-table-wrap]');
+    const head = document.querySelector('[data-compare-head]');
+    const body = document.querySelector('[data-compare-body]');
+    const copyButton = document.querySelector('[data-copy-link]');
+    const copyStatus = document.querySelector('[data-copy-status]');
+
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.getAll('marketplace').flatMap((value) => value.split(',')).filter((slug) => bySlug.has(slug));
+    const uniqueRequested = [...new Set(requested)].slice(0, 4);
+    const initial = uniqueRequested.length >= 2 ? uniqueRequested : defaultSlugs;
+    selects.forEach((select, index) => { select.value = initial[index] || ''; });
+    differenceOnly.checked = params.get('differences') === 'only';
+
+    const label = (value) => value == null || value === '' ? 'Not recorded' : String(value).replace(/_/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
+    const list = (value) => Array.isArray(value) && value.length ? value.map(label).join(', ') : label(value);
+    const yearRange = (record) => `${record.launch_year ?? 'Unknown'} → ${record.end_year ?? 'Present / not recorded'}`;
+    const selectedSlugs = () => [...new Set(selects.map((select) => select.value).filter(Boolean))].slice(0, 4);
+
+    const rows = [
+      ['Status', (record) => label(record.status)],
+      ['Category', (record) => label(record.category)],
+      ['Marketplace scope', (record) => label(record.marketplace_scope)],
+      ['Chains', (record) => list(record.chain_scope)],
+      ['Recorded years', yearRange],
+      ['Closure / change reason', (record) => label(record.closure_reason)],
+      ['Frontend state', (record) => label(record.frontend_status)],
+      ['Contract state', (record) => label(record.contract_status)],
+      ['Asset state', (record) => label(record.asset_status)],
+      ['Predecessor', (record) => label(record.predecessor_marketplace)],
+      ['Successor', (record) => label(record.successor_marketplace)],
+      ['Recorded lifecycle event types', (record) => list(record.event_types)],
+      ['What remains', (record) => record.what_remains || 'Not recorded'],
+      ['Where users / assets went', (record) => record.where_users_or_assets_went || 'Not recorded'],
+      ['Last verified', (record) => record.last_verified_at || 'Not recorded'],
+      ['Confidence', (record) => label(record.confidence)],
+      ['Review state', (record) => label(record.review_status)],
+      ['Open review flags', (record) => list(record.record_quality_flags)],
+      ['Evidence records', (record) => String(record.evidence_count)],
+      ['High-reliability evidence', (record) => String(record.high_reliability_evidence_count)],
+      ['Archived evidence links', (record) => String(record.archived_evidence_count)]
+    ];
+
+    const syncUrl = (slugs) => {
+      const next = new URLSearchParams();
+      slugs.forEach((slug) => next.append('marketplace', slug));
+      if (differenceOnly.checked) next.set('differences', 'only');
+      const suffix = next.toString();
+      history.replaceState({}, '', `${window.location.pathname}${suffix ? `?${suffix}` : ''}`);
+    };
+
+    const render = () => {
+      const slugs = selectedSlugs();
+      const selectedRecords = slugs.map((slug) => bySlug.get(slug)).filter(Boolean);
+      syncUrl(slugs);
+      head.replaceChildren();
+      body.replaceChildren();
+
+      if (selectedRecords.length < 2) {
+        tableWrap.hidden = true;
+        message.hidden = false;
+        message.textContent = 'Choose at least two different marketplaces to compare.';
+        return;
+      }
+
+      message.hidden = true;
+      tableWrap.hidden = false;
+      const headerRow = document.createElement('tr');
+      const fieldHeader = document.createElement('th');
+      fieldHeader.scope = 'col';
+      fieldHeader.textContent = 'Recorded field';
+      headerRow.append(fieldHeader);
+      selectedRecords.forEach((record) => {
+        const cell = document.createElement('th');
+        cell.scope = 'col';
+        const link = document.createElement('a');
+        link.href = `/encyclopedia/${record.slug}/`;
+        link.textContent = record.name;
+        cell.append(link);
+        headerRow.append(cell);
+      });
+      head.append(headerRow);
+
+      rows.forEach(([rowLabel, getter]) => {
+        const values = selectedRecords.map((record) => getter(record));
+        if (differenceOnly.checked && new Set(values).size <= 1) return;
+        const row = document.createElement('tr');
+        const field = document.createElement('th');
+        field.scope = 'row';
+        field.textContent = rowLabel;
+        row.append(field);
+        values.forEach((value) => {
+          const cell = document.createElement('td');
+          cell.textContent = value;
+          row.append(cell);
+        });
+        body.append(row);
+      });
+    };
+
+    selects.forEach((select) => select.addEventListener('change', render));
+    differenceOnly.addEventListener('change', render);
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        copyStatus.textContent = 'Link copied.';
+      } catch {
+        copyStatus.textContent = 'Copy unavailable; use the address bar URL.';
+      }
+    });
+    render();
+  </script>
+
+  <style>
+    .compare-shell { display: grid; gap: 1.5rem; }
+    .compare-controls { display: grid; gap: 1rem; }
+    .compare-select-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .compare-select-grid label { display: grid; gap: .35rem; font-weight: 700; }
+    .compare-actions { display: flex; flex-wrap: wrap; gap: .8rem 1.2rem; align-items: center; }
+    .compare-table-wrap { overflow-x: auto; }
+    .compare-table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    .compare-table th, .compare-table td { border-bottom: 1px solid var(--line, #cbbfa7); padding: .8rem; text-align: left; vertical-align: top; max-width: 32rem; }
+    .compare-table thead th { position: sticky; top: 0; background: var(--paper, #f7f1e4); z-index: 1; }
+    .compare-table tbody th { width: 12rem; }
+    @media (max-width: 720px) { .compare-select-grid { grid-template-columns: 1fr; } }
+  </style>
+</BaseLayout>
