@@ -12,19 +12,17 @@ const evidence = getEvidence();
 const options = getFilterOptions(records);
 const selected = records.find((record) => record.slug === 'x2y2') ?? records.find((record) => record.status === 'dead') ?? records[0];
 
-const eventsByMarketplace = new Map();
-for (const event of events) {
-  const items = eventsByMarketplace.get(event.marketplace_id) ?? [];
-  items.push(event);
-  eventsByMarketplace.set(event.marketplace_id, items);
-}
-
-const evidenceByMarketplace = new Map();
-for (const item of evidence) {
-  const items = evidenceByMarketplace.get(item.marketplace_id) ?? [];
-  items.push(item);
-  evidenceByMarketplace.set(item.marketplace_id, items);
-}
+const byMarketplace = (items) => {
+  const map = new Map();
+  for (const item of items) {
+    const group = map.get(item.marketplace_id) ?? [];
+    group.push(item);
+    map.set(item.marketplace_id, group);
+  }
+  return map;
+};
+const eventsByMarketplace = byMarketplace(events);
+const evidenceByMarketplace = byMarketplace(evidence);
 
 const getFilterMeta = (record) => {
   const linkedEvents = eventsByMarketplace.get(record.id) ?? [];
@@ -38,17 +36,16 @@ const getFilterMeta = (record) => {
   if (record.archived_url || linkedEvidence.some((item) => item.archived_url)) evidenceFlags.push('archive_available');
   if (linkedEvidence.some((item) => item.reliability === 'high')) evidenceFlags.push('high_reliability_evidence');
   if ((record.record_quality_flags ?? []).length > 0) evidenceFlags.push('open_review_flags');
-
   return { lifecycle, evidenceFlags };
 };
 
 const metaById = new Map(records.map((record) => [record.id, getFilterMeta(record)]));
 const countBy = (items, getValue) => items.reduce((acc, item) => {
-  const values = Array.isArray(getValue(item)) ? getValue(item) : [getValue(item)];
+  const raw = getValue(item);
+  const values = Array.isArray(raw) ? raw : [raw];
   values.filter(Boolean).forEach((value) => { acc[value] = (acc[value] ?? 0) + 1; });
   return acc;
 }, {});
-
 const counts = {
   status: countBy(records, (record) => record.status),
   chain: countBy(records, (record) => record.chain_scope),
@@ -57,13 +54,11 @@ const counts = {
   lifecycle: countBy(records, (record) => metaById.get(record.id)?.lifecycle ?? []),
   evidence: countBy(records, (record) => metaById.get(record.id)?.evidenceFlags ?? [])
 };
-
 const lifecycleOptions = [
   ['has_successor', 'Successor recorded'],
   ['has_predecessor', 'Predecessor recorded'],
   ['migration_event', 'Migration event recorded']
 ].filter(([value]) => (counts.lifecycle[value] ?? 0) > 0);
-
 const evidenceOptions = [
   ['archive_available', 'Archive available'],
   ['high_reliability_evidence', 'High-reliability evidence'],
@@ -85,7 +80,9 @@ const evidenceOptions = [
         <img class="hero-archive-image" src="/assets/minted-gone-archive-cabinet-hero.png" alt="" loading="eager" decoding="async" />
       </aside>
     </section>
+
     <p class="mock-note">Draft-data warning: records are source-reviewed staging entries, not final public-quality certification. Uncertain records remain visibly flagged for later review.</p>
+
     <div class="market-layout encyclopedia-layout" data-filter-root>
       <aside class="filter-panel framed-panel encyclopedia-filter">
         <details data-filter-details>
@@ -100,12 +97,10 @@ const evidenceOptions = [
             </fieldset>
           )}
 
-          {options.closureReasons.length > 0 &&
-            <fieldset class="filter-group">
-              <legend>Closure / change reason</legend>
-              {options.closureReasons.map((item:string) => <label class="check"><input type="checkbox" data-filter="closure_reason" value={item}/><span>{formatLabel(item)}</span><em>{counts.closure_reason[item] ?? 0}</em></label>)}
-            </fieldset>
-          }
+          {options.closureReasons.length > 0 && <fieldset class="filter-group">
+            <legend>Closure / change reason</legend>
+            {options.closureReasons.map((item:string) => <label class="check"><input type="checkbox" data-filter="closure_reason" value={item}/><span>{formatLabel(item)}</span><em>{counts.closure_reason[item] ?? 0}</em></label>)}
+          </fieldset>}
 
           <fieldset class="filter-group">
             <legend>Lifecycle year</legend>
@@ -121,23 +116,20 @@ const evidenceOptions = [
             </select>
           </fieldset>
 
-          {lifecycleOptions.length > 0 &&
-            <fieldset class="filter-group">
-              <legend>Lifecycle relationships</legend>
-              {lifecycleOptions.map(([value,label]) => <label class="check"><input type="checkbox" data-filter="lifecycle" value={value}/><span>{label}</span><em>{counts.lifecycle[value] ?? 0}</em></label>)}
-            </fieldset>
-          }
+          {lifecycleOptions.length > 0 && <fieldset class="filter-group">
+            <legend>Lifecycle relationships</legend>
+            {lifecycleOptions.map(([value,label]) => <label class="check"><input type="checkbox" data-filter="lifecycle" value={value}/><span>{label}</span><em>{counts.lifecycle[value] ?? 0}</em></label>)}
+          </fieldset>}
 
-          {evidenceOptions.length > 0 &&
-            <fieldset class="filter-group">
-              <legend>Evidence / review state</legend>
-              {evidenceOptions.map(([value,label]) => <label class="check"><input type="checkbox" data-filter="evidence" value={value}/><span>{label}</span><em>{counts.evidence[value] ?? 0}</em></label>)}
-            </fieldset>
-          }
+          {evidenceOptions.length > 0 && <fieldset class="filter-group">
+            <legend>Evidence / review state</legend>
+            {evidenceOptions.map(([value,label]) => <label class="check"><input type="checkbox" data-filter="evidence" value={value}/><span>{label}</span><em>{counts.evidence[value] ?? 0}</em></label>)}
+          </fieldset>}
 
           <button class="btn" data-clear-filters type="button">Clear filters</button>
         </details>
       </aside>
+
       <section class="catalog-panel framed-panel encyclopedia-catalog">
         <div class="catalog-toolbar encyclopedia-toolbar">
           <p><strong data-result-count>{records.length}</strong> results</p>
@@ -154,6 +146,7 @@ const evidenceOptions = [
         </div>
         <div class="card empty" data-empty-state><h3>No matching records</h3><p>Clear filters or try a broader search.</p></div>
       </section>
+
       <aside class="field-notes-panel framed-panel encyclopedia-notes">
         <p class="eyebrow">Field notes</p><h2>{selected.canonical_name}</h2><p>{selected.summary}</p>
         <div class="specimen-plate" aria-hidden="true">◉</div>
@@ -163,6 +156,7 @@ const evidenceOptions = [
       </aside>
     </div>
   </div>
+
   <script>
     const root = document.querySelector('[data-filter-root]');
     if (root) {
@@ -178,11 +172,9 @@ const evidenceOptions = [
       const filterDetails = root.querySelector('.encyclopedia-filter details');
       const filterSummary = root.querySelector('[data-active-filter-summary]');
       const filterNames = ['status', 'category', 'chain', 'closure_reason', 'lifecycle', 'evidence'];
-
       const mobileQuery = window.matchMedia('(max-width: 720px)');
       const getInitialLimit = () => mobileQuery.matches ? 30 : 60;
       const getIncrement = () => mobileQuery.matches ? 30 : 60;
-
       let visibleLimit = getInitialLimit();
       let wasMobile = mobileQuery.matches;
 
@@ -191,91 +183,76 @@ const evidenceOptions = [
         if (mobileQuery.matches) filterDetails.removeAttribute('open');
         else filterDetails.setAttribute('open', '');
       };
-
       syncFilterDetailsState();
 
       const initialParams = new URLSearchParams(window.location.search);
       const initialSearch = initialParams.get('q') || initialParams.get('search');
       if (initialSearch) input.value = initialSearch;
-
       filterNames.forEach((name) => {
         const selectedValues = initialParams.getAll(name).flatMap((value) => value.split(',')).filter(Boolean);
-        checks
-          .filter((checkbox) => checkbox.dataset.filter === name && selectedValues.includes(checkbox.value))
+        checks.filter((checkbox) => checkbox.dataset.filter === name && selectedValues.includes(checkbox.value))
           .forEach((checkbox) => { checkbox.checked = true; });
       });
-
       yearSelects.forEach((select) => {
-        const value = initialParams.get(select.dataset.yearFilter);
+        const name = select.dataset.yearFilter;
+        const value = name ? initialParams.get(name) : null;
         if (value && [...select.options].some((option) => option.value === value)) select.value = value;
       });
 
       const getSelectedFilters = () => {
         const selected = Object.fromEntries(filterNames.map((name) => [name, []]));
-        checks.filter((checkbox) => checkbox.checked).forEach((checkbox) => {
-          selected[checkbox.dataset.filter].push(checkbox.value);
-        });
+        checks.filter((checkbox) => checkbox.checked).forEach((checkbox) => selected[checkbox.dataset.filter].push(checkbox.value));
         return selected;
       };
-
       const valuesFromCard = (card, field) => (card.dataset[field] || '').split('|').filter(Boolean);
-
+      const selectedYear = (name) => yearSelects.find((select) => select.dataset.yearFilter === name)?.value || '';
       const cardMatches = (card, query, selected) => {
         const chains = valuesFromCard(card, 'chains');
         const lifecycle = valuesFromCard(card, 'lifecycle');
         const evidenceFlags = valuesFromCard(card, 'evidenceFlags');
-        const launchYear = yearSelects.find((select) => select.dataset.yearFilter === 'launch_year')?.value || '';
-        const endYear = yearSelects.find((select) => select.dataset.yearFilter === 'end_year')?.value || '';
-
-        return (
-          (!query || card.dataset.search.includes(query)) &&
-          (!selected.status.length || selected.status.includes(card.dataset.status)) &&
-          (!selected.category.length || selected.category.includes(card.dataset.category)) &&
-          (!selected.chain.length || chains.some((chain) => selected.chain.includes(chain))) &&
-          (!selected.closure_reason.length || selected.closure_reason.includes(card.dataset.closure)) &&
-          (!selected.lifecycle.length || lifecycle.some((value) => selected.lifecycle.includes(value))) &&
-          (!selected.evidence.length || evidenceFlags.some((value) => selected.evidence.includes(value))) &&
-          (!launchYear || card.dataset.launchYear === launchYear) &&
-          (!endYear || card.dataset.endYear === endYear)
-        );
+        const launchYear = selectedYear('launch_year');
+        const endYear = selectedYear('end_year');
+        return (!query || card.dataset.search.includes(query))
+          && (!selected.status.length || selected.status.includes(card.dataset.status))
+          && (!selected.category.length || selected.category.includes(card.dataset.category))
+          && (!selected.chain.length || chains.some((value) => selected.chain.includes(value)))
+          && (!selected.closure_reason.length || selected.closure_reason.includes(card.dataset.closure))
+          && (!selected.lifecycle.length || lifecycle.some((value) => selected.lifecycle.includes(value)))
+          && (!selected.evidence.length || evidenceFlags.some((value) => selected.evidence.includes(value)))
+          && (!launchYear || card.dataset.launchYear === launchYear)
+          && (!endYear || card.dataset.endYear === endYear);
       };
 
       const formatValue = (value) => value.replace(/_/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
-
       const syncUrl = (query, selected) => {
         const params = new URLSearchParams();
         if (query) params.set('q', input.value.trim());
-        filterNames.forEach((name) => {
-          [...selected[name]].sort().forEach((value) => params.append(name, value));
-        });
-        yearSelects.forEach((select) => {
-          if (select.value) params.set(select.dataset.yearFilter, select.value);
-        });
+        filterNames.forEach((name) => [...selected[name]].sort().forEach((value) => params.append(name, value)));
+        yearSelects.forEach((select) => { if (select.value && select.dataset.yearFilter) params.set(select.dataset.yearFilter, select.value); });
         const suffix = params.toString();
         history.replaceState({}, '', `${window.location.pathname}${suffix ? `?${suffix}` : ''}`);
       };
-
       const syncSummary = (query, selected) => {
         if (!filterSummary) return;
         const labels = [];
         if (query) labels.push(`Search: ${input.value.trim()}`);
         filterNames.forEach((name) => selected[name].forEach((value) => labels.push(`${formatValue(name)}: ${formatValue(value)}`)));
-        yearSelects.forEach((select) => {
-          if (select.value) labels.push(`${formatValue(select.dataset.yearFilter)}: ${select.value}`);
+        yearSelects.forEach((select) => { if (select.value && select.dataset.yearFilter) labels.push(`${formatValue(select.dataset.yearFilter)}: ${select.value}`); });
+        filterSummary.replaceChildren();
+        const values = labels.length ? labels : ['All records'];
+        values.forEach((label) => {
+          const chip = document.createElement('span');
+          chip.textContent = label;
+          filterSummary.append(chip);
         });
-        filterSummary.innerHTML = labels.length
-          ? labels.map((label) => `<span>${label}</span>`).join('')
-          : '<span>All records</span>';
       };
 
       const update = ({ resetLimit = false, updateUrl = true } = {}) => {
         if (resetLimit) visibleLimit = getInitialLimit();
-
         const query = input.value.trim().toLowerCase();
         const selected = getSelectedFilters();
         let matched = 0;
         let shown = 0;
-
         cards.forEach((card) => {
           const matches = cardMatches(card, query, selected);
           if (matches) matched += 1;
@@ -283,17 +260,11 @@ const evidenceOptions = [
           card.classList.toggle('is-hidden', !shouldShow);
           if (shouldShow) shown += 1;
         });
-
         count.textContent = matched;
         empty.style.display = matched ? 'none' : 'block';
         const remaining = Math.max(matched - shown, 0);
         if (loadWrap) loadWrap.style.display = remaining ? 'grid' : 'none';
-        if (loadStatus) {
-          loadStatus.textContent = remaining
-            ? `${shown} shown · ${remaining} more records`
-            : matched ? `${shown} shown` : '';
-        }
-
+        if (loadStatus) loadStatus.textContent = remaining ? `${shown} shown · ${remaining} more records` : matched ? `${shown} shown` : '';
         syncSummary(query, selected);
         if (updateUrl) syncUrl(query, selected);
       };
@@ -301,24 +272,13 @@ const evidenceOptions = [
       input.addEventListener('input', () => update({ resetLimit: true }));
       checks.forEach((checkbox) => checkbox.addEventListener('change', () => update({ resetLimit: true })));
       yearSelects.forEach((select) => select.addEventListener('change', () => update({ resetLimit: true })));
-
-      const clearButton = root.querySelector('[data-clear-filters]');
-      if (clearButton) {
-        clearButton.addEventListener('click', () => {
-          input.value = '';
-          checks.forEach((checkbox) => { checkbox.checked = false; });
-          yearSelects.forEach((select) => { select.value = ''; });
-          update({ resetLimit: true });
-        });
-      }
-
-      if (loadButton) {
-        loadButton.addEventListener('click', () => {
-          visibleLimit += getIncrement();
-          update({ updateUrl: false });
-        });
-      }
-
+      root.querySelector('[data-clear-filters]')?.addEventListener('click', () => {
+        input.value = '';
+        checks.forEach((checkbox) => { checkbox.checked = false; });
+        yearSelects.forEach((select) => { select.value = ''; });
+        update({ resetLimit: true });
+      });
+      loadButton?.addEventListener('click', () => { visibleLimit += getIncrement(); update({ updateUrl: false }); });
       window.addEventListener('resize', () => {
         const isMobile = mobileQuery.matches;
         if (isMobile !== wasMobile) {
@@ -327,7 +287,6 @@ const evidenceOptions = [
           update({ resetLimit: true, updateUrl: false });
         }
       });
-
       update({ resetLimit: true, updateUrl: false });
     }
   </script>
