@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: read
+  statuses: write
 
 concurrency:
   group: mag-phase5-production-verification
@@ -28,6 +29,19 @@ jobs:
       EXPECTED_COMMIT: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || inputs.expected_commit || github.sha }}
       MAG_PRODUCTION_ORIGIN: https://mag.badjoke-lab.com
     steps:
+      - name: Publish pending production status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: process.env.EXPECTED_COMMIT,
+              state: 'pending',
+              context: 'mag-phase5-production',
+              description: 'Exact production verification running'
+            });
+
       - name: Checkout exact deployed commit
         uses: actions/checkout@v4
         with:
@@ -40,3 +54,31 @@ jobs:
 
       - name: Verify exact production surfaces
         run: node scripts/check-phase5-production.mjs "$EXPECTED_COMMIT"
+
+      - name: Publish successful production status
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: process.env.EXPECTED_COMMIT,
+              state: 'success',
+              context: 'mag-phase5-production',
+              description: 'Exact production verification passed'
+            });
+
+      - name: Publish failed production status
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: process.env.EXPECTED_COMMIT,
+              state: 'failure',
+              context: 'mag-phase5-production',
+              description: 'Exact production verification failed'
+            });
