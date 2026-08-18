@@ -59,9 +59,20 @@ export function loadCanonicalRegistry() {
   return { marketplaces, events, evidence };
 }
 
+function groupByMarketplace(items) {
+  const grouped = new Map();
+  for (const item of items) {
+    const group = grouped.get(item.marketplace_id) ?? [];
+    group.push(item);
+    grouped.set(item.marketplace_id, group);
+  }
+  return grouped;
+}
+
 export function buildStats({ marketplaces, events, evidence }, generatedAt) {
   const byStatus = countBy(marketplaces, (record) => record.status);
   const exact = (status) => byStatus[status] ?? 0;
+  const fadedStatuses = new Set(['inactive', 'dead', 'acquired', 'merged', 'rebranded']);
   const activeSideTotal = exact('active') + exact('limited');
   const fadedSideTotal = exact('inactive') + exact('dead') + exact('acquired') + exact('merged') + exact('rebranded');
   const unknownTotal = exact('unknown');
@@ -76,6 +87,27 @@ export function buildStats({ marketplaces, events, evidence }, generatedAt) {
   if (statusPartitionTotal !== marketplaces.length) {
     throw new Error(`Status-side partition mismatch: ${statusPartitionTotal} != ${marketplaces.length}`);
   }
+
+  const evidenceByMarketplace = groupByMarketplace(evidence);
+  const eventsByMarketplace = groupByMarketplace(events);
+  const fadedRecords = marketplaces.filter((record) => fadedStatuses.has(record.status));
+  const migrationMarketplaceIds = new Set(events.filter((event) => event.event_type === 'asset_migration_announced').map((event) => event.marketplace_id));
+  const successorCount = marketplaces.filter((record) => Boolean(record.successor_marketplace)).length;
+  const predecessorCount = marketplaces.filter((record) => Boolean(record.predecessor_marketplace)).length;
+  const fadedWithOutcomeLink = fadedRecords.filter((record) => Boolean(record.successor_marketplace) || migrationMarketplaceIds.has(record.id)).length;
+
+  const lifespanEligible = marketplaces.filter((record) => Number.isInteger(record.launch_year) && Number.isInteger(record.end_year) && record.end_year >= record.launch_year);
+  const lifespanBuckets = countBy(lifespanEligible, (record) => {
+    const years = record.end_year - record.launch_year;
+    if (years === 0) return 'same_year';
+    if (years <= 2) return '1_2_years';
+    if (years <= 5) return '3_5_years';
+    if (years <= 10) return '6_10_years';
+    return '11_plus_years';
+  });
+
+  const recordsWithHighReliabilityEvidence = marketplaces.filter((record) => (evidenceByMarketplace.get(record.id) ?? []).some((item) => item.reliability === 'high')).length;
+  const recordsWithArchivedEvidence = marketplaces.filter((record) => (evidenceByMarketplace.get(record.id) ?? []).some((item) => Boolean(item.archived_url))).length;
 
   return {
     schema_version: SCHEMA_VERSION,
@@ -95,7 +127,10 @@ export function buildStats({ marketplaces, events, evidence }, generatedAt) {
       transitioned: 'acquired + merged + rebranded; this is a subset of faded-side, not an additional population.',
       multi_value_breakdowns: ['by_chain', 'platform_roles'],
       review_state_field: 'review_status',
-      review_states: REVIEW_STATES
+      review_states: REVIEW_STATES,
+      lifespan: 'Computed only when both canonical launch_year and end_year are recorded and end_year is not earlier than launch_year.',
+      lifecycle_outcome_link: 'For faded-side records only: canonical successor_marketplace or a canonical asset_migration_announced event. Absence means not recorded, not proof that no transition occurred.',
+      provenance_coverage: 'Evidence coverage is descriptive registry provenance depth and is not a marketplace safety or quality score.'
     },
     kpis: {
       total_marketplaces: marketplaces.length,
@@ -125,19 +160,51 @@ export function buildStats({ marketplaces, events, evidence }, generatedAt) {
       by_marketplace_scope: countBy(marketplaces, (record) => record.marketplace_scope),
       by_chain: countBy(marketplaces, (record) => record.chain_scope),
       by_confidence: countBy(marketplaces, (record) => record.confidence),
-      by_review_status: countBy(marketplaces, (record) => record.review_status)
+      by_review_status: countBy(marketplaces, (record) => record.review_status),
+      by_closure_reason_faded_side: countBy(fadedRecords, (record) => record.closure_reason || 'unknown')
+    },
+    lifecycle: {
+      faded_side_population: fadedRecords.length,
+      successor_recorded: successorCount,
+      predecessor_recorded: predecessorCount,
+      migration_event_recorded: migrationMarketplaceIds.size,
+      faded_with_successor_or_migration: {
+        count: fadedWithOutcomeLink,
+        total: fadedRecords.length,
+        share: fadedRecords.length ? fadedWithOutcomeLink / fadedRecords.length : 0
+      },
+      lifespan: {
+        eligible_count: lifespanEligible.length,
+        total_marketplaces: marketplaces.length,
+        coverage_share: marketplaces.length ? lifespanEligible.length / marketplaces.length : 0,
+        buckets: lifespanBuckets
+      }
     },
     coverage: {
       archive_coverage: {
         count: archiveCount,
         total: marketplaces.length,
         share: marketplaces.length ? archiveCount / marketplaces.length : 0
+      },
+      high_reliability_evidence: {
+        count: recordsWithHighReliabilityEvidence,
+        total: marketplaces.length,
+        share: marketplaces.length ? recordsWithHighReliabilityEvidence / marketplaces.length : 0
+      },
+      archived_evidence: {
+        count: recordsWithArchivedEvidence,
+        total: marketplaces.length,
+        share: marketplaces.length ? recordsWithArchivedEvidence / marketplaces.length : 0
       }
     },
     quality: {
       record_quality_flags: countBy(marketplaces.flatMap((record) => record.record_quality_flags ?? []), (value) => value),
       evidence_depth: countBy(marketplaces, (record) => {
-        const count = evidence.filter((item) => item.marketplace_id === record.id).length;
+        const count = (evidenceByMarketplace.get(record.id) ?? []).length;
+        return count === 0 ? 'zero' : count === 1 ? 'one' : 'multiple';
+      }),
+      lifecycle_event_depth: countBy(marketplaces, (record) => {
+        const count = (eventsByMarketplace.get(record.id) ?? []).length;
         return count === 0 ? 'zero' : count === 1 ? 'one' : 'multiple';
       })
     },
