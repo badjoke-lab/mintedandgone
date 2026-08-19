@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "command -v astro >/dev/null 2>&1 && astro dev || node scripts/static-build.mjs --serve",
     "build:site": "command -v astro >/dev/null 2>&1 && astro build || node scripts/static-build.mjs",
-    "build": "npm run generate:stats && npm run generate:sitemap && npm run build:site",
+    "build": "npm run generate:stats && npm run generate:sitemap && npm run validate:series && npm run build:site",
     "preview": "command -v astro >/dev/null 2>&1 && astro preview || node scripts/static-build.mjs --serve",
     "validate": "command -v tsx >/dev/null 2>&1 && tsx scripts/validate-data.ts || node --loader ./scripts/ts-loader.mjs scripts/validate-data.ts",
     "validate:record-json": "node scripts/validate-record-level-marketplaces.mjs",
+    "validate:series": "node scripts/validate-series-adapter.mjs",
     "validate:phase5-stats": "node scripts/validate-phase5-stats.mjs",
     "validate:candidates": "node scripts/validate-mag-candidate-backlog.mjs",
     "validate:latest-batch": "node scripts/check-mag-batch-candidates.mjs latest",
@@ -30,7 +31,7 @@
     "select:mag-ready": "node scripts/select-mag-ready-candidates.mjs 10",
     "generate:stats": "command -v tsx >/dev/null 2>&1 && tsx scripts/generate-stats.ts || node --loader ./scripts/ts-loader.mjs scripts/generate-stats.ts",
     "generate:sitemap": "command -v tsx >/dev/null 2>&1 && tsx scripts/generate-sitemap.ts || node --loader ./scripts/ts-loader.mjs scripts/generate-sitemap.ts",
-    "check": "npm run generate:stats && npm run generate:sitemap && npm run validate && npm run validate:record-json && npm run validate:phase5-stats && npm run test:phase5-filters && npm run test:phase5-compare && npm run test:phase5-production && npm run validate:candidates && npm run validate:latest-batch && npm run validate:tokenized && npm run test:monitoring:tokenized && npm run monitor:tokenized && npm run build:site",
+    "check": "npm run generate:stats && npm run generate:sitemap && npm run validate && npm run validate:record-json && npm run validate:series && npm run validate:phase5-stats && npm run test:phase5-filters && npm run test:phase5-compare && npm run test:phase5-production && npm run validate:candidates && npm run validate:latest-batch && npm run validate:tokenized && npm run test:monitoring:tokenized && npm run monitor:tokenized && npm run build:site",
     "import:assets": "node scripts/import-assets.mjs"
   },
   "dependencies": {
