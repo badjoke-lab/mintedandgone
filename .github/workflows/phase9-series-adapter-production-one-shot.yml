@@ -1,0 +1,33 @@
+name: Phase 9 Series Adapter Production One-shot
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-production:
+    if: github.head_ref == 'agent/phase9-series-adapter-production-check'
+    runs-on: ubuntu-latest
+    env:
+      SERIES_ORIGIN: https://mag.badjoke-lab.com
+      SERIES_EXPECTED_COMMIT: 6c41c2ae0fdd884501f02d3a6620ca5800268fdc
+      SERIES_VERIFY_ATTEMPTS: 20
+      SERIES_VERIFY_INTERVAL_MS: 15000
+      GITHUB_SHA: 6c41c2ae0fdd884501f02d3a6620ca5800268fdc
+    steps:
+      - name: Checkout reviewed main plus verifier
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --progress=false
+      - name: Generate native and Series public layers locally
+        run: npm run generate:stats
+      - name: Validate local Series adapter
+        run: npm run validate:series
+      - name: Verify representative Series adapter on production
+        run: node scripts/check-series-origin.mjs
