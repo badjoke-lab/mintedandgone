@@ -22,7 +22,7 @@ jobs:
     if: github.head_ref == 'agent/phase9-series-adapter'
     runs-on: ubuntu-latest
     env:
-      SERIES_ORIGIN: https://agent-phase9-series-adapter.mag.badjoke-lab.com
+      SERIES_ORIGIN: https://agent-phase9-series-adapter.mintedandgone.pages.dev
       SERIES_EXPECTED_COMMIT: ${{ github.event.pull_request.head.sha }}
       SERIES_VERIFY_ATTEMPTS: 20
       SERIES_VERIFY_INTERVAL_MS: 15000
