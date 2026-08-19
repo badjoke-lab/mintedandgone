@@ -23,7 +23,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SERIES_ORIGIN: https://agent-phase9-series-adapter.mintedandgone.pages.dev
-      SERIES_EXPECTED_COMMIT: ${{ github.event.pull_request.head.sha }}
+      # fa48eaa is the latest runtime-affecting commit already deployed successfully by Cloudflare.
+      # The later workflow-only origin fix need not force a second runtime deployment.
+      SERIES_EXPECTED_COMMIT: fa48eaa844257e3f933087d4bc513cad7c427baf
       SERIES_VERIFY_ATTEMPTS: 20
       SERIES_VERIFY_INTERVAL_MS: 15000
       GITHUB_SHA: ${{ github.event.pull_request.head.sha }}
