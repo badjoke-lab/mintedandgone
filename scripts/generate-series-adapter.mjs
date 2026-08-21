@@ -1,8 +1,10 @@
+import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 
 const SERIES_SCHEMA_VERSION = '1.0.0';
 const ADAPTER_VERSION = '1.0.0';
 const REGISTRY_ID = 'minted-and-gone';
+const RELATIONSHIP_AUTHORITY = 'config/ledger-series-phase9-stage5-mag-local-authority.json';
 const site = (process.env.PUBLIC_SITE_URL ?? 'https://mag.badjoke-lab.com').replace(/\/$/, '');
 
 function readJson(path) {
@@ -21,9 +23,29 @@ function writeJson(path, value) {
   writeFileSync(path, `${JSON.stringify(stableValue(value), null, 2)}\n`);
 }
 
+function parseGlobalKey(globalKey) {
+  const parts = String(globalKey).split(':');
+  if (parts.length !== 3 || parts.some((part) => !part)) {
+    throw new Error(`Invalid Series global record key: ${globalKey}`);
+  }
+  return {
+    registry_id: parts[0],
+    native_record_type: parts[1],
+    native_record_id: parts[2],
+  };
+}
+
+function relationshipId(relationType, sourceGlobalKey, targetGlobalKey) {
+  const digest = createHash('sha256')
+    .update(`${relationType}\n${sourceGlobalKey}\n${targetGlobalKey}`, 'utf8')
+    .digest('hex');
+  return `series_rel_${digest}`;
+}
+
 const version = readJson('public/version.json');
 const manifest = readJson('public/data/manifest.json');
 const marketplaces = readJson('public/data/marketplaces.json');
+const relationshipAuthority = readJson(RELATIONSHIP_AUTHORITY);
 
 if (version.canonical_only !== true || manifest.canonical_only !== true || marketplaces.canonical_only !== true) {
   throw new Error('MAG native public layer must remain canonical-only');
@@ -33,6 +55,12 @@ if (version.project_id !== 'mag' || manifest.project_id !== 'mag') {
 }
 if (marketplaces.record_count !== version.record_counts.marketplaces) {
   throw new Error('MAG marketplace count mismatch');
+}
+if (relationshipAuthority.registry_id !== REGISTRY_ID || relationshipAuthority.accepted_count !== 17) {
+  throw new Error('Unexpected MAG Stage 5 relationship authority');
+}
+if (!Array.isArray(relationshipAuthority.finite_allowlist) || relationshipAuthority.finite_allowlist.length !== 17) {
+  throw new Error('MAG Stage 5 relationship allowlist must contain exactly 17 rows');
 }
 
 const outputRoot = 'public/data/series';
@@ -118,7 +146,7 @@ for (const marketplace of [...marketplaces.records].sort((a, b) => a.slug.locale
       native_record: nativeMachineUrl,
       review_status: marketplace.review_status ?? null,
       record_quality_flags: marketplace.record_quality_flags ?? [],
-      relationship_boundary: 'native predecessor/successor slugs are preserved in current_state.native but are not emitted as typed Series relationships during Stage 3',
+      relationship_boundary: 'native predecessor/successor slugs remain preserved in current_state.native; reviewed Stage 5 typed relationships are published only as standalone relationship_record objects',
     },
   };
 
@@ -136,6 +164,48 @@ for (const marketplace of [...marketplaces.records].sort((a, b) => a.slug.locale
     native_machine_url: nativeMachineUrl,
   });
 }
+
+const availableGlobalKeys = new Set(rows.map((row) => row.global_record_key));
+const relationshipKeys = new Set();
+const relationshipIds = new Set();
+const relationshipRecords = relationshipAuthority.finite_allowlist.map((entry, index) => {
+  if (!Array.isArray(entry) || entry.length !== 3) {
+    throw new Error(`MAG Stage 5 relationship row ${index + 1} must be [relation_type, source, target]`);
+  }
+  const [relationType, sourceGlobalKey, targetGlobalKey] = entry;
+  if (!['predecessor_of', 'successor_of'].includes(relationType)) {
+    throw new Error(`MAG Stage 5 relationship row ${index + 1} has unauthorized type ${relationType}`);
+  }
+  if (sourceGlobalKey === targetGlobalKey) {
+    throw new Error(`MAG Stage 5 relationship row ${index + 1} is a self-loop`);
+  }
+  if (!availableGlobalKeys.has(sourceGlobalKey) || !availableGlobalKeys.has(targetGlobalKey)) {
+    throw new Error(`MAG Stage 5 relationship row ${index + 1} references a missing Series endpoint`);
+  }
+  const tupleKey = `${relationType}\n${sourceGlobalKey}\n${targetGlobalKey}`;
+  if (relationshipKeys.has(tupleKey)) {
+    throw new Error(`MAG Stage 5 relationship row ${index + 1} duplicates a reviewed tuple`);
+  }
+  relationshipKeys.add(tupleKey);
+
+  const id = relationshipId(relationType, sourceGlobalKey, targetGlobalKey);
+  if (relationshipIds.has(id)) throw new Error(`MAG Stage 5 relationship ID collision: ${id}`);
+  relationshipIds.add(id);
+
+  return {
+    series_schema_version: SERIES_SCHEMA_VERSION,
+    object_type: 'relationship_record',
+    id,
+    relation_type: relationType,
+    source: parseGlobalKey(sourceGlobalKey),
+    target: parseGlobalKey(targetGlobalKey),
+    direction: 'directed',
+    provenance: {
+      basis: 'native_reviewed_relationship',
+      native_evidence_refs: [],
+    },
+  };
+});
 
 const descriptor = {
   series_schema_version: SERIES_SCHEMA_VERSION,
@@ -158,6 +228,7 @@ const descriptor = {
     primary_records: version.record_counts.marketplaces,
     events: version.record_counts.events,
     evidence: version.record_counts.evidence,
+    relationships: relationshipRecords.length,
     native: version.record_counts,
   },
   record_types: [
@@ -170,6 +241,7 @@ const descriptor = {
   routes: {
     descriptor: '/data/series/registry.json',
     index: '/data/series/index.json',
+    relationships: '/data/series/relationships.json',
     record_templates: ['/data/series/records/{slug}.json'],
     search: '/encyclopedia/',
     compare: '/compare/',
@@ -212,4 +284,5 @@ const index = {
 
 writeJson(`${outputRoot}/registry.json`, descriptor);
 writeJson(`${outputRoot}/index.json`, index);
-console.log(`Generated MAG Series adapter: ${rows.length} marketplace envelopes`);
+writeJson(`${outputRoot}/relationships.json`, relationshipRecords);
+console.log(`Generated MAG Series adapter: ${rows.length} marketplace envelopes, ${relationshipRecords.length} reviewed relationships`);
