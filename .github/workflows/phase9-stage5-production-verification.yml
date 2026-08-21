@@ -26,5 +26,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Install dependencies
+        run: npm install --progress=false
+      - name: Generate local native and Series layers
+        run: npm run generate:stats
+      - name: Validate local Series adapter
+        run: npm run validate:series
       - name: Verify deployed Stage 5 relationship transport
         run: node scripts/check-series-origin.mjs
