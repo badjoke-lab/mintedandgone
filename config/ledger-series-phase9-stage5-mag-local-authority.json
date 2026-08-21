@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "authority_id": "mag-ledger-series-phase9-stage5-local-2026-08-21",
+  "status": "review_required_before_implementation",
+  "registry_id": "minted-and-gone",
+  "repository": "badjoke-lab/mintedandgone",
+  "base_main": "6c41c2ae0fdd884501f02d3a6620ca5800268fdc",
+  "coordination": {
+    "repository": "badjoke-lab/historical-exchange-index",
+    "issue": 780,
+    "publication_authority_pr": 792,
+    "publication_authority_merge": "6b4925d894908de6b043269405af794b60031f54",
+    "audit_pr": 791,
+    "audit_merge": "562419348b48bd7d3ab7e521c8a654e0cbe15413"
+  },
+  "accepted_count": 17,
+  "publication_contract": {
+    "object_type": "relationship_record",
+    "transport": "/data/series/relationships.json",
+    "record_envelope_relationship_arrays_remain_empty": true,
+    "canonical_records_unchanged": true,
+    "cross_registry_relationships": 0
+  },
+  "finite_allowlist": [
+    ["predecessor_of", "minted-and-gone:marketplace_dossier:mag_nfm_mock_000006", "minted-and-gone:marketplace_dossier:mag_nfm_mock_000007"],
+    ["predecessor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000108", "minted-and-gone:marketplace_dossier:mag_nfm_real_000104"],
+    ["predecessor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000116", "minted-and-gone:marketplace_dossier:mag_nfm_real_000107"],
+    ["predecessor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000122", "minted-and-gone:marketplace_dossier:mag_nfm_real_000075"],
+    ["predecessor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000155", "minted-and-gone:marketplace_dossier:mag_nfm_real_000057"],
+    ["predecessor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000202", "minted-and-gone:marketplace_dossier:mag_nfm_real_000201"],
+    ["predecessor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000203", "minted-and-gone:marketplace_dossier:mag_nfm_real_000204"],
+    ["predecessor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000235", "minted-and-gone:marketplace_dossier:mag_nfm_real_000234"],
+    ["predecessor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000277", "minted-and-gone:marketplace_dossier:mag_nfm_real_000278"],
+    ["successor_of", "minted-and-gone:marketplace_dossier:mag_nfm_mock_000007", "minted-and-gone:marketplace_dossier:mag_nfm_mock_000006"],
+    ["successor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000039", "minted-and-gone:marketplace_dossier:mag_nfm_mock_000006"],
+    ["successor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000040", "minted-and-gone:marketplace_dossier:mag_nfm_mock_000006"],
+    ["successor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000114", "minted-and-gone:marketplace_dossier:mag_nfm_real_000076"],
+    ["successor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000201", "minted-and-gone:marketplace_dossier:mag_nfm_real_000202"],
+    ["successor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000204", "minted-and-gone:marketplace_dossier:mag_nfm_real_000203"],
+    ["successor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000233", "minted-and-gone:marketplace_dossier:mag_nfm_real_000012"],
+    ["successor_of", "minted-and-gone:marketplace_dossier:mag_nfm_real_000278", "minted-and-gone:marketplace_dossier:mag_nfm_real_000277"]
+  ],
+  "id_algorithm": "series_rel_ + lowercase hex SHA-256 of UTF-8 relation_type + newline + source_global_record_key + newline + target_global_record_key",
+  "allowed_work": [
+    "emit exactly 17 allowlisted relationship_record objects",
+    "add deterministic generation and validation",
+    "advertise relationship route/count/capability in the existing Series descriptor"
+  ],
+  "forbidden": [
+    "canonical marketplace/event/evidence mutation",
+    "record-envelope relationship mutation",
+    "dynamic relationship discovery",
+    "candidate or monitoring promotion",
+    "Search/Compare/Stats/UI/Cloudflare changes",
+    "Stage 6 continuation"
+  ],
+  "acceptance": [
+    "exact allowlist equality at count 17",
+    "all endpoints resolve to existing Stage 3 Series records",
+    "deterministic relationship IDs",
+    "existing MAG checks green",
+    "merge before production verification"
+  ],
+  "automatic_continuation": false
+}
