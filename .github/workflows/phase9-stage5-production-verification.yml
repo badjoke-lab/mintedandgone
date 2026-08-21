@@ -1,0 +1,30 @@
+name: Phase 9 Stage 5 Production Verification
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/phase9-stage5-production-verification.yml'
+      - 'scripts/check-series-origin.mjs'
+      - 'config/ledger-series-phase9-stage5-mag-local-authority.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-production:
+    runs-on: ubuntu-latest
+    env:
+      SERIES_ORIGIN: https://mag.badjoke-lab.com
+      SERIES_EXPECTED_COMMIT: f7892a04edf4cba49e4ae3d9f04109e3faf429a2
+      SERIES_VERIFY_ATTEMPTS: 20
+      SERIES_VERIFY_INTERVAL_MS: 15000
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify deployed Stage 5 relationship transport
+        run: node scripts/check-series-origin.mjs
