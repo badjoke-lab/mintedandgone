@@ -46,5 +46,21 @@
     "claim_scope": "status",
     "language": "en",
     "notes": "First-party documentation separates EVM/BTC marketplace and infrastructure deprecations from continuing Solana Marketplace, Packs and Lucky Buy services."
+  },
+  {
+    "id": "mag_src_real_2026101601",
+    "marketplace_id": "mag_nfm_mock_000002",
+    "event_id": "mag_ev_real_2026101501",
+    "source_type": "official_statement",
+    "title": "Blur official notice: frontend deprecation and Blend new-loan matching cutoff",
+    "url": "https://x.com/blur_io/status/2109735810857861203",
+    "publisher": "Blur (@blur_io)",
+    "published_at": "2026-10-12",
+    "archived_url": null,
+    "accessed_at": "2026-10-16",
+    "reliability": "high",
+    "claim_scope": "event",
+    "language": "en",
+    "notes": "Primary first-party three-post Blur announcement: November 12 is the planned frontend deprecation and Blend new-loan-matching cutoff; the Blur marketplace protocol continues on-chain. Does not establish that either cutoff has already occurred."
   }
 ]
