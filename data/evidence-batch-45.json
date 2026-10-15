@@ -1,0 +1,50 @@
+[
+  {
+    "id": "mag_src_real_2026101501",
+    "marketplace_id": "mag_nfm_mock_000002",
+    "event_id": "mag_ev_real_2026101501",
+    "source_type": "news_article",
+    "title": "Blur to shut down frontend next month as NFT trading volume dwindles",
+    "url": "https://www.theblock.co/news/ecosystems/2026-10-12-blur-nft-marketplace-shutting-down-frontend-blend-418363",
+    "publisher": "The Block",
+    "published_at": "2026-10-12",
+    "archived_url": null,
+    "accessed_at": "2026-10-15",
+    "reliability": "high",
+    "claim_scope": "event",
+    "language": "en",
+    "notes": "Reports Blur's October 12 official post, November 12 frontend sunset and continued on-chain marketplace operation."
+  },
+  {
+    "id": "mag_src_real_2026101502",
+    "marketplace_id": "mag_nfm_mock_000002",
+    "event_id": "mag_ev_real_2026101501",
+    "source_type": "news_article",
+    "title": "NFT Marketplace Blur Is Retiring Blur.io on Nov. 12, Keeping Its Contracts Live Onchain",
+    "url": "https://finance.yahoo.com/markets/crypto/articles/nft-marketplace-blur-retiring-blur-101927874.html",
+    "publisher": "Unchained / Yahoo Finance",
+    "published_at": "2026-10-13",
+    "archived_url": null,
+    "accessed_at": "2026-10-15",
+    "reliability": "medium",
+    "claim_scope": "event",
+    "language": "en",
+    "notes": "Independent coverage quotes Blur's scope distinction; not a replacement for the official statement link."
+  },
+  {
+    "id": "mag_src_real_2026101503",
+    "marketplace_id": "mag_nfm_mock_000003",
+    "event_id": "mag_ev_real_2026101502",
+    "source_type": "official_statement",
+    "title": "Magic Eden Marketplace Updates & Service Changes",
+    "url": "https://help.magiceden.io/en/articles/13885504-magic-eden-marketplace-updates-service-changes",
+    "publisher": "Magic Eden Help Center",
+    "published_at": "2026-06-30",
+    "archived_url": null,
+    "accessed_at": "2026-10-15",
+    "reliability": "high",
+    "claim_scope": "status",
+    "language": "en",
+    "notes": "First-party documentation separates EVM/BTC marketplace and infrastructure deprecations from continuing Solana Marketplace, Packs and Lucky Buy services."
+  }
+]
