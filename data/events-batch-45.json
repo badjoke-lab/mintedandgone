@@ -10,7 +10,7 @@
     "confidence": "high",
     "impact_level": "high",
     "status_effect": "active",
-    "source_count": 2,
+    "source_count": 3,
     "sort_order": 2,
     "notes": "Frontend and on-chain protocol must be distinguished. Blend lending shutdown is related but should receive a separate CYA record. Follow up on or after November 12 for actual execution."
   },
