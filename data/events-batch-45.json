@@ -1,0 +1,32 @@
+[
+  {
+    "id": "mag_ev_real_2026101501",
+    "marketplace_id": "mag_nfm_mock_000002",
+    "event_type": "shutdown_announced",
+    "event_date": "2026-10-12",
+    "event_date_precision": "day",
+    "title": "Blur announces November 12 frontend deprecation",
+    "description": "Blur announced that the blur.io web frontend would be deprecated on November 12, 2026. The on-chain NFT marketplace protocol and BLUR fee-switch governance are expected to remain in operation; this is not a completed shutdown as of October 15.",
+    "confidence": "high",
+    "impact_level": "high",
+    "status_effect": "active",
+    "source_count": 2,
+    "sort_order": 2,
+    "notes": "Frontend and on-chain protocol must be distinguished. Blend lending shutdown is related but should receive a separate CYA record. Follow up on or after November 12 for actual execution."
+  },
+  {
+    "id": "mag_ev_real_2026101502",
+    "marketplace_id": "mag_nfm_mock_000003",
+    "event_type": "status_review",
+    "event_date": "2026-06-30",
+    "event_date_precision": "day",
+    "title": "Magic Eden clarifies EVM and Bitcoin marketplace sunsets while Solana continues",
+    "description": "Magic Eden's June 30 product-change guidance lists March 9 as the end of EVM and Bitcoin marketplace support and March 27 as the end of remaining Bitcoin services. It explicitly confirms continuation of the Solana Marketplace, Packs and Lucky Buy. This event records the dated official status clarification, not an assertion that all Magic Eden products closed.",
+    "confidence": "high",
+    "impact_level": "high",
+    "status_effect": "active",
+    "source_count": 1,
+    "sort_order": 2,
+    "notes": "Official guidance supplies historical product deadlines. The core marketplace identity remains active; API and wallet changes belong in separate registries."
+  }
+]
